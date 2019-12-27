@@ -93,5 +93,15 @@
 MOZI.AI Diary
 \end_layout
 
+\begin_layout Subsection*
+26 Dec 2019
+\end_layout
+
+\begin_layout Standard
+Downloads: `wget -r --no-parent https://mozi.ai/datasets/` graps 998796 KBytes
+ of uncompressed scm files.
+ A tar.gz of the same is 45.5MBytes and a tar.bz2 is only 26.2 MBytes.
+\end_layout
+
 \end_body
 \end_document
