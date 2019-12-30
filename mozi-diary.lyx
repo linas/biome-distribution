@@ -98,9 +98,64 @@ MOZI.AI Diary
 \end_layout
 
 \begin_layout Standard
-Downloads: `wget -r --no-parent https://mozi.ai/datasets/` graps 998796 KBytes
- of uncompressed scm files.
+Downloads: `
+\family typewriter
+wget -r --no-parent https://mozi.ai/datasets/
+\family default
+` graps 998796 KBytes of uncompressed scm files.
  A tar.gz of the same is 45.5MBytes and a tar.bz2 is only 26.2 MBytes.
+\end_layout
+
+\begin_layout Standard
+The file 
+\family typewriter
+/home/ubuntu/datasets/smpdb_chebi_wname.scm
+\family default
+ loaded in 127 secs elapsed; 210 secs system time, with 900MB virt 610MB
+ resident.
+ Total of 972747 atoms, like so: 
+\family typewriter
+(cog-report-counts) $4 = ((ConceptNode .
+ 98388) (PredicateNode .
+ 1) (ListLink .
+ 49808) (MemberLink .
+ 773191) (EvaluationLink .
+ 49808) (MoleculeNode .
+ 1551))
+\end_layout
+
+\begin_layout Standard
+So zero seconds to run 
+\family typewriter
+(gene-go-annotation '("IGF1") "biological_process molecular_function cellular_co
+mponent")
+\family default
+ and results ..
+ pfft.
+\end_layout
+
+\begin_layout Standard
+How about SQL?
+\end_layout
+
+\begin_layout Standard
+(sql-create "postgres:///biosci")
+\end_layout
+
+\begin_layout Standard
+(sql-open "postgres:///biosci")
+\end_layout
+
+\begin_layout Standard
+(store-atomspace)
+\end_layout
+
+\begin_layout Standard
+The store took 233 seconds (ouch) at about 4.3K atoms/sec.
+ Close and re-open.
+ Load takes 121 seconds elapsed (8.1K atoms/sec) so this is hardly any improvemen
+t at all, compared to the file-load.
+ Why? Where's the bottleneck?
 \end_layout
 
 \end_body
