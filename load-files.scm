@@ -16,7 +16,8 @@
 	(define ssz (count-all))
 	(define path (string-append "/home/ubuntu/datasets/" fn))
 	(define jnk (primitive-load path))
-	(define elapse (- (current-time) start))
+	(define delapse (- (current-time) start))
+	(define elapse (if (eq? delapse 0) 1 delapse))
 	(define delta (- (count-all) ssz))
 	(define rate (/ (exact->inexact delta) elapse))
 	(format #t "Took ~A secs to load ~A\n" elapse fn)
@@ -25,6 +26,7 @@
 	*unspecified*
 )
 
+(define start (current-time))
 (loaf "biogridgene2uniprot.scm")
 (loaf "biogrid_gene_gene_174.scm")
 (loaf "ChEBI2Reactome_PE_Pathway.txt.scm")
@@ -49,3 +51,6 @@
 (loaf "current/reactome.scm")
 (loaf "current/uniprot2GO.scm")
 (loaf "current/UniProt2Reactome_PE_Pathway.txt.scm")
+
+(format #t "\nLoaded all the files in ~A seconds\n" (- (current-time) start))
+*unspecified*

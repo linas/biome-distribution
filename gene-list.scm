@@ -81,3 +81,13 @@
 "OST4" "EEF1DP3" "HSBP1" "MCTS1" "DICER1-AS1" "CDKN2AIPNL" "FAM200B"
 "GOLGA2P5" "MRPL33" "NME1-NME2" "UBE2V1" "SMIM20" "APOPT1" "CUX1"
 "UBE2F-SCLY" "GOLGA7B" "NCBP2-AS2"))
+
+
+(define (do-anno)
+	(define start (current-time))
+	(define anno (gene-go-annotation gene-list
+		"biological_process molecular_function cellular_component"))
+	(define elapse (- (current-time) start))
+	(format #t "Annotation took ~A seconds\n" elapse)
+	*unspecified*
+)
