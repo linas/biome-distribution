@@ -164,7 +164,35 @@ Effing A.
  OC_OMP is busted, issue opencog/cogutil#218 and opencog/atomspace#2460
  Fixing this causes guile to run at 780% CPU ...
  apparently thrashing ...
- 
+ wtf ...
+ but now it works great, loaded 72860 atoms in total in 43 seconds (22624
+ per second).
+ So ...
+ 3x faster than file input.
+\end_layout
+
+\begin_layout Subsection*
+31 Dec 2019
+\end_layout
+
+\begin_layout Standard
+See ~/work/load-files.scm to load all the files..
+ total of 6.4M atoms – 5.2GB virt, 3.9G RSS Loaded in 1060 seconds for 6.05K/sec,
+ but there are mnay duplicate atoms in the datasets ...
+\end_layout
+
+\begin_layout Standard
+SQL fails ...
+ Error: do_store_single_atom: Maxiumum Link size is 330.
+ Atom was: (ListLink (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=1459691
+7") ...
+ etc.
+ Oh well.
+\end_layout
+
+\begin_layout Standard
+Up to then, store rate was 3.1K/second ..
+ disappointing, as usual ...
 \end_layout
 
 \end_body
