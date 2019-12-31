@@ -155,7 +155,16 @@ The store took 233 seconds (ouch) at about 4.3K atoms/sec.
  Close and re-open.
  Load takes 121 seconds elapsed (8.1K atoms/sec) so this is hardly any improvemen
 t at all, compared to the file-load.
- Why? Where's the bottleneck?
+ Why? Where's the bottleneck? Apparently its postgres, which runs at 70%
+ cpu while guile runs at 22%
+\end_layout
+
+\begin_layout Standard
+Effing A.
+ OC_OMP is busted, issue opencog/cogutil#218 and opencog/atomspace#2460
+ Fixing this causes guile to run at 780% CPU ...
+ apparently thrashing ...
+ 
 \end_layout
 
 \end_body
