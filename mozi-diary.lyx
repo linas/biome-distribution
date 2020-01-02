@@ -177,7 +177,7 @@ Effing A.
 
 \begin_layout Standard
 See ~/work/load-files.scm to load all the files..
- total of 6.4M atoms – 5.2GB virt, 3.9G RSS Loaded in 1060 seconds for 6.05K/sec,
+ total of 6.4M atoms – 5.2GB virt, 3.9G RSS Loaded in 760 seconds for 8.4K/sec,
  but there are mnay duplicate atoms in the datasets ...
 \end_layout
 
@@ -193,6 +193,28 @@ SQL fails ...
 \begin_layout Standard
 Up to then, store rate was 3.1K/second ..
  disappointing, as usual ...
+\end_layout
+
+\begin_layout Standard
+Annotation took 335 seconds, RAM usage grew to 4.06GB and created an 8.4MB
+ file...
+\end_layout
+
+\begin_layout Standard
+Try again: HUGETLB_MORECORE=yes LD_PRELOAD=/usr/lib/libhugetlbfs.so.0 takes
+ 730 seconds (so 8.8K atoms/sec) which is just a hair faster than before,
+ and annotation takes 330 seconds (effectively no difference.)
+\end_layout
+
+\begin_layout Standard
+Loading parallel takes 628 seconds to load, so this is ...
+ losing, given how much cpu time it burned.
+ Ouch Parallelism in guile still sucks.
+\end_layout
+
+\begin_layout Standard
+Using (n-par-map 12 in gene-go.scm shortens execution time to 130 seconds
+ from 330 seconds, but at 12x larger CPU usage, so this is a big waste.
 \end_layout
 
 \end_body
