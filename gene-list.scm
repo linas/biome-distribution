@@ -82,6 +82,8 @@
 "GOLGA2P5" "MRPL33" "NME1-NME2" "UBE2V1" "SMIM20" "APOPT1" "CUX1"
 "UBE2F-SCLY" "GOLGA7B" "NCBP2-AS2"))
 
+(use-modules (annotation gene-go))
+(use-modules (annotation functions))
 
 (define (do-anno)
 	(define start (current-time))

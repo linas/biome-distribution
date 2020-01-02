@@ -1,13 +1,6 @@
 
-(use-modules (annotation) (annotation main)
-        (annotation gene-go)
-        (annotation biogrid) 
-        (annotation gene-pathway)
-        (annotation functions)
-        (annotation util)
-        (annotation parser)
-        (json))
 (use-modules (opencog))
+(use-modules (annotation))
 (use-modules (opencog cogserver))
 (start-cogserver)
 
@@ -26,31 +19,36 @@
 	*unspecified*
 )
 
-(define start (current-time))
-(loaf "biogridgene2uniprot.scm")
-(loaf "biogrid_gene_gene_174.scm")
-(loaf "ChEBI2Reactome_PE_Pathway.txt.scm")
-(loaf "current_symbols.scm")
-(loaf "entrez_to_protein.scm")
-(loaf "GO_annotation.scm")
-(loaf "GO_without_def.scm")
-(loaf "NCBI2Reactome_PE_Pathway.txt.scm")
-(loaf "reactome.scm")
-(loaf "smpdb_chebi_wname.scm")
-(loaf "smpdb_protein.scm")
-(loaf "uniprot2GO.scm")
-(loaf "UniProt2Reactome_PE_Pathway.txt.scm")
+(use-modules (ice-9 threads))
 
-(loaf "current/biogridgene2uniprot.scm")
-(loaf "current/biogrid_gene_gene_3.5.177.scm")
-(loaf "current/ChEBI2Reactome_PE_Pathway.txt.scm")
-(loaf "current/entrez_to_protein.scm")
-(loaf "current/GO.scm")
-(loaf "current/GO_annotation.scm")
-(loaf "current/NCBI2Reactome_PE_Pathway.txt.scm")
-(loaf "current/reactome.scm")
-(loaf "current/uniprot2GO.scm")
-(loaf "current/UniProt2Reactome_PE_Pathway.txt.scm")
+(define start (current-time))
+
+(define file-list (list
+ "biogridgene2uniprot.scm"
+ "biogrid_gene_gene_174.scm"
+ "ChEBI2Reactome_PE_Pathway.txt.scm"
+ "current_symbols.scm"
+ "entrez_to_protein.scm"
+ "GO_annotation.scm"
+ "GO_without_def.scm"
+ "NCBI2Reactome_PE_Pathway.txt.scm"
+ "reactome.scm"
+ "smpdb_chebi_wname.scm"
+ "smpdb_protein.scm"
+ "uniprot2GO.scm"
+ "UniProt2Reactome_PE_Pathway.txt.scm"
+ "current/biogridgene2uniprot.scm"
+ "current/biogrid_gene_gene_3.5.177.scm"
+ "current/ChEBI2Reactome_PE_Pathway.txt.scm"
+ "current/entrez_to_protein.scm"
+ "current/GO.scm"
+ "current/GO_annotation.scm"
+ "current/NCBI2Reactome_PE_Pathway.txt.scm"
+ "current/reactome.scm"
+ "current/uniprot2GO.scm"
+ "current/UniProt2Reactome_PE_Pathway.txt.scm"))
+
+(n-par-for-each 2 loaf file-list)
 
 (format #t "\nLoaded all the files in ~A seconds\n" (- (current-time) start))
 *unspecified*
