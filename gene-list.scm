@@ -82,14 +82,39 @@
 "GOLGA2P5" "MRPL33" "NME1-NME2" "UBE2V1" "SMIM20" "APOPT1" "CUX1"
 "UBE2F-SCLY" "GOLGA7B" "NCBP2-AS2"))
 
+(use-modules (annotation biogrid))
 (use-modules (annotation gene-go))
+(use-modules (annotation gene-pathway))
 (use-modules (annotation functions))
 
-(define (do-anno)
+(define (do-anno nparents)
 	(define start (current-time))
 	(define anno (gene-go-annotation gene-list
-		"biological_process molecular_function cellular_component"))
+		"my-go-anno-results"
+		#:parents nparents))
 	(define elapse (- (current-time) start))
-	(format #t "Annotation took ~A seconds\n" elapse)
+	(format #t "GO Annotation took ~A seconds\n" elapse)
+	*unspecified*
+)
+
+(define (do-path nparents)
+	(define start (current-time))
+	(define anno (gene-pathway-annotation gene-list
+		"my-path-results"
+		; #:namespace "biological_process molecular_function cellular_component"
+		#:parents nparents))
+	(define elapse (- (current-time) start))
+	(format #t "Path Annotation took ~A seconds\n" elapse)
+	*unspecified*
+)
+
+(define (do-grid nparents)
+	(define start (current-time))
+	(define anno (biogrid-interaction-annotation gene-list
+		"my-biogrid-results"
+		; #:namespace "biological_process molecular_function cellular_component"
+		#:parents nparents))
+	(define elapse (- (current-time) start))
+	(format #t "Grid Annotation took ~A seconds\n" elapse)
 	*unspecified*
 )
