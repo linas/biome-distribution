@@ -101,6 +101,7 @@
 	(define start (current-time))
 	(define anno (gene-pathway-annotation gene-list
 		"my-path-results"
+		; #:pathway "reactome smpdb"
 		; #:namespace "biological_process molecular_function cellular_component"
 		#:parents nparents))
 	(define elapse (- (current-time) start))

@@ -22,8 +22,6 @@
 
 (use-modules (ice-9 threads))
 
-(define start (current-time))
-
 (define file-list (list
  "biogridgene2uniprot.scm"
  "biogrid_gene_gene_174.scm"
@@ -49,8 +47,11 @@
  "current/uniprot2GO.scm"
  "current/UniProt2Reactome_PE_Pathway.txt.scm"))
 
-; Using more than 2 threads results in net de-acceleration!
-(n-par-for-each 2 loaf file-list)
+(define (load-all)
+	(define start (current-time))
+	; Using more than 2 threads results in net de-acceleration!
+	(n-par-for-each 2 loaf file-list)
+	(format #t "\nLoaded all the files in ~A seconds\n" (- (current-time) start))
+)
 
-(format #t "\nLoaded all the files in ~A seconds\n" (- (current-time) start))
 *unspecified*
