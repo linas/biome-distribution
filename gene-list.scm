@@ -104,7 +104,8 @@
 	(define start (current-time))
 	(define anno (gene-pathway-annotation gene-list
 		"my-path-results"
-		; #:pathway "reactome smpdb"
+		#:pathway "reactome smpdb"
+		; XXX if the pathway is set, then it crashes, see issue #91
 		; #:namespace "biological_process molecular_function cellular_component"
 		#:parents nparents))
 	(define elapse (- (current-time) start))
@@ -116,7 +117,7 @@
 	(define start (current-time))
 	(define anno (biogrid-interaction-annotation gene-list
 		"my-biogrid-results"
-		; #:namespace "biological_process molecular_function cellular_component"
+		#:namespace "biological_process molecular_function cellular_component"
 		#:parents nparents))
 	(define elapse (- (current-time) start))
 	(format #t "Grid Annotation took ~A seconds\n" elapse)

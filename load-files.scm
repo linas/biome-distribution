@@ -3,7 +3,6 @@
 ; (use-modules (annotation))
 (use-modules (opencog bioscience))
 (use-modules (opencog cogserver))
-(start-cogserver)
 
 (define (loaf fn)
 	(define start (current-time))
@@ -63,7 +62,6 @@
 	"current/GO_annotation.scm"
 	"current/entrez_to_protein.scm"
 	"current/current_symbols.scm"
-	"current/meta.json"
 	"current/smpdb_chebi_wname.scm"
 	"current/biogridgene2uniprot.scm"
 	"current/codingRNA.scm"
@@ -88,4 +86,5 @@
 	#f
 )
 
+(start-cogserver)
 *unspecified*
