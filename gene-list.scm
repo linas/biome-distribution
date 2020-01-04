@@ -1,4 +1,6 @@
 
+; Basic list of 681 genes
+; See also lmpd-genes for a list of 1482
 (define gene-list (list "TSPAN6" "NDUFAF7" "RBM5" "SLC7A2" "NDUFAB1"
 "DVL2" "SKAP2" "DHX33" "MSL3" "BZRAP1" "GTF2IRD1" "IL32" "RPS20" "SCMH1"
 "CLCN6" "RNF14" "ATP2C1" "IGF1" "GLRX2" "FAS" "ATP6V0A1" "FBXO42" "JADE2"
@@ -86,6 +88,7 @@
 (use-modules (annotation gene-go))
 (use-modules (annotation gene-pathway))
 (use-modules (annotation functions))
+(use-modules (annotation util))
 
 (define (do-anno nparents)
 	(define start (current-time))

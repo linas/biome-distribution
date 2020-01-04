@@ -36,22 +36,56 @@
  "smpdb_protein.scm"
  "uniprot2GO.scm"
  "UniProt2Reactome_PE_Pathway.txt.scm"
- "current/biogridgene2uniprot.scm"
- "current/biogrid_gene_gene_3.5.177.scm"
- "current/ChEBI2Reactome_PE_Pathway.txt.scm"
- "current/entrez_to_protein.scm"
- "current/GO.scm"
- "current/GO_annotation.scm"
- "current/NCBI2Reactome_PE_Pathway.txt.scm"
- "current/reactome.scm"
- "current/uniprot2GO.scm"
- "current/UniProt2Reactome_PE_Pathway.txt.scm"))
+))
+
+(define current-2019-list (list
+ "current-2019-12-31/biogridgene2uniprot.scm"
+ "current-2019-12-31/biogrid_gene_gene_3.5.177.scm"
+ "current-2019-12-31/ChEBI2Reactome_PE_Pathway.txt.scm"
+ "current-2019-12-31/entrez_to_protein.scm"
+ "current-2019-12-31/GO.scm"
+ "current-2019-12-31/GO_annotation.scm"
+ "current-2019-12-31/NCBI2Reactome_PE_Pathway.txt.scm"
+ "current-2019-12-31/reactome.scm"
+ "current-2019-12-31/uniprot2GO.scm"
+ "current-2019-12-31/UniProt2Reactome_PE_Pathway.txt.scm"
+))
+
+(define current-list (list
+	"current/ChEBI2Reactome_PE_Pathway.txt.scm"
+	"current/biogrid_gene_gene_3.5.177.scm"
+	"current/noncodingRNA.scm"
+	"current/smpdb_protein.scm"
+	"current/NCBI2Reactome_PE_Pathway.txt.scm"
+	"current/uniprot2GO.scm"
+	"current/UniProt2Reactome_PE_Pathway.txt.scm"
+	"current/reactome.scm"
+	"current/GO_annotation.scm"
+	"current/entrez_to_protein.scm"
+	"current/current_symbols.scm"
+	"current/meta.json"
+	"current/smpdb_chebi_wname.scm"
+	"current/biogridgene2uniprot.scm"
+	"current/codingRNA.scm"
+	"current/GO.scm"
+))
+
+(define (serial-load-all)
+	(define start (current-time))
+	; Using more than 2 threads results in net de-acceleration!
+	; (n-par-for-each 2 loaf file-list)
+	(for-each loaf current-list)
+	(format #t "\nLoaded all the files in ~A seconds\n" (- (current-time) start))
+	#f
+)
 
 (define (load-all)
 	(define start (current-time))
 	; Using more than 2 threads results in net de-acceleration!
-	(n-par-for-each 2 loaf file-list)
+	; (n-par-for-each 2 loaf file-list)
+	(n-par-for-each 2 loaf current-list)
 	(format #t "\nLoaded all the files in ~A seconds\n" (- (current-time) start))
+	#f
 )
 
 *unspecified*
