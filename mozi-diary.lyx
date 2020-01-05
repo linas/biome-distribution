@@ -94,7 +94,7 @@ MOZI.AI Diary
 \end_layout
 
 \begin_layout Subsection*
-26 Dec 2019
+26 Dec 2019 - Initial setup; SQL game start
 \end_layout
 
 \begin_layout Standard
@@ -102,7 +102,7 @@ Downloads: `
 \family typewriter
 wget -r --no-parent https://mozi.ai/datasets/
 \family default
-` graps 998796 KBytes of uncompressed scm files.
+` grabs 998796 KBytes of uncompressed scm files.
  A tar.gz of the same is 45.5MBytes and a tar.bz2 is only 26.2 MBytes.
 \end_layout
 
@@ -139,14 +139,20 @@ How about SQL?
 \end_layout
 
 \begin_layout Standard
+
+\family typewriter
 (sql-create "postgres:///biosci")
 \end_layout
 
 \begin_layout Standard
+
+\family typewriter
 (sql-open "postgres:///biosci")
 \end_layout
 
 \begin_layout Standard
+
+\family typewriter
 (store-atomspace)
 \end_layout
 
@@ -161,7 +167,14 @@ t at all, compared to the file-load.
 
 \begin_layout Standard
 Effing A.
- OC_OMP is busted, issue opencog/cogutil#218 and opencog/atomspace#2460
+ OC_OMP is busted, issue 
+\family typewriter
+opencog/cogutil#218
+\family default
+ and 
+\family typewriter
+opencog/atomspace#2460
+\family default
  Fixing this causes guile to run at 780% CPU ...
  apparently thrashing ...
  wtf ...
@@ -172,11 +185,15 @@ Effing A.
 \end_layout
 
 \begin_layout Subsection*
-31 Dec 2019
+31 Dec 2019 - SQL Game failure
 \end_layout
 
 \begin_layout Standard
-See ~/work/load-files.scm to load all the files..
+See 
+\family typewriter
+~/work/load-files.scm
+\family default
+ to load all the files..
  total of 6.4M atoms – 5.2GB virt, 3.9G RSS Loaded in 760 seconds for 8.4K/sec,
  but there are many duplicate atoms in the datasets ...
 \end_layout
@@ -184,8 +201,11 @@ See ~/work/load-files.scm to load all the files..
 \begin_layout Standard
 SQL fails ...
  Error: do_store_single_atom: Maxiumum Link size is 330.
- Atom was: (ListLink (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=1459691
-7") ...
+ Atom was: 
+\family typewriter
+(ListLink (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=14596917")
+\family default
+ ...
  etc.
  Oh well.
 \end_layout
@@ -201,8 +221,11 @@ Annotation took 335 seconds, RAM usage grew to 4.06GB and created an 8.4MB
 \end_layout
 
 \begin_layout Standard
-Try again: HUGETLB_MORECORE=yes LD_PRELOAD=/usr/lib/libhugetlbfs.so.0 takes
- 730 seconds (so 8.8K atoms/sec) which is just a hair faster than before,
+Try again: 
+\family typewriter
+HUGETLB_MORECORE=yes LD_PRELOAD=/usr/lib/libhugetlbfs.so.0
+\family default
+ takes 730 seconds (so 8.8K atoms/sec) which is just a hair faster than before,
  and annotation takes 330 seconds (effectively no difference.)
 \end_layout
 
@@ -218,8 +241,12 @@ Loading parallel takes 628 seconds to load (16% faster), so this is ...
 \end_layout
 
 \begin_layout Standard
-Using (n-par-map 12 in gene-go.scm shortens execution time to 130 seconds
- from 330 seconds, but at 12x larger CPU usage, so this is a big waste.
+Using 
+\family typewriter
+(n-par-map 12)
+\family default
+ in gene-go.scm shortens execution time to 130 seconds from 330 seconds,
+ but at 12x larger CPU usage, so this is a big waste.
 \end_layout
 
 \begin_layout Subsection*
@@ -234,7 +261,7 @@ A haha.
 \begin_inset Quotes eld
 \end_inset
 
-Idle
+idle
 \begin_inset Quotes erd
 \end_inset
 
@@ -247,13 +274,17 @@ busy
 \end_inset
 
  is elapsed seconds on busy system.
- All measurements with HUGETLB_MORECORE=yes LD_PRELOAD=/usr/lib/libhugetlbfs.so.0
+ All measurements with 
+\family typewriter
+HUGETLB_MORECORE=yes LD_PRELOAD=/usr/lib/libhugetlbfs.so.0
+\family default
  set.
+ The gene list is the basic list of 681 genes.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Tabular
-<lyxtabular version="3" rows="10" columns="6">
+<lyxtabular version="3" rows="9" columns="6">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -405,7 +436,7 @@ load, 2 threads
 \begin_inset Text
 
 \begin_layout Plain Layout
-957
+847-957
 \end_layout
 
 \end_inset
@@ -629,7 +660,7 @@ gene-go
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+24059
 \end_layout
 
 \end_inset
@@ -710,11 +741,413 @@ crash
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 biogrid
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+crash
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The crashes are becoming increasingly mysterious: they crash, but hand-running
+ the code by cut-n-paste does NOT crash.
+ That's weird.
+ A haha.
+ The crash is avoided by saying 
+\family typewriter
+(use-modules (annotation util))
+\family default
+ and the crash was because of 
+\family typewriter
+(GroundedSchemaNode 
+\begin_inset Quotes eld
+\end_inset
+
+scm:stuff
+\begin_inset Quotes erd
+\end_inset
+
+)
+\family default
+ with 
+\begin_inset Quotes eld
+\end_inset
+
+stuff
+\begin_inset Quotes erd
+\end_inset
+
+ being in util.
+ Aieee!!!!
+\end_layout
+
+\begin_layout Subsection*
+4 Jan 2020
+\end_layout
+
+\begin_layout Standard
+Apparently only half the files need to be loaded.
+ Only the 
+\begin_inset Quotes eld
+\end_inset
+
+current
+\begin_inset Quotes erd
+\end_inset
+
+ ones, not the base ones.
+ There's also a new list of 1482 genes to supplant the list of 681.
+\end_layout
+
+\begin_layout Standard
+Audit:
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+find-pathway-name
+\family default
+ would be faster if written out, instead of using GetLink.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+is-cellular-component?
+\family default
+ is buggy – the last setter wins.
+ See issue #89
+\end_layout
+
+\begin_layout Itemize
+Crash, when 
+\family typewriter
+gene-pathway-annotation
+\family default
+ with 
+\family typewriter
+#:namespace
+\family default
+ set...
+ 
+\family typewriter
+In procedure cog-new-link: Wrong type argument in position 2 (expecting
+ opencog atom): 
+\backslash
+"ECSIT
+\backslash
+"
+\family default
+.
+ Stack: 
+\family typewriter
+In annotation/functions.scm:
+\backslash
+n 301:22 13 (find-pathway-genes _ _)
+\family default
+ See issue #91
+\end_layout
+
+\begin_layout Standard
+So again, with the new current files, and the old 681-gene list.
+ #atoms is the total number of atoms in the atomspace.
+\end_layout
+
+\begin_layout Standard
+Issues:
+\end_layout
+
+\begin_layout Itemize
+File load generates error: 
+\family typewriter
+In procedure unquote: expression not valid outside of quasiquote
+\family default
+ ..
+ oh its a json file...
+ issue #90
+\end_layout
+
+\begin_layout Itemize
+After 3-4 hours, hit 
+\family typewriter
+Too many heap sections: Increase MAXHINCR or MAX_HEAP_SECTS
+\family default
+ on pathway.
+ Odd, I think it got up to 5GB or 6GB, so rame-use is not bad.
+ Just probably mem fragmentation.
+ Trying a new bdwgc with large model.
+ Attempt to 
+\family typewriter
+./configure --enable-large-config
+\family default
+ of bdwgc to see if that fixes it.
+ Its master, Nov 9 2019 which seems to be version 8.1.0
+\end_layout
+
+\begin_layout Itemize
+Mem fragmentation might be due to over-use of GroundedSchema
+\end_layout
+
+\begin_layout Itemize
+gc-stats: heap-size = 4GB!! yow! 10GB RSS, 19GB virt, 0.5GB free for pathway
+ after 450 minutes runtime.
+ GC is running ever 10 seconds.
+ ....
+ now GC has calmed down, but ...
+ heap=10GB, heap-free = 0.5GB with 17GB RSS 27GB virt and also this: 
+\family typewriter
+libhugetlbfs: WARNING: New heap segment map at 0x55629b400000 failed: Cannot
+ allocate memory
+\family default
+ and hmm 
+\family typewriter
+cat /proc/meminfo
+\family default
+ says ..
+ what did postgres reserve them all? no, postgres reserved 12K of them,
+ who reserved the other 12K?? ohh probably postres in the not-container.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="9" columns="6">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+type
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+#parents
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+idle (secs)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+busy (secs)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RSS (GBytes)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+#atoms
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+load, 1 threads
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+845
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.9
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.8M=6757334
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+load, 2 threads
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+602-725
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.08
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.8M=6757334
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+gene-go
 \end_layout
 
 \end_inset
@@ -741,7 +1174,231 @@ biogrid
 \begin_inset Text
 
 \begin_layout Plain Layout
-crash
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+gene-go
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+gene-go
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+gene-go
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+pathway
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MAXHINCR
 \end_layout
 
 \end_inset
@@ -770,7 +1427,7 @@ crash
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+biogrid
 \end_layout
 
 \end_inset
@@ -779,7 +1436,7 @@ crash
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+0
 \end_layout
 
 \end_inset
