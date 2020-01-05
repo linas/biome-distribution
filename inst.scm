@@ -6,22 +6,22 @@
 
       (define actr (accum-time \"foo\"))
       (define bctr (accum-time \"bar\"))
-      (actr #t #f) ; start timing foo
-      (bctr #t #f) ; start timing bar
-      (bctr #f #f) ; stop  timing bar
-      (bctr #t #f) ; start timing bar
-      (bctr #f #f) ; stop  timing bar
-      (bctr #t #f) ; start timing bar
-      (bctr #f #f) ; stop  timing bar
-      (actr #f #f) ; stop  timing foo
-      (actr #f #t) ; report foo
-      (bctr #f #t) ; report bar
+      (actr #:enter? #t) ; start timing foo
+      (bctr #:enter? #t) ; start timing bar
+      (bctr #:enter? #f) ; stop  timing bar
+      (bctr #:enter? #t) ; start timing bar
+      (bctr #:enter? #f) ; stop  timing bar
+      (bctr #:enter? #t) ; start timing bar
+      (bctr #:enter? #f) ; stop  timing bar
+      (actr #:enter? #f) ; stop  timing foo
+      (actr #:report? #t) ; report foo
+      (bctr #:report? #t) ; report bar
 "
 	(let ((fname name)
 			(elapsed 0)
 			(calls 0)
 			(start 0))
-		(lambda (enter? report?)
+		(lambda* (#:key (enter? #f) (report? #f))
 			(if report?
 				(format #t "Time: ~6f secs. calls: ~A avg: ~2f usec/call for ~A\n"
 					(* 1.0e-9 elapsed)
