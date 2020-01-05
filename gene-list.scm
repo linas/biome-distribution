@@ -123,3 +123,6 @@
 	(format #t "Grid Annotation took ~A seconds\n" elapse)
 	*unspecified*
 )
+
+; (start-cogserver "path.conf")
+; (start-cogserver "grid.conf")

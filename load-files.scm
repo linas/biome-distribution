@@ -86,5 +86,10 @@
 	#f
 )
 
-(start-cogserver)
+; (start-cogserver)
+; (start-cogserver "path.conf")
+; (start-cogserver "grid.conf")
+(display "Don't forget to (start-cogserver \"path.conf\")\n")
+(display "   or to (start-cogserver \"grid.conf\")\n")
+
 *unspecified*
