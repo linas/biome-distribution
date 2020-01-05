@@ -142,6 +142,19 @@
 	*unspecified*
 )
 
+(define (do-one-path gename)
+	(define start (current-time))
+	(define anno (gene-pathway-annotation (list gename)
+		"do-one-path-results"
+		#:pathway "reactome smpdb"
+		; XXX if the pathway is set, then it crashes, see issue #91
+		; #:namespace "biological_process molecular_function cellular_component"
+		#:parents 0))
+	(define elapse (- (current-time) start))
+	(format #t "Path Annotation for ~A took ~A seconds\n" gename elapse)
+	*unspecified*
+)
+
 (define (do-grid nparents)
 	(define start (current-time))
 	(define anno (biogrid-interaction-annotation gene-list
