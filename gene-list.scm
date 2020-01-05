@@ -109,6 +109,13 @@
 (find-memberln-ctr #:report? #t)
 (add-go-info-ctr #:report? #t)
 (find-parent-ctr #:report? #t)
+(find-pathway-member-ctr #:report? #t)
+(pathway-gene-interactors-ctr #:report? #t)
+(pathway-hierarchy-ctr #:report? #t)
+(find-protein-ctr #:report? #t)
+(find-protein-form-ctr #:report? #t)
+(find-mol-ctr #:report? #t)
+(generate-interactors-ctr #:report? #t)
 )
 
 

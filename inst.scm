@@ -25,11 +25,14 @@
 			(start 0))
 		(lambda* (#:key (enter? #f) (report? #f))
 			(if report?
-				(format #t "Time: ~9f secs. calls: ~A avg: ~8,1f usec/call for ~A\n"
-					(* 1.0e-9 elapsed)
-					calls
-					(/ (* 1.0e-3 elapsed) calls)
-					fname)
+				(if (< 0 calls)
+					(format #t
+						"Time: ~9f secs. calls: ~A avg: ~8,1f usec/call for ~A\n"
+						(* 1.0e-9 elapsed)
+						calls
+						(/ (* 1.0e-3 elapsed) calls)
+						fname)
+					(format #t "Zero calls to ~A\n" fname))
 				(if enter?
 					(set! start (get-internal-real-time))
 					(begin
