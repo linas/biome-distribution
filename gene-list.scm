@@ -115,7 +115,7 @@
 (find-protein-ctr #:report? #t)
 (find-protein-form-ctr #:report? #t)
 (find-mol-ctr #:report? #t)
-(generate-interactors-ctr #:report? #t)
+(find-pubmed-id-ctr #:report? #t)
 )
 
 
