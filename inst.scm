@@ -1,4 +1,6 @@
 
+(use-modules (ice-9 format))
+
 (define (accum-time name)
 "
    Maintain performance profile manually.
