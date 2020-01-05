@@ -1,6 +1,22 @@
 
-; Maintain counts
 (define (accum-time name)
+"
+   Maintain performance profile manually.
+   Example usage:
+
+      (define actr (accum-time \"foo\"))
+      (define bctr (accum-time \"bar\"))
+      (actr #t #f) ; start timing foo
+      (bctr #t #f) ; start timing bar
+      (bctr #f #f) ; stop  timing bar
+      (bctr #t #f) ; start timing bar
+      (bctr #f #f) ; stop  timing bar
+      (bctr #t #f) ; start timing bar
+      (bctr #f #f) ; stop  timing bar
+      (actr #f #f) ; stop  timing foo
+      (actr #f #t) ; report foo
+      (bctr #f #t) ; report bar
+"
 	(let ((fname name)
 			(elapsed 0)
 			(calls 0)
