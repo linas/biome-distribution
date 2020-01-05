@@ -90,6 +90,17 @@
 (use-modules (annotation functions))
 (use-modules (annotation util))
 
+(load "inst.scm")
+(define smpdb-ctr (accum-time "smpdb"))
+(define reactome-ctr (accum-time "reactome"))
+(define find-pathway-genes-ctr (accum-time "find-pathway-genes"))
+(define add-pathway-genes-ctr (accum-time "add-pathway-genes"))
+(define find-go-term-ctr (accum-time "find-go-term"))
+(define find-memberln-ctr (accum-time "find-memberln"))
+(define add-go-info-ctr (accum-time "add-go-info"))
+(define find-parent-ctr (accum-time "find-parent"))
+
+
 (define (do-anno nparents)
 	(define start (current-time))
 	(define anno (gene-go-annotation gene-list
