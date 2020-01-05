@@ -961,7 +961,7 @@ cat /proc/meminfo
 \family default
  says ..
  what did postgres reserve them all? no, postgres reserved 12K of them,
- who reserved the other 12K?? ohh probably postres in the not-container.
+ who reserved the other 12K?? ohh probably postgres in the not-container.
 \end_layout
 
 \begin_layout Standard
@@ -1483,6 +1483,41 @@ biogrid
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+See issue #98 – looks like 88% of the CPU time is spent in the json library.
+ My work here is done.
+\end_layout
+
+\begin_layout Subsection*
+4 Jan 2020 - Conclusions
+\end_layout
+
+\begin_layout Standard
+My work here is done.
+ See status report in issue #98 – looks like 80% to 90% of the CPU time
+ is lost in the json library, and that is also probably where the RAM is
+ being lost, too.
+ Assorted relatively simple cleanups will likely regain the cpu time list
+ in the pattern-matcher.
+ I'm done.
+ Over and out.
+\end_layout
+
+\begin_layout Standard
+Oh hang on.
+ Some work items for me:
+\end_layout
+
+\begin_layout Itemize
+Create a micro-benchmark comparing direct EvaluationLink walking to GetLink
+ searches.
+\end_layout
+
+\begin_layout Itemize
+Log BindLink performance stats in a value hanging on the BindLink.
+ Also cache last result.(?) (Caching is dangerous for RAM mis-use).
 \end_layout
 
 \end_body
