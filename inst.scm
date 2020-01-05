@@ -23,7 +23,7 @@
 			(start 0))
 		(lambda* (#:key (enter? #f) (report? #f))
 			(if report?
-				(format #t "Time: ~6f secs. calls: ~A avg: ~2f usec/call for ~A\n"
+				(format #t "Time: ~9f secs. calls: ~A avg: ~8,1f usec/call for ~A\n"
 					(* 1.0e-9 elapsed)
 					calls
 					(/ (* 1.0e-3 elapsed) calls)
