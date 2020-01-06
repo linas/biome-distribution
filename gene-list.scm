@@ -115,6 +115,7 @@
 (find-protein-ctr #:report? #t)
 (find-protein-form-ctr #:report? #t)
 (find-mol-ctr #:report? #t)
+(find-name-ctr #:report? #t)
 (find-pubmed-id-ctr #:report? #t)
 )
 
@@ -151,7 +152,8 @@
 		; #:namespace "biological_process molecular_function cellular_component"
 		#:parents 0))
 	(define elapse (- (current-time) start))
-	(format #t "Path Annotation for ~A took ~A seconds\n" gename elapse)
+	(format #t "Path Annotation for ~A took ~A seconds; got ~A annotations\n"
+		gename elapse (cog-arity anno))
 	*unspecified*
 )
 
