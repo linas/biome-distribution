@@ -907,67 +907,11 @@ n 301:22 13 (find-pathway-genes _ _)
 \begin_layout Standard
 So again, with the new current files, and the old 681-gene list.
  #atoms is the total number of atoms in the atomspace.
-\end_layout
-
-\begin_layout Standard
-Issues:
-\end_layout
-
-\begin_layout Itemize
-File load generates error: 
-\family typewriter
-In procedure unquote: expression not valid outside of quasiquote
-\family default
- ..
- oh its a json file...
- issue #90
-\end_layout
-
-\begin_layout Itemize
-After 3-4 hours, hit 
-\family typewriter
-Too many heap sections: Increase MAXHINCR or MAX_HEAP_SECTS
-\family default
- on pathway.
- Odd, I think it got up to 5GB or 6GB, so rame-use is not bad.
- Just probably mem fragmentation.
- Trying a new bdwgc with large model.
- Attempt to 
-\family typewriter
-./configure --enable-large-config
-\family default
- of bdwgc to see if that fixes it.
- Its master, Nov 9 2019 which seems to be version 8.1.0
-\end_layout
-
-\begin_layout Itemize
-Mem fragmentation might be due to over-use of GroundedSchema
-\end_layout
-
-\begin_layout Itemize
-gc-stats: heap-size = 4GB!! yow! 10GB RSS, 19GB virt, 0.5GB free for pathway
- after 450 minutes runtime.
- GC is running ever 10 seconds.
- ....
- now GC has calmed down, but ...
- heap=10GB, heap-free = 0.5GB with 17GB RSS 27GB virt and also this: 
-\family typewriter
-libhugetlbfs: WARNING: New heap segment map at 0x55629b400000 failed: Cannot
- allocate memory
-\family default
- and hmm 
-\family typewriter
-cat /proc/meminfo
-\family default
- says ..
- what did postgres reserve them all? no, postgres reserved 12K of them,
- who reserved the other 12K?? ohh probably postgres in the not-container.
-\end_layout
-
-\begin_layout Standard
+ The par=2 column is with (n-par-map 2) for gene-go.scm on idle system (seconds)
 \begin_inset Tabular
-<lyxtabular version="3" rows="9" columns="6">
+<lyxtabular version="3" rows="9" columns="7">
 <features tabularvalignment="middle">
+<column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -998,6 +942,15 @@ type
 
 \begin_layout Plain Layout
 idle (secs)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+par=2
 \end_layout
 
 \end_inset
@@ -1062,6 +1015,15 @@ load, 1 threads
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 845
 \end_layout
 
@@ -1109,6 +1071,15 @@ load, 2 threads
 \begin_inset Text
 
 \begin_layout Plain Layout
+500
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -1118,7 +1089,7 @@ load, 2 threads
 \begin_inset Text
 
 \begin_layout Plain Layout
-602-725
+602-785
 \end_layout
 
 \end_inset
@@ -1165,7 +1136,7 @@ gene-go
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+104
 \end_layout
 
 \end_inset
@@ -1174,7 +1145,16 @@ gene-go
 \begin_inset Text
 
 \begin_layout Plain Layout
+85
+\end_layout
 
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+161
 \end_layout
 
 \end_inset
@@ -1221,7 +1201,7 @@ gene-go
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+509
 \end_layout
 
 \end_inset
@@ -1230,7 +1210,16 @@ gene-go
 \begin_inset Text
 
 \begin_layout Plain Layout
+422
+\end_layout
 
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+853
 \end_layout
 
 \end_inset
@@ -1277,7 +1266,7 @@ gene-go
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+646
 \end_layout
 
 \end_inset
@@ -1286,7 +1275,7 @@ gene-go
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+536
 \end_layout
 
 \end_inset
@@ -1295,7 +1284,16 @@ gene-go
 \begin_inset Text
 
 \begin_layout Plain Layout
+1063
+\end_layout
 
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.10
 \end_layout
 
 \end_inset
@@ -1333,7 +1331,16 @@ gene-go
 \begin_inset Text
 
 \begin_layout Plain Layout
+809
+\end_layout
 
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+678
 \end_layout
 
 \end_inset
@@ -1351,7 +1358,7 @@ gene-go
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+4.35
 \end_layout
 
 \end_inset
@@ -1360,7 +1367,7 @@ gene-go
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+6936183
 \end_layout
 
 \end_inset
@@ -1381,6 +1388,15 @@ pathway
 
 \begin_layout Plain Layout
 0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -1468,6 +1484,15 @@ biogrid
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
@@ -1486,7 +1511,88 @@ biogrid
 \end_layout
 
 \begin_layout Standard
-See issue #98 – looks like 88% of the CPU time is spent in the json library.
+Issues:
+\end_layout
+
+\begin_layout Itemize
+File load generates error: 
+\family typewriter
+In procedure unquote: expression not valid outside of quasiquote
+\family default
+ ..
+ oh its a json file...
+ issue #90
+\end_layout
+
+\begin_layout Itemize
+After 3-4 hours, hit 
+\family typewriter
+Too many heap sections: Increase MAXHINCR or MAX_HEAP_SECTS
+\family default
+ on pathway.
+ Odd, I think it got up to 5GB or 6GB, so rame-use is not bad.
+ Just probably mem fragmentation.
+ Trying a new bdwgc with large model.
+ Attempt to 
+\family typewriter
+./configure --enable-large-config
+\family default
+ of bdwgc to see if that fixes it.
+ Its master, Nov 9 2019 which seems to be version 8.1.0
+\end_layout
+
+\begin_layout Itemize
+Mem fragmentation might be due to over-use of GroundedSchema XXX no its
+ not its due to call/cc and make-parameter
+\end_layout
+
+\begin_layout Itemize
+While running pathway: 
+\family typewriter
+gc-stats
+\family default
+: heap-size = 4GB!! yow! 10GB RSS, 19GB virt, 0.5GB free for pathway after
+ 450 minutes runtime.
+ GC is running ever 10 seconds.
+ ....
+ now GC has calmed down, but ...
+ heap=10GB, heap-free = 0.5GB with 17GB RSS 27GB virt and also this: 
+\family typewriter
+libhugetlbfs: WARNING: New heap segment map at 0x55629b400000 failed: Cannot
+ allocate memory
+\family default
+ and hmm 
+\family typewriter
+cat /proc/meminfo
+\family default
+ says ..
+ what did postgres reserve them all? no, postgres reserved 12K of them,
+ who reserved the other 12K?? ohh probably postgres in the not-container.
+\end_layout
+
+\begin_layout Itemize
+Why is running gen-go an order of magnitude faster? Is it a different dataset?
+ Is it the new pull eq #2464 ???
+\end_layout
+
+\begin_layout Itemize
+Running overnight, pathway exploded to 62GB RSS, 102GB virt.
+ Took two hours before it started growing.
+ Then grew quickly.
+\end_layout
+
+\begin_layout Itemize
+Running overnight, grid remains a 4.2 GB
+\end_layout
+
+\begin_layout Itemize
+File loading: single-threaded, took 831 seconds to load, of which 500 was
+ in gc.
+\end_layout
+
+\begin_layout Standard
+See issue #98 – looks like 88% of the CPU time is spent in call/cc.
+ And this is also probably leaking like a seive...
  My work here is done.
 \end_layout
 
@@ -1497,8 +1603,8 @@ See issue #98 – looks like 88% of the CPU time is spent in the json library.
 \begin_layout Standard
 My work here is done.
  See status report in issue #98 – looks like 80% to 90% of the CPU time
- is lost in the json library, and that is also probably where the RAM is
- being lost, too.
+ is lost in call/cc, and that is also probably where the RAM is being lost,
+ too.
  Assorted relatively simple cleanups will likely regain the cpu time list
  in the pattern-matcher.
  I'm done.
@@ -1511,13 +1617,16 @@ Oh hang on.
 \end_layout
 
 \begin_layout Itemize
-Create a micro-benchmark comparing direct EvaluationLink walking to GetLink
- searches.
+Log BindLink performance stats in a value hanging on the BindLink.
+ Also cache last result.(?) (Caching is dangerous for RAM mis-use).
+ Yeah, but this wastes tiem for the 99% of users who don't care.
 \end_layout
 
 \begin_layout Itemize
-Log BindLink performance stats in a value hanging on the BindLink.
- Also cache last result.(?) (Caching is dangerous for RAM mis-use).
+Create a micro-benchmark comparing direct EvaluationLink walking to GetLink
+ searches.
+ OK, so I didn't do this by hand, but instrumenting the code is interesting.
+ See issue MOZI-AI/annotation-scheme#88
 \end_layout
 
 \end_body
