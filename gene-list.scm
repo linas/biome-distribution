@@ -101,30 +101,35 @@
 ; (define find-parent-ctr (accum-time "find-parent"))
 
 (define (report)
+;pathway stuff
 (smpdb-ctr #:report? #t)
 (reactome-ctr #:report? #t)
 (find-pathway-genes-ctr #:report? #t)
 (add-pathway-genes-ctr #:report? #t)
+(find-pathway-member-ctr #:report? #t)
+(pathway-gene-interactors-ctr #:report? #t)
+(generate-interactors-ctr #:report? #t)
+(pathway-hierarchy-ctr #:report? #t)
+(check-pathway-ctr #:report? #t)
+(find-protein-ctr #:report? #t)
+(find-mol-ctr #:report? #t)
+
+; grid stuff
+(match-gene-interactors-ctr #:report? #t)
+(find-output-interactors-ctr #:report? #t)
+(generate-result-ctr #:report? #t)
+(build-interaction-ctr #:report? #t)
+(find-protein-form-ctr #:report? #t)
+
+; common to grid and path
+(find-name-ctr #:report? #t)
+(find-pubmed-id-ctr #:report? #t)
+
+; ???
 (find-go-term-ctr #:report? #t)
 (find-memberln-ctr #:report? #t)
 (add-go-info-ctr #:report? #t)
 (find-parent-ctr #:report? #t)
-
-(match-gene-interactors-ctr #:report? #t)
-(find-output-interactors-ctr #:report? #t)
-
-(find-pathway-member-ctr #:report? #t)
-(pathway-gene-interactors-ctr #:report? #t)
-(generate-result-ctr #:report? #t)
-(generate-interactors-ctr #:report? #t)
-(build-interaction-ctr #:report? #t)
-(pathway-hierarchy-ctr #:report? #t)
-(check-pathway-ctr #:report? #t)
-(find-protein-ctr #:report? #t)
-(find-protein-form-ctr #:report? #t)
-(find-mol-ctr #:report? #t)
-(find-name-ctr #:report? #t)
-(find-pubmed-id-ctr #:report? #t)
 )
 
 
