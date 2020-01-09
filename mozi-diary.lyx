@@ -1479,7 +1479,7 @@ biogrid
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+95170
 \end_layout
 
 \end_inset
@@ -1488,7 +1488,7 @@ biogrid
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+4.45
 \end_layout
 
 \end_inset
@@ -1497,7 +1497,7 @@ biogrid
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+9053882
 \end_layout
 
 \end_inset
@@ -1588,6 +1588,19 @@ Running overnight, grid remains a 4.2 GB
 \begin_layout Itemize
 File loading: single-threaded, took 831 seconds to load, of which 500 was
  in gc.
+ Heap was 19MB, Heap free was 11.5MB, required 11K gc's (so 12 per second).
+\end_layout
+
+\begin_layout Itemize
+The biogrid run completed! It took 26.4 hours wall-clock time, 30.25 hours
+ CPU time.
+ Of this, 26642 seconds = 7.4 hours was in GC.
+ RSS was 4.6GB, Virt was 9.1GB
+\end_layout
+
+\begin_layout Itemize
+When pathway is exploding, path-hierarchy/check-pathway goes from half-seecond
+ of cpu time to half-hours-ish.
 \end_layout
 
 \begin_layout Standard
