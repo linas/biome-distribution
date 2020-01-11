@@ -130,6 +130,8 @@
 (find-memberln-ctr #:report? #t)
 (add-go-info-ctr #:report? #t)
 (find-parent-ctr #:report? #t)
+(locate-node-ctr #:report? #t)
+(add-loc-ctr #:report? #t)
 )
 
 
@@ -152,7 +154,7 @@
 		; #:namespace "biological_process molecular_function cellular_component"
 		#:parents nparents))
 	(define elapse (- (current-time) start))
-	(format #t "Path Annotation took ~A seconds\n" elapse)
+	(format #t "Path Annotation (p=~A) took ~A seconds\n" nparents elapse)
 	*unspecified*
 )
 
@@ -175,6 +177,8 @@
 	(define anno (biogrid-interaction-annotation gene-list
 		"my-biogrid-results"
 		#:namespace "biological_process molecular_function cellular_component"
+		; #:interaction "Proteins"
+		#:interaction "Genes"
 		#:parents nparents))
 	(define elapse (- (current-time) start))
 	(format #t "Grid Annotation took ~A seconds\n" elapse)
