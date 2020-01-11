@@ -113,6 +113,7 @@
 (check-pathway-ctr #:report? #t)
 (find-protein-ctr #:report? #t)
 (find-mol-ctr #:report? #t)
+(find-go-term-ctr #:report? #t)
 
 ; grid stuff
 (match-gene-interactors-ctr #:report? #t)
@@ -126,7 +127,6 @@
 (find-pubmed-id-ctr #:report? #t)
 
 ; ???
-(find-go-term-ctr #:report? #t)
 (find-memberln-ctr #:report? #t)
 (add-go-info-ctr #:report? #t)
 (find-parent-ctr #:report? #t)
