@@ -158,6 +158,18 @@
 	*unspecified*
 )
 
+(define (do-path-ns nparents)
+	(define start (current-time))
+	(define anno (gene-pathway-annotation gene-list
+		"my-path-results"
+		#:pathway "reactome smpdb"
+		#:namespace "biological_process molecular_function cellular_component"
+		#:parents nparents))
+	(define elapse (- (current-time) start))
+	(format #t "Path Annotation (p=~A) took ~A seconds\n" nparents elapse)
+	*unspecified*
+)
+
 (define (do-one-path gename)
 	(define start (current-time))
 	(define anno (gene-pathway-annotation (list gename)
@@ -172,12 +184,24 @@
 	*unspecified*
 )
 
-(define (do-grid nparents)
+(define (do-grid-protein nparents)
 	(define start (current-time))
 	(define anno (biogrid-interaction-annotation gene-list
 		"my-biogrid-results"
 		#:namespace "biological_process molecular_function cellular_component"
-		; #:interaction "Proteins"
+		#:interaction "Proteins"
+		; #:interaction "Genes"
+		#:parents nparents))
+	(define elapse (- (current-time) start))
+	(format #t "Grid Annotation took ~A seconds\n" elapse)
+	*unspecified*
+)
+
+(define (do-grid-gene nparents)
+	(define start (current-time))
+	(define anno (biogrid-interaction-annotation gene-list
+		"my-biogrid-results"
+		#:namespace "biological_process molecular_function cellular_component"
 		#:interaction "Genes"
 		#:parents nparents))
 	(define elapse (- (current-time) start))
