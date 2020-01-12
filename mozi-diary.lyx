@@ -2571,12 +2571,13 @@ Create a micro-benchmark comparing direct EvaluationLink walking to GetLink
 \end_layout
 
 \begin_layout Subsection*
-9 Jan 2020 - Conclusions, again
+11 Jan 2020 - Conclusions, again
 \end_layout
 
 \begin_layout Standard
-Three issues describing fixes and per improvements - #103 and #105 and #106.
- Things seem OK-ish now.
+Four issues describing fixes and per improvements - #103 and #105 and #106.
+ And pull req #108 And also opencog/atomspace#2470 Things seem OK-ish now.
+ Really, I am now super-done.
 \end_layout
 
 \end_body
