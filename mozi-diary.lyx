@@ -909,9 +909,8 @@ So again, with the new current files, and the old 681-gene list.
  #atoms is the total number of atoms in the atomspace.
  The par=2 column is with (n-par-map 2) for gene-go.scm on idle system (seconds)
 \begin_inset Tabular
-<lyxtabular version="3" rows="20" columns="8">
+<lyxtabular version="3" rows="25" columns="7">
 <features tabularvalignment="middle">
-<column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -934,15 +933,6 @@ type
 
 \begin_layout Plain Layout
 #parents
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-ns
 \end_layout
 
 \end_inset
@@ -1034,15 +1024,6 @@ load, 1 threads
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 845
 \end_layout
 
@@ -1082,15 +1063,6 @@ load, 2 threads
 
 \begin_layout Plain Layout
 -
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
 \end_layout
 
 \end_inset
@@ -1164,15 +1136,6 @@ gene-go
 \begin_inset Text
 
 \begin_layout Plain Layout
-y
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 104
 \end_layout
 
@@ -1230,15 +1193,6 @@ gene-go
 
 \begin_layout Plain Layout
 1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-y
 \end_layout
 
 \end_inset
@@ -1312,15 +1266,6 @@ gene-go
 \begin_inset Text
 
 \begin_layout Plain Layout
-y
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 646
 \end_layout
 
@@ -1378,15 +1323,6 @@ gene-go
 
 \begin_layout Plain Layout
 3
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-y
 \end_layout
 
 \end_inset
@@ -1460,15 +1396,6 @@ pathway
 \begin_inset Text
 
 \begin_layout Plain Layout
-n
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -1526,15 +1453,6 @@ pathway
 
 \begin_layout Plain Layout
 1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-n
 \end_layout
 
 \end_inset
@@ -1608,15 +1526,6 @@ path/cac
 \begin_inset Text
 
 \begin_layout Plain Layout
-n
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -1682,15 +1591,6 @@ path/cac+af
 \begin_inset Text
 
 \begin_layout Plain Layout
-n
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -1738,7 +1638,7 @@ n
 \begin_inset Text
 
 \begin_layout Plain Layout
-path/cac+af
+path/af-up
 \end_layout
 
 \end_inset
@@ -1756,7 +1656,128 @@ path/cac+af
 \begin_inset Text
 
 \begin_layout Plain Layout
-y
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+?
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+path/af+ns
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+213324
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20/21
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7839823
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+path-ns/mf
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
 \end_layout
 
 \end_inset
@@ -1830,15 +1851,6 @@ biogrid
 \begin_inset Text
 
 \begin_layout Plain Layout
-y
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -1896,15 +1908,6 @@ biogrid-fix
 
 \begin_layout Plain Layout
 0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-y
 \end_layout
 
 \end_inset
@@ -1978,15 +1981,6 @@ biogr-fix+cac
 \begin_inset Text
 
 \begin_layout Plain Layout
-y
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -2034,7 +2028,7 @@ y
 \begin_inset Text
 
 \begin_layout Plain Layout
-biogr-gene
+biogr-fix+up
 \end_layout
 
 \end_inset
@@ -2052,7 +2046,63 @@ biogr-gene
 \begin_inset Text
 
 \begin_layout Plain Layout
-y
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4095
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.03/8.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9137069
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+biogr-gene
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
 \end_layout
 
 \end_inset
@@ -2126,15 +2176,6 @@ biogr-gene
 \begin_inset Text
 
 \begin_layout Plain Layout
-y
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -2192,15 +2233,6 @@ biogr-gene
 
 \begin_layout Plain Layout
 2
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-y
 \end_layout
 
 \end_inset
@@ -2274,15 +2306,6 @@ bio-gene+cac
 \begin_inset Text
 
 \begin_layout Plain Layout
-y
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -2326,7 +2349,7 @@ y
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2335,7 +2358,7 @@ bio-gene+cac
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2344,16 +2367,7 @@ bio-gene+cac
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-y
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2362,7 +2376,7 @@ y
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2371,7 +2385,7 @@ y
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2380,7 +2394,7 @@ y
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2389,11 +2403,141 @@ y
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 8596350
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+bio-gene+up
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1204
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.08/8.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8409118
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+bio-g+pub
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+802
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.1/8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8515250
 \end_layout
 
 \end_inset
@@ -2488,10 +2632,11 @@ File loading: single-threaded, took 831 seconds to load, of which 500 was
 \end_layout
 
 \begin_layout Itemize
-The biogrid run completed! It took 26.4 hours wall-clock time, 30.25 hours
- CPU time.
+biogrid-fix: The biogrid run completed! It took 26.4 hours wall-clock time,
+ 30.25 hours CPU time.
  Of this, 26642 seconds = 7.4 hours was in GC.
- RSS was 4.6GB, Virt was 9.1GB
+ RSS was 4.6GB, Virt was 9.1GB This was the biogrid #:interaction "Proteins"
+ only
 \end_layout
 
 \begin_layout Itemize
@@ -2501,15 +2646,27 @@ When pathway is exploding, path-hierarchy/check-pathway goes from half-second
 \end_layout
 
 \begin_layout Itemize
-pathway crashes when namespaces set!? so above measured without pathways
- (ns=no in the ns column).
- Now fixed, so ns=y are the ones that measure the namespaces.
+path+cac= cac==cache fixes to pattern matcher.
+ apparently no speedup at all.
+ Can we double-check? Yep.
+ Nope.
+ No speedup from caching.
+ Bummer.
+ Also this took 1023 seconds in GC, so about 1/60 = 1.6% in GC.
 \end_layout
 
 \begin_layout Itemize
-path+cac= cac==cache fixes to pattern matcher.
- apparently no speedup at all.
- Can we doulbe-check?
+path/af+ns the afunc-cache fix (#108) plus name-spaces #:namespace "biological_p
+rocess molecular_function cellular_component" which used to crash in the
+ past but now works.
+ I'm pretty sure it was running at 4GB almost the entire time, but blew
+ up to 20GB during file write.
+ See issue #111
+\end_layout
+
+\begin_layout Itemize
+path-ns/mf - with fix #108 and with #2471 and with afunc memoization for
+ node-info, find-name and locate-node.
 \end_layout
 
 \begin_layout Itemize
@@ -2527,14 +2684,54 @@ bio-gene+cac = cac==cache fixes to pattern matcher.
 \end_layout
 
 \begin_layout Itemize
+biogene+up ==upper-cut pull req #2471 for (do-grid-gene 0)
+\end_layout
+
+\begin_layout Itemize
 af == make-afunc-cache for pathway-gene-interactors total # calls to pathway-gen
 e-interactors was 1992 for 11K seconds.
+ (puyll req #108)
+\end_layout
+
+\begin_layout Itemize
+path-af-up == af is make-afunc-cache as above.
+ up==upwards cut aka pull req #2471.
+ Performance more that triples: 13100/4095 = 3.2x faster and the new bottlenecks
+ are generate-result and find-protein-form
+\end_layout
+
+\begin_layout Itemize
+biogrid-fix+up == biogrid protein, with the cac fixes, and the upper-cut
+ pull req #2471
+\end_layout
+
+\begin_layout Itemize
+biog+pub == pubmed-id lookup fix issue #110
 \end_layout
 
 \begin_layout Standard
 See issue #98 – looks like 88% of the CPU time is spent in call/cc.
  And this is also probably leaking like a seive...
  My work here is done.
+\end_layout
+
+\begin_layout Standard
+OK so this is now the interesting one:
+\end_layout
+
+\begin_layout Itemize
+find-protein-form — it has a simple but time-consuming search in it.
+ Its triangle-shaped, making a triangle from three EvaluationLinks.
+ Viz: gene—$a—$b—gene
+\end_layout
+
+\begin_layout Itemize
+find-output-interactors — also makes a triangle.
+ a different triangle, but same idea.
+\end_layout
+
+\begin_layout Itemize
+pathway-gene-interactors — forms a pentagon!
 \end_layout
 
 \begin_layout Subsection*
@@ -2571,13 +2768,20 @@ Create a micro-benchmark comparing direct EvaluationLink walking to GetLink
 \end_layout
 
 \begin_layout Subsection*
-11 Jan 2020 - Conclusions, again
+14 Jan 2020 - Conclusions, again
 \end_layout
 
 \begin_layout Standard
 Four issues describing fixes and per improvements - #103 and #105 and #106.
  And pull req #108 And also opencog/atomspace#2470 Things seem OK-ish now.
  Really, I am now super-done.
+\end_layout
+
+\begin_layout Standard
+Wait, there's more.
+ opencog/atomspace#2471 gives a 3.2x up to 10x improvment.
+ biogrid is now running maybe 100x faster than before.
+ Just a few more measurements are still being made ...
 \end_layout
 
 \end_body
