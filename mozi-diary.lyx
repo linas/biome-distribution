@@ -909,7 +909,7 @@ So again, with the new current files, and the old 681-gene list.
  #atoms is the total number of atoms in the atomspace.
  The par=2 column is with (n-par-map 2) for gene-go.scm on idle system (seconds)
 \begin_inset Tabular
-<lyxtabular version="3" rows="25" columns="7">
+<lyxtabular version="3" rows="26" columns="7">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -1674,7 +1674,45 @@ path/af-up
 \begin_inset Text
 
 \begin_layout Plain Layout
-?
+14341
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.37/9.8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7460731
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+path/mf
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
 \end_layout
 
 \end_inset
@@ -1688,11 +1726,38 @@ path/af-up
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10554
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.4/10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7484061
 \end_layout
 
 \end_inset
@@ -1804,7 +1869,7 @@ path-ns/mf
 \begin_inset Text
 
 \begin_layout Plain Layout
-?
+16569
 \end_layout
 
 \end_inset
@@ -1813,7 +1878,7 @@ path-ns/mf
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+20/21
 \end_layout
 
 \end_inset
@@ -1822,7 +1887,7 @@ path-ns/mf
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+7868246
 \end_layout
 
 \end_inset
@@ -2665,8 +2730,14 @@ rocess molecular_function cellular_component" which used to crash in the
 \end_layout
 
 \begin_layout Itemize
-path-ns/mf - with fix #108 and with #2471 and with afunc memoization for
- node-info, find-name and locate-node.
+path-ns/mf - path-namespaces, with fix #108 and with #2471 and with afunc
+ memoization for node-info, find-name and locate-node.
+\end_layout
+
+\begin_layout Itemize
+path/mf – path but WITHOUT namespaces, with fix #108 and with #2471 and
+ with afunc memoization for node-info, find-name and locate-node.
+ Just as above but blank namespace.
 \end_layout
 
 \begin_layout Itemize
@@ -2782,6 +2853,11 @@ Wait, there's more.
  opencog/atomspace#2471 gives a 3.2x up to 10x improvment.
  biogrid is now running maybe 100x faster than before.
  Just a few more measurements are still being made ...
+\end_layout
+
+\begin_layout Standard
+With pull req #113 ...
+ I'm seeing cumulative 6x to 100x perf improvements.Now I'm done.
 \end_layout
 
 \end_body
