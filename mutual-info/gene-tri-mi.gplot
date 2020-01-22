@@ -1,0 +1,12 @@
+#! /usr/bin/env gnuplot
+#
+# Create a graph of the number of loops found.
+#
+set term png
+set out 'gene-tri-mi.png'
+
+set title "MI of gene pairs"
+set xlabel "Mutual Information"
+set ylabel "Number of gene pairs"
+
+plot "gene-tri-mi.csv" using 1:2 title ""

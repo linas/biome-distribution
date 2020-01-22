@@ -2882,7 +2882,7 @@ query-loop
 \begin_inset Quotes erd
 \end_inset
 
- for graphs of distributions.
+ for graphs of distributions as well as explanation of what this is.
  Here's a graph:
 \end_layout
 
@@ -2899,6 +2899,10 @@ query-loop
 \begin_layout Standard
 This shows 18766 genes in three-way triangular relationships.
  The parameter fits are just numerology.
+\end_layout
+
+\begin_layout Standard
+How does one compute MI, again?
 \end_layout
 
 \end_body
