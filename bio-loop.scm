@@ -71,42 +71,53 @@
 	))
 
 ;; -----------
-;; Run the triangle-benchmark
-(define (run-triangle-benchmark gene-list)
+;; Count triangles.
+(define (count-triangles gene-list)
 	(define bench-secs (make-timer))
-	(define interaction-counts
-		(map
-			(lambda (gene-name)
-				; Create a search pattern for each gene in the gene list.
-				(define gene (Gene gene-name))
-				(define query (find-output-interactors gene))
+	(define batch-secs (make-timer))
+	(define start-time (get-internal-real-time))
+	(define ndone 0)
+	(define ngen (length gene-list))
+	(for-each
+		(lambda (gene)
+			; Create a search pattern for each gene in the gene list.
+			; (define gene (Gene gene-name))
+			; (define gene-name (cog-name gene))
+			(define query (find-output-interactors gene))
 
-				; Perform the search
-				(define gene-secs (make-timer))
-				(define result (cog-execute! query))
-				(define rlen (cog-arity result))
+			; Perform the search
+			(define gene-secs (make-timer))
+			(define result (cog-execute! query))
+			(define rlen (cog-arity result))
 
-				; Collect up some stats
-				(cog-inc-count! gene rlen)
-				(for-each
-					(lambda (gene-pair)
-						(define gene-a (cog-outgoing-atom gene-pair 0))
-						(define gene-b (cog-outgoing-atom gene-pair 1))
-						(cog-inc-count! gene-a 1)
-						(cog-inc-count! gene-b 1))
-					(cog-outgoing-set result))
+			; Collect up some stats
+			(cog-inc-count! gene rlen)
+			(for-each
+				(lambda (gene-pair)
+					(define gene-a (cog-outgoing-atom gene-pair 0))
+					(define gene-b (cog-outgoing-atom gene-pair 1))
+					(cog-inc-count! gene-a 1)
+					(cog-inc-count! gene-b 1))
+				(cog-outgoing-set result))
 
-				;; (format #t "Ran triangle ~A in ~6f seconds; got ~A results\n"
-				;; 	gene-name (gene-secs) rlen)
-				(display ".")
-				(cog-delete result)
-				(cons gene-name rlen)
-			)
-			gene-list))
+			; delete the SetLink
+			(cog-delete result)
+
+			;; (format #t "Ran triangle ~A in ~6f seconds; got ~A results\n"
+			;; 	gene-name (gene-secs) rlen)
+			(display ".")
+			(set! ndone (+ ndone 1))
+			(if (eq? 0 (modulo ndone 100))
+				(format #t "\nTriangle done ~A of ~A in ~6f secs ~8f\n"
+					ndone ngen (batch-secs)
+					(/ (- (get-internal-real-time) start-time)
+						internal-time-units-per-second)))
+		)
+		gene-list)
 	(define run-time (bench-secs))
 	(format #t "\n")
-	(format #t "Triangle relations for ~A genes in ~6f seconds\n"
-			(length interaction-counts) run-time)
+	(format #t "Finished triangle relations for ~A genes in ~8f seconds\n"
+			ngen run-time)
 
 	; Return the list of counts.
 	; interaction-counts
@@ -201,6 +212,8 @@
 
 ; =================================================================
 
+
+; (count-triangles (cog-get-atoms 'GeneNode))
 
 #! -----------------------------------------------------------------
 ; Some stuff to create a ranked graph of the results found above.
