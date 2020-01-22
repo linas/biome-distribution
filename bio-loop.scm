@@ -134,6 +134,8 @@
 	(define start-time (get-internal-real-time))
 	(define ndone 0)
 	(define npath (length pathways))
+	(define pr-exp (Predicate "expresses"))
+	(define pr-act (Predicate "interacts_with"))
 
 	(for-each
 		(lambda (pathway)
@@ -149,14 +151,29 @@
 			(cog-inc-count! pathway rlen)
 			(for-each
 				(lambda (g-g-m-m)
+					; The corners
 					(define gene-a (cog-outgoing-atom g-g-m-m 0))
 					(define gene-b (cog-outgoing-atom g-g-m-m 1))
 					(define prot-a (cog-outgoing-atom g-g-m-m 2))
 					(define prot-b (cog-outgoing-atom g-g-m-m 3))
+					; The edges
+					(define path-a (MemberLink prot-a pathway))
+					(define path-b (MemberLink prot-b pathway))
+					(define exp-a (Evaluation pr-exp (List gene-a prot-a)))
+					(define exp-b (Evaluation pr-exp (List gene-b prot-b)))
+					(define ract (Evaluation pr-act (List gene-a gene-b)))
+					; Increment the counts on the corners
 					(cog-inc-count! gene-a 1)
 					(cog-inc-count! gene-b 1)
 					(cog-inc-count! prot-a 1)
-					(cog-inc-count! prot-b 1))
+					(cog-inc-count! prot-b 1)
+					; Increment the counts on the edges, too.
+					(cog-inc-count! path-a 1)
+					(cog-inc-count! path-b 1)
+					(cog-inc-count! exp-a 1)
+					(cog-inc-count! exp-b 1)
+					(cog-inc-count! ract 1)
+				)
 				(cog-outgoing-set result))
 
 			; delete the SetLink
