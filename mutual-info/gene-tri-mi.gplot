@@ -8,5 +8,7 @@ set out 'gene-tri-mi.png'
 set title "MI of gene pairs"
 set xlabel "Mutual Information"
 set ylabel "Number of gene pairs"
+set xrange [-2:20]
+set yrange [0:10000]
 
-plot "gene-tri-mi.csv" using 1:2 title ""
+plot "gene-tri-mi.csv" using 2:3 with lines title ""
