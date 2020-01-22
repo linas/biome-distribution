@@ -105,13 +105,15 @@
 
 			;; (format #t "Ran triangle ~A in ~6f seconds; got ~A results\n"
 			;; 	gene-name (gene-secs) rlen)
-			(display ".")
+			; (display ".")
 			(set! ndone (+ ndone 1))
-			(if (eq? 0 (modulo ndone 100))
-				(format #t "\nTriangle done ~A of ~A in ~6f secs ~8f\n"
-					ndone ngen (batch-secs)
-					(/ (- (get-internal-real-time) start-time)
-						internal-time-units-per-second)))
+			(if (eq? 0 (modulo ndone 500))
+				(let* ((elapsed
+							(/ (- (get-internal-real-time) start-time)
+								internal-time-units-per-second))
+						(rate (/ ndone elapsed)))
+					(format #t "Tri done ~A of ~A in ~3f secs rate=~5f elapsed=~6f\n"
+						ndone ngen (batch-secs) rate elapsed)))
 		)
 		gene-list)
 	(define run-time (bench-secs))
@@ -119,8 +121,6 @@
 	(format #t "Finished triangle relations for ~A genes in ~8f seconds\n"
 			ngen run-time)
 
-	; Return the list of counts.
-	; interaction-counts
 	*unspecified*
 )
 
@@ -211,13 +211,12 @@
 
 
 ; =================================================================
-
+; Actually do stuff.
 
 ; (count-triangles (cog-get-atoms 'GeneNode))
 
-#! -----------------------------------------------------------------
+; -----------------------------------------------------------------
 ; Some stuff to create a ranked graph of the results found above.
-; Look in the directory called `dataset-notes`.
 
 (define (dump-to-csv pair-list filename)
 
@@ -236,13 +235,8 @@
 	(close f)
 )
 
-(dump-to-csv interaction-counts "gene-loops.csv")
-
-!# ; ---------------------------------------------------------------
-
 #! -----------------------------------------------------------------
 ; Some stuff to create a ranked graph of the results found above.
-; Look in the directory called `dataset-notes`.
 
 ; Genes that appeared in a triangular loop.
 (define loop-participants
