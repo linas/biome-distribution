@@ -239,3 +239,17 @@
 )
 
 ; ---------------------------------------------------------------------
+;
+; (define gpr (Evaluation (Predicate "interacts_with") (List (Gene "FAM20C") (Gene "RNF123"))))
+; (define gpa (make-gene-pair-api))
+; (define gps (add-pair-stars gpa))
+; (define gpf (add-pair-freq-api gps #:nothrow #t))
+; (gpf 'pair-freq gpr)
+;
+; (define all-gene-pairs (gps 'get-all-elts)) ; 540778
+; (define any-left (gps 'left-wild-pairs))    ; 18074
+; (define any-right (gps 'right-wild-pairs))  ; 19648
+; (define evs (cog-incoming-set (Predicate "interacts_with"))) ; 578501
+; (define hmm (atoms-subtract evs all-gene-pairs))
+; (define h2 (atoms-subtract hmm any-left))
+; (define wtf (atoms-subtract h2 any-right))
