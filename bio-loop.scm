@@ -86,7 +86,7 @@
 			(define query (find-output-interactors gene))
 
 			; Perform the search
-			(define gene-secs (make-timer))
+			; (define gene-secs (make-timer))
 			(define result (cog-execute! query))
 			(define rlen (cog-arity result))
 
@@ -116,71 +116,77 @@
 						ndone ngen (batch-secs) rate elapsed)))
 		)
 		gene-list)
-	(define run-time (bench-secs))
 	(format #t "\n")
 	(format #t "Finished triangle relations for ~A genes in ~8f seconds\n"
-			ngen run-time)
+			ngen (bench-secs))
 
 	*unspecified*
 )
 
 ;; -----------
-;; The pentagon-benchmark; a list of pathways must be supplied.
-(define (pentagon-benchmark pathways)
-
+;; Count pentagons anchored at a pathway. A list of pathways must be supplied.
+(define (count-pentagons pathways)
 	(define bench-secs (make-timer))
-	(define path-counts
-		(map
-			(lambda (pathway)
-				; Create a search pattern for each pathway in the list.
-				(define query (pathway-gene-interactors pathway))
+	(define batch-secs (make-timer))
+	(define start-time (get-internal-real-time))
+	(define ndone 0)
+	(define npath (length pathways))
 
-				; Perform the search
-				(define path-secs (make-timer))
-				(define result (cog-execute! query))
-				(define rlen (cog-arity result))
+	(for-each
+		(lambda (pathway)
+			; Create a search pattern for each pathway in the list.
+			(define query (pathway-gene-interactors pathway))
 
-				; Collect up some stats
-				(cog-inc-count! pathway rlen)
-				(for-each
-					(lambda (g-g-m-m)
-						(define gene-a (cog-outgoing-atom g-g-m-m 0))
-						(define gene-b (cog-outgoing-atom g-g-m-m 1))
-						(define prot-a (cog-outgoing-atom g-g-m-m 2))
-						(define prot-b (cog-outgoing-atom g-g-m-m 3))
-						(cog-inc-count! gene-a 1)
-						(cog-inc-count! gene-b 1)
-						(cog-inc-count! prot-a 1)
-						(cog-inc-count! prot-b 1))
-					(cog-outgoing-set result))
+			; Perform the search
+			; (define path-secs (make-timer))
+			(define result (cog-execute! query))
+			(define rlen (cog-arity result))
 
-				; (format #t "Ran path ~A in ~6f seconds; got ~A results\n"
-				; 	(cog-name pathway) (path-secs) rlen)
-				(display ".")
-				(cog-delete result)
-				(cons (cog-name pathway) rlen)
-			)
-			pathways))
-	(define run-time (bench-secs))
+			; Collect up some stats
+			(cog-inc-count! pathway rlen)
+			(for-each
+				(lambda (g-g-m-m)
+					(define gene-a (cog-outgoing-atom g-g-m-m 0))
+					(define gene-b (cog-outgoing-atom g-g-m-m 1))
+					(define prot-a (cog-outgoing-atom g-g-m-m 2))
+					(define prot-b (cog-outgoing-atom g-g-m-m 3))
+					(cog-inc-count! gene-a 1)
+					(cog-inc-count! gene-b 1)
+					(cog-inc-count! prot-a 1)
+					(cog-inc-count! prot-b 1))
+				(cog-outgoing-set result))
+
+			; delete the SetLink
+			(cog-delete result)
+
+			; (format #t "Ran path ~A in ~6f seconds; got ~A results\n"
+			; 	(cog-name pathway) (path-secs) rlen)
+			(display ".")
+			(set! ndone (+ ndone 1))
+			(if (eq? 0 (modulo ndone 100))
+				(let* ((elapsed
+							(/ (- (get-internal-real-time) start-time)
+								internal-time-units-per-second))
+						(rate (/ ndone elapsed)))
+					(format #t "\nPath done ~A of ~A in ~3f secs rate=~5f elapsed=~6f\n"
+						ndone npath (batch-secs) rate elapsed)))
+		)
+		pathways)
 	(format #t "\n")
 	(format #t "Protein expression for ~A pathways in ~6f seconds\n"
-			(length path-counts) run-time)
+			(length path-counts) (bench-secs))
 
-	; Return the list of counts.
-	; path-counts
 	*unspecified*
 )
 
 ;; -----------
-;; The long pentagon-benchmark. This takes several hours.
-;;
-(define (run-long-pentagon-benchmark gene-list)
-
-	; Create a list of the pathways that the genes are in.
-	(define pathways (delete-duplicates
+(define (pathways-of-genes gene-list)
+"
+	Create a list of the pathways that the genes are in.
+"
+	(delete-dup-atoms
 		(append-map
-			(lambda (gene-name)
-				(define gene (Gene gene-name))
+			(lambda (gene)
 				(define query (find-pathways gene))
 				; Perform the search
 				(define path-set (cog-execute! query))
@@ -188,32 +194,17 @@
 				(cog-delete path-set)
 				pathways
 			)
-			gene-list)))
-	(pentagon-benchmark pathways)
+			gene-list))
 )
-
-;; -----------
-;; The short pentagon-benchmark. This takes several minutes.
-;;
-(define (run-short-pentagon-benchmark)
-
-	; A selected short list of pathways.
-	(define paths (list
-		"R-HSA-6799198" "R-HSA-72163" "R-HSA-352230" "R-HSA-611105"
-		"R-HSA-389661" "R-HSA-77289" "R-HSA-4641258" "R-HSA-5663220"
-		"R-HSA-201681" "R-HSA-4086400" "R-HSA-5099900" "R-HSA-4608870"))
-
-	(pentagon-benchmark (map Concept paths))
-)
-
-; (define elapsed-secs (make-timer))
-(format #t "AtomSpace contents: ~A\n" (cog-report-counts))
-
 
 ; =================================================================
 ; Actually do stuff.
 
+(format #t "AtomSpace contents: ~A\n" (cog-report-counts))
 ; (count-triangles (cog-get-atoms 'GeneNode))
+
+; (define pathways (pathways-of-genes (cog-get-atoms 'GeneNode)))
+; (count-pentagons pathways)
 
 ; -----------------------------------------------------------------
 ; Some stuff to create a ranked graph of the results found above.
