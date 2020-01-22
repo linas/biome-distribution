@@ -96,8 +96,10 @@
 				(lambda (gene-pair)
 					(define gene-a (cog-outgoing-atom gene-pair 0))
 					(define gene-b (cog-outgoing-atom gene-pair 1))
+					(define act-pair (Evaluation (Predicate "interacts_with") gene-pair))
 					(cog-inc-count! gene-a 1)
-					(cog-inc-count! gene-b 1))
+					(cog-inc-count! gene-b 1)
+					(cog-inc-count! act-pair 1))
 				(cog-outgoing-set result))
 
 			; delete the SetLink
