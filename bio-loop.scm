@@ -112,7 +112,8 @@
 							(/ (- (get-internal-real-time) start-time)
 								internal-time-units-per-second))
 						(rate (/ ndone elapsed)))
-					(format #t "Tri done ~A of ~A in ~3f secs rate=~5f elapsed=~6f\n"
+					(format #t
+						"Tri done ~A/~A in ~3f secs rate=~4f gene/sec elapsed=~6f\n"
 						ndone ngen (batch-secs) rate elapsed)))
 		)
 		gene-list)
@@ -161,20 +162,21 @@
 
 			; (format #t "Ran path ~A in ~6f seconds; got ~A results\n"
 			; 	(cog-name pathway) (path-secs) rlen)
-			(display ".")
+			; (display ".")
 			(set! ndone (+ ndone 1))
-			(if (eq? 0 (modulo ndone 100))
+			(if (eq? 0 (modulo ndone 200))
 				(let* ((elapsed
 							(/ (- (get-internal-real-time) start-time)
 								internal-time-units-per-second))
 						(rate (/ ndone elapsed)))
-					(format #t "\nPath done ~A of ~A in ~3f secs rate=~5f elapsed=~6f\n"
+					(format #t
+						"Path done ~A/~A in ~4f secs rate=~4f path/sec elapsed=~6f\n"
 						ndone npath (batch-secs) rate elapsed)))
 		)
 		pathways)
 	(format #t "\n")
 	(format #t "Protein expression for ~A pathways in ~6f seconds\n"
-			(length path-counts) (bench-secs))
+			npath (bench-secs))
 
 	*unspecified*
 )
