@@ -148,7 +148,7 @@
 (define (do-path nparents)
 	(define start (current-time))
 	(define anno (gene-pathway-annotation gene-list
-		"my-path-results"
+		"path-results"
 		#:pathway "reactome smpdb"
 		; XXX if the pathway is set, then it crashes, see issue #91
 		; #:namespace "biological_process molecular_function cellular_component"
@@ -161,7 +161,7 @@
 (define (do-path-ns nparents)
 	(define start (current-time))
 	(define anno (gene-pathway-annotation gene-list
-		"my-path-results"
+		"path-with-ns-results"
 		#:pathway "reactome smpdb"
 		#:namespace "biological_process molecular_function cellular_component"
 		#:parents nparents))
