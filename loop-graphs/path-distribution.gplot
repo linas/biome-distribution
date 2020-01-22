@@ -1,0 +1,44 @@
+#! /usr/bin/env gnuplot
+#
+# Create charts showing the distribution of the pentagon-shaped
+# interaction loops.
+#
+set term png
+
+set yrange [:20000]
+set logscale x
+set logscale y
+set format y "10^{%L}"
+
+set out 'path-loops.png'
+set title "Number of interaction loops per gene"
+set xlabel "Gene Rank"
+set ylabel "Number of pentagons"
+
+# Eyeballed fit to the data.
+plot "path-loops.csv" using 1:3 title "data", \
+     "path-loops.csv" using 1:(10000 / ($1)**0.5) with lines title "1/sqrt(rank)"
+
+# -----------------------------------------------------
+
+set out 'path-genes.png'
+
+set title "Number of loops a gene participates in"
+set xlabel "Gene Rank"
+set ylabel "Number of pentagons"
+
+# Eyeballed fit to the data.
+plot "path-genes.csv" using 1:3 title "data", \
+     "path-genes.csv" using 1:(10000 / ($1)**0.5) with lines title "1/sqrt(rank)"
+
+# -----------------------------------------------------
+
+set out 'path-proteins.png'
+
+set title "Number of loops a protein participates in"
+set xlabel "Protein Rank"
+set ylabel "Number of pentagons"
+
+# Eyeballed fit to the data.
+plot "path-proteins.csv" using 1:3 title "data", \
+     "path-proteins.csv" using 1:(10000 / ($1)**0.5) with lines title "1/sqrt(rank)"
