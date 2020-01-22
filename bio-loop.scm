@@ -237,7 +237,7 @@
 		(filter (lambda (gene) (< 0 (cog-count gene)))
 			(cog-get-atoms 'GeneNode))))
 
-(dump-to-csv loop-participants "loop-participants.csv")
+(dump-to-csv loop-participants "gene-loops.csv")
 
 ; Genes that appeared in the pentagonal loop
 (define path-genes
