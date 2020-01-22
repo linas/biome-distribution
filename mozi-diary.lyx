@@ -2857,7 +2857,48 @@ Wait, there's more.
 
 \begin_layout Standard
 With pull req #113 ...
- I'm seeing cumulative 6x to 100x perf improvements.Now I'm done.
+ I'm seeing cumulative 6x to 100x perf improvements.
+ Now I'm done.
+\end_layout
+
+\begin_layout Subsection*
+22 January 2020 - Zipf graphs
+\end_layout
+
+\begin_layout Standard
+See the email chain titled 
+\begin_inset Quotes eld
+\end_inset
+
+Genome distribution!?
+\begin_inset Quotes erd
+\end_inset
+
+ and also the opencog benchmark 
+\begin_inset Quotes eld
+\end_inset
+
+query-loop
+\begin_inset Quotes erd
+\end_inset
+
+ for graphs of distributions.
+ Here's a graph:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename loop-graphs/gene-loops.png
+	width 60col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This shows 18766 genes in three-way triangular relationships.
+ The parameter fits are just numerology.
 \end_layout
 
 \end_body
