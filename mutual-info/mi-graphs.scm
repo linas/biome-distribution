@@ -1,4 +1,8 @@
 
+;
+; Notebook of cut-n-paste scripts used to generate
+; the graph(s)
+'
 (define gpr (Evaluation (Predicate "interacts_with") (List (Gene "FAM20C") (Gene "RNF123"))))
 
 (define gpa (make-gene-pair-api))
@@ -17,8 +21,6 @@
 	(filter (lambda (gpr)
 		(and (< 0 (cog-count gpr)) (not (inf? (gpf 'pair-fmi gpr)))))
 	all-gene-pairs))  ; 455572
-
-
 
 
 (gpf 'pair-fmi gpr)
@@ -44,6 +46,4 @@
 	(filter (lambda (gpr)
 		(and (< 4 (cog-count gpr)) (not (equal? (gadr gpr) (gddr gpr)))))
 	mi-sorted-pairs))
-
-
 
