@@ -47,3 +47,8 @@
 		(and (< 4 (cog-count gpr)) (not (equal? (gadr gpr) (gddr gpr)))))
 	mi-sorted-pairs))
 
+(for-each (lambda (gpr)
+	(format #t "~10A - ~10A cnt=~A   mi=~6f\n"
+		(cog-name (gadr gpr))  (cog-name (gddr gpr))
+		(cog-count gpr) (gpf 'pair-fmi gpr)))
+	(take culled-pairs 70))
