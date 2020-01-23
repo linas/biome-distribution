@@ -3044,5 +3044,31 @@ The second graph is very similar, but this time shows the weighted distribution.
 
 \end_layout
 
+\begin_layout Subsection*
+Pentagons
+\end_layout
+
+\begin_layout Standard
+The pentagon has five vrtexes: a pathway (as a single, named vertex), two
+ proteins on that pathway, two genes, each of which express the coresponding
+ protein, and finally, the two genes interacting with each other.
+ Here, there are five edges, and three edge types: (protein in pathway),
+ (gene expresses protein) and (gene-pair interaction).
+ Thus, characterizing this statisitically requires six Zipfian graphs: three
+ for the different vertex types, and three for the different edge types.
+ Each edge type will also have an MI distribution, and so six MI graphs:
+ one for each type, weighted and unweighted.
+ So, twelve graphs in total.
+\end_layout
+
+\begin_layout Standard
+(Based on earlier work, I beleive that that they will all look very similar
+ to one-another...
+ and explanation for that similarity is unknown to me ...
+ the similarity is both reassuring and un-nerving: reassuring, in that there
+ is a certain regularity to the giant mess of biology; un-nerving in that,
+ perhaps, we've over-generalized and lost too many important details...)
+\end_layout
+
 \end_body
 \end_document
