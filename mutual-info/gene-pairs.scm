@@ -1,8 +1,7 @@
 ;
 ; gene-pairs.scm
 ;
-; Define gene-pair access API objects.
-; Batch-compute the mutual information of pairs of genes.
+; Define a gene-pair matrix API object.
 ;
 ; Copyright (c) 2013, 2014, 2017, 2020 Linas Vepstas
 ;
