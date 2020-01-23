@@ -2888,7 +2888,7 @@ query-loop
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename loop-graphs/gene-loops.png
+	filename /home/linas/src/novamente/mozi/graphs/loop-graphs/gene-loops.png
 	width 60col%
 
 \end_inset
@@ -2908,7 +2908,7 @@ There were 455572 distinct edges in the triangles.
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename loop-graphs/tri-edges.png
+	filename /home/linas/src/novamente/mozi/graphs/loop-graphs/tri-edges.png
 	width 60col%
 
 \end_inset
@@ -2998,7 +2998,7 @@ e)
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename mutual-info/gene-tri-mi.png
+	filename /home/linas/src/novamente/mozi/graphs/mutual-info/gene-tri-mi.png
 	width 60col%
 
 \end_inset
@@ -3036,7 +3036,7 @@ The second graph is very similar, but this time shows the weighted distribution.
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename mutual-info/tri-weighted-mi.png
+	filename /home/linas/src/novamente/mozi/graphs/mutual-info/tri-weighted-mi.png
 	width 60col%
 
 \end_inset
