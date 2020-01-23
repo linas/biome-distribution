@@ -9,7 +9,7 @@ The primary result is a paper, being prepared for publication.
 It is in the [paper](./paper) directory. The
 [PDF is here](./paper/biome-distributions.pdf).
 
-==Directory layout
+### Directory layout
 Other directories here:
 
 * [diary](./diary) A research diary of notes.
