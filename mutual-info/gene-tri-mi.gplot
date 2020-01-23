@@ -1,0 +1,22 @@
+#! /usr/bin/env gnuplot
+#
+# Create a graph of the number of loops found.
+#
+set term png
+set out 'gene-tri-mi.png'
+
+set title "Probability of gene pair having given MI"
+set xlabel "Mutual Information"
+set ylabel "Probability of a gene pair"
+set xrange [-2:20]
+set yrange [1e-4:0.2]
+set logscale y
+set format y "10^{%L}"
+
+norm = 300/(40 * 455572.)
+C = 1 / sqrt(2 * 3.1415926)
+plot "gene-tri-mi.csv" using 2:($3*norm) with lines title "data", \
+     "gene-tri-mi.csv" using 2:(0.25 * C * exp(-0.5*($2-2.5)**2)) with lines title "C/4 exp(-(MI-2.5)^2/2)", \
+     "gene-tri-mi.csv" using 2:(0.3333 *C* exp(-(($2-4.5)**2)/32)) with lines title "C/3 exp(-(MI-4.5)^2/32)",\
+     "gene-tri-mi.csv" using 2:(1) title "C = 1/√ 2 π"
+
