@@ -1,6 +1,19 @@
-
-; Basic list of 681 genes
-; See also lmpd-genes for a list of 1482
+;
+; debug-wrapper.scm
+;
+; A quick hacky wrapper around the MOZI annotation-scheme code,
+; used to debug performance issues in that code-base. This just
+; provides a medium-sized list of genes, and then some small
+; wrapprs to trigger processing of this list.
+;
+; ----------------------------------------------------------
+;
+; Basic list of 681 genes.
+; See also lmpd-genes.scm for a list of 1482
+;
+; These are genes that are active in youth/young (human) adults, but
+; whose activty disappears in sixty-year-olds.
+;
 (define gene-list (list "TSPAN6" "NDUFAF7" "RBM5" "SLC7A2" "NDUFAB1"
 "DVL2" "SKAP2" "DHX33" "MSL3" "BZRAP1" "GTF2IRD1" "IL32" "RPS20" "SCMH1"
 "CLCN6" "RNF14" "ATP2C1" "IGF1" "GLRX2" "FAS" "ATP6V0A1" "FBXO42" "JADE2"

@@ -1,3 +1,6 @@
+;
+; A list of 1482 genes. To be use for debugging and testing.
+;
 (define lmpd-genes (list 
 "A3GALT2"
 "ABCA4"

@@ -1,6 +1,17 @@
 ;
 ; bio-loop.scm
-; Modified copy of the benchmark.
+;
+; Traverse genome and protemome networks, counting the number of
+; various interesting gene and protein interactions. At this time,
+; two graphs are examined:
+;
+; * Gene triangles: groups of three genes, each of which interact
+;   with one-another (an order-3 clique).
+; * Gene-protein pentagons: two genes that interact, and express two
+;   proteins, both of which appear on the same pathway.
+;
+; This started life as a modified copy of the benchmark, which in
+; turn is an abstracted variant of the MOZI gene-annotation code.
 ;
 (use-modules (srfi srfi-1))
 (use-modules (opencog) (opencog exec))
