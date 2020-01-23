@@ -123,6 +123,11 @@ An exploration of the mutual information of interaction pathways is also
  It appears that these are easily fit with a bimodal Gaussian distribution.
 \end_layout
 
+\begin_layout Abstract
+This is for human genome, reactome data.
+ I don't doubt that the results are generic in biology.
+\end_layout
+
 \begin_layout Subsection*
 Zipf graphs
 \end_layout

@@ -20,6 +20,9 @@ An exploration of the mutual information of interaction pathways is
 also performed. It appears that these are easily fit with a bimodal
 Gaussian distribution.
 
+This is for human genome/reactome data. I don't doubt that the results
+are generic in biology.
+
 ### Directory layout
 Other directories here:
 
