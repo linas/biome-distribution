@@ -1,6 +1,15 @@
-
+;
+; load-files.scm
+;
+; Quick-n-dirty hacky wrapper to load the genome/proteome datasets
+; into the AtomSpace. A required first step for performing network
+; analysis.
+;
+; Usage:
+; guile> (load "load-files.scm")
+; guile> (load-all)
+;
 (use-modules (opencog))
-; (use-modules (annotation))
 (use-modules (opencog bioscience))
 (use-modules (opencog cogserver))
 
