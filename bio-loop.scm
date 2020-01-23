@@ -263,8 +263,13 @@
 (dump-to-csv loop-participants "gene-loops.csv")
 
 ; Gene pairs that appeared as edges in a triangular loop
+; Some of these pairs have AnyNodes from the matrix code,
+; so filter those out...
 (define gene-pairs
-	(filter (lambda (evlnk) (< 0 (cog-count evlnk)))
+	(filter (lambda (evlnk)
+			(and (< 0 (cog-count evlnk))
+				(equal? 'GeneNode (cog-type (gadr evlnk)))
+				(equal? 'GeneNode (cog-type (gddr evlnk)))))
 		(cog-incoming-set (Predicate "interacts_with"))))
 
 ; Count-pairs for the gene-pairs
