@@ -3,11 +3,19 @@
 
 (define (accum-time name)
 "
-   Maintain performance profile manually.
+   Create a performance profile with manual instrumentation.
+   By installing this stub of code in various locations, performance
+   timing information can be obtained for interesting code blocks.
+   That is, once cna learn how much CPU time was spent in certain
+   blocks of scheme code.
+
    Example usage:
 
+      ; Define two performance counters.
       (define actr (accum-time \"foo\"))
       (define bctr (accum-time \"bar\"))
+
+      ; Accumulate timing information.
       (actr #:enter? #t) ; start timing foo
       (bctr #:enter? #t) ; start timing bar
       (bctr #:enter? #f) ; stop  timing bar
@@ -16,6 +24,8 @@
       (bctr #:enter? #t) ; start timing bar
       (bctr #:enter? #f) ; stop  timing bar
       (actr #:enter? #f) ; stop  timing foo
+
+      ; Print a performance report.
       (actr #:report? #t) ; report foo
       (bctr #:report? #t) ; report bar
 "
