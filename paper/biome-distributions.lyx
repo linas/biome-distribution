@@ -316,7 +316,7 @@ Pentagons
 \end_layout
 
 \begin_layout Standard
-The pentagon has five vrtexes: a pathway (as a single, named vertex), two
+The pentagon has five vertexes: a pathway (as a single, named vertex), two
  proteins on that pathway, two genes, each of which express the coresponding
  protein, and finally, the two genes interacting with each other.
  Here, there are five edges, and three edge types: (protein in pathway),
@@ -335,6 +335,27 @@ The pentagon has five vrtexes: a pathway (as a single, named vertex), two
  the similarity is both reassuring and un-nerving: reassuring, in that there
  is a certain regularity to the giant mess of biology; un-nerving in that,
  perhaps, we've over-generalized and lost too many important details...)
+\end_layout
+
+\begin_layout Subsubsection*
+Zipf
+\end_layout
+
+\begin_layout Standard
+There were 9895 unique genes appearing in pentagons (this is half of those
+ that appear in triangles).
+ There were 29225 unique proteins appearing in the pentagons.
+ There were 50823 distinct pathways.
+ Wow, that sure seems like a lot, but OK.
+\end_layout
+
+\begin_layout Standard
+Argh ...
+ bug.
+ non-paths got included in the pentagons, including GO and and SMP and we
+ only wanted R-HSA, I beleive ...
+ oops.
+ try again.
 \end_layout
 
 \end_body

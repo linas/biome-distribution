@@ -1231,3 +1231,12 @@ scheme@(guile-user)>
 (filter (lambda (pr)
 	(equal? "left-gene" (cog-name (gar pr))))
 	lst)
+
+==========================================================
+Paths
+
+Protein expression for 68714 pathways in 59670. seconds
+(length path-genes) ;9895   .. seems short? 
+
+Arghhh effing G and SMP ConceptNodes...
+
