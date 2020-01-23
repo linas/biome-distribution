@@ -8,5 +8,10 @@ set out 'gene-tri-mi.png'
 set title "MI of gene pairs"
 set xlabel "Mutual Information"
 set ylabel "Number of gene pairs"
+set xrange [-2:20]
+set yrange [1:10000]
+set logscale y
 
-plot "gene-tri-mi.csv" using 1:2 title ""
+plot "gene-tri-mi.csv" using 2:3 with lines title "data", \
+     "gene-tri-mi.csv" using 2:(6000 * exp(-0.5*($2-2.5)**2)) with lines title "exp(-((MI-2.5)^2)/2)fit", \
+     "gene-tri-mi.csv" using 2:(8000 * exp(-(($2-4.5)**2)/32)) with lines title "exp(-((MI-4.5)^2)/32)fit"
