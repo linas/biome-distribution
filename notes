@@ -1,0 +1,1233 @@
+
+
+
+(use-modules   (annotation)   (annotation   main)   
+                        (annotation   gene-go)   
+                        (annotation   biogrid)   
+                        (annotation   gene-pathway)
+                        (annotation   functions)   
+                        (annotation   util)
+                        (annotation   parser)
+                        (json))
+(use-modules   (opencog))
+(define   start   (current-time))
+(primitive-load   "/home/ubuntu/datasets/smpdb_chebi_wname.scm")
+(-   (current-time)   start)
+
+(define   start   (current-time))
+(gene-go-annotation   '("IGF1")   "biological_process   molecular_function   cellular_component")
+(-   (current-time)   start)
+
+(use-modules   (opencog   persist)   (opencog   persist-sql))
+(use-modules   (opencog   cogserver))
+(start-cogserver)
+
+(sql-open   "postgres:///biosci")
+
+(sql-create   "postgres:///biosci")
+
+(define   start   (current-time))
+(store-atomspace)
+(-   (current-time)   start)
+
+NCBI2Reactome_PE_Pathway.txt.scm
+(define   start   (current-time))
+(load-atomspace)
+(-   (current-time)   start)
+
+value   at   takes   the   longest
+
+
+================
+
+SQLBulk.cc:296
+insert   async_buffer.h:457
+
+31   do_stats   blocked   on   AtomTable::getSize   lock
+
+SQLAtomStorage::not_yet_stored   SQLAtomStore.cc:138   blocked   6+   threads
+28   AtomTable::lookupHandle   AtomTable.cc:199   blocked   in   TLB::addAtom
+..   deadlocked   !??
+
+table.foreachHandleByType(
+getHandleSetByType   ...   yes,   deadlock...
+
+
+Took   7   secs   to   load   biogridgene2uniprot.scm
+Loaded   147750   atoms   (21107.14285714286   per   sec)   total   atoms=147750
+Took   323   secs   to   load   biogrid_gene_gene_174.scm
+Took   280   secs   to   load   biogrid_gene_gene_174.scm
+Took   269   secs   to   load   biogrid_gene_gene_174.scm
+Loaded   2371502   atoms   (8469.65   per   sec)   total   atoms=2519252
+Loaded   2371502   atoms   (7342.111455108359   per   sec)   total   atoms=2519252
+Took   6   secs   to   load   ChEBI2Reactome_PE_Pathway.txt.scm
+Loaded   40356   atoms   (6726.0   per   sec)   total   atoms=2559608
+Took   2   secs   to   load   current_symbols.scm
+Loaded   35183   atoms   (17591.5   per   sec)   total   atoms=2594791
+Took   33   secs   to   load   entrez_to_protein.scm
+Loaded   414945   atoms   (12574.09090909091   per   sec)   total   atoms=3009736
+Took   47   secs   to   load   GO_annotation.scm
+Took   43   secs   to   load   GO_annotation.scm
+Loaded   357348   atoms   (7603.148936170212   per   sec)   total   atoms=3367084
+Took   28   secs   to   load   GO_without_def.scm
+Took   23   secs   to   load   GO_without_def.scm
+Loaded   374126   atoms   (13361.642857142857   per   sec)   total   atoms=3741210
+Took   20   secs   to   load   NCBI2Reactome_PE_Pathway.txt.scm
+Loaded   141084   atoms   (7054.2   per   sec)   total   atoms=3882294
+Took   1   secs   to   load   reactome.scm
+Loaded   9516   atoms   (9516.0   per   sec)   total   atoms=3891810
+Took   208   secs   to   load   smpdb_chebi_wname.scm
+Took   199   secs   to   load   smpdb_chebi_wname.scm
+Loaded   972075   atoms   (4884.798994974874   per   sec)   total   atoms=5617296
+Loaded   972076   atoms   (4673.442307692308   per   sec)   total   atoms=4863886
+Took   144   secs   to   load   smpdb_protein.scm
+Loaded   756272   atoms   (5251.888888888889   per   sec)   total   atoms=5620158
+Took   9   secs   to   load   uniprot2GO.scm
+Loaded   38036   atoms   (4226.222222222223   per   sec)   total   atoms=5658194
+Took   19   secs   to   load   UniProt2Reactome_PE_Pathway.txt.scm
+Loaded   149757   atoms   (7881.9473684210525   per   sec)   total   atoms=5807951
+Took   8   secs   to   load   current/biogridgene2uniprot.scm
+Loaded   30   atoms   (3.75   per   sec)   total   atoms=5807981
+Took   178   secs   to   load   current/biogrid_gene_gene_3.5.177.scm
+Took   146   secs   to   load   current/biogrid_gene_gene_3.5.177.scm
+Loaded   448199   atoms   (2517.9719101123596   per   sec)   total   atoms=6256180
+Took   4   secs   to   load   current/ChEBI2Reactome_PE_Pathway.txt.scm
+Loaded   9922   atoms   (2480.5   per   sec)   total   atoms=6266102
+Took   33   secs   to   load   current/entrez_to_protein.scm
+Loaded   13780   atoms   (417.57575757575756   per   sec)   total   atoms=6279882
+Took   25   secs   to   load   current/GO.scm
+Loaded   2806   atoms   (112.24   per   sec)   total   atoms=6282688
+Took   93   secs   to   load   current/GO_annotation.scm
+Took   81   secs   to   load   current/GO_annotation.scm
+Loaded   16093   atoms   (173.04301075268816   per   sec)   total   atoms=6298781
+Loaded   16093   atoms   (198.679012345679   per   sec)   total   atoms=4382664
+Took   15   secs   to   load   current/NCBI2Reactome_PE_Pathway.txt.scm
+Loaded   14532   atoms   (968.8   per   sec)   total   atoms=6313313
+Took   1   secs   to   load   current/reactome.scm
+Loaded   67   atoms   (67.0   per   sec)   total   atoms=6313380
+Took   11   secs   to   load   current/uniprot2GO.scm
+Loaded   94709   atoms   (8609.90909090909   per   sec)   total   atoms=6408089
+Took   17   secs   to   load   current/UniProt2Reactome_PE_Pathway.txt.scm
+Loaded   0   atoms   (0.0   per   sec)   total   atoms=6408089
+
+
+---   a/env
++++   /dev/null
+@@   -1,12   +0,0   @@
+-#!/bin/sh
+-abs_top_srcdir="`cd   "/opt"   >   /dev/null;   pwd`"
+-abs_top_builddir="`cd   "/opt"   >   /dev/null;   pwd`"
+-
+-GUILE_LOAD_COMPILED_PATH="$abs_top_builddir${GUILE_LOAD_COMPILED_PATH:+:}$GUILE_LOAD_COMPILED_PATH"
+-GUILE_LOAD_PATH="$abs_top_builddir:$abs_top_srcdir${GUILE_LOAD_PATH:+:}:$GUILE_LOAD_PATH"
+-export   GUILE_LOAD_COMPILED_PATH   GUILE_LOAD_PATH
+-
+-PATH="$abs_top_builddir:$PATH"
+-export   PATH
+-
+-exec   "$@"
+
+---   a/env.in
++++   /dev/null
+@@   -1,12   +0,0   @@
+-#!/bin/sh
+-abs_top_srcdir="`cd   "@abs_top_srcdir@"   >   /dev/null;   pwd`"
+-abs_top_builddir="`cd   "@abs_top_builddir@"   >   /dev/null;   pwd`"
+-
+-GUILE_LOAD_COMPILED_PATH="$abs_top_builddir${GUILE_LOAD_COMPILED_PATH:+:}$GUILE_LOAD_COMPILED_PATH"
+-GUILE_LOAD_PATH="$abs_top_builddir:$abs_top_srcdir${GUILE_LOAD_PATH:+:}:$GUILE_LOAD_PATH"
+-export   GUILE_LOAD_COMPILED_PATH   GUILE_LOAD_PATH
+-
+-PATH="$abs_top_builddir:$PATH"
+-export   PATH
+-
+-exec   "$@"
+
+
+-AM_SCM_LOG_DRIVER_FLAGS   =   --brief=yes
+-
+-AM_SCM_LOG_FLAGS   =   --no-auto-compile   -L   $(top_srcdir)
+-
+:q
+
+gene-go-annotation
+
+
+find-go-term
+find-proteins-goterm
+
+(find-go-term   (GeneNode   gene)   (string-split   namespace   #\   )   parents)
+(find-go-term   (GeneNode   "MAGI2")
+            (list   "biological_process"   "molecular_function"   "cellular_component")   0)
+
+
+find-pathway-genes
+
+duuude   pathway=(ConceptNode   "R-HSA-6799198")
+   go=(ListLink
+)
+
+duuude   in   ad-pathway   path=(ConceptNode   "R-HSA-6799198")
+   gene=(GeneNode   "ECSIT")
+   go=(ListLink
+)
+
+node-info   ?
+locate-node?   ..   no   print   ...
+
+find-go-term
+
+crash   in   locate-node
+   in   scm:   filter-loc
+
+(use-modules   (annotation   util))
+
+(locate-node   (GeneNode   "NDUFA1"))
+(locate-node   (GeneNode   "NDUFV1"))
+
+         (ExecutionLink
+                  (SchemaNode   "scm:   filter-loc")
+                  (ListLink
+                           (GeneNode   "NDUFA1")
+                           (ConceptNode   "GO:0016021")
+                  )
+         )
+(use-modules   (opencog   exec))
+(define   gene-node   (GeneNode   "NDUFV1"))
+(define   nobl   (BindLink
+                        (VariableNode   "$go")
+                        (AndLink
+                              (MemberLink   gene-node   (VariableNode   "$go"))
+                              (EvaluationLink   (PredicateNode   "GO_namespace")
+                                    (ListLink
+                                          (VariableNode   "$go")
+                                          (ConceptNode   "cellular_component"))))
+                        (Execution   (Schema   "scm:   filter-loc")
+                                    (List   gene-node   (VariableNode   "$go")))))
+
+(define   filt-set   (cog-outgoing-set   (cog-execute!   nobl)))
+
+(define   (cal   ex)   (define   li   (gdr   ex))
+	(filter-loc   (cog-outgoing-atom   li   0)   (cog-outgoing-atom   li   1)))
+
+(for-each   cal   filt-set)
+
+OK,   so   it   doesn't   crash   the   second   time!?
+
+
+Wait,   now   the   stack   trace   says
+In   annotation/gene-pathway.scm:
+         115:32   16   (_   _)
+In   annotation/functions.scm:
+         301:22   15   (find-pathway-genes   _   _)
+
+h,   same   sas   before...
+
+(use-modules   (statprof))
+(statprof   (lambda()   (load-all)   #f))
+
+(statprof   (lambda()   (stuff)   #f)   #:count-calls?   #t)
+
+      0.00               39.37                  0.00      347770      ice-9/boot-9.scm:220:5:map1
+      0.00               19.76                  0.00      129892      ice-9/psyntax.scm:332:10
+
+(get-internal-real-time)   seems   to   be   nanosecs
+
+(define   actr   (accum-time   "foo"))
+(define   bctr   (accum-time   "bar"))
+
+                  (define   actr   (accum-time   \"foo\"))
+                  (define   bctr   (accum-time   \"bar\"))
+                  (actr   #:enter?   #t)
+
+(define   smpdb-ctr   (accum-time   "smpdb"))
+(define   reactome-ctr   (accum-time   "reactome"))
+(define   find-pathway-genes-ctr   (accum-time   "find-pathway-genes"))
+(define   add-pathway-genes-ctr   (accum-time   "add-pathway-genes"))
+(define   find-go-term-ctr   (accum-time   "find-go-term"))
+(define   find-memberln-ctr   (accum-time   "find-memberln"))
+(define   add-go-info-ctr   (accum-time   "add-go-info"))
+(define   find-parent-ctr   (accum-time   "find-parent"))
+
+(smpdb-ctr   #:report?   #t)
+(reactome-ctr   #:report?   #t)
+(find-pathway-genes-ctr   #:report?   #t)   ;   yes
+(add-pathway-genes-ctr   #:report?   #t)   ;   yes
+(find-go-term-ctr   #:report?   #t)
+(find-memberln-ctr   #:report?   #t)
+(add-go-info-ctr   #:report?   #t)
+(find-parent-ctr   #:report?   #t)
+
+Time:   0.0373287   secs.   calls:   1   avg:      37328.7   usec/call   for   smpdb
+Time:   94.282941   secs.   calls:   1   avg:   94282940.8   usec/call   for   reactome
+Time:   9.7742674   secs.   calls:   3   avg:   3258089.1   usec/call   for   find-pathway-genes
+Time:   9.2660640   secs.   calls:   267   avg:      34704.4   usec/call   for   add-pathway-genes
+
+
+go-info
+
+find-pathway-member
+pathway-gene-interactors
+pathway-hierarchy
+find-protein
+find-mol
+
+generate-interactors
+biogrid-pairs-pathway
+
+(define-public   biogrid-pairs-pathway-ctr   (accum-time   "biogrid-pairs-pathway"))
+
+HSP90B1   AP1G1   PPIB   NDUFAF7   RBM5   
+
+Time:   258.21071   secs.   calls:   6   avg:   43035118.8   usec/call   for   smpdb
+Time:   372.90087   secs.   calls:   6   avg:   62150145.4   usec/call   for   reactome
+Time:   116.43059   secs.   calls:   29   avg:   4014847.9   usec/call   for   find-pathway-genes
+Time:   105.30257   secs.   calls:   1423   avg:      74000.4   usec/call   for   add-pathway-genes
+Zero   calls   to   find-go-term
+Zero   calls   to   find-memberln
+Zero   calls   to   add-go-info
+Zero   calls   to   find-parent
+Time:   0.0641030   secs.   calls:   12   avg:         5341.9   usec/call   for   find-pathway-member
+Time:   425.35330   secs.   calls:   29   avg:   14667355.0   usec/call   for   pathway-gene-interactors
+Time:   0.0171103   secs.   calls:   14   avg:         1222.2   usec/call   for   pathway-hierarchy
+Time:   1.1350559   secs.   calls:   12   avg:      94588.0   usec/call   for   find-protein
+Zero   calls   to   find-protein-form
+Time:   88.010315   secs.   calls:   58   avg:   1517419.2   usec/call   for   find-mol
+Time:   1.8552350   secs.   calls:   1975   avg:            939.4   usec/call   for   find-pubmed-id
+
+
+gene-pathway-annotation
+smpdb
+reactome
+
+so   ..   stats   on   bindlinks
+and   microbench   for   evaluation   lookups.
+
+
+Hedra   Seid   <tanksh24@gmail.com>
+cc:	Michael   Duncan   <mjsduncan@gmail.com>,
+Abdulrahman   Semrie   <hsamireh@gmail.com>
+
+pattern   matcher--   outgoing   by   type...
+
+find-name   util
+
+(do-anno   0)
+(report)
+Zero   calls   to   smpdb
+Zero   calls   to   reactome
+Zero   calls   to   find-pathway-genes
+Zero   calls   to   add-pathway-genes
+Time:   52.993996   secs.   calls:   777   avg:      68203.3   usec/call   for   find-go-term
+Time:   101.73235   secs.   calls:   1458   avg:      69775.3   usec/call   for   find-memberln
+Time:   4.4660020   secs.   calls:   11047   avg:            404.3   usec/call   for   add-go-info
+Zero   calls   to   find-parent
+Zero   calls   to   find-pathway-member
+Zero   calls   to   pathway-gene-interactors
+Zero   calls   to   pathway-hierarchy
+Zero   calls   to   find-protein
+Time:   0.3594327   secs.   calls:   681   avg:            527.8   usec/call   for   find-protein-form
+Zero   calls   to   find-mol
+Zero   calls   to   find-name
+Zero   calls   to   find-pubmed-id
+
+(do-anno   1)
+Time:   498.92558   secs.   calls:   2103   avg:   237244.7   usec/call   for   find-go-term
+Time:   213.82027   secs.   calls:   3465   avg:      61708.6   usec/call   for   find-memberln
+Time:   25.569612   secs.   calls:   65154   avg:            392.4   usec/call   for   add-go-info
+Time:   384.72846   secs.   calls:   18694   avg:      20580.3   usec/call   for   find-parent
+Time:   0.7617738   secs.   calls:   1362   avg:            559.3   usec/call   for   find-protein-form
+
+(do-anno   3)
+Time:   1826.1190   secs.   calls:   4755   avg:   384041.9   usec/call   for   find-go-term
+Time:   434.04710   secs.   calls:   7479   avg:      58035.4   usec/call   for   find-memberln
+Time:   105.34913   secs.   calls:   304012   avg:            346.5   usec/call   for   add-go-info
+Time:   1593.4385   secs.   calls:   148143   avg:      10756.1   usec/call   for   find-parent
+Time:   1.4674012   secs.   calls:   2724   avg:            538.7   usec/call   for   find-protein-form
+
+
+
+filter-loc
+
+wtf:
+query-link   runs
+         extract_variables(_outgoing);
+         unbundle_clauses(_body);
+         common_init();
+         setup_components();
+         _pat.redex_name   =   "anonymous   QueryLink";
+
+after   patternlink   
+
+OK:
+GetLink   exec   tot=0.006211   calls=100   avg=6.211e-05
+QueryLink   ctor   tot=0.00423   calls=100   avg=4.23e-05
+BindLink   exec   tot=0.05829   calls=100   avg=0.0005829
+
+GetLink   exec   tot=1.16336   calls=17800   avg=6.53572e-05   =   65   microsecs   each
+BindLink   exec   tot=47.4649   calls=13400   avg=0.00354216   =   3.5   millisecs   each
+QueryLink   ctor   tot=0.526276   calls=13400   avg=3.92743e-05   =   40   microsecs   each
+
+BindLink   exec   tot=534.667   calls=76600   avg=0.00697999
+GetLink   exec   tot=4.42686   calls=79100   avg=5.59654e-05
+QueryLink   ctor   tot=3.09268   calls=76700   avg=4.03217e-05
+
+
+Huh...
+
+Time:   0.3252858   secs.   calls:   1507   avg:            215.8   usec/call   for   find-name
+[2020-01-06   07:05:22:748]   [INFO]   duude   GetLink   exec   tot=0.08956   calls=1500   avg=5.97067e-05
+[2020-01-06   07:05:22:748]   [INFO]   duude   execat   calls=1500   inst=2.58733e-06   exec=6.4306e-05   add=2.374e-06
+
+
+so   
+verify:   2.4   usecs
+inst   ctor:   2.6usecs
+exec   64   usec
+adatom=2.4usec
+
+body   total:   74   usecs.
+
+arg
+Get   ->   Pattern->Prenex->Rewr->Sco      (can   trim   skip_init()   in   Rewr)
+
+so   why   215   usec   ???
+
+FunctionWrap(ss_execat,   "cog-execat!",   "exec"));      a_h
+is   it   ss_get_env_as   ??   
+
+
+                           (GetLink
+                              (VariableNode   "$name")      ;;   maybe   constrain   type...
+
+                              (EvaluationLink
+                                 (PredicateNode   predicate)      "GO_name"   "has_name"
+                                 (ListLink
+                                    atom
+                                    (VariableNode   "$name")
+
+generate-result-ctr
+generate-interactors-ctr
+build-interaction-ctr
+
+
+find-pubmed-id
+biogrid-pairs
+biogrid-genes
+
+
+Time:   42.967683   secs.   calls:   12   avg:   3580640.2   usec/call   for   smpdb
+Time:   473.42932   secs.   calls:   12   avg:   39452443.4   usec/call   for   reactome
+Time:   9.9261857   secs.   calls:   39   avg:   254517.6   usec/call   for   find-pathway-genes
+Time:   9.5269167   secs.   calls:   1881   avg:         5064.8   usec/call   for   add-pathway-genes
+Time:   0.0888016   secs.   calls:   25   avg:         3552.1   usec/call   for   find-pathway-member
+Time:   826.87570   secs.   calls:   38   avg:   21759886.8   usec/call   for   pathway-gene-interactors
+Zero   calls   to   generate-result
+Time:   384.45394   secs.   calls:   22696   avg:      16939.3   usec/call   for   generate-interactors
+Zero   calls   to   build-interaction
+Time:   0.1271114   secs.   calls:   31   avg:         4100.4   usec/call   for   pathway-hierarchy
+Time:   3.1967965   secs.   calls:   24   avg:   133199.9   usec/call   for   find-protein
+Zero   calls   to   find-protein-form
+Time:   25.929194   secs.   calls:   77   avg:   336742.8   usec/call   for   find-mol
+Time:   3.1772875   secs.   calls:   13835   avg:            229.7   usec/call   for   find-name
+Time:   9.9202071   secs.   calls:   9506   avg:         1043.6   usec/call   for   find-pubmed-id
+#t
+
+
+pathway-gene-interactors   is   the   interestng   work-horse.
+generate-interactors   is   pointlessly   slow.
+pathway-gene-interactor   
+
+
+Do   we   need   to   explicitly   say   sysctl   foo   vm.hugetlb_shm_group   ???
+sudo            sysctl   -p   /etc/sysctl.conf
+   seems   to   be   needed....
+bt   this   errors   out   ...   
+
+useradd      -c   "lxc   containers"   -M   -u   101000   -U   lxc-tain
+usermod   -a   -G   hugepages   lxc-tain
+groupmod   -n   lxc-tain   lxc
+That   did   nothing   ...   sp   wtfennberg   ...
+
+what   is   reactome   returning?
+
+
+in   generate-interactors
+
+biogrid-pairs-pathway   returns   a   list...
+it   is   holding   pairs   of   strings   ...   
+   The   entire   biogrid-pairs-pathway   is   searched   to   see   if   a   single   pair   is
+in   there!!!!   Yikes!   super   inefficient.
+
+and   it   is   used   only   to   determine   if   the   output   needs   to   be   done,   again,
+or   not.
+
+
+(do-one-path   "ERCC8")
+
+Did   reactome   1   of   681   for   TSPAN6   result-len=1   pwlen=1   time=0
+Did   smpdb   1   of   681   for   TSPAN6   result-len=1   time=0
+Did   reactome   2   of   681   for   NDUFAF7   result-len=567   pwlen=2   time=12
+Did   smpdb   2   of   681   for   NDUFAF7   result-len=567   time=0
+Did   reactome   3   of   681   for   RBM5   result-len=3457   pwlen=3   time=95
+Did   smpdb   3   of   681   for   RBM5   result-len=3457   time=1
+Did   reactome   4   of   681   for   SLC7A2   result-len=3564   pwlen=4   time=1
+Did   smpdb   4   of   681   for   SLC7A2   result-len=3954   time=44
+Did   reactome   5   of   681   for   NDUFAB1   result-len=4753   pwlen=5   time=39
+Did   smpdb   5   of   681   for   NDUFAB1   result-len=4753   time=0
+Did   reactome   6   of   681   for   DVL2   result-len=8501   pwlen=6   time=272
+Did   smpdb   6   of   681   for   DVL2   result-len=8501   time=0
+Did   reactome   7   of   681   for   SKAP2   result-len=8562   pwlen=7   time=4
+Did   smpdb   7   of   681   for   SKAP2   result-len=8562   time=0
+Did   reactome   8   of   681   for   DHX33   result-len=8563   pwlen=8   time=0
+Did   smpdb   8   of   681   for   DHX33   result-len=8563   time=0
+Did   reactome   9   of   681   for   MSL3   result-len=9490   pwlen=9   time=56
+Did   smpdb   9   of   681   for   MSL3   result-len=9490   time=0
+Did   reactome   10   of   681   for   BZRAP1   result-len=9816   pwlen=10   time=13
+Did   smpdb   10   of   681   for   BZRAP1   result-len=9816   time=0
+Did   reactome   11   of   681   for   GTF2IRD1   result-len=9817   pwlen=11   time=0
+Did   smpdb   11   of   681   for   GTF2IRD1   result-len=9817   time=1
+Did   reactome   12   of   681   for   IL32   result-len=9882   pwlen=12   time=3
+Did   smpdb   12   of   681   for   IL32   result-len=9882   time=0
+Did   reactome   13   of   681   for   RPS20   result-len=17812   pwlen=13   time=2095
+Did   smpdb   13   of   681   for   RPS20   result-len=21285   time=2795
+Did   reactome   14   of   681   for   SCMH1   result-len=23648   pwlen=14   time=335
+Did   smpdb   14   of   681   for   SCMH1   result-len=23648   time=0
+Did   reactome   15   of   681   for   CLCN6   result-len=23876   pwlen=15   time=14
+Did   smpdb   15   of   681   for   CLCN6   result-len=23876   time=0
+Did   reactome   16   of   681   for   RNF14   result-len=26378   pwlen=16   time=245
+Did   smpdb   16   of   681   for   RNF14   result-len=26378   time=0
+Did   reactome   17   of   681   for   ATP2C1   result-len=26544   pwlen=17   time=14
+Did   smpdb   17   of   681   for   ATP2C1   result-len=26544   time=1
+Did   reactome   18   of   681   for   IGF1   result-len=27429   pwlen=18   time=82
+Did   smpdb   18   of   681   for   IGF1   result-len=27429   time=0
+Did   reactome   19   of   681   for   GLRX2   result-len=27430   pwlen=19   time=0
+Did   smpdb   19   of   681   for   GLRX2   result-len=27430   time=0
+Did   reactome   20   of   681   for   FAS   result-len=27704   pwlen=20   time=62
+Did   smpdb   20   of   681   for   FAS   result-len=27834   time=17
+Did   reactome   21   of   681   for   ATP6V0A1   result-len=30048   pwlen=21   time=235
+Did   smpdb   21   of   681   for   ATP6V0A1   result-len=30048   time=1
+Did   reactome   22   of   681   for   FBXO42   result-len=30049   pwlen=22   time=0
+Did   smpdb   22   of   681   for   FBXO42   result-len=30049   time=0
+Did   reactome   23   of   681   for   JADE2   result-len=30307   pwlen=23   time=81
+Did   smpdb   23   of   681   for   JADE2   result-len=30307   time=0
+Did   reactome   24   of   681   for   PREX2   result-len=30502   pwlen=24   time=112
+Did   smpdb   24   of   681   for   PREX2   result-len=30502   time=0
+Did   reactome   25   of   681   for   NOP16   result-len=30503   pwlen=25   time=1
+Did   smpdb   25   of   681   for   NOP16   result-len=30503   time=0
+Did   reactome   26   of   681   for   LMO3   result-len=30504   pwlen=26   time=0
+Did   smpdb   26   of   681   for   LMO3   result-len=30504   time=0
+Did   reactome   27   of   681   for   R3HDM1   result-len=30505   pwlen=27   time=0
+Did   smpdb   27   of   681   for   R3HDM1   result-len=30505   time=0
+
+205   minutes   ==   12300   seconds
+but   7085   seecs   in   gc   so   (-   12300   7085)   =   5215   secs   in   the   code   
+
+check-pathway
+
+match-gene-interactors
+find-output-interactors
+
+
+replace   biogrid-pairs   by   SetLink   this   will   speed   generate-result
+
+
+find-go-term
+
+
+why   zero   pathway-gene-interactors   
+
+find-pathway-member
+should   have   find-pathway-genes
+
+failure      in   ...   find-pathway-genes   ...   add-pathway-genes   ...locate-node
+
+(locate-node   (GeneNode   "NT5C"))
+
+(define   (lon   node)
+(cog-outgoing-set   (cog-execute!
+                        (BindLink
+                        (VariableNode   "$go")
+                        (AndLink
+                              (MemberLink
+                                    node
+                                    (VariableNode   "$go"))
+                              (EvaluationLink
+                                    (PredicateNode   "GO_namespace")
+                                    (ListLink
+                                          (VariableNode   "$go")
+                                          (ConceptNode   "cellular_component")))
+                        )
+                        (ExecutionOutputLink
+                        (GroundedSchemaNode   "scm:   filter-loc")
+                              (ListLink
+                                    node
+                                    (VariableNode   "$go")
+                              ))
+                              )
+)))
+
+
+crash   in   reactome   
+
+locate-node
+add-loc
+
+
+find-pathway-genes   took   go   paths   as   last   arg.
+does   nothing   passes   to   add-pathway-genes
+find-go-term
+
+Whhhhat?
+
+pathway-gene-interactors   is   called   from   ...
+smdb   ab   from   reactome
+but   only   if   
+smdb   --   if   (find-pathway-member   (GeneNode   gene)   "SMP")
+rectome   -   if   (find-pathway-member   (GeneNode   gene)   "R-HSA")
+(ConceptNode
+
+filter-atoms
+add-pathway-info
+node-info
+
+node   is   (cog-outgoing-atom   (cog-outgoing-atom   path   0)   1)
+which   is   pathway,   and   not   gene...
+
+
+
+
+classic   form:
+find-protein-form
+pathway-gene-interactors
+
+find-output-interactors   is   speeded   by   cac   by   11767/9444   =   1.25x   faster
+
+find-go-term
+find-parent
+
+(define   (bar   x)
+	(format   #t   "Called   bar   with   ~A\n"   x)
+	(+   x   1))
+
+(define   (memoize   FUNC)
+"
+      memoize   a   function   FUNC   which   takes   a   single   int   as   argument
+"
+	(define   cache   (make-hash-table))
+         (define   (int-hash   INT   SZ)   (modulo   INT   SZ))
+         (define   (int-assoc   INT   ILIST)
+                  (find   (lambda   (pr)   (equal?   INT   (car   pr)))   ILIST))
+
+         (lambda   (ITEM)
+                  (define   val   (hashx-ref   int-hash   int-assoc   cache   ITEM))
+                  (if   val   val
+                           (let   ((fv   (FUNC   ITEM)))
+                                    (hashx-set!   int-hash   int-assoc   cache   ITEM   fv)
+                                    fv)))
+)
+
+(define   bar-memo   (memoize   bar))
+
+(define   barco
+	(let   ((cval   #f))
+	(lambda   (x)
+		(if   (not   cval)   (set!   cval   (bar   x)))
+		cval)))
+
+(define-syntax   foo
+	(syntax-rules   ()
+		((foo   exp)
+			(if   (symbol?   (quote   exp))
+				(begin   (display   "its   a   symb\n")   (bar   exp))
+				(begin   (display   "no   its   not\n")   (bar-memo   exp))))))
+--------------------------------
+
+;   The   function   in   question.   It   needs   to   become   a   runtime
+;   constant,   for   constant   arguments.
+(define   (bar   x)
+	(format   #t   "Called   bar   with   ~A\n"   x)
+	(+   x   1))
+
+;   Memoization   boilerplate
+(define   cache   (make-hash-table))
+(define   (int-hash   INT   SZ)   (modulo   INT   SZ))
+(define   (int-assoc   INT   ILIST)
+	(find   (lambda   (pr)   (equal?   INT   (car   pr)))   ILIST))
+
+(define-syntax   foob
+	(syntax-rules   ()
+		((foob   EXP)
+			(let   ((junk   (format   #t   "A   hash   lookup   is   happening   for   ~A\n"   EXP))
+					(const-val   (hashx-ref   int-hash   int-assoc   cache   EXP)))
+				(if   (symbol?   (quote   EXP))
+					(begin   (display   "Its   a   symbol\n")   (bar   EXP))
+					(begin
+						(display   "It's   a   constant!\n")   
+                  				(if   (not   const-val)
+							(begin
+								(set!   const-val   (bar   EXP))
+                                    				(hashx-set!   int-hash   int-assoc   cache   EXP   const-val)))
+						const-val))))))
+
+-----------------------------------------------
+
+
+      (define-syntax   foob
+            (lambda   (stx)
+                  (syntax-case   stx   ()
+                        ((_   x)
+                           (if   (symbol?   (syntax->datum   #'x))
+                                       #'(bar   (syntax->datum   #'x))
+                                       #'(display   "nope\n"))))))
+-----------------------------------------------
+
+(define   (memoize   FUNC)
+"
+      memoize   a   function   FUNC   which   takes   a   single   int   as   argument
+"
+	(define   cache   (make-hash-table))
+         (define   (int-hash   INT   SZ)   (modulo   INT   SZ))
+         (define   (int-assoc   INT   ILIST)
+                  (find   (lambda   (pr)   (equal?   INT   (car   pr)))   ILIST))
+
+         (lambda   (ITEM)
+                  (define   val   (hashx-ref   int-hash   int-assoc   cache   ITEM))
+                  (if   val
+			(begin   (format   #t   "We   did   a   cache   lookup   for   ~A"   ITEM)   val)
+                           (let   ((fv   (FUNC   ITEM)))
+                                    (hashx-set!   int-hash   int-assoc   cache   ITEM   fv)
+                                    fv)))
+)
+
+(define   (bar   x)
+	(format   #t   "Called   bar   with   ~A\n"   x)
+	(+   x   1))
+
+(define   bar-memo   (memoize   bar))
+
+(define-syntax   foob
+	(syntax-rules   ()
+		((foob   EXP)
+
+			(if   (symbol?   (quote   EXP))
+				(begin   (display   "its   a   symbol\n")   (bar   EXP))
+				(begin
+					(display   "no   its   not\n")   
+                  			(if   val   val
+                           			(let   ((fv   (bar   EXP)))
+                                    				(hashx-set!   int-hash   int-assoc   cache   EXP   fv)
+                                    			fv))))))))
+
+=================================================
+(define-syntax   incr
+	(lambda   (x)
+		(syntax-case   x   ()
+			((_)   
+
+
+
+
+(define-syntax   add1!
+      (lambda   (x)
+            (syntax-case   x   ()
+                  ((_   var)   (identifier?   #'var)
+                     #'(set!   var   (+   1   var))))))
+
+(define-syntax   add-or-die
+      (lambda   (x)
+            (syntax-case   x   ()
+                  ((_   var)   (identifier?   #'var)
+                        #'(set!   var   (+   1   var)))
+		((_   exp)   (not   (identifier?   #'exp))
+		      #'(format   #t   "give   it   up   for   ~A\n"   exp))
+	)))
+
+
+
+Did   grid-protein   1   of   681   for   TSPAN6   result-len=31   time=1.5403
+Did   grid-protein   2   of   681   for   NDUFAF7   result-len=103   time=4.9989
+Did   grid-protein   3   of   681   for   RBM5   result-len=432   time=24.632
+Did   grid-protein   4   of   681   for   SLC7A2   result-len=475   time=4.7015
+Did   grid-protein   5   of   681   for   NDUFAB1   result-len=561   time=4.1379
+Did   grid-protein   6   of   681   for   DVL2   result-len=1540   time=45.046
+Did   grid-protein   7   of   681   for   SKAP2   result-len=1594   time=4.7697
+Did   grid-protein   8   of   681   for   DHX33   result-len=1696   time=14.745
+Did   grid-protein   9   of   681   for   MSL3   result-len=1751   time=8.3342
+
+Did   grid-protein   75   of   681   for   TMED2   result-len=28065   time=35.530
+Did   grid-protein   76   of   681   for   HUWE1   result-len=37275   time=278.54
+Did   grid-protein   77   of   681   for   NLK   result-len=37455   time=16.030
+Did   grid-protein   78   of   681   for   UIMC1   result-len=37809   time=32.225
+Did   grid-protein   79   of   681   for   GNAS   result-len=38296   time=40.636
+Did   grid-protein   80   of   681   for   COQ9   result-len=39034   time=21.462
+Did   grid-protein   81   of   681   for   NSFL1C   result-len=39321   time=27.969
+Did   grid-protein   82   of   681   for   TASP1   result-len=39328   time=4.5103
+Did   grid-protein   83   of   681   for   MRPS33   result-len=39426   time=13.077
+Did   grid-protein   84   of   681   for   NDUFB2   result-len=39472   time=5.1260
+Did   grid-protein   85   of   681   for   TXNL1   result-len=39733   time=31.122
+Did   grid-protein   86   of   681   for   MYL6   result-len=40392   time=60.824
+Did   grid-protein   87   of   681   for   HDAC6   result-len=43564   time=161.19
+Did   grid-protein   88   of   681   for   DHPS   result-len=43694   time=11.170
+Did   grid-protein   89   of   681   for   CREM   result-len=43768   time=5.7811
+Did   grid-protein   90   of   681   for   PSMD8   result-len=44680   time=48.937
+Did   grid-protein   91   of   681   for   CIRBP   result-len=45191   time=42.320
+Did   grid-protein   92   of   681   for   HNRNPM   result-len=51729   time=202.34
+Did   grid-protein   93   of   681   for   SF3A1   result-len=54086   time=104.33
+Did   grid-protein   94   of   681   for   POLR2F   result-len=54668   time=13.487
+Did   grid-protein   95   of   681   for   HMGXB4   result-len=54756   time=6.4987
+
+
+
+Whoa!!!
+Did   grid-protein   76   of   681   for   HUWE1   result-len=37275   time=164.80
+Did   grid-protein   79   of   681   for   GNAS   result-len=38296   time=16.145
+Did   grid-protein   87   of   681   for   HDAC6   result-len=43564   time=77.229
+Did   grid-protein   88   of   681   for   DHPS   result-len=43694   time=2.0529
+Did   grid-protein   89   of   681   for   CREM   result-len=43768   time=0.7322
+Did   grid-protein   90   of   681   for   PSMD8   result-len=44680   time=19.045
+Did   grid-protein   91   of   681   for   CIRBP   result-len=45191   time=13.813
+
+
+find-pubmed-id
+
+(run-query
+
+(define-public   pathway-gene-interactors
+         (make-afunc-cache   do-pathway-gene-interactors))
+
+
+OK,   
+
+
+todo-   pathological   file-write
+todo-   find-mol
+toto   the   patch   --   done
+
+cache   locate-node
+cache   find-name
+maybe   node-info
+
+=================
+penta:   pathway-gene-interactors
+   (PredicateNode   "expresses")
+(PredicateNode   "interacts_with")   
+
+tri:
+   find-output-interactors
+(PredicateNode   "interacts_with")   
+
+
+tri:   find-protein-form      
+
+(PredicateNode   "expresses")
+
+ChEBI2Reactome_PE_Pathway.txt.scm
+NCBI2Reactome_PE_Pathway.txt.scm
+UniProt2Reactome_PE_Pathway.txt.scm
+
+(MemberLink   
+   (MoleculeNode   "ChEBI:10036")
+(ConceptNode   "R-HSA-2142753"))
+
+(MemberLink
+(GeneNode   "AARS")
+(ConceptNode   "SMP0000055")
+
+(MemberLink   gene   pathway)
+
+
+(find-mol   node   "ChEBI")
+
+[pw   (find-pathway-member   (GeneNode   gene)   "R-HSA")]
+
+
+(Link
+   (Link
+      (Link
+         (Link)   
+         (Link
+            (ConceptNode "F")
+            (ConceptNode "C")
+         )
+         (Link
+            (ConceptNode "B")
+         )
+      )
+      (Link
+         (Link
+            (ConceptNode "D")
+         )
+         (Link
+            (ConceptNode "C")
+         )
+      )
+   )
+)
+
+
+(A  (B (C (D) F)))
+
+
+     A
+     |
+     B
+    / \
+   C   F
+   |
+   D
+
+(List (Concept "A")
+      (List (Concept "B")
+            (List (Concept "C")
+                  (List (Concept "D"))
+                  (Concept "F"))))
+
+
+(use-modules (opencog))
+(use-modules (srfi srfi-1))
+(Inheritance    (Concept "A")    (Concept "B"))
+(Inheritance    (Concept "B")    (Concept "C"))
+(Inheritance    (Concept "B")    (Concept "F"))
+(Inheritance    (Concept "C")    (Concept "D"))
+
+
+; Traverse inheritance-link tree graph HEAD to depth DEPTH
+(define (traverse HEAD DEPTH)
+	; If we've traversed to the end, but there are more
+	; branches below us, then say that.
+	(if (eq? DEPTH 0) "unknown-branch"
+		; Otherwise, build atree with HEAD at the top of
+		; the tree.
+		(cons HEAD 
+			; Walk over the all links of the form (Inheritance A B)
+			; and discard those where A is not HEAD. Keep only B.
+			(filter-map
+				(lambda (inh-lnk)
+					; Discard those where A is not HEAD.
+					(if (not (equal? HEAD (gar inh-lnk))) #f
+						; Recurse to get subtrees under B.
+						(traverse (gdr inh-lnk) (- DEPTH 1))))
+				; A list of all InheritanceLinks which have HEAD in them.
+				(cog-incoming-by-type HEAD 'InheritanceLink)))))
+
+; Same as before, but generates valid atomese
+(define (atraverse HEAD DEPTH)
+	(if (eq? DEPTH 0) (Concept "unknown-branch")
+		(List HEAD 
+			(filter-map
+				(lambda (inh-lnk)
+					(if (not (equal? HEAD (gar inh-lnk))) #f
+						(atraverse (gdr inh-lnk) (- DEPTH 1))))
+				(cog-incoming-by-type HEAD 'InheritanceLink)))))
+
+
+
+(define (pred-traverse HEAD DEPTH PRED)
+	(if (eq? DEPTH 0) (Concept "unknown-branch")
+	(if (not (PRED HEAD)) (Concept "cut by predicate")
+		(List HEAD 
+			(filter-map
+				(lambda (inh-lnk)
+					(if (not (equal? HEAD (gar inh-lnk))) #f
+						(pred-traverse (gdr inh-lnk) (- DEPTH 1) PRED)))
+				(cog-incoming-by-type HEAD 'InheritanceLink))))))
+
+
+(Evaluation (Predicate "citizen") (List (Concept "A") (Concept "U.K")))
+(Evaluation (Predicate "citizen") (List (Concept "B") (Concept "U.K")))
+(Evaluation (Predicate "citizen") (List (Concept "F") (Concept "U.S")))
+
+(define (is-uk? ATOM)
+	(and
+		(not (equal? '() (cog-link 'ListLink ATOM (Concept "U.K"))))
+		(not (equal? '() (cog-link 'EvaluationLink (Predicate "citizen")
+			 (List ATOM (Concept "U.K")))))))
+
+(define (is-uk? ATOM)
+	(and
+		(cog-link 'ListLink ATOM (Concept "U.K"))
+		(cog-link 'EvaluationLink (Predicate "citizen")
+			 (List ATOM (Concept "U.K")))))
+
+ (GetLink
+    (TypedVariable (Variable "$a") (Type 'ConceptNode))  
+    (Evaluation (Predicate "citizen")
+                (List (Variable "$a") (Concept "U.K"))))
+
+of 49050 genes, 18766 were in a triangle...
+
+
+(use-modules (opencog matrix))
+
+Triangle done 23000 of 49050 in 6.2343 secs 1818.420
+Tri done 23000/49050 in 34. secs rate=12.0 gene/sec elapsed=1922.9
+
+Finished triangle relations for 49050 genes in 4134.186 seconds
+
+(sql-create "postgres:///gene_pairs")
+(sql-open "postgres:///gene_pairs")
+ 
+scheme@(guile-user)> (batch-gene-pairs)
+Start computing the basis
+Support: found num left= 19648 num right= 18074 in 19 secs
+Finished left norm marginals in 25 secs
+Finished left totals in 1 secs
+Finished right norm marginals in 24 secs
+Finished right totals in 1 secs
+Done with wild-card count N(x,*) and N(*,y) in 51 secs
+Total count N(*,*) = 5050388.0 = 5050388.0
+Finished column (left) norm averages in 4 secs
+Finished row (right) norm averages in 4 secs
+Going to do individual pair frequencies
+Done computing 540778 pair frequencies in 38 secs
+Start computing log P(*,y)
+Done computing 18074 left-wild log frequencies in 0 secs
+Done with -log P(*,y), start -log P(x,*)
+Done computing 19648 right-wild log frequencies in 1 secs
+
+Done storing 18074 left-wilds in 11 secs
+Done storing 19648 right-wilds in 13 secs
+Done computing and saving -log P(x,*) and P(*,y)
+Going to compute and store individual pair MI
+Done 10000 of 19648 outer loops in 243 secs, pairs=325811 (1340.8 pairs/sec)
+Done computing 529667 pair MI's in 391 secs
+Going to do column and row subtotals
+Finished left entropy subtotals in 30 secs
+Finished right entropy subtotals in 30 secs
+Finished left MI subtotals in 30 secs
+Finished right MI subtotals in 29 secs
+Going to compute the left, right and total entropy
+Done computing totals; start saving wildcards
+Done storing 18074 left-wilds in 17 secs
+Done storing 19648 right-wilds in 19 secs
+Finished with MI computations; this took 0.191 hours
+Summary Report for Correlation Matrix Gene interacts_with Pairs
+Left type: GeneNode    Right Type: GeneNode    Pair Type: EvaluationLink
+Wildcard: (EvaluationLink (ctv 0 0 5050388)
+   (PredicateNode "interacts_with")
+   (ListLink
+      (AnyNode "left-gene")
+      (AnyNode "right-gene")
+   )
+)
+Rows: 19648 Columns: 18074
+Size: 455572 non-zero entries of 355117952 possible
+Fraction non-zero: 1.2829E-3 Sparsity (-log_2): 9.6064
+Total observations:  5050388.0  Avg obs per pair: 11.086
+Entropy Total: 17.608   Left: +nan.0   Right: 11.045
+Total MI: +nan.0
+
+                 Left         Right     Avg-left     Avg-right
+                 ----         -----     --------     ---------
+Support (l_0)  440.1        262.5    
+Count   (l_1)  1.0973E+4    6694.         24.93        25.51    
+Length  (l_2)  803.0        628.0         1.825        2.393    
+RMS Count      +nan.0       +nan.0        +nan.0       +nan.0   
+
+No MM^T data present
+No M^TM data present
+$45 = #t
+scheme@(guile-user)> 
+
+
+argh...
+
+ntropy Tota
+(rpt-obj 'left-entropy) (add-report-api 
+(cog-value-ref (cog-value wild-atom ent-key) 0)
+"*-Total Entropy Key-*"
+set-entropy
+
+cache-entropy
+
+compute-left-entropy
+
+(define gpe (add-report-api gps))
+(define rpn (add-total-entropy-compute gps))
+(gpp 'total-mi)
+
+add-subtotal-mi-compute
+
+(rpn 'cache-all-subtotals)
+
+(define star-obj gps)
+(define frqobj (add-pair-freq-api gps))
+
+      (define (left-sum FN)
+         (fold
+            (lambda (right-item sum) (+ sum (FN right-item)))
+            0 (star-obj 'right-basis)))
+
+      (define (compute-left-entropy)
+         (left-sum
+            (lambda (x) 
+(define prod (*
+                  (frqobj 'left-wild-freq x)
+                  (frqobj 'left-wild-logli x)))
+(if (nan? prod) (format #t "oh no ~A\n" x))
+prod
+)))
+
+      (define (compute-total-mi)
+         (define lsum (left-sum
+               (lambda (x) 
+(define wmi (frqobj 'left-wild-mi x))
+(if (nan? wmi) (format #t "oh non ~A" x))
+wmi
+)))
+         (define rsum (right-sum
+               (lambda (x) (frqobj 'right-wild-mi x))))
+         (if (< 1.0e-8 (/ (abs (- lsum rsum)) lsum))
+            (throw 'bad-summation 'compute-total-mi
+               (format #f
+                  "Left and right MI sums fail to be equal: ~A ~A\n"
+                  lsum rsum)))
+         lsum)
+
+
+cache-left-mi
+
+compute-left-mi
+frqobj 'pair-mi PAIR
+
+(frqobj 'left-wild-mi (GeneNode "CD2AP"))
+(compute-left-mi (GeneNode "CD2AP"))
+
+(define (compute-left-mi RIGHT-ITEM)
+         (fold
+            (lambda (PAIR sum)
+					(define pmi (frqobj 'pair-mi PAIR))
+					(if (finite? pmi) (+ sum pmi) sum))
+            0
+            (star-obj 'left-stars RIGHT-ITEM)))
+
+
+set-left-norms
+
+(define sgc (add-support-compute gps))
+(sgc 'cache-all)
+(define sga (add-support-api gps))
+
+((make-central-compute  gps) 'cache-all)
+
+      (define (get-left-rms-count)
+         (real-part
+         (get-col-fn-avg
+            (lambda (x)
+               (define sup (len-obj 'left-support x))
+               (define siz (len-obj 'left-count x))
+               (define len (len-obj 'left-length x))
+               (define lensq (* len len))
+               (define sizsq (/ (* siz siz) sup))
+              (define fu (sqrt (- lensq sizsq)))
+; (if (nan? fu) (format #t "aiii ~A ~A ~A" sizsq fu x))
+(if (finite? sizsq) fu 0.0)
+))))
+
+
+      (define (get-col-fn-avg FN)
+         (define weighted-avg (fold
+            (lambda (item sum)
+               (+ sum (* 
+                     (FN item)
+                     (len-obj 'left-count item))))
+            0.0
+            (wild-obj 'right-basis)))
+         (define total (len-obj 'wild-wild-count))
+         (/ weighted-avg total))
+
+
+
+
+
+store-atom
+
+ (store-obj 'store-wildcards)
+
+(add-pair-freq-api #:nothrow #t)
+
+
+batch-mi-obj (make-batch-mi
+
+subtotal-obj (add-subtotal-mi-compute  entropy.scm
+
+(define evs (cog-incoming-by-type
+	(PredicateNode "interacts_with") 'EvaluationLink))
+
+(define hit 0)
+(for-each (lambda (ev)
+	(if (not (cog-ctv? (cog-tv ev)))
+		(cog-set-tv! ev (cog-new-ctv 1 0 0))
+		(set! hit (+ hit 1))))
+	evs)
+
+455573 hat tvs, out of 676602
+
+but:
+Done computing 540778 pair frequencies in 39 secs
+(length (gps 'get-all-elts)) is 540778 so wtf ...
+
+(cog-incoming-set (AnyNode "right-gene"))
+
+(define (get-left-wildcards LLOBJ)
+	(map
+		(lambda (right-item)
+			(LLOBJ 'left-wildcard right-item))
+		(LLOBJ 'right-basis)))
+
+(define (get-right-wildcards LLOBJ)
+	(map
+		(lambda (left-item)
+			(LLOBJ 'right-wildcard left-item))
+		(LLOBJ 'left-basis)))
+
+(define any-left (get-left-wildcards gps))  ; 18074
+(define any-right (get-right-wildcards gps)) ;19648
+
+(define 
+crap...
+(VariableNode "$a")
+
+
+(add-pair-freq-api
+
+ (let ((pair-cnt (freq-obj 'cache-all-pair-freqs)))
+
+
+scheme@(guile-user)> (print-matrix-summary-report gps)
+Summary Report for Correlation Matrix Gene interacts_with Pairs
+Left type: GeneNode    Right Type: GeneNode    Pair Type: EvaluationLink
+Wildcard: (EvaluationLink (ctv 0 0 5050388)
+   (PredicateNode "interacts_with")
+   (ListLink
+      (AnyNode "left-gene")
+      (AnyNode "right-gene")
+   )
+)
+Rows: 19648 Columns: 18074
+Size: 455572 non-zero entries of 355117952 possible
+Fraction non-zero: 1.2829E-3 Sparsity (-log_2): 9.6064
+Total observations:  5050388.0  Avg obs per pair: 11.086
+Entropy Total: 17.608   Left: 10.621   Right: 11.045
+Total MI: 4.0584
+
+                 Left         Right     Avg-left     Avg-right
+                 ----         -----     --------     ---------
+Support (l_0)  440.1        262.5    
+Count   (l_1)  1.0973E+4    6694.         24.93        25.51    
+Length  (l_2)  803.0        628.0         1.825        2.393    
+RMS Count      685.5        517.2         1.558        1.971    
+
+No MM^T data present
+No M^TM data present
+$157 = #t
+scheme@(guile-user)> 
+
+
+(define lst
+(cog-incoming-by-type (Gene "RNF123") 'ListLink)
+
+(filter (lambda (pr)
+	(equal? "left-gene" (cog-name (gar pr))))
+	lst)
