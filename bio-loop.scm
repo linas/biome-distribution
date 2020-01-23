@@ -231,7 +231,11 @@
 ; Some stuff to create a ranked graph of the results found above.
 
 (define (dump-to-csv pair-list filename)
-
+"
+   Write the pair-list to the filename.
+   pair-list is a list of (string . count) pairs.
+   It is sorted, first.
+"
 	; Sort according to descending rank.
 	(define sorted-counts (sort pair-list
 		(lambda (a b) (> (cdr a) (cdr b)))))
@@ -258,6 +262,22 @@
 
 (dump-to-csv loop-participants "gene-loops.csv")
 
+; Gene pairs that appeared as edges in a triangular loop
+(define gene-pairs
+	(filter (lambda (evlnk) (< 0 (cog-count evlnk)))
+		(cog-incoming-set (Predicate "interacts_with"))))
+
+; Count-pairs for the gene-pairs
+(define gene-pair-cnts
+	(map (lambda (evelnk) (cons
+		(string-concatenate
+			(list (cog-name (gadr evelnk)) "-" (cog-name (gddr gene-pr))))
+		(cog-count evelnk)))
+		gene-pairs))
+
+(dump-to-csv gene-pair-cnts "tri-edges.csv")
+
+; ------------------------------------------------------------
 ; Genes that appeared in the pentagonal loop
 (define path-genes
 	(map (lambda (gene) (cons (cog-name gene) (cog-count gene)))
