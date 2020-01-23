@@ -109,6 +109,20 @@ An exploration of the statistical distribution of interactions between genes,
  It is incomplete.
 \end_layout
 
+\begin_layout Abstract
+It was naively hypothesized that genome/proteome reaction pathways form
+ a scale-free network, and thus would have a Zipfian distribution.
+ Much to our surprise, this is not the case! It seems like *everything*
+ follows a square-root Zipfian distribution! I do not know of any network
+ theory or biology theory that would explain this, so it is a surprise.
+\end_layout
+
+\begin_layout Abstract
+An exploration of the mutual information of interaction pathways is also
+ performed.
+ It appears that these are easily fit with a bimodal Gaussian distribution.
+\end_layout
+
 \begin_layout Subsection*
 Zipf graphs
 \end_layout
