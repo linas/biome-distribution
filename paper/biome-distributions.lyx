@@ -130,9 +130,7 @@ This is for human genome, reactome data.
 
 \begin_layout Abstract
 The results here are preliminary; there are issues with ...
- my understanding of the datasets, and the dataset strucutres...
- need to do some cleanup.
- * self-interactions * GO nodes in pentagons.
+ my understanding of the pathway annotation may be flawed ...
 \end_layout
 
 \begin_layout Subsection*
@@ -157,7 +155,23 @@ query-loop
 \end_inset
 
  for graphs of distributions as well as explanation of what this is.
- Here's a graph:
+\end_layout
+
+\begin_layout Standard
+Self-interacting genes were removed from the dataset, so that all triangles
+ are true topological triangles (and not degenerate, where two of the vertexes
+ are the same vertex.) This is a difference from the defacto idea of self-interac
+ting genes; the dataset had 2950 of these, they are recognized as such,
+ and have PubMed ID's.
+ However, for the below, these were removed from the dataset.
+\end_layout
+
+\begin_layout Standard
+This leaves a total of 13846 genes participating in triangles.
+\end_layout
+
+\begin_layout Standard
+Here's a graph:
 \end_layout
 
 \begin_layout Standard
@@ -168,6 +182,14 @@ query-loop
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+RedoTh
+\end_layout
+
+\begin_layout Standard
+Old results before cleanup:
 \end_layout
 
 \begin_layout Standard
@@ -349,8 +371,18 @@ Zipf
 \end_layout
 
 \begin_layout Standard
-There were 9895 unique genes appearing in pentagons (this is half of those
- that appear in triangles).
+There are 50501 pathways in which some gene in the dataset is a member of.
+ These are both SMP and R-HSA-tagged pathways.
+ XXX Double check – are these both pathways ?? I'm confused.
+\end_layout
+
+\begin_layout Standard
+XXX
+\end_layout
+
+\begin_layout Standard
+were 9895 unique genes appearing in pentagons (this is half of those that
+ appear in triangles).
  There were 29225 unique proteins appearing in the pentagons.
  There were 50823 distinct pathways.
  Wow, that sure seems like a lot, but OK.
