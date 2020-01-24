@@ -1240,3 +1240,36 @@ Protein expression for 68714 pathways in 59670. seconds
 
 Arghhh effing G and SMP ConceptNodes...
 
+scheme@(guile-user)> (cog-report-counts)
+$12 = ((ConceptNode . 454779) (PredicateNode . 12) (ListLink . 2575276) (MemberLink . 2037006) (AndLink . 167502) (VariableNode . 5) (VariableList . 1) (GetLink . 117764) (EvaluationLink . 1887533) (TypeNode . 3) (TypedVariableLink . 5) (InheritanceLink . 122184) (GeneNode . 49050) (MoleculeNode . 368909))
+
+delete the GO: nodes:
+
+$14 = ((ConceptNode . 410047) (PredicateNode . 12) (ListLink . 2485821) (MemberLink . 1618670) (AndLink . 149289) (VariableNode . 5) (VariableList . 1) (GetLink . 99551) (EvaluationLink . 1798075) (TypeNode . 3) (TypedVariableLink . 5) (InheritanceLink . 2322) (GeneNode . 49050) (MoleculeNode . 368909))
+scheme@(guile-user)> 
+
+=====================
+fresh load
+scheme@(guile-user)> (cog-report-counts)
+$3 = ((ConceptNode . 454779) (PredicateNode . 12) (ListLink . 1925554) (MemberLink . 1850528) (AndLink . 98788) (EvaluationLink . 1887530) (InheritanceLink . 122184) (GeneNode . 49050) (MoleculeNode . 368909))
+
+delete-go-nodes
+
+scheme@(guile-user)> (cog-report-counts)
+$4 = ((ConceptNode . 410047) (PredicateNode . 12) (ListLink . 1836099) (MemberLink . 1468618) (AndLink . 98788) (EvaluationLink . 1798072) (InheritanceLink . 2322) (GeneNode . 49050) (MoleculeNode . 368909))
+
+self-interactors -- all GeneNodes, 2945 of them.
+
+scheme@(guile-user)> (cog-report-counts)
+$5 = ((ConceptNode . 410047) (PredicateNode . 12) (ListLink . 1830216) (MemberLink . 1468618) (AndLink . 98788) (VariableNode . 1) (GetLink . 1) (EvaluationLink . 1792188) (InheritanceLink . 2322) (GeneNode . 49050) (MoleculeNode . 368909))
+
+
+non-sym evals:
+537839
+
+after symmetrization:
+((ConceptNode . 410047) (PredicateNode . 12) (ListLink . 2023866) (MemberLink . 1468618) (AndLink . 98788) (PresentLink . 1) (VariableNode . 3) (VariableList . 1) (GetLink . 1) (BindLink . 2) (EvaluationLink . 1985841) (TypeNode . 1) (TypedVariableLink . 2) (InheritanceLink . 2322) (GeneNode . 49050) (MoleculeNode . 368909))
+
+
+
+

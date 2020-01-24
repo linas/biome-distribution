@@ -128,6 +128,13 @@ This is for human genome, reactome data.
  I don't doubt that the results are generic in biology.
 \end_layout
 
+\begin_layout Abstract
+The results here are preliminary; there are issues with ...
+ my understanding of the datasets, and the dataset strucutres...
+ need to do some cleanup.
+ * self-interactions * GO nodes in pentagons.
+\end_layout
+
 \begin_layout Subsection*
 Zipf graphs
 \end_layout
