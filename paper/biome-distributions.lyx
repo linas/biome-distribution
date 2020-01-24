@@ -191,18 +191,30 @@ The parameter fits are just numerology; they're eyeballed to look appealling
 \end_layout
 
 \begin_layout Standard
-There were 455572 distinct edges in the triangles.
- Here is thier distribution:
+The situation for triangle edges is more confusing.
+ At first, they too seem to follow the square-root Zipfian fall-off, similar
+ to the vertexes ...
+ Here's a graph from the earlier dataset ...
 \end_layout
 
 \begin_layout Standard
+\align center
 \begin_inset Graphics
-	filename /home/linas/src/novamente/mozi/graphs/loop-graphs/tri-edges.png
-	width 60col%
+	filename /home/linas/src/novamente/mozi/graphs/loop-graphs/tri-edges.eps
+	width 70col%
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+But now its different...
+\end_layout
+
+\begin_layout Standard
+There were 617530 distinct edges in the triangles.
+ Here is thier distribution:
 \end_layout
 
 \begin_layout Standard

@@ -2,8 +2,10 @@
 #
 # Create a graph of the distribution of triangle edges.
 #
-set term png
-set out 'tri-edges.png'
+# set term png
+# set out 'tri-edges.png'
+set term eps color
+set out 'tri-edges.eps'
 
 set logscale x
 set logscale y
@@ -15,6 +17,6 @@ set ylabel "Number of triangles"
 set yrange [1:]
 
 # Eyeballed fit to the data.
-plot "tri-edges.csv" using 1:3 title "data", \
-     "tri-edges.csv" using 1:(6000 / ($1)**0.5) with lines title "6e3/sqrt(rank)", \
-     "tri-edges.csv" using 1:((6000 / ($1)**0.5) * exp(-($1) / 2e5)) with lines title "6e3 *exp(-rank/2e5)/sqrt(rank))"
+plot "tri-edges.csv" using 1:3 with lines lw 3 title "data", \
+     "tri-edges.csv" using 1:(6000 / ($1)**0.5) with lines lw 3 title "6e3/√rank", \
+     "tri-edges.csv" using 1:((6000 / ($1)**0.5) * exp(-($1) / 2e5)) with lines lw 3 title "6e3 exp(-rank/2e5)/√rank"
