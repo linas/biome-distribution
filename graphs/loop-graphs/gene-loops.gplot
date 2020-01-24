@@ -2,8 +2,10 @@
 #
 # Create a graph of the number of loops found.
 #
-set term png
-set out 'gene-loops.png'
+# set term png
+# set out 'gene-loops.png'
+set term eps color
+set out 'gene-loops.eps'
 
 set logscale x
 set logscale y
@@ -11,11 +13,12 @@ set format y "10^{%L}"
 set title "Number of interaction loops per gene"
 set xlabel "Gene Rank (ranked by count of triangles)"
 set ylabel "Number of triangles"
+set key left bottom
 
 set yrange [1:]
 
 # Eyeballed fit to the data.
-plot "gene-loops.csv" using 1:3 title "data", \
-     "gene-loops.csv" using 1:(200000 / ($1)**0.5) with lines title "2e5/sqrt(rank)", \
-     "gene-loops.csv" using 1:((200000 / ($1)**0.5) * exp(-($1) / 2500)) with lines title "2e5 *exp(-rank/2500)/sqrt(rank))", \
-     "gene-loops.csv" using 1:((200000 / ($1)**0.5) * exp(-($1) / 1500)) with lines title "2e5 *exp(-rank/1500)/sqrt(rank))"
+plot "gene-loops.csv" using 1:3 with lines lw 3 title "data", \
+     "gene-loops.csv" using 1:(500000 / ($1)**0.5) with lines lw 3 title "5e5/√rank", \
+     "gene-loops.csv" using 1:((500000 / ($1)**0.5) * exp(-($1) / 1500)) with lines lw 3 title "5e5 exp(-rank/1500)/√rank", \
+     "gene-loops.csv" using 1:((500000 / ($1)**0.5) * exp(-($1)**0.75 / 200)) with lines lw 3 title "5e5 exp(-rank^{0.75}/200)/√rank"

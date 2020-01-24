@@ -175,9 +175,10 @@ Here's a graph:
 \end_layout
 
 \begin_layout Standard
+\align center
 \begin_inset Graphics
-	filename /home/linas/src/novamente/mozi/graphs/loop-graphs/gene-loops.png
-	width 60col%
+	filename /home/linas/src/novamente/mozi/graphs/loop-graphs/gene-loops.eps
+	width 70col%
 
 \end_inset
 
@@ -185,16 +186,8 @@ Here's a graph:
 \end_layout
 
 \begin_layout Standard
-RedoTh
-\end_layout
-
-\begin_layout Standard
-Old results before cleanup:
-\end_layout
-
-\begin_layout Standard
-This shows 18766 genes in three-way triangular relationships.
- The parameter fits are just numerology.
+The parameter fits are just numerology; they're eyeballed to look appealling
+ to the eye.
 \end_layout
 
 \begin_layout Standard
