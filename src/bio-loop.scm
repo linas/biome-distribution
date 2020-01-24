@@ -128,7 +128,7 @@
 								internal-time-units-per-second))
 						(rate (/ ndone elapsed)))
 					(format #t
-						"Tri done ~A/~A in ~3f secs rate=~4f gene/sec elapsed=~6f\n"
+						"Tri done ~A/~A in ~4f secs rate=~4f gene/sec elapsed=~6f\n"
 						ndone ngen (batch-secs) rate elapsed)))
 		)
 		gene-list)
@@ -232,92 +232,15 @@
 )
 
 ; =================================================================
-; Actually do stuff.
+; Actually do stuff. Just cut and paste from here to command line.
 
-(format #t "AtomSpace contents: ~A\n" (cog-report-counts))
+; (format #t "AtomSpace contents: ~A\n" (cog-report-counts))
+;
+; Run the triangle counting code.
 ; (count-triangles (cog-get-atoms 'GeneNode))
 
+; Run the pentqagon counting code.
 ; (define pathways (pathways-of-genes (cog-get-atoms 'GeneNode)))
 ; (count-pentagons pathways)
-
-; -----------------------------------------------------------------
-; Some stuff to create a ranked graph of the results found above.
-
-(define (dump-to-csv pair-list filename)
-"
-   Write the pair-list to the filename.
-   pair-list is a list of (string . count) pairs.
-   It is sorted, first.
-"
-	; Sort according to descending rank.
-	(define sorted-counts (sort pair-list
-		(lambda (a b) (> (cdr a) (cdr b)))))
-
-	; Dump to file.
-	(define f (open-file filename "w"))
-	(define cnt 1)
-	(format f "#\n# ~A\n#\n# Rank-ordered counts\n#\n" filename)
-	(for-each
-		(lambda (gu) (format f "~A	~A	~A\n" cnt (car gu) (cdr gu))
-			(set! cnt (+ 1 cnt)))
-		sorted-counts)
-	(close f)
-)
-
-#! -----------------------------------------------------------------
-; Some stuff to create a ranked graph of the results found above.
-
-; Genes that appeared in a triangular loop.
-(define loop-participants
-	(map (lambda (gene) (cons (cog-name gene) (cog-count gene)))
-		(filter (lambda (gene) (< 0 (cog-count gene)))
-			(cog-get-atoms 'GeneNode))))
-
-(dump-to-csv loop-participants "gene-loops.csv")
-
-; Gene pairs that appeared as edges in a triangular loop
-; Some of these pairs have AnyNodes from the matrix code,
-; so filter those out...
-(define gene-pairs
-	(filter (lambda (evlnk)
-			(and (< 0 (cog-count evlnk))
-				(equal? 'GeneNode (cog-type (gadr evlnk)))
-				(equal? 'GeneNode (cog-type (gddr evlnk)))))
-		(cog-incoming-set (Predicate "interacts_with"))))
-
-; Count-pairs for the gene-pairs
-(define gene-pair-cnts
-	(map (lambda (evelnk) (cons
-		(string-concatenate
-			(list (cog-name (gadr evelnk)) "-" (cog-name (gddr gene-pr))))
-		(cog-count evelnk)))
-		gene-pairs))
-
-(dump-to-csv gene-pair-cnts "tri-edges.csv")
-
-; ------------------------------------------------------------
-; Genes that appeared in the pentagonal loop
-(define path-genes
-	(map (lambda (gene) (cons (cog-name gene) (cog-count gene)))
-		(filter (lambda (gene) (< 0 (cog-count gene)))
-			(cog-get-atoms 'GeneNode))))
-
-(dump-to-csv path-genes "path-genes.csv")
-
-(define path-proteins
-	(map (lambda (protein) (cons (cog-name protein) (cog-count protein)))
-		(filter (lambda (protein) (< 0 (cog-count protein)))
-			(cog-get-atoms 'MoleculeNode))))
-
-(dump-to-csv path-proteins "path-proteins.csv")
-
-(define path-loops
-	(map (lambda (pathway) (cons (cog-name pathway) (cog-count pathway)))
-		(filter (lambda (pathway) (< 0 (cog-count pathway)))
-			(cog-get-atoms 'ConceptNode))))
-
-(dump-to-csv path-loops "path-loops.csv")
-
-!# ; ---------------------------------------------------------------
 
 ; ------------------------------------------------------------------
