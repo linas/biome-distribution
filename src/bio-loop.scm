@@ -6,9 +6,11 @@
 ; two graphs are examined:
 ;
 ; * Gene triangles: groups of three genes, each of which interact
-;   with one-another (an order-3 clique).
+;   with one-another (an order-3 clique). Takes about 90 minutes
+;   on the current datasets.
 ; * Gene-protein pentagons: two genes that interact, and express two
-;   proteins, both of which appear on the same pathway.
+;   proteins, both of which appear on the same pathway. Took 16 hours
+;   on the current dataset.
 ;
 ; This started life as a modified copy of the benchmark, which in
 ; turn is an abstracted variant of the MOZI gene-annotation code.
