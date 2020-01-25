@@ -134,11 +134,48 @@ The results here are preliminary; there are issues with ...
 \end_layout
 
 \begin_layout Subsection*
-Zipf graphs
+Introduction
 \end_layout
 
 \begin_layout Standard
-See the email chain titled 
+Publicly available genomics and proteomics databases describe a large number
+ of interactions between genes and pathways.
+ Taken together, these datasets describe a large graph, and the one may
+ reasonably wonder about the properties and general structure of that graph.
+ For example, one might as if the graph is scale-free, or if it has a hub-and-sp
+oke structure, or make other graph-theoretic inquiries into it.
+\end_layout
+
+\begin_layout Standard
+In this short monograph, a study is made of 
+\begin_inset Quotes eld
+\end_inset
+
+triangles
+\begin_inset Quotes erd
+\end_inset
+
+: three genes that mutually interact, and 
+\begin_inset Quotes eld
+\end_inset
+
+pentagons
+\begin_inset Quotes erd
+\end_inset
+
+: a pair of genes that express a pair of proteins that lie on a common pathway.
+ If the genome (proteome, reactome) network were scale-free, then one might
+ expect Zipfian distributions of triangles and pentagons.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+These questions originally arose during the characterization of a bioinformatics
+ data-mining benchmark, found in 
+\family typewriter
+https://github.com/opencog/benchmark/query-loop
+\family default
+, and was elaborated in the
 \begin_inset Quotes eld
 \end_inset
 
@@ -146,15 +183,84 @@ Genome distribution!?
 \begin_inset Quotes erd
 \end_inset
 
- and also the opencog benchmark 
+ email discussion.
+\end_layout
+
+\end_inset
+
+ This appears not to be the case.
+ A further study is made of the mutual information (
 \begin_inset Quotes eld
 \end_inset
 
-query-loop
+lexical attraction
 \begin_inset Quotes erd
 \end_inset
 
- for graphs of distributions as well as explanation of what this is.
+) of pairs.
+ It appears to be easy to describe this as a pair of Gaussians.
+ A theoretical grounding for these results is unknown to the author.
+ Clarifications are solicited.
+\end_layout
+
+\begin_layout Subsection*
+Datasets
+\end_layout
+
+\begin_layout Standard
+The graph networks explored here were constructed from public datasets from
+ MCBI, ChEBI, PubMed, UniProt, SMPDB, Entrez and BioGrid.
+ Two variant networks were constructed and explored.
+ The two differ in how gene interactions were treated.
+ In the first, genes that regulate one-another were treated as directed
+ edges, in that gene A may regulate gene B, but not the other way around.
+ This includes genes that may self-regulate.
+ The second network was obtained from the first by symmetrizing all gene
+ interactions (if A interacts with B, then B interacts with A) and removing
+ all self-interacting genes.
+\end_layout
+
+\begin_layout Standard
+Both graphs contain a total of 49050 genes.
+ There are 540778 gene interactions in the first dataset, which are represented
+ as directed edges.
+ Of these, 347127 are symmetric (
+\emph on
+i.e.
+
+\emph default
+ have a partner indicating the opposite direction).
+ There were 2939 self-interacting genes.
+ From this, we deduce a total of (347127 - 2939) / 2 = 172094 symmetric
+ interactions, and 540778 - 347127 = 193651 non-symmetric interactions.
+\end_layout
+
+\begin_layout Standard
+For the second dataset, the self-interacting genes are removed, and matching
+ symmetrized edges are created, for a total of 731490 directed edges, or
+ half of that, 365745, when the relation is taken as symmetric.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Use the 
+\family typewriter
+(count-gene-interactions)
+\family default
+ tool.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Zipf graphs
+\end_layout
+
+\begin_layout Standard
+The datasets describe N genes
 \end_layout
 
 \begin_layout Standard
