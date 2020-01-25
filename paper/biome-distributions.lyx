@@ -332,7 +332,20 @@ In the first dataset, there are NN pointed triangles.
 
 \begin_layout Standard
 that can be observed.
- A total of 19648 genes participate in these interactions.
+ A total of 18766 genes participate in these interactions.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Counted with 
+\family typewriter
+(length loop-participants)
+\family default
+.
+\end_layout
+
+\end_inset
+
  This differs from the number of genes in the dataset, as not all genes
  participate in triangles.
  There are 455572 distinct edges that appear in triangles.
@@ -376,7 +389,8 @@ gene A regulates gene B, B regulates C and C regulates A,
 \end_layout
 
 \begin_layout Standard
-The second dataset has NNN distinct triangles,
+The second dataset has NNN distinct triangles, a total of 13846 genes participat
+ing in triangles
 \end_layout
 
 \begin_layout Subsection*
@@ -384,22 +398,26 @@ Zipf graphs
 \end_layout
 
 \begin_layout Standard
-This leaves a total of 13846 genes participating in triangles.
-\end_layout
-
-\begin_layout Standard
-Here's a graph:
+The following figure shows the number of triangles in which a gene participates
+ in.
+ This figure if for the symmetrized network; the corresponding figure for
+ the unsymmetrized network is very similiar.
 \end_layout
 
 \begin_layout Standard
 \align center
 \begin_inset Graphics
-	filename /home/linas/src/novamente/mozi/graphs/loop-graphs/gene-loops.eps
+	filename /home/linas/src/novamente/mozi/graphs/loop-graphs/gene-loops-sym.eps
 	width 70col%
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+The first unexpected surprise is that this graph is not Zipfian.
+ That is, the distribution is not
 \end_layout
 
 \begin_layout Standard
