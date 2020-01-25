@@ -45,7 +45,9 @@
 
 ; Gene pairs that appeared as edges in a triangular loop
 ; Some of these pairs have AnyNodes from the matrix code,
-; so filter those out...
+; so filter those out... 
+; Some pairs have zero-count. These are interacting genes in 
+; the dataset, but simply do not form a triangle.
 (define gene-pairs
 	(filter (lambda (evlnk)
 			(and (< 0 (cog-count evlnk))
@@ -57,7 +59,7 @@
 (define gene-pair-cnts
 	(map (lambda (evelnk) (cons
 		(string-concatenate
-			(list (cog-name (gadr evelnk)) "-" (cog-name (gddr gene-pr))))
+			(list (cog-name (gadr evelnk)) "-" (cog-name (gddr evelnk))))
 		(cog-count evelnk)))
 		gene-pairs))
 
