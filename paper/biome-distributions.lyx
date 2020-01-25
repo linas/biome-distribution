@@ -133,7 +133,7 @@ The results here are preliminary; there are issues with ...
  my understanding of the pathway annotation may be flawed ...
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Section*
 Introduction
 \end_layout
 
@@ -167,7 +167,7 @@ pentagons
  If the genome (proteome, reactome) network were scale-free, then one might
  expect Zipfian distributions of triangles and pentagons.
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 These questions originally arose during the characterization of a bioinformatics
@@ -240,7 +240,7 @@ For the second dataset, the self-interacting genes are removed, and matching
  symmetrized edges are created, for a total of 731490 directed edges, or
  half of that, 365745, when the relation is taken as symmetric.
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Use the 
@@ -255,21 +255,132 @@ Use the
 
 \end_layout
 
+\begin_layout Section*
+Triangles
+\end_layout
+
+\begin_layout Standard
+A triangle is defined as a three-way interaction, of gene A regulates gene
+ B, gene B regulates gene C and C regulates A.
+ Such triangles are one of the most basic components of the topological
+ structure of regulatory networks.
+ It is worth understanding thier structure.
+\end_layout
+
+\begin_layout Standard
+Any given gene may appear in multiple triangles; clearly, some genes might
+ participate in many, and some in only a few.
+ So, the first statistical question becomes: what is the distribution of
+ these genes? This is answered via a Zipf-style graph: one makes a list
+ of all of genes, ranking them according to the number of triangles they
+ participated in, and then graphing, on a log-log graph, the number of triangles
+ vs.
+ the rank.
+ Similarly, one can pose the same question, but for edges: how many triangles
+ does a given gene-gene interaction participate in?
+\end_layout
+
+\begin_layout Standard
+By counting the number of times an edge participates in some triangle, one
+ obtains a count 
+\begin_inset Formula $N(g_{a},g_{b})$
+\end_inset
+
+ that relates gene 
+\begin_inset Formula $g_{a}$
+\end_inset
+
+ to 
+\begin_inset Formula $g_{b}$
+\end_inset
+
+.
+ Given the counts of such pairs, this opens the door to a stable of standard
+ statistical questions: what are the marginal disributions, the entropies,
+ and the mutual information of such pairs? This is explored in a subsequent
+ section.
+\end_layout
+
+\begin_layout Standard
+Because these explorations are perfomed on curated datasets carried out
+ by research labs, one has an open question of whether one is measuring
+ 
+\begin_inset Quotes eld
+\end_inset
+
+true biology
+\begin_inset Quotes erd
+\end_inset
+
+, or whether one is measuring the social network of the scientists, and
+ thier intellectual interests.
+ There does not appear to be any obvious way of answering this question.;
+\end_layout
+
+\begin_layout Subsection*
+Characterization
+\end_layout
+
+\begin_layout Standard
+The two datasets provide sometimes-similar and sometimes-different results.
+ The differences are noted as appropriate.
+\end_layout
+
+\begin_layout Standard
+In the first dataset, there are NN pointed triangles.
+\end_layout
+
+\begin_layout Standard
+that can be observed.
+ A total of 19648 genes participate in these interactions.
+ This differs from the number of genes in the dataset, as not all genes
+ participate in triangles.
+ There are 455572 distinct edges that appear in triangles.
+ These edges appear a grand-total of 5050388 times in different triangles;
+ thus, on average, any given gene interaction might appear in 11 different
+ triangles.
+ However, the concept of 
+\begin_inset Quotes eld
+\end_inset
+
+average
+\begin_inset Quotes erd
+\end_inset
+
+ is troublesome in Zipfian distributions; this and other marginals are expanded
+ on in a subsequent section.
+\end_layout
+
+\begin_layout Standard
+Because the first dataset contains self-interacting genes, not all triangles
+ are 
+\begin_inset Quotes eld
+\end_inset
+
+true
+\begin_inset Quotes erd
+\end_inset
+
+ triangles; come may be degenerate.
+ That is, one may have triangular relationships of the form 
+\begin_inset Quotes eld
+\end_inset
+
+gene A regulates gene B, B regulates C and C regulates A,
+\begin_inset Quotes erd
+\end_inset
+
+ where B and C are the same gene.
+ The desire to eliminate such degenerate triangles leads to contemplating
+ the second dataset.
+\end_layout
+
+\begin_layout Standard
+The second dataset has NNN distinct triangles,
+\end_layout
+
 \begin_layout Subsection*
 Zipf graphs
-\end_layout
-
-\begin_layout Standard
-The datasets describe N genes
-\end_layout
-
-\begin_layout Standard
-Self-interacting genes were removed from the dataset, so that all triangles
- are true topological triangles (and not degenerate, where two of the vertexes
- are the same vertex.) This is a difference from the defacto idea of self-interac
-ting genes; the dataset had 2950 of these, they are recognized as such,
- and have PubMed ID's.
- However, for the below, these were removed from the dataset.
 \end_layout
 
 \begin_layout Standard
