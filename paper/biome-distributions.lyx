@@ -334,7 +334,7 @@ In the first dataset, there are NN pointed triangles.
 that can be observed.
  A total of 18766 genes participate in these interactions.
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Counted with 
@@ -417,17 +417,49 @@ The following figure shows the number of triangles in which a gene participates
 
 \begin_layout Standard
 The first unexpected surprise is that this graph is not Zipfian.
- That is, the distribution is not
+ That is, the distribution is not of the form 
+\begin_inset Formula $1/(rank)^{\alpha}$
+\end_inset
+
+ with 
+\begin_inset Formula $\alpha\approx1$
+\end_inset
+
+.
+ Just eyeballing the general shape, as done above, one promptly arrives
+ that 
+\begin_inset Formula $\alpha=0.5$
+\end_inset
+
+ for the leading part of the figure.
+ The tail is certainly not Zipfian, either; it falls of sharply.
+ A first guess, no better than voodoo numerology, suggests that the distribution
+ of the 
+\begin_inset Formula $n$
+\end_inset
+
+-th ranked gene is of the form 
+\begin_inset Formula $p(n)=e^{-\beta n}/\sqrt{n}$
+\end_inset
+
+ for some constant 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ Closer examination suggests 
+\begin_inset Formula $p(n)=\exp(-\beta n^{3/4})/\sqrt{n}$
+\end_inset
+
+.
+ These forms are chosen to simply look appealing to the eye, rather than
+ by minimizing some least-squares curve-fit.
+ These seem like reasonable hypothesis, given the above graph.
+ However, the situation gets a bit confused, when one looks at edges.
 \end_layout
 
 \begin_layout Standard
-The parameter fits are just numerology; they're eyeballed to look appealling
- to the eye.
-\end_layout
-
-\begin_layout Standard
-The situation for triangle edges is more confusing.
- At first, they too seem to follow the square-root Zipfian fall-off, similar
+At first, they too seem to follow the square-root Zipfian fall-off, similar
  to the vertexes ...
  Here's a graph from the earlier dataset ...
 \end_layout
