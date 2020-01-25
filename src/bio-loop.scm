@@ -153,19 +153,22 @@
 		))
 
 (define (make-pointed-triangles)
+	(define elapsed-secs (make-timer))
 	(define pset (cog-execute! pointed-triangle-query))
 	(define points (cog-outgoing-set pset))
 	(define npoints (length points))
 	(cog-delete pset)
-	(format #t "Obtained ~A pointed triangles\n" npoints)
+	(format #t "Obtained ~A pointed triangles in ~6f seconds\n"
+		npoints (elapsed-secs))
 )
 
 (define (make-triangles)
+	(define elapsed-secs (make-timer))
 	(define tset (cog-execute! triangle-query))
 	(define triangles (cog-outgoing-set tset))
 	(define ntris (length triangles))
 	(cog-delete tset)
-	(format #t "Obtained ~A triangles\n" ntris)
+	(format #t "Obtained ~A triangles in ~6f seconds\n" ntris (elapsed-secs))
 )
 
 ;; -----------
