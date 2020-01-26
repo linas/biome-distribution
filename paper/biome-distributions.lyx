@@ -460,9 +460,19 @@ The first unexpected surprise is that this graph is not Zipfian.
 \end_layout
 
 \begin_layout Standard
-At first, they too seem to follow the square-root Zipfian fall-off, similar
- to the vertexes ...
- Here's a graph from the earlier dataset ...
+One may also ask how many triangles a given edge (a given gene-pair) participate
+s in.
+ A similar distribution results, although the suggestive 
+\begin_inset Formula $\sqrt{n}$
+\end_inset
+
+ hypothesis does not seem to hold cleanly.
+ As shown in the figure below, the exponent 
+\begin_inset Formula $\alpha\approx0.43$
+\end_inset
+
+ appears to offer a better fit.
+ This figure is for the unsymmetrized dataset.
 \end_layout
 
 \begin_layout Standard
@@ -477,17 +487,29 @@ At first, they too seem to follow the square-root Zipfian fall-off, similar
 \end_layout
 
 \begin_layout Standard
-But now its different...
+The symmetrization of the edges makes a dramatic change to the distribution
+ exponent.
+ The exponent now appears to be 
+\begin_inset Formula $\alpha\approx0.25$
+\end_inset
+
+, as shown in the figure below.
 \end_layout
 
 \begin_layout Standard
-There were 617530 distinct edges in the triangles.
- Here is thier distribution:
+\align center
+\begin_inset Graphics
+	filename /home/linas/src/novamente/mozi/graphs/loop-graphs/tri-edges-sym.eps
+	width 70col%
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Both graphs show a square-root fall-off.
- Why?
+That such a technical change would have a rather profound effect on the
+ structure of the graph is surprising.
 \end_layout
 
 \begin_layout Subsubsection*
