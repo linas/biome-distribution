@@ -330,7 +330,7 @@ The two datasets provide sometimes-similar and sometimes-different results.
 In the first dataset, there are 3452807 pointed triangles.
  These are triangles with a distinguished point.
  By symmetry, ne would expect this number to be divisible by 3; it is not
- because many of the triangles are degenerate: There are 145572 degenerate
+ because many of the triangles are degenerate: There are 145571 degenerate
  triangles having the only two distinct vertexes, and 2939 
 \begin_inset Quotes eld
 \end_inset
@@ -340,12 +340,11 @@ bouquets
 \end_inset
 
  - that is, triangles where all three corners are the same vertex.
- XXX
+ This leaves behind 1102412 distinct triangles having three distinct corners.
 \end_layout
 
 \begin_layout Standard
-that can be observed.
- A total of 18766 genes participate in these interactions.
+A total of 18766 genes participate in these interactions.
 \begin_inset Foot
 status collapsed
 

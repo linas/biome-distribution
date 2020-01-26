@@ -14,14 +14,14 @@
 #x#set xlabel "Gene-pair rank (ranked by count of triangles)"
 #x#set ylabel "Fraction of all triangles"
 #x#
-#x#set yrange [:1.1e-3]
+#x#set yrange [1e-6:4e-3]
 #x#
-#x#ntris = 3452807
+#x#ntris = 1102412 + 71316 + 2939
 #x#
 #x## Eyeballed fit to the data.
 #x#plot "tri-edges.csv" using 1:($3 / ntris) with lines lw 1 title "data", \
-#x#     "tri-edges.csv" using 1:(1e-3 / ($1)**0.5) with lines lw 1 title "1e-3/√rank", \
-#x#     "tri-edges.csv" using 1:((1e-3 / ($1)**0.43) * exp(-($1) / 1.7e5)) with lines lw 1 title "1e-3 exp(-rank/1.7e5)/rank^{0.43}"
+#x#     "tri-edges.csv" using 1:(3e-3 / ($1)**0.5) with lines lw 1 title "3e-3/√rank", \
+#x#     "tri-edges.csv" using 1:((3e-3 / ($1)**0.43) * exp(-($1) / 1.7e5)) with lines lw 1 title "3e-3 exp(-rank/1.7e5)/rank^{0.43}"
 ###     "tri-edges.csv" using 1:((2e-3 / ($1)**0.5) * exp(-($1) / 2e5)) with lines lw 1 title "2e-3 exp(-rank/2e5)/√rank", \
 #
 # ##########################################################################
@@ -38,7 +38,7 @@ set title "Participation of gene-pairs in triangles (symmetrized dataset)"
 set xlabel "Gene-pair rank (ranked by count of triangles)"
 set ylabel "Fraction of all triangles"
 
-# set yrange [1:]
+set yrange [1e-6:1e-3]
 
 ntris = 1797281
 
