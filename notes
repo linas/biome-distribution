@@ -1273,3 +1273,77 @@ after symmetrization:
 
 
 
+(define rotate
+   (Bind
+      (VariableList
+         (TypedVariable (Variable "$a") (Type 'GeneNode))
+         (TypedVariable (Variable "$b") (Type 'GeneNode))
+         (TypedVariable (Variable "$c") (Type 'GeneNode))
+      )
+	(And
+      (Present (Evaluation (Predicate "pointed_triangle")
+         (List (Variable "$a") (Variable "$b") (Variable "$c"))))
+      (Absent (Evaluation (Predicate "pointed_triangle")
+         (List (Variable "$b") (Variable "$c") (Variable "$a"))))
+	)
+	(Evaluation (Predicate "foobar")
+		(List (Variable "$a") (Variable "$b") (Variable "$c")))
+      )) 
+
+(define (make-rotated-triangles)
+   (define elapsed-secs (make-timer))
+   (define pset (cog-execute! rotate))
+   (define points (cog-outgoing-set pset))
+   (define npoints (length points))
+   (cog-delete pset)
+   (format #t "Obtained ~A pointed triangles in ~6f seconds\n"
+      npoints (elapsed-secs))
+	; points
+)
+
+(define rotate
+   (Bind
+      (VariableList
+         (TypedVariable (Variable "$a") (Type 'GeneNode))
+         (TypedVariable (Variable "$b") (Type 'GeneNode))
+      )
+      (Evaluation (Predicate "pointed_triangle")
+         ; (List (Variable "$a") (Variable "$b") (Variable "$b"))
+         (List (Variable "$b") (Variable "$a") (Variable "$b"))
+		)
+		(Evaluation (Predicate "degenerate")
+			(List (Variable "$a") (Variable "$b")))
+      )) 
+
+(define rotate
+   (Bind
+      (VariableList
+         (TypedVariable (Variable "$a") (Type 'GeneNode))
+      )
+      (Evaluation (Predicate "pointed_triangle")
+         (List (Variable "$a") (Variable "$a") (Variable "$a"))
+		)
+		(Evaluation (Predicate "point")
+			(List (Variable "$a")))
+      )) 
+
+
+(define rotate
+   (Bind
+      (VariableList
+         (TypedVariable (Variable "$a") (Type 'GeneNode))
+      )
+		(Evaluation (Predicate "degenerate")
+			(List (Variable "$a") (Variable "$a")))
+		(Evaluation (Predicate "point")
+			(List (Variable "$a")))
+      )) 
+
+
+3452807
+
+942608  in the SetLink
+
+whoa: 145572 degenerates!!
+
+

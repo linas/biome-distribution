@@ -328,7 +328,19 @@ The two datasets provide sometimes-similar and sometimes-different results.
 
 \begin_layout Standard
 In the first dataset, there are 3452807 pointed triangles.
- Because these are created with directed edges, ...
+ These are triangles with a distinguished point.
+ By symmetry, ne would expect this number to be divisible by 3; it is not
+ because many of the triangles are degenerate: There are 145572 degenerate
+ triangles having the only two distinct vertexes, and 2939 
+\begin_inset Quotes eld
+\end_inset
+
+bouquets
+\begin_inset Quotes erd
+\end_inset
+
+ - that is, triangles where all three corners are the same vertex.
+ XXX
 \end_layout
 
 \begin_layout Standard
