@@ -327,7 +327,8 @@ The two datasets provide sometimes-similar and sometimes-different results.
 \end_layout
 
 \begin_layout Standard
-In the first dataset, there are NN pointed triangles.
+In the first dataset, there are 3452807 pointed triangles.
+ Because these are created with directed edges, ...
 \end_layout
 
 \begin_layout Standard
@@ -389,8 +390,9 @@ gene A regulates gene B, B regulates C and C regulates A,
 \end_layout
 
 \begin_layout Standard
-The second dataset has NNN distinct triangles, a total of 13846 genes participat
-ing in triangles
+The second dataset has 10783686 pointed triangles; by symmetry, only 1/6
+ of these are distinct, leaving 1797281 distinct triangles.
+ There is a total of 13846 genes participating in these triangles.
 \end_layout
 
 \begin_layout Subsection*
@@ -433,25 +435,24 @@ The first unexpected surprise is that this graph is not Zipfian.
 
  for the leading part of the figure.
  The tail is certainly not Zipfian, either; it falls of sharply.
- A first guess, no better than voodoo numerology, suggests that the distribution
- of the 
+ A first guess, no better than voodoo numerology, suggests that the 
 \begin_inset Formula $n$
 \end_inset
 
--th ranked gene is of the form 
-\begin_inset Formula $p(n)=e^{-\beta n}/\sqrt{n}$
+-th ranked gene appears in 
+\begin_inset Formula $p(n)=0.25e^{-\beta n}/\sqrt{n}$
 \end_inset
 
- for some constant 
+ of all triangles, for some constant 
 \begin_inset Formula $\beta$
 \end_inset
 
 .
  Closer examination suggests 
-\begin_inset Formula $p(n)=\exp(-\beta n^{3/4})/\sqrt{n}$
+\begin_inset Formula $p(n)=0.25\exp(-\beta n^{3/4})/\sqrt{n}$
 \end_inset
 
-.
+ provides a better fit.
  These forms are chosen to simply look appealing to the eye, rather than
  by minimizing some least-squares curve-fit.
  These seem like reasonable hypothesis, given the above graph.
