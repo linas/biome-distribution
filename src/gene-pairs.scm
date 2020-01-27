@@ -209,8 +209,7 @@
 ; XXX FIXME - these will fail if an SQL database is not open.
 ; For now, the work-around is to create a database, and open it.
 ; As follows:
-;    $ createdb gene_pairs
-;    $ guile
+;
 ; (use-modules (opencog persist) (opencog persist-sql))
 ; (sql-create "postgres:///gene_pairs")
 ; (sql-open "postgres:///gene_pairs")
