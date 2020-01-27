@@ -1347,4 +1347,69 @@ after symmetrization:
 
 whoa: 145572 degenerates!!
 
+Symmetric set:
 
+scheme@(guile-user)> (batch-gene-pairs)
+Start computing the basis
+Support: found num left= 20123 num right= 20123 in 18 secs
+Finished left norm marginals in 79 secs
+Finished left totals in 1 secs
+Finished right norm marginals in 81 secs
+Finished right totals in 0 secs
+Done with wild-card count N(x,*) and N(*,y) in 161 secs
+Total count N(*,*) = 10783686.0 = 10783686.0
+Finished column (left) norm averages in 3 secs
+Finished row (right) norm averages in 4 secs
+Going to do individual pair frequencies
+Done computing 731490 pair frequencies in 89 secs
+Start computing log P(*,y)
+Done computing 20123 left-wild log frequencies in 1 secs
+Done with -log P(*,y), start -log P(x,*)
+Done computing 20123 right-wild log frequencies in 0 secs
+Done storing 20123 left-wilds in 30 secs
+Done storing 20123 right-wilds in 22 secs
+Done computing and saving -log P(x,*) and P(*,y)
+Going to compute and store individual pair MI
+Done 10000 of 20123 outer loops in 636 secs, pairs=503507 (791.68 pairs/sec)
+Done computing 704086 pair MI's in 894 secs
+Going to do column and row subtotals
+Finished left entropy subtotals in 80 secs
+Finished right entropy subtotals in 84 secs
+Finished left MI subtotals in 82 secs
+Finished right MI subtotals in 80 secs
+Going to compute the left, right and total entropy
+Done computing totals; start saving wildcards
+Done storing 20123 left-wilds in 17 secs
+Done storing 20123 right-wilds in 16 secs
+Finished with MI computations; this took 0.438 hours
+Summary Report for Correlation Matrix Gene interacts_with Pairs
+Left type: GeneNode    Right Type: GeneNode    Pair Type: EvaluationLink
+Wildcard: (EvaluationLink (ctv 0 0 10783686)
+   (PredicateNode "interacts_with")
+   (ListLink
+      (AnyNode "left-gene")
+      (AnyNode "right-gene")
+   )
+)
+Rows: 20123 Columns: 20123
+Size: 617530 non-zero entries of 404935129 possible
+Fraction non-zero: 1.5250E-3 Sparsity (-log_2): 9.3570
+Total observations: 10783686.0  Avg obs per pair: 17.463
+Entropy Total: 18.214   Left: 10.852   Right: 10.852
+Total MI: 3.4905
+
+                 Left         Right     Avg-left     Avg-right
+                 ----         -----     --------     ---------
+Support (l_0)  400.5        400.5    
+Count   (l_1)  1.5231E+4    1.5231E+4     38.03        38.03    
+Length  (l_2)  905.5        905.5         2.261        2.261    
+RMS Count      634.3        634.3         1.584        1.584 
+
+WTF:
+Done computing 731490 pair frequencies in 89 secs
+Done computing 704086 pair MI's in 894 secs
+Size: 617530 non-zero entries of 404935129 possible
+
+why aren't these identical? Oh, because ... 
+first two differ because not all pairs were in triangles.
+why do the second two differ?

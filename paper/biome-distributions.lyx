@@ -255,6 +255,10 @@ Use the
 
 \end_layout
 
+\begin_layout Standard
+Pathways are from https://reactome.org and from http://smpdb.ca/
+\end_layout
+
 \begin_layout Section*
 Triangles
 \end_layout
@@ -403,7 +407,8 @@ gene A regulates gene B, B regulates C and C regulates A,
 \begin_layout Standard
 The second dataset has 10783686 pointed triangles; by symmetry, only 1/6
  of these are distinct, leaving 1797281 distinct triangles.
- There is a total of 13846 genes participating in these triangles.
+ These triangles have a total of 731490 distinct edges.
+ There is a total of 20123 genes participating in these triangles.
 \end_layout
 
 \begin_layout Subsection*
@@ -561,7 +566,45 @@ MI(x,y)=\log_{2}\frac{N(x,y)N(*,*)}{N(x,*)N(*,y)}
 
 \end_inset
 
+The total MI for a dataset is defined as
+\begin_inset Formula 
+\[
+MI=\sum_{x,y}p(x,y)MI(x,y)
+\]
 
+\end_inset
+
+where 
+\begin_inset Formula $p(x,y)=N(x,y)/N(*,*)$
+\end_inset
+
+ is the (frequentist) probability of observing the pair 
+\begin_inset Formula $(x,y)$
+\end_inset
+
+.
+ For the symmetric dataset, it is 3.49.
+ The total entropy for the dataset is 18.21.
+ The sparsity is 9.36, where the sparsity is defined as 
+\begin_inset Formula $\log_{2}$
+\end_inset
+
+ of the number of non-zero entries in the matrix.
+ In this case, there are 20123 genes that participated in triangles, and
+ 617530 non-zero entries (out of 404935129 possible; the 
+\begin_inset Formula $\log_{2}$
+\end_inset
+
+ of this ratio provides the sparsity).
+ Other statistics are possible: any given gene-pair participates in 400
+ triangles, on average; however, the concept of averages is rather flawed,
+ when one has such Zipfian distributions.
+\end_layout
+
+\begin_layout Standard
+So because the concept of average is flawed, we use MI instead...
+ Hmm.
+ what about the other stats (support, count, length!? I'm confused...)
 \end_layout
 
 \begin_layout Standard
@@ -678,8 +721,8 @@ Zipf
 
 \begin_layout Standard
 There are 50501 pathways in which some gene in the dataset is a member of.
- These are both SMP and R-HSA-tagged pathways.
- XXX Double check – are these both pathways ?? I'm confused.
+ These are both SMP and R-HSA-tagged pathways (from the smpdb.ca and reactome.org,
+ respectively).
 \end_layout
 
 \begin_layout Standard
@@ -687,20 +730,11 @@ XXX
 \end_layout
 
 \begin_layout Standard
-were 9895 unique genes appearing in pentagons (this is half of those that
+were XXX unique genes appearing in pentagons (this is half of those that
  appear in triangles).
- There were 29225 unique proteins appearing in the pentagons.
- There were 50823 distinct pathways.
+ There were XXX unique proteins appearing in the pentagons.
+ There were XXX distinct pathways.
  Wow, that sure seems like a lot, but OK.
-\end_layout
-
-\begin_layout Standard
-Argh ...
- bug.
- non-paths got included in the pentagons, including GO and and SMP and we
- only wanted R-HSA, I beleive ...
- oops.
- try again.
 \end_layout
 
 \end_body
