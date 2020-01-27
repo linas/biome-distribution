@@ -198,13 +198,23 @@
 					((delete-pairs) delete-gene-pairs)
 					((provides) (lambda (symb) #f))
 					((filters?) (lambda () #f))
-					(else (error "Bad method call on ANY-link:" message)))
+					(else (error "Bad method call on gene-pair-api:" message)))
 				args)))
 )
 
 
 ; ---------------------------------------------------------------------
-; Handy-dandy main entry points.
+; Handy-dandy main entry points. These compute mutual information.
+;
+; XXX FIXME - these will fail if an SQL database is not open.
+; For now, the work-around is to create a database, and open it.
+; As follows:
+;    $ createdb gene_pairs
+;    $ guile
+; (use-modules (opencog persist) (opencog persist-sql))
+; (sql-create "postgres:///gene_pairs")
+; (sql-open "postgres:///gene_pairs")
+;
 
 (define-public (batch-pairs LLOBJ)
 	(cog-report-counts)
@@ -218,6 +228,7 @@
 
 ; ---------------------------------------------------------------------
 ;
+; Debugging notes and cheat-sheet.
 ; (define gpr (Evaluation (Predicate "interacts_with") (List (Gene "FAM20C") (Gene "RNF123"))))
 ; (define gpa (make-gene-pair-api))
 ; (define gps (add-pair-stars gpa))
