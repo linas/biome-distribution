@@ -10,49 +10,28 @@
 ; --------
 ; The objects below define API's to access natural bio-molecule pairs,
 ; stored in the AtomSpace, as a rank-2 matrix, i.e. as a matrix of
-; (left, right) molecule-pairs.  This provides exactly the API needed for
-; use with the `(use-modules (opencog matrix))` statistical analysis
-; subsystem.
+; (left, right) molecule-pairs.  This provides exactly the API needed
+; for ; use with the `(use-modules (opencog matrix))` statistical
+; analysis subsystem.
 ;
-; Given a generic API, the `(opencog matrix)` can do things such as
-; computing the Yuret-style lexical attraction between pairs of molecules.
-; (See `compute-mi.scm` for more detail about what is computed, and how.)
-;
-; Given the generic API, there is a handful of small scripts, at the
-; bottom of this file, that will perform the MI calculations as a batch
-; job.  As a batch job, and may take hours to complete. The results are
-; stored in the currently-open database, for future reference.
-;
-; One structure, among several, in which the pair counts are held,
-; is of the form
+; To be explicit: a sparse matrix is encoded in the AtomSpace as
 ;
 ;     EvaluationLink
-;         LinkGrammarRelationshipNode "ANY"
+;         PredicateNode "some named relationship"
 ;         ListLink
-;             WordNode "some-word"
-;             WordNode "other-word"
+;             MoleculeNode "some molecule or gene"
+;             MoleculeNode "some other gene or protein"
 ;
-; After they've been computed, the values for N(w,*) and N(*,w) can be
-; fetched with the `get-left-count-str` and `get-right-count-str`
-; routines, below.  The value for N(*,*) can be gotten by calling
-; `total-pair-observations`.
+; Although other forms are possible, as well (e.g. `InheritanceLink`s,
+; etc.) Matrix entries N(x,y) are stored as counts (numbers) on the
+; EvaluationLink, ; with the `x` being the first molecule, and `y`
+; being the second molecule.
 ;
-; The counting done in `link-pipeline.scm` keeps track of several
-; different types of pair information.  Besides the above, it also
-; counts these things:
-;
-;     EvaluationLink
-;         PredicateNode "*-Sentence Word Pair-*"
-;         ListLink
-;             WordNode "lefty"
-;             WordNode "righty"
-;
-;     ExecutionLink
-;         SchemaNode "*-Pair Distance-*"
-;         ListLink
-;             WordNode "lefty"
-;             WordNode "righty"
-;         NumberNode 3
+; Given the generic API, the matrx system will compute marginals N(x,*)
+; and N(*,y), a grand total N(*,*) and then probabilities:
+;     p(x,y) = N(x,y)/N(*,*)
+; and from this, various other statistical quantities, such as mutual
+; information.
 ;
 ; ---------------------------------------------------------------------
 ;
@@ -86,7 +65,7 @@
   that is not how the dataset is currrently coded, so for now this
   is hacky and assymetric. XXX FIXME some day.
 
-  Left-side counts, frequencies, etc. such as N(*,y) P(*,y) or
+  Left-side counts, frequencies, etc. such as N(*,y), P(*,y) or
   log_2 P(*,y) will be placed on the following, which is returned
   by the 'left-wildcard method:
 
