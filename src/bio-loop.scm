@@ -148,7 +148,7 @@
 			(Evaluation (Predicate "interacts_with")
 				(List (Variable "$c") (Variable "$a")))
 		)
-		(Evaluation (Predicate "pointed_triangle")
+		(Evaluation (Predicate "triangle")
 			(Set (Variable "$a") (Variable "$b") (Variable "$c")))
 		))
 
