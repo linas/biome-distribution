@@ -6,9 +6,11 @@
 ; two graphs are examined:
 ;
 ; * Gene triangles: groups of three genes, each of which interact
-;   with one-another (an order-3 clique).
+;   with one-another (an order-3 clique). Takes about 110 minutes
+;   on the current datasets.
 ; * Gene-protein pentagons: two genes that interact, and express two
-;   proteins, both of which appear on the same pathway.
+;   proteins, both of which appear on the same pathway. Took 14 hours
+;   on the current dataset.
 ;
 ; This started life as a modified copy of the benchmark, which in
 ; turn is an abstracted variant of the MOZI gene-annotation code.
@@ -29,19 +31,18 @@
 			diff)))
 
 ; ------------------------------------------------------------------
-; Define the main benchmarking routine
+; The triangle routines.
 
 ;; This defines a triangle-shaped search; one endpoint is fixed,
 ;; and we are looking for two other genes that interact with the
-;; endpoint and form a triangle.
+;; endpoint and form a triangle.  This is called
+;; "find-output-interactors" in the MOZI code-base, and we keep
+;; that name here.
 (define (find-output-interactors gene)
 	(Get
 		(VariableList
 			(TypedVariable (Variable "$a") (Type 'GeneNode))
 			(TypedVariable (Variable "$b") (Type 'GeneNode))
-
-			; (TypedVariable (Variable "$a") (Type 'ConceptNode))
-			; (TypedVariable (Variable "$b") (Type 'ConceptNode))
 		)
 		(And
 			(Evaluation (Predicate "interacts_with")
@@ -51,35 +52,6 @@
 			(Evaluation (Predicate "interacts_with")
 				(List gene (Variable "$b")))
 		)))
-
-;; -----------
-;; This defines a pentagon-shaped search; one endpoint, a reaction
-;; pathway, is fixed, and we are looking for two proteins that
-;; participate in that pathway. These two are expressed with a pair
-;; of genes that interact with one-another, forming a pentagon.
-(define (pathway-gene-interactors pathway)
-	(Get
-		(VariableList
-			(TypedVariable (Variable "$g1") (Type 'GeneNode))
-			(TypedVariable (Variable "$g2") (Type 'GeneNode))
-			(TypedVariable (Variable "$p1") (Type 'MoleculeNode))
-			(TypedVariable (Variable "$p2") (Type 'MoleculeNode)))
-		(And
-			(Member (Variable "$p1") pathway)
-			(Member (Variable "$p2") pathway)
-			(Evaluation (Predicate "expresses") (List (Variable "$g1") (Variable "$p1")))
-			(Evaluation (Predicate "expresses") (List (Variable "$g2") (Variable "$p2")))
-			(Evaluation (Predicate "interacts_with") (List (Variable "$g1") (Variable "$g2")))
-		)))
-
-;; -----------
-;; This defines a single edge search; one endpoint is the given
-;; gene, the other is a pathway.
-(define (find-pathways gene)
-	(Get
-		(TypedVariable (Variable "$p") (Type 'ConceptNode))
-		(Member gene (Variable "$p"))
-	))
 
 ;; -----------
 ;; Count triangles.
@@ -115,6 +87,8 @@
 
 			; delete the SetLink
 			(cog-delete result)
+			; delete the GetLink, too.
+			(cog-delete query)
 
 			;; (format #t "Ran triangle ~A in ~6f seconds; got ~A results\n"
 			;; 	gene-name (gene-secs) rlen)
@@ -126,7 +100,7 @@
 								internal-time-units-per-second))
 						(rate (/ ndone elapsed)))
 					(format #t
-						"Tri done ~A/~A in ~3f secs rate=~4f gene/sec elapsed=~6f\n"
+						"Tri done ~A/~A in ~4f secs rate=~4f gene/sec elapsed=~6f\n"
 						ndone ngen (batch-secs) rate elapsed)))
 		)
 		gene-list)
@@ -136,6 +110,95 @@
 
 	*unspecified*
 )
+
+;; -----------
+; Explicitly create and count triangles.
+(define pointed-triangle-query
+	(Bind
+		(VariableList
+			(TypedVariable (Variable "$a") (Type 'GeneNode))
+			(TypedVariable (Variable "$b") (Type 'GeneNode))
+			(TypedVariable (Variable "$c") (Type 'GeneNode))
+		)
+		(And
+			(Evaluation (Predicate "interacts_with")
+				(List (Variable "$a") (Variable "$b")))
+			(Evaluation (Predicate "interacts_with")
+				(List (Variable "$b") (Variable "$c")))
+			(Evaluation (Predicate "interacts_with")
+				(List (Variable "$c") (Variable "$a")))
+		)
+		(Evaluation (Predicate "pointed_triangle")
+			(List (Variable "$a") (Variable "$b") (Variable "$c")))
+		))
+
+; Same as above, but not pointed; uses a set.
+(define triangle-query
+	(Bind
+		(VariableList
+			(TypedVariable (Variable "$a") (Type 'GeneNode))
+			(TypedVariable (Variable "$b") (Type 'GeneNode))
+			(TypedVariable (Variable "$c") (Type 'GeneNode))
+		)
+		(And
+			(Evaluation (Predicate "interacts_with")
+				(List (Variable "$a") (Variable "$b")))
+			(Evaluation (Predicate "interacts_with")
+				(List (Variable "$b") (Variable "$c")))
+			(Evaluation (Predicate "interacts_with")
+				(List (Variable "$c") (Variable "$a")))
+		)
+		(Evaluation (Predicate "triangle")
+			(Set (Variable "$a") (Variable "$b") (Variable "$c")))
+		))
+
+(define (make-pointed-triangles)
+	(define elapsed-secs (make-timer))
+	(define pset (cog-execute! pointed-triangle-query))
+	(define points (cog-outgoing-set pset))
+	(define npoints (length points))
+	(cog-delete pset)
+	(format #t "Obtained ~A pointed triangles in ~6f seconds\n"
+		npoints (elapsed-secs))
+)
+
+(define (make-triangles)
+	(define elapsed-secs (make-timer))
+	(define tset (cog-execute! triangle-query))
+	(define triangles (cog-outgoing-set tset))
+	(define ntris (length triangles))
+	(cog-delete tset)
+	(format #t "Obtained ~A triangles in ~6f seconds\n" ntris (elapsed-secs))
+)
+
+;; -----------
+;; This defines a pentagon-shaped search; one endpoint, a reaction
+;; pathway, is fixed, and we are looking for two proteins that
+;; participate in that pathway. These two are expressed with a pair
+;; of genes that interact with one-another, forming a pentagon.
+(define (pathway-gene-interactors pathway)
+	(Get
+		(VariableList
+			(TypedVariable (Variable "$g1") (Type 'GeneNode))
+			(TypedVariable (Variable "$g2") (Type 'GeneNode))
+			(TypedVariable (Variable "$p1") (Type 'MoleculeNode))
+			(TypedVariable (Variable "$p2") (Type 'MoleculeNode)))
+		(And
+			(Member (Variable "$p1") pathway)
+			(Member (Variable "$p2") pathway)
+			(Evaluation (Predicate "expresses") (List (Variable "$g1") (Variable "$p1")))
+			(Evaluation (Predicate "expresses") (List (Variable "$g2") (Variable "$p2")))
+			(Evaluation (Predicate "interacts_with") (List (Variable "$g1") (Variable "$g2")))
+		)))
+
+;; -----------
+;; This defines a single edge search; one endpoint is the given
+;; gene, the other is a pathway.
+(define (find-pathways gene)
+	(Get
+		(TypedVariable (Variable "$p") (Type 'ConceptNode))
+		(Member gene (Variable "$p"))
+	))
 
 ;; -----------
 ;; Count pentagons anchored at a pathway. A list of pathways must be supplied.
@@ -189,6 +252,7 @@
 
 			; delete the SetLink
 			(cog-delete result)
+			(cog-delete query)
 
 			; (format #t "Ran path ~A in ~6f seconds; got ~A results\n"
 			; 	(cog-name pathway) (path-secs) rlen)
@@ -230,92 +294,15 @@
 )
 
 ; =================================================================
-; Actually do stuff.
+; Actually do stuff. Just cut and paste from here to command line.
 
-(format #t "AtomSpace contents: ~A\n" (cog-report-counts))
+; (format #t "AtomSpace contents: ~A\n" (cog-report-counts))
+;
+; Run the triangle counting code.
 ; (count-triangles (cog-get-atoms 'GeneNode))
 
+; Run the pentqagon counting code.
 ; (define pathways (pathways-of-genes (cog-get-atoms 'GeneNode)))
 ; (count-pentagons pathways)
-
-; -----------------------------------------------------------------
-; Some stuff to create a ranked graph of the results found above.
-
-(define (dump-to-csv pair-list filename)
-"
-   Write the pair-list to the filename.
-   pair-list is a list of (string . count) pairs.
-   It is sorted, first.
-"
-	; Sort according to descending rank.
-	(define sorted-counts (sort pair-list
-		(lambda (a b) (> (cdr a) (cdr b)))))
-
-	; Dump to file.
-	(define f (open-file filename "w"))
-	(define cnt 1)
-	(format f "#\n# ~A\n#\n# Rank-ordered counts\n#\n" filename)
-	(for-each
-		(lambda (gu) (format f "~A	~A	~A\n" cnt (car gu) (cdr gu))
-			(set! cnt (+ 1 cnt)))
-		sorted-counts)
-	(close f)
-)
-
-#! -----------------------------------------------------------------
-; Some stuff to create a ranked graph of the results found above.
-
-; Genes that appeared in a triangular loop.
-(define loop-participants
-	(map (lambda (gene) (cons (cog-name gene) (cog-count gene)))
-		(filter (lambda (gene) (< 0 (cog-count gene)))
-			(cog-get-atoms 'GeneNode))))
-
-(dump-to-csv loop-participants "gene-loops.csv")
-
-; Gene pairs that appeared as edges in a triangular loop
-; Some of these pairs have AnyNodes from the matrix code,
-; so filter those out...
-(define gene-pairs
-	(filter (lambda (evlnk)
-			(and (< 0 (cog-count evlnk))
-				(equal? 'GeneNode (cog-type (gadr evlnk)))
-				(equal? 'GeneNode (cog-type (gddr evlnk)))))
-		(cog-incoming-set (Predicate "interacts_with"))))
-
-; Count-pairs for the gene-pairs
-(define gene-pair-cnts
-	(map (lambda (evelnk) (cons
-		(string-concatenate
-			(list (cog-name (gadr evelnk)) "-" (cog-name (gddr gene-pr))))
-		(cog-count evelnk)))
-		gene-pairs))
-
-(dump-to-csv gene-pair-cnts "tri-edges.csv")
-
-; ------------------------------------------------------------
-; Genes that appeared in the pentagonal loop
-(define path-genes
-	(map (lambda (gene) (cons (cog-name gene) (cog-count gene)))
-		(filter (lambda (gene) (< 0 (cog-count gene)))
-			(cog-get-atoms 'GeneNode))))
-
-(dump-to-csv path-genes "path-genes.csv")
-
-(define path-proteins
-	(map (lambda (protein) (cons (cog-name protein) (cog-count protein)))
-		(filter (lambda (protein) (< 0 (cog-count protein)))
-			(cog-get-atoms 'MoleculeNode))))
-
-(dump-to-csv path-proteins "path-proteins.csv")
-
-(define path-loops
-	(map (lambda (pathway) (cons (cog-name pathway) (cog-count pathway)))
-		(filter (lambda (pathway) (< 0 (cog-count pathway)))
-			(cog-get-atoms 'ConceptNode))))
-
-(dump-to-csv path-loops "path-loops.csv")
-
-!# ; ---------------------------------------------------------------
 
 ; ------------------------------------------------------------------

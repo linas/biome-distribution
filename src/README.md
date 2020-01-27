@@ -4,7 +4,9 @@ Data processing
 Some of the primary files:
 
 * `load-files.scm` - Load genomic/proteomic datasets into the AtomSpace
+* `cleanup-data.scm` - Scrub datasets for cleaner results.
 * `bio-loop.scm` - Data-mine triangular and pentagonal interactions.
+* `data-export.scm` - Export selected stats to CSV files for graphing.
 * `gene-pairs.scm` - Provide a sparse-matrix API for data analysis.
 
 Some of the secondary files:
