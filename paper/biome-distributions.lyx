@@ -175,7 +175,7 @@ These questions originally arose during the characterization of a bioinformatics
 \family typewriter
 https://github.com/opencog/benchmark/query-loop
 \family default
-, and was elaborated in the
+, and was elaborated in the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -350,7 +350,7 @@ bouquets
 \begin_layout Standard
 A total of 18766 genes participate in these interactions.
 \begin_inset Foot
-status collapsed
+status open
 
 \begin_layout Plain Layout
 Counted with 
@@ -604,7 +604,9 @@ where
 \begin_layout Standard
 So because the concept of average is flawed, we use MI instead...
  Hmm.
- what about the other stats (support, count, length!? I'm confused...)
+ what about the other stats (support, count, length!? I'm confused...
+ OK: deconfuser: the matrix summary report shows *weighted* banach-space
+ norms, so not raw, but weighted by frequency of row/column...)
 \end_layout
 
 \begin_layout Standard

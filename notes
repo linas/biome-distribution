@@ -1411,5 +1411,349 @@ Done computing 704086 pair MI's in 894 secs
 Size: 617530 non-zero entries of 404935129 possible
 
 why aren't these identical? Oh, because ... 
-first two differ because not all pairs were in triangles.
-why do the second two differ?
+first two differ because they're counting non-zero rows intersect non-zero
+columns. i.e. upper-bound on non-zero pairs.
+
+why do the second two differ? Because 
+second two differ because not all pairs were in triangles.
+
+
+Hmm,
+
+(define gpa (make-gene-pair-api))
+(define gps (add-pair-stars gpa))
+
+(length (gps 'get-all-elts)) ; 731490  -- OK
+(define pos-elts (filter (lambda (x) (< 0 (gpa 'get-count x))) all-elts))
+(length pos-elts) ; 617530 
+
+(fold (lambda (row sum)
+	(+ sum (length (gps 'right-stars row))))
+0 (gps 'left-basis))   ; 731490 OK
+
+(fold (lambda (row sum)
+	(+ sum (length (gps 'right-duals row))))
+0 (gps 'left-basis))    ; 731490 OK
+
+
+(define gpr (add-report-api gps))
+(define (do-one-pair col)
+	(< 0 (gpr 'left-count col)) 
+
+(fold (lambda (row sum)
+	(+ sum (length (filter (lambda (col) (< 0 (gpr 'left-count col)))
+		(gps 'right-stars row)))))
+0 (gps 'left-basis))    ;  731490
+
+(fold (lambda (row sum)
+	(+ sum (length (filter (lambda (col) (< 0 (gpr 'left-count col)))
+		(gps 'right-stars row)))))
+0 
+	(filter (lambda (row) (< 0 (gpr 'right-count row))) (gps 'left-basis)))  ; 731490
+
+(define cnt 0)
+(define (right-loop left-item)
+	(define (do-one-pair right-item)
+		(if (< 0 (gpr 'left-count right-item)) (set! cnt (+ 1 cnt))))
+	
+	(if (< 0 (gpr 'right-count left-item))
+		(for-each do-one-pair (gps 'right-duals left-item)))
+)
+(for-each right-loop (gps 'left-basis))  
+cnt ; 731490  OK so where 
+
+
+
+num-prs batch-mi-obj 'cache-pair-mi
+(make-batch-mi gps)
+
+
+
+
+(gps 'left-basis-size) ;  20123
+(gpr 'left-support)  ; 400.4529875962635
+(gpr 'left-count)   ; 15230.809315849887
+
+
+I don't get it. If there are 617530 non-zero entries, and 20123 rows, then
+there's an average of (/ 617530 20123.) = 30.687770213188887 non-zero entries
+per row, so what is l_0 then? .. its the weighted averge. Ah hah.
+
+from set-left-norms
+
+(define gcc (make-central-compute gps))
+(gcc 'left-support)
+do-get-col-avg 'left-support
+which is average over columns, of the support in that column, weiighted by column
+itself.  Ohhhh OK. That explains it.
+
+
+(define (make-batch-fu LLOBJ)
+
+   (let ((llobj LLOBJ)
+         (star-obj (add-pair-stars LLOBJ))
+         (supobj (add-support-api LLOBJ))
+         (frqobj (add-pair-freq-api LLOBJ #:nothrow #t)))
+
+      (define (compute-fu)
+         (define lefties (star-obj 'left-basis))
+         (define nlefties (length lefties))
+
+         ; progress stats
+         (define cnt-pairs (make-atomic-box 0))
+         (define cnt-lefties (make-atomic-box 0))
+
+         (define (atomic-inc ctr)
+            (define old (atomic-box-ref ctr))
+            (define new (+ 1 old))
+            (define swp (atomic-box-compare-and-swap! ctr old new))
+            (if (= old swp) new (atomic-inc ctr)))
+
+         (define start-time (current-time))
+         (define (elapsed-secs)
+            (define diff (- (current-time) start-time))
+            (set! start-time (current-time))
+            diff)
+
+         (define cnt-start 0)
+         (define (elapsed-count cnt)
+            (define diff (- (atomic-box-ref cnt-pairs) cnt-start))
+            (set! cnt-start cnt)
+            diff)
+
+         (define (right-loop left-item)
+            (if (< 0 (supobj 'right-count left-item))
+               (let ()
+                  (define (do-one-pair right-item)
+                     (if (< 0 (supobj 'left-count right-item))
+                           (atomic-inc cnt-pairs)))
+                  (for-each
+                     do-one-pair
+                     (star-obj 'right-duals left-item))
+
+                  ; Print some progress statistics.
+                  (if (eqv? 0 (modulo (atomic-inc cnt-lefties) 10000))
+                     (let ((secs (elapsed-secs)))
+                        (format #t
+                           "Done ~A of ~A outer loops in ~A secs, pairs=~A (~6f pairs/sec)\n"
+                           (atomic-box-ref cnt-lefties)
+                           nlefties secs
+                           (atomic-box-ref cnt-pairs)
+                           (/ (elapsed-count (atomic-box-ref cnt-pairs)) secs))))
+               ))
+         )
+         (for-each right-loop lefties)
+
+         ; Return a count of the number of pairs.
+         (atomic-box-ref cnt-pairs)
+      )
+      ; Methods on this class.
+      (lambda (message . args)
+         (case message
+            ((pute-fu)        (compute-fu))
+            (else (apply llobj      (cons message args))))
+      ))
+)
+(define gpf (make-batch-fu gps))
+(gpf 'pute-fu)
+
+gives ... 704086 .. why? That seems wrong?
+Ah hah. Its not the entry that's non-zero, its the column/row
+
+(define (make-batch-fu LLOBJ)
+
+   (let ((llobj LLOBJ)
+         (star-obj (add-pair-stars LLOBJ))
+         (supobj (add-support-api LLOBJ)))
+
+      (define (compute-fu)
+         (define lefties (star-obj 'left-basis))
+
+         ; progress stats
+         (define cnt-pairs (make-atomic-box 0))
+
+         (define (atomic-inc ctr)
+            (define old (atomic-box-ref ctr))
+            (define new (+ 1 old))
+            (define swp (atomic-box-compare-and-swap! ctr old new))
+            (if (= old swp) new (atomic-inc ctr)))
+
+         (define (right-loop left-item)
+            (if (< 0 (supobj 'right-count left-item))
+               (let ()
+                  (define (do-one-pair right-item)
+                     (if (< 0 (supobj 'left-count right-item))
+                           (atomic-inc cnt-pairs)))
+                  (for-each
+                     do-one-pair
+                     (star-obj 'right-duals left-item))
+               ))
+         )
+         (for-each right-loop lefties)
+
+         ; Return a count of the number of pairs.
+         (atomic-box-ref cnt-pairs)
+      )
+      ; Methods on this class.
+      (lambda (message . args)
+         (case message
+            ((pute-fu)        (compute-fu))
+            (else (apply llobj      (cons message args))))
+      ))
+)
+(define gpf (make-batch-fu gps))
+(gpf 'pute-fu) ; 704086
+
+      (define (compute-fu LLOBJ)
+
+         (define supobj (add-support-api LLOBJ))
+         (define cnt-pairs 0)
+         (define (atomic-inc)
+				(set! cnt-pairs (+ 1 cnt-pairs)))
+
+         (define (right-loop left-item)
+            (if (< 0 (supobj 'right-count left-item))
+               (let ()
+                  (define (do-one-pair right-item)
+                     (if (< 0 (supobj 'left-count right-item))
+                           (atomic-inc)))
+                  (for-each
+                     do-one-pair
+                     (LLOBJ 'right-duals left-item))
+               ))
+         )
+         (for-each right-loop (LLOBJ 'left-basis))
+         cnt-pairs
+      )
+
+(compute-fu gps) ; 704086
+
+      (define (compute-fu LLOBJ)
+
+         (define supobj (add-support-api LLOBJ))
+         (define cnt-pairs 0)
+
+         (define (right-loop left-item)
+            (if (< 0 (supobj 'right-count left-item))
+               (let ()
+                  (define (do-one-pair right-item)
+                     (if (< 0 (supobj 'left-count right-item))
+                           (set! cnt-pairs (+ 1 cnt-pairs))))
+                  (for-each do-one-pair (LLOBJ 'right-duals left-item))))
+         )
+         (for-each right-loop (LLOBJ 'left-basis))
+         cnt-pairs
+      )
+(compute-fu gps) ; 704086
+
+      (define (compute-fu LLOBJ)
+         (define supobj (add-support-api LLOBJ))
+         (define cnt-pairs 0)
+         (define (do-one-pair right-item)
+            (if (< 0 (supobj 'left-count right-item)) (set! cnt-pairs (+ 1 cnt-pairs))))
+
+         (define (right-loop left-item)
+            (if (< 0 (supobj 'right-count left-item))
+                  (for-each do-one-pair (LLOBJ 'right-duals left-item)))
+         )
+         (for-each right-loop (LLOBJ 'left-basis))
+         cnt-pairs
+      )
+
+
+(define gpr (add-report-api gps))
+(define cnt 0)
+(define (right-loop left-item)
+	(define (do-one-pair right-item)
+		(if (< 0 (gpr 'left-count right-item)) (set! cnt (+ 1 cnt))))
+	
+	(if (< 0 (gpr 'right-count left-item))
+		(for-each do-one-pair (gps 'right-duals left-item)))
+)
+(for-each right-loop (gps 'left-basis))  
+
+
+(define gpu (add-support-api gps))
+      (define (compute-fu)
+         (define cnp 0)
+         (define (do-one-pair right-item)
+				(define cpu (< 0 (gpu 'left-count right-item)))
+				(define rpu (< 0 (gpr 'left-count right-item)))
+				(if (not (equal? cpu rpu))
+					(format #t "Oh noooo sup=~A rep=~A for right=~A\n"
+							(gpu 'left-count right-item)
+							(gpr 'left-count right-item)
+							right-item))
+            (if cpu (set! cnp (+ 1 cnp))))
+
+         (define (right-loop left-item)
+            (define cpu (< 0 (gpu 'right-count left-item)))
+            (define rpu (< 0 (gpr 'right-count left-item)))
+				(if (not (equal? cpu rpu))
+					(format #t "Oh noooo sup=~A rep=~A for left=~A\n"
+                     (gpu 'right-count left-item)
+                     (gpr 'right-count left-item)
+							left-item))
+            (if cpu (for-each do-one-pair (gps 'right-duals left-item)))
+         )
+         (for-each right-loop (gps 'left-basis))
+         cnp)
+
+report: right-count = sum_x P(x,*) N(x,*)
+
+support:
+(get-count (LLOBJ 'right-wildcard ITEM)))
+
+(define gene (GeneNode "MORF4L1P2"))
+
+   (define (get-count ATOM)
+		(define norm-key (PredicateNode "*-Norm Key-*"))
+         (cog-value-ref (cog-value ATOM norm-key) 1))
+
+(define marg (gps 'right-wildcard gene))
+(cog-value marg norm-key)
+
+... all zeros... why? Oh OK
+who called set-norms ?
+add-support-compute ... called set-left-marginals all-left-marginals
+
+(define gsc (add-support-compute gps))
+(gsc 'left-support gene)
+
+(length (gps 'left-stars gene)) ; 1
+... which has a count of zero ... OK, its not in a triangle...
+
+but report is different...
+(gpr 'left-count gene)
+
+
+gahhh 
+
+(define (make-batch-fu LLOBJ)
+
+   (let ()
+		(define (foo)  1)
+		(define (bar argy) 2)
+
+      ; Methods on this class.
+      (lambda (message . args)
+
+         (define (oops)
+            (throw 'wrong-number-of-args 'add-report-api
+               (format #f "The ~A method does not expect any arguments!" message)))
+
+         (if (< 0 (length args))
+            (case message
+               ((pute-fu)            (oops))
+				))
+
+         (case message
+            ((pute-fu)        (foo))
+            ((say-fu)        (apply foo args))
+            (else (apply LLOBJ      (cons message args))))
+      )))
+
+
+            (throw 'no-transpose-data 'mtm-mi
+               "No transpose data available for this dataset! Did you forget to (batch-transpose)? ")))
+
