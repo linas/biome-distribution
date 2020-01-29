@@ -179,7 +179,7 @@
 		; Methods on the object
 		(lambda (message . args)
 			(apply (case message
-					((name) (lambda () "Gene interacts_with Pairs"))
+					((name) (lambda () "Gene pairs, predicate `interacts_with`"))
 					((id)   (lambda () "Gene-pairs"))
 					((left-type) get-left-type)
 					((right-type) get-right-type)
