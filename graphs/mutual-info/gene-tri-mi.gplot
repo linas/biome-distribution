@@ -2,8 +2,40 @@
 #
 # Create a graph of the number of loops found.
 #
-set term png
-set out 'gene-tri-mi.png'
+# This first one is for the non-symmetric dataset.
+#
+#-x=#set term png
+#-x=#set out 'gene-tri-mi.png'
+#-x=#
+#-x=#set title "Probability of a unique gene pair having given MI"
+#-x=#set xlabel "Mutual Information"
+#-x=#set ylabel "Probability of a unique gene pair"
+#-x=#set xrange [-2:20]
+#-x=#set yrange [1e-4:0.2]
+#-x=#set logscale y
+#-x=#set format y "10^{%L}"
+#-x=#
+#-x=## There were 455572 gene pairs with a non-zero observation count
+#-x=## in the dataset. These were binned into 300 bins.  The range was
+#-x=## from MI=-10 to +30, so that the bin-width is (40/300). The
+#-x=## normalization is thus the total-count divided by bin width, so
+#-x=## that the integral under the curve is 1.0
+#-x=#norm = 300/(40 * 455572.)
+#-x=#C = 1 / sqrt(2 * 3.1415926)
+#-x=#plot "gene-tri-mi.csv" using 2:($3*norm) with lines title "data", \
+#-x=#     "gene-tri-mi.csv" using 2:(0.25 * C * exp(-0.5*($2-2.5)**2)) with lines title "C/4 exp(-(MI-2.5)^2/2)", \
+#-x=#     "gene-tri-mi.csv" using 2:(0.3333 *C* exp(-(($2-4.5)**2)/32)) with lines title "C/3 exp(-(MI-4.5)^2/32)",\
+#-x=#     "gene-tri-mi.csv" using 2:(1) title "C = 1/√ 2 π"
+#-x=#
+#############################################################################
+
+# This is for the symmetrized gene-interaction dataset.
+
+# set term png
+# set out 'gene-tri-mi-sym.png'
+
+set term eps color
+set out 'gene-tri-mi-sym.eps'
 
 set title "Probability of a unique gene pair having given MI"
 set xlabel "Mutual Information"
@@ -13,14 +45,14 @@ set yrange [1e-4:0.2]
 set logscale y
 set format y "10^{%L}"
 
-# There were 455572 gene pairs with a non-zero observation count
+# There were 617530 gene pairs with a non-zero observation count
 # in the dataset. These were binned into 300 bins.  The range was
-# from MI=-10 to +30, so that the bin-width is (40/300). The
+# from MI=-5 to +25, so that the bin-width is (30/300). The
 # normalization is thus the total-count divided by bin width, so
 # that the integral under the curve is 1.0
-norm = 300/(40 * 455572.)
+norm = 300/(30 * 617530.)
 C = 1 / sqrt(2 * 3.1415926)
-plot "gene-tri-mi.csv" using 2:($3*norm) with lines title "data", \
-     "gene-tri-mi.csv" using 2:(0.25 * C * exp(-0.5*($2-2.5)**2)) with lines title "C/4 exp(-(MI-2.5)^2/2)", \
-     "gene-tri-mi.csv" using 2:(0.3333 *C* exp(-(($2-4.5)**2)/32)) with lines title "C/3 exp(-(MI-4.5)^2/32)",\
-     "gene-tri-mi.csv" using 2:(1) title "C = 1/√ 2 π"
+plot "gene-tri-mi-sym.csv" using 2:($3*norm) with lines title "data", \
+     "gene-tri-mi-sym.csv" using 2:(0.25 * C * exp(-0.5*($2-2.5)**2)) with lines title "C/4 exp(-(MI-2.5)^2/2)", \
+     "gene-tri-mi-sym.csv" using 2:(0.3333 *C* exp(-(($2-4.5)**2)/32)) with lines title "C/3 exp(-(MI-4.5)^2/32)",\
+     "gene-tri-mi-sym.csv" using 2:(1) title "C = 1/√ 2 π"

@@ -233,6 +233,8 @@ i.e.
  There were 2939 self-interacting genes.
  From this, we deduce a total of (347127 - 2939) / 2 = 172094 symmetric
  interactions, and 540778 - 347127 = 193651 non-symmetric interactions.
+ The number of edges that have non-zero counts (i.e.
+ appeared at least once in a triangle) is 455572.
 \end_layout
 
 \begin_layout Standard
@@ -252,7 +254,8 @@ Use the
 
 \end_inset
 
-
+ The number of edges with non-zero counts (i.e.
+ the number of edges that appear in at least one triangle) is 617530.
 \end_layout
 
 \begin_layout Standard
@@ -350,7 +353,7 @@ bouquets
 \begin_layout Standard
 A total of 18766 genes participate in these interactions.
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Counted with 
@@ -644,9 +647,10 @@ e)
 \end_layout
 
 \begin_layout Standard
+\align center
 \begin_inset Graphics
-	filename /home/linas/src/novamente/mozi/graphs/mutual-info/gene-tri-mi.png
-	width 60col%
+	filename /home/linas/src/novamente/mozi/graphs/mutual-info/gene-tri-mi-sym.eps
+	width 70col%
 
 \end_inset
 
@@ -682,13 +686,19 @@ The second graph is very similar, but this time shows the weighted distribution.
 \end_layout
 
 \begin_layout Standard
+\align center
 \begin_inset Graphics
-	filename /home/linas/src/novamente/mozi/graphs/mutual-info/tri-weighted-mi.png
-	width 60col%
+	filename /home/linas/src/novamente/mozi/graphs/mutual-info/tri-weighted-mi-sym.eps
+	width 70col%
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Again, the fit is eyeballed, with a preferrence of finding numerological
+ simple-fraction fits, so as to expose simple laws, if these exist.
 \end_layout
 
 \begin_layout Subsection*
