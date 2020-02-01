@@ -7,7 +7,7 @@ See the email chain titled “Genome distribution!?” and also
 the opencog benchmark “query-loop” for details about distributions
 of interactions.
 
-HOWTO:
+### HOWTO:
 
 ```
 (load "load-files.scm")
@@ -24,3 +24,9 @@ Then see bottom of that file...
 ```
 
 To make the csv's, cut and paste the code at the bottom of that file.
+
+### Files
+
+* `gene-loops.gplot` -- Create Zipf-distribution graphs for triangles.
+* `tri-edges.gplot` -- Create Zipf-distribution graphs for gene-pair edges in
+                       appearing triangles
