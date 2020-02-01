@@ -70,7 +70,7 @@
 ; ------------------------------------------------------------
 ; Examination of the pentagons.
 
-; Genes that appeared in the pentagonal loop.
+; Genes that appeared in a pentagonal loop.
 (define path-genes
 	(map (lambda (gene) (cons (cog-name gene) (cog-count gene)))
 		(filter (lambda (gene) (< 0 (cog-count gene)))
@@ -78,6 +78,7 @@
 
 (dump-to-csv path-genes "path-genes.csv")
 
+; Proteins that appeared in a pentagonal loop.
 (define path-proteins
 	(map (lambda (protein) (cons (cog-name protein) (cog-count protein)))
 		(filter (lambda (protein) (< 0 (cog-count protein)))
@@ -85,12 +86,25 @@
 
 (dump-to-csv path-proteins "path-proteins.csv")
 
+; Pathways that appeared in a pentagonal loop.
 (define path-loops
 	(map (lambda (pathway) (cons (cog-name pathway) (cog-count pathway)))
 		(filter (lambda (pathway) (< 0 (cog-count pathway)))
 			(cog-get-atoms 'ConceptNode))))
 
 (dump-to-csv path-loops "path-loops.csv")
+
+; How many pentagons? Lets count paths. I get 491558.0
+(fold (lambda (path cnt) (+ cnt (cog-count path))) 0
+	(cog-get-atoms 'ConceptNode))
+
+; How many pentagons, via proteins? I get 983116.0 twice as many, of course
+(fold (lambda (prot cnt) (+ cnt (cog-count prot))) 0
+	(cog-get-atoms 'MoleculeNode))
+
+; Via genes? 983116.0 - twice as many: its mirror symmetry.
+(fold (lambda (gene cnt) (+ cnt (cog-count gene))) 0
+	(cog-get-atoms 'GeneNode))
 
 !# ; ---------------------------------------------------------------
 
