@@ -738,7 +738,30 @@ There are 50501 pathways in which some gene in the dataset is a member of.
 \end_layout
 
 \begin_layout Standard
-XXX
+There were 491558 distinct pentagons (or twice that many, if you count mirror
+ symmetry.) There are 6694 unique genes that appeared in pentagonal relationships.
+ There were 6735 proteins that appeared in pentagonal relations.
+ There were 2129 distinct pathways that appeared in pentagonal relations.
+ All have an unexpected distribution.
+ All are graphed below, on the same graph.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/linas/src/novamente/mozi/graphs/pentagon-paths/path-genes-sym.png
+	width 70text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There are 491558 pentagons
+\end_layout
+
+\begin_layout Standard
+xxx
 \end_layout
 
 \begin_layout Standard
