@@ -105,6 +105,28 @@
 
 (dump-to-csv path-edges "path-edges-sym.csv")
 
+; Protein-expessed-by-gene edges
+(define path-exprs
+	(map (lambda (expr) (cons
+			(string-append (cog-name (gadr expr)) "-x-"
+				(cog-name (gddr expr)))
+		(cog-count expr)))
+		(filter (lambda (expr) (< 0 (cog-count expr)))
+			(cog-incoming-by-type (Predicate "expresses") 'EvaluationLink))))
+
+(dump-to-csv path-exprs "path-exprs-sym.csv")
+
+; Gene interactions
+(define path-intrs
+	(map (lambda (intr) (cons
+			(string-append (cog-name (gadr intr)) "-x-"
+				(cog-name (gddr intr)))
+		(cog-count intr)))
+		(filter (lambda (intr) (< 0 (cog-count intr)))
+			(cog-incoming-by-type (Predicate "interacts_with") 'EvaluationLink))))
+
+(dump-to-csv path-intrs "path-intrs-sym.csv")
+
 ; How many pentagons? Lets count paths. I get 491558.0
 (fold (lambda (path cnt) (+ cnt (cog-count path))) 0
 	(cog-get-atoms 'ConceptNode))
