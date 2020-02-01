@@ -1,6 +1,6 @@
 #! /usr/bin/env gnuplot
 #
-# Create charts showing the distribution of the pentagon-shaped
+# Create charts showing the distribution of the vertexes in pentagon-shaped
 # interaction loops.
 #
 set term png

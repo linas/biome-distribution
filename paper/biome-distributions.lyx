@@ -766,15 +766,9 @@ The normalization is with respect to the total number of pentagons that
 \end_layout
 
 \begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-were XXX unique genes appearing in pentagons (this is half of those that
- appear in triangles).
- There were XXX unique proteins appearing in the pentagons.
- There were XXX distinct pathways.
- Wow, that sure seems like a lot, but OK.
+There were 38843 distinct edges connecting pathways to proteins.
+ There were 148040 distinct gene-protein expression edges.
+ There were 77304 gene-gene interaction edges...
 \end_layout
 
 \end_body

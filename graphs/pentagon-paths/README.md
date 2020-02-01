@@ -24,4 +24,5 @@ To make the csv's, cut and paste the code at the bottom of that file.
 
 ### Files
 
-* `path-distribution.gplot` -- Create Zipf-distribution graphs for pentagons.
+* `path-vertex.gplot` -- Create Zipf-distribution graphs for vertexes of pentagons.
+* `path-edges.gplot` -- Create Zipf-distribution graphs for edges of pentagons.

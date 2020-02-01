@@ -1,0 +1,35 @@
+#! /usr/bin/env gnuplot
+#
+# Create charts showing the distribution of the edges in pentagon-shaped
+# interaction loops.
+#
+set term png
+
+# set yrange [:0.02]
+set logscale x
+set logscale y
+set format y "10^{%L}"
+
+set out 'path-edges-sym.png'
+
+set title "Number of pentagons an edge participates in"
+set xlabel "Vertex Rank"
+set ylabel "Fraction of all pentagons"
+
+# There were 983116 pentagons, including thier left-right symmetric partners
+# We count both, because genes and protiens are also double-counted...
+npentagons= 983116.0
+ngenes = 6694
+nproteins = 6735
+npathways = 2129
+# Eyeballed fit to the data.
+# plot "path-edges-sym.csv" using 1:($3 / npentagons) with lines title "Path-Protein", \
+#     "path-edges-sym.csv" using 1:(1e-3 / ($1)**0.5) with lines title "1/√rank"
+
+# plot "path-exprs-sym.csv" using 1:($3 / npentagons) with lines title "Protein-Gene", \
+#     "path-exprs-sym.csv" using 1:(1e-3 / ($1)**0.5) with lines title "1/√rank"
+
+plot "path-intrs-sym.csv" using 1:($3 / npentagons) with lines title "Gene-Gene", \
+     "path-intrs-sym.csv" using 1:(1e-3 / ($1)**0.5) with lines title "1/√rank"
+
+# -----------------------------------------------------
