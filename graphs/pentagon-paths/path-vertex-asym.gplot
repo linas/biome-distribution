@@ -1,0 +1,25 @@
+#! /usr/bin/env gnuplot
+#
+# Create charts showing the distribution of the vertexes in pentagon-shaped
+# interaction loops.  Non-symmetrixed version
+#
+set term png
+
+# set yrange [:0.02]
+set logscale x
+set logscale y
+set format y "10^{%L}"
+
+set out 'path-genes.png'
+
+set title "Number of pentagons a vertex participates in"
+set xlabel "Vertex Rank"
+set ylabel "Number of pentagons"
+
+# Eyeballed fit to the data.
+plot "path-genes.csv" using 1:3 with lines title "Genes", \
+     "path-proteins.csv" using 1:3 with lines title "Proteins", \
+     "path-loops.csv" using 1:3 with lines title "Pathways", \
+     "path-loops.csv" using 1:(1e4 / ($1)**0.5) with lines title "1/√rank"
+
+## -----------------------------------------------------
