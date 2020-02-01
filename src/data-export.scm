@@ -34,6 +34,8 @@
 
 #! -----------------------------------------------------------------
 ; Some stuff to create a ranked graph of the results found above.
+; This first section is for the triangles; for the pentagons, see
+; further down.
 
 ; Genes that appeared in a triangular loop.
 (define loop-participants
@@ -66,7 +68,9 @@
 (dump-to-csv gene-pair-cnts "tri-edges.csv")
 
 ; ------------------------------------------------------------
-; Genes that appeared in the pentagonal loop
+; Examination of the pentagons.
+
+; Genes that appeared in the pentagonal loop.
 (define path-genes
 	(map (lambda (gene) (cons (cog-name gene) (cog-count gene)))
 		(filter (lambda (gene) (< 0 (cog-count gene)))
