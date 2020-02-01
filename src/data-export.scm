@@ -94,6 +94,17 @@
 
 (dump-to-csv path-loops "path-loops.csv")
 
+; Path-protein edges that appeared in a pentagonal loop.
+(define path-edges
+	(map (lambda (memb) (cons
+			(string-append (cog-name (cog-outgoing-atom memb 0)) "-x-"
+				(cog-name (cog-outgoing-atom memb 1)))
+		(cog-count memb)))
+		(filter (lambda (memb) (< 0 (cog-count memb)))
+			(cog-get-atoms 'MemberLink))))
+
+(dump-to-csv path-edges "path-edges-sym.csv")
+
 ; How many pentagons? Lets count paths. I get 491558.0
 (fold (lambda (path cnt) (+ cnt (cog-count path))) 0
 	(cog-get-atoms 'ConceptNode))
@@ -105,6 +116,14 @@
 ; Via genes? 983116.0 - twice as many: its mirror symmetry.
 (fold (lambda (gene cnt) (+ cnt (cog-count gene))) 0
 	(cog-get-atoms 'GeneNode))
+
+; Proteins belonging to pathways? 983116.0
+(fold (lambda (memb cnt) (+ cnt (cog-count memb))) 0
+	(cog-get-atoms 'MemberLink))
+
+; The other three? whoops, bug.
+(fold (lambda (eval cnt) (+ cnt (cog-count eval))) 0
+	(cog-get-atoms 'EvaluationLink))
 
 !# ; ---------------------------------------------------------------
 
