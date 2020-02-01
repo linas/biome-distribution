@@ -34,6 +34,8 @@
 
 #! -----------------------------------------------------------------
 ; Some stuff to create a ranked graph of the results found above.
+; This first section is for the triangles; for the pentagons, see
+; further down.
 
 ; Genes that appeared in a triangular loop.
 (define loop-participants
@@ -66,7 +68,9 @@
 (dump-to-csv gene-pair-cnts "tri-edges.csv")
 
 ; ------------------------------------------------------------
-; Genes that appeared in the pentagonal loop
+; Examination of the pentagons.
+
+; Genes that appeared in a pentagonal loop.
 (define path-genes
 	(map (lambda (gene) (cons (cog-name gene) (cog-count gene)))
 		(filter (lambda (gene) (< 0 (cog-count gene)))
@@ -74,6 +78,7 @@
 
 (dump-to-csv path-genes "path-genes.csv")
 
+; Proteins that appeared in a pentagonal loop.
 (define path-proteins
 	(map (lambda (protein) (cons (cog-name protein) (cog-count protein)))
 		(filter (lambda (protein) (< 0 (cog-count protein)))
@@ -81,12 +86,66 @@
 
 (dump-to-csv path-proteins "path-proteins.csv")
 
+; Pathways that appeared in a pentagonal loop.
 (define path-loops
 	(map (lambda (pathway) (cons (cog-name pathway) (cog-count pathway)))
 		(filter (lambda (pathway) (< 0 (cog-count pathway)))
 			(cog-get-atoms 'ConceptNode))))
 
 (dump-to-csv path-loops "path-loops.csv")
+
+; Path-protein edges that appeared in a pentagonal loop.
+(define path-edges
+	(map (lambda (memb) (cons
+			(string-append (cog-name (cog-outgoing-atom memb 0)) "-x-"
+				(cog-name (cog-outgoing-atom memb 1)))
+		(cog-count memb)))
+		(filter (lambda (memb) (< 0 (cog-count memb)))
+			(cog-get-atoms 'MemberLink))))
+
+(dump-to-csv path-edges "path-edges-sym.csv")
+
+; Protein-expessed-by-gene edges
+(define path-exprs
+	(map (lambda (expr) (cons
+			(string-append (cog-name (gadr expr)) "-x-"
+				(cog-name (gddr expr)))
+		(cog-count expr)))
+		(filter (lambda (expr) (< 0 (cog-count expr)))
+			(cog-incoming-by-type (Predicate "expresses") 'EvaluationLink))))
+
+(dump-to-csv path-exprs "path-exprs-sym.csv")
+
+; Gene interactions
+(define path-intrs
+	(map (lambda (intr) (cons
+			(string-append (cog-name (gadr intr)) "-x-"
+				(cog-name (gddr intr)))
+		(cog-count intr)))
+		(filter (lambda (intr) (< 0 (cog-count intr)))
+			(cog-incoming-by-type (Predicate "interacts_with") 'EvaluationLink))))
+
+(dump-to-csv path-intrs "path-intrs-sym.csv")
+
+; How many pentagons? Lets count paths. I get 491558.0
+(fold (lambda (path cnt) (+ cnt (cog-count path))) 0
+	(cog-get-atoms 'ConceptNode))
+
+; How many pentagons, via proteins? I get 983116.0 twice as many, of course
+(fold (lambda (prot cnt) (+ cnt (cog-count prot))) 0
+	(cog-get-atoms 'MoleculeNode))
+
+; Via genes? 983116.0 - twice as many: its mirror symmetry.
+(fold (lambda (gene cnt) (+ cnt (cog-count gene))) 0
+	(cog-get-atoms 'GeneNode))
+
+; Proteins belonging to pathways? 983116.0
+(fold (lambda (memb cnt) (+ cnt (cog-count memb))) 0
+	(cog-get-atoms 'MemberLink))
+
+; The other three? whoops, bug.
+(fold (lambda (eval cnt) (+ cnt (cog-count eval))) 0
+	(cog-get-atoms 'EvaluationLink))
 
 !# ; ---------------------------------------------------------------
 
