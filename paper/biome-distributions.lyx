@@ -757,7 +757,12 @@ There were 491558 distinct pentagons (or twice that many, if you count mirror
 \end_layout
 
 \begin_layout Standard
-There are 491558 pentagons
+The normalization is with respect to the total number of pentagons that
+ a given vertex appears in.
+ Thus, for example, the highest-ranked gene, and the highest-ranked pathway
+ appears in approximately 1 out of 50 pentagons; the highest-ranked protien
+ appears in approximately 1 out of 100, which can be read directly off the
+ above graph.
 \end_layout
 
 \begin_layout Standard
