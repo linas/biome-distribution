@@ -1,14 +1,16 @@
 #! /usr/bin/env gnuplot
 #
-# Create a graph of the number of loops found.
+# Create a graph of the number of triangles found.
 #
 set term png
 set out 'gene-loops.png'
+# set term eps color
+# set out 'gene-loops.eps'
 
 set logscale x
 set logscale y
 set format y "10^{%L}"
-set title "Number of interaction loops per gene"
+set title "Triangles per gene (non-symmetrized)"
 set xlabel "Gene Rank (ranked by count of triangles)"
 set ylabel "Number of triangles"
 
@@ -16,6 +18,32 @@ set yrange [1:]
 
 # Eyeballed fit to the data.
 plot "gene-loops.csv" using 1:3 title "data", \
-     "gene-loops.csv" using 1:(200000 / ($1)**0.5) with lines title "2e5/sqrt(rank)", \
-     "gene-loops.csv" using 1:((200000 / ($1)**0.5) * exp(-($1) / 2500)) with lines title "2e5 *exp(-rank/2500)/sqrt(rank))", \
-     "gene-loops.csv" using 1:((200000 / ($1)**0.5) * exp(-($1) / 1500)) with lines title "2e5 *exp(-rank/1500)/sqrt(rank))"
+     "gene-loops.csv" using 1:(200000 / ($1)**0.5) with lines title "2e5/√rank", \
+     "gene-loops.csv" using 1:((200000 / ($1)**0.5) * exp(-($1) / 2500)) with lines title "2e5 *exp(-rank/2500)/√rank", \
+     "gene-loops.csv" using 1:((200000 / ($1)**0.5) * exp(-($1) / 1500)) with lines title "2e5 *exp(-rank/1500)/√rank"
+
+#############################################################################
+#
+# set term png
+# set out 'gene-loops-sym.png'
+set term eps color
+set out 'gene-loops-sym.eps'
+
+set logscale x
+set logscale y
+set format y "10^{%L}"
+set title "Triangles per gene (symmetrized interactions)"
+set xlabel "Gene Rank (ranked by count of triangles)"
+set ylabel "Fraction of all triangles"
+# set key left bottom
+
+set yrange [1e-6:1]
+
+# Total number of unique triangles observed
+ntris = 1797281
+
+# Eyeballed fit to the data.
+plot "gene-loops-sym.csv" using 1:($3 / ntris) with lines lw 3 title "data", \
+     "gene-loops-sym.csv" using 1:(0.25 / ($1)**0.5) with lines lw 3 title "0.25/√rank", \
+     "gene-loops-sym.csv" using 1:((0.25 / ($1)**0.5) * exp(-($1) / 1800)) with lines lw 3 title "0.25 exp(-rank/1800)/√rank", \
+     "gene-loops-sym.csv" using 1:((0.25 / ($1)**0.5) * exp(-($1)**0.75 / 200)) with lines lw 3 title "0.25 exp(-rank^{0.75}/200)/√rank"
