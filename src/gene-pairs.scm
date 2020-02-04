@@ -355,7 +355,7 @@
 					((wild-wild) get-wild-wild)
 					((all-pairs) get-all-pairs)
 					((fetch-pairs) fetch-gene-pairs)
-					((delete-pairs) delete-gene-pairs)
+					((delete-pairs) delete-expression-pairs)
 					((provides) (lambda (symb) #f))
 					((filters?) (lambda () #f))
 					(else (error "Bad method call on gene-expression-api:" message)))
