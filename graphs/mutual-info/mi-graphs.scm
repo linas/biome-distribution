@@ -2,7 +2,10 @@
 ;
 ; Notebook of cut-n-paste scripts used to generate
 ; the graph(s)
-'
+;
+; ------------------------------------------------------------
+; Gene interactions
+
 (define gpr (Evaluation (Predicate "interacts_with") (List (Gene "FAM20C") (Gene "RNF123"))))
 
 (define gpa (make-gene-pair-api))
@@ -26,6 +29,18 @@
 	all-gene-pairs))  ; 455572 as above.
 
 (gpf 'pair-fmi gpr)
+
+; ------------------------------------------------------------
+; Gene-protein expression
+(load "gene-pairs.scm")
+(define gea (make-expression-pair-api))
+(define ges (add-pair-stars gea))
+
+; Ick hack
+(use-modules (opencog persist) (opencog persist-sql))
+(sql-create "postgres:///gene_expr")
+(sql-open "postgres:///gene_expr")
+(batch-all-pair-mi ges)
 
 ; ---------------------------------------
 ; Create a "with-degeneracy" bin-count graph.

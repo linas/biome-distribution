@@ -744,6 +744,20 @@ There were 491558 distinct pentagons (or twice that many, if you count mirror
  There were 2129 distinct pathways that appeared in pentagonal relations.
  All have an unexpected distribution.
  All are graphed below, on the same graph.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Per contents of the 
+\family typewriter
+graphs/pentagon-paths
+\family default
+ directory.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -769,6 +783,17 @@ The normalization is with respect to the total number of pentagons that
 There were 38843 distinct edges connecting pathways to proteins.
  There were 148040 distinct gene-protein expression edges.
  There were 77304 gene-gene interaction edges...
+\end_layout
+
+\begin_layout Subsubsection*
+Mutual Info
+\end_layout
+
+\begin_layout Standard
+Lets look at gene-protein expression in the above.
+ The matrix reports 27117 genes and 147848 proteins.
+ The matrix appears to have 148734 non-zero matrix entries (!) ...
+ not a surprise, because each protein is expresed by ...?
 \end_layout
 
 \end_body
