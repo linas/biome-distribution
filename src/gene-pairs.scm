@@ -11,7 +11,7 @@
 ; The objects below define API's to access natural bio-molecule pairs,
 ; stored in the AtomSpace, as a rank-2 matrix, i.e. as a matrix of
 ; (left, right) molecule-pairs.  This provides exactly the API needed
-; for ; use with the `(use-modules (opencog matrix))` statistical
+; for use with the `(use-modules (opencog matrix))` statistical
 ; analysis subsystem.
 ;
 ; To be explicit: a sparse matrix is encoded in the AtomSpace as
@@ -24,7 +24,7 @@
 ;
 ; Although other forms are possible, as well (e.g. `InheritanceLink`s,
 ; etc.) Matrix entries N(x,y) are stored as counts (numbers) on the
-; EvaluationLink, ; with the `x` being the first molecule, and `y`
+; EvaluationLink, with the `x` being the first molecule, and `y`
 ; being the second molecule.
 ;
 ; Given the generic API, the matrx system will compute marginals N(x,*)
@@ -45,8 +45,8 @@
 "
   make-gene-pair-api -- Gene-pair access methods.
 
-  This implements a gene-pair object, where the two genes interact.
-  That is, a gene pair is represented as:
+  This implements a matrix object representing gene-pairs, denoting
+  that the two genes interact.  A gene pair is represented as:
 
     EvaluationLink
        PredicateNode \"interacts_with\"
@@ -54,16 +54,16 @@
           GeneNode \"SIRT1\"
           GeneNode \"LARP7\"
 
-  After various counts, frequencies, entropies, etc pertaining to
-  this particular pair are computed, they will be hung, as values,
-  on the above EvaluationLink.
+  This Atom (the EvaluationLink) be used to record counts, frequencies,
+  entropies, etc pertaining to this particular pair, simply by placing
+  them, as values, on the above EvaluationLink.
 
   The 'get-pair method returns the above EvaluationLink, if it exists.
   The 'make-pair method will create it, if it does not exist.
 
   In principle, the \"interacts_with\" relation is symmetric, but
   that is not how the dataset is currrently coded, so for now this
-  is hacky and assymetric. XXX FIXME some day.
+  is hacky and asymmetric. XXX FIXME some day.
 
   Left-side counts, frequencies, etc. such as N(*,y), P(*,y) or
   log_2 P(*,y) will be placed on the following, which is returned
@@ -83,125 +83,64 @@
        ListLink
           GeneNode \"SIRT1\"
           AnyNode \"right-gene\"
-
-  Finally, the 'left-type and 'right-type methods return the type
-  of the the two sides of the pair.
 "
-	(let ((all-pairs '()))
-
-		; Get the observational count on ATOM.
-		(define (get-count ATOM) (cog-count ATOM))
-
-		(define any-left (AnyNode "left-gene"))
-		(define any-right (AnyNode "right-gene"))
-		(define gene-pair-pred (PredicateNode "interacts_with"))
-
-		(define (get-left-type) 'GeneNode)
-		(define (get-right-type) 'GeneNode)
-		(define (get-pair-type) 'EvaluationLink)
-
-		; Return the atom holding the count, if it exists, else
-		; return nil.
-		(define (get-pair L-ATOM R-ATOM)
-			(define maybe-list (cog-link 'ListLink L-ATOM R-ATOM))
-			(if (null? maybe-list) '()
-				(cog-link 'EvaluationLink gene-pair-pred maybe-list)))
-
-		; Create an atom to hold the count (if it doesn't exist already).
-		(define (make-pair L-ATOM R-ATOM)
-			(EvaluationLink gene-pair-pred (List L-ATOM R-ATOM)))
-
-		; Return the left member of the pair. Given the pair-atom,
-		; locate the left-side atom.
-		(define (get-left-element PAIR)
-			(gadr PAIR))
-		(define (get-right-element PAIR)
-			(gddr PAIR))
-
-		; Return the raw observational count on PAIR. If the counter for
-		; PAIR does not exist (was not observed), then return 0.
-		(define (get-pair-count L-ATOM R-ATOM)
-			(define pr (get-pair L-ATOM R-ATOM))
-			(if (null? pr) 0 (get-count pr)))
-
-		; Caution: this unconditionally creates the wildcard pair!
-		(define (get-left-wildcard WORD)
-			(make-pair any-left WORD))
-
-		; Caution: this unconditionally creates the wildcard pair!
-		(define (get-right-wildcard WORD)
-			(make-pair WORD any-right))
-
-		(define (get-wild-wild)
-			(make-pair any-left any-right))
-
-		; get-all-pairs - return a list holding all of the observed
-		; gene-pairs.  Caution: this can be tens of millions long!
-		(define (do-get-all-pairs)
-			; The list of pairs is mostly just the incoming set of the
-			; predicate node. However, this does include some junk, sooo ...
-			; hey, both left and right better be words.
-		   (filter!
-				(lambda (pair)
-					(and
-						(equal? 'GeneNode (cog-type (gadr pair)))
-						(equal? 'GeneNode (cog-type (gddr pair)))))
-				(cog-incoming-by-type gene-pair-pred 'EvaluationLink)))
-
-		(define (get-all-pairs)
-			(if (null? all-pairs) (set! all-pairs (do-get-all-pairs)))
-			all-pairs)
-
-		; fetch-gene-pairs -- fetch all counts for link-grammar
-		; ANY links from the database.
-		(define (fetch-gene-pairs)
-			(define start-time (current-time))
-			(fetch-incoming-set gene-pair-pred)
-			(format #t "Elapsed time to load gene pairs: ~A secs\n"
-				(- (current-time) start-time))
-		)
-
-		; Delete the pairs from the atomspace AND the database.
-		; But only those that are currently in the atomspace are
-		; deleted; if any are hiding in the database, they will not be
-		; touched.
-		(define (delete-gene-pairs)
-			(define start-time (current-time))
-			(for-each (lambda (PAIR) (cog-delete-recursive (gdr PAIR)))
-				(cog-incoming-set gene-pair-pred))
-			(cog-delete gene-pair-pred)
-			(cog-delete any-left)
-			(cog-delete any-right)
-			(format #t "Elapsed time to delete gene pairs: ~A secs\n"
-				(- (current-time) start-time))
-		)
-
-		; Methods on the object
-		(lambda (message . args)
-			(apply (case message
-					((name) (lambda () "Gene pairs, predicate `interacts_with`"))
-					((id)   (lambda () "Gene-pairs"))
-					((left-type) get-left-type)
-					((right-type) get-right-type)
-					((pair-type) get-pair-type)
-					((pair-count) get-pair-count)
-					((get-pair) get-pair)
-					((get-count) get-count)
-					((make-pair) make-pair)
-					((left-element) get-left-element)
-					((right-element) get-right-element)
-					((left-wildcard) get-left-wildcard)
-					((right-wildcard) get-right-wildcard)
-					((wild-wild) get-wild-wild)
-					((all-pairs) get-all-pairs)
-					((fetch-pairs) fetch-gene-pairs)
-					((delete-pairs) delete-gene-pairs)
-					((provides) (lambda (symb) #f))
-					((filters?) (lambda () #f))
-					(else (error "Bad method call on gene-pair-api:" message)))
-				args)))
+	(make-evaluation-pair-api
+		(PredicateNode "interacts_with")
+		'GeneNode 'MoleculeNode
+		(AnyNode "left-gene") (AnyNode "right-gene")
+		"Gene-pairs"
+		"Gene pairs, predicate `interacts_with`")
 )
 
+; ---------------------------------------------------------------------
+
+(define-public (make-expression-pair-api)
+"
+  make-expression-pair-api -- Gene-protein expression access methods.
+
+  This implements a matrix object, connecting genes and proteins.
+  The rows of the matrix are genes, the columns are proteins.
+  These are represented as:
+
+    EvaluationLink
+       PredicateNode \"expresses\"
+       ListLink
+          MoleculeNode \"Uniprot:E9PC49\"
+          GeneNode \"SIRT1\"
+
+  This Atom (the EvaluationLink) be used to record counts, frequencies,
+  entropies, etc pertaining to this particular pair, simply by placing
+  them, as values, on the above EvaluationLink.
+
+  The 'get-pair method returns the above EvaluationLink, if it exists.
+  The 'make-pair method will create it, if it does not exist.
+
+  Left-side counts, frequencies, etc. such as N(*,y), P(*,y) or
+  log_2 P(*,y) will be placed on the following, which is returned
+  by the 'left-wildcard method:
+
+    EvaluationLink
+       PredicateNode \"expresses\"
+       ListLink
+          AnyNode \"left-protein\"
+          GeneNode \"SIRT1\"
+
+  The corresponding N(x,*) P(x,*) etc are hung on the atom returned
+  by the 'right-wildcard method:
+
+    EvaluationLink
+       PredicateNode \"expresses\"
+       ListLink
+          MoleculeNode \"Uniprot:E9PC49\"
+          AnyNode \"right-gene\"
+"
+	(make-evaluation-pair-api
+		(PredicateNode "expresses")
+		'GeneNode 'MoleculeNode
+		(AnyNode "left-gene") (AnyNode "right-protein")
+		"Gene-expression"
+		"Gene-Protein pairs, predicate `expresses`")
+)
 
 ; ---------------------------------------------------------------------
 ; Handy-dandy main entry points. These compute mutual information.
