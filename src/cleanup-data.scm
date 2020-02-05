@@ -117,3 +117,21 @@
 		(length (cog-outgoing-set sym-set)))
 	(cog-delete sym-set)
 )
+
+(define (delete-simple-tv)
+"
+  Delete the SimpleTruthValues on all atoms in the atomspace.
+  The problem is that calling `get-count` on a SimpleTruthValue
+  returns garbage, thus messing up statistics. Unfortunately,
+  this cannot be fixed, because the PLN book documents the garbage;
+  its part of the spec. Whoops.
+"
+
+	; Setting to (stv 1 0) sets it to DEFAULT_TV, which frees
+	; the RAM in the AtomSpace.
+	(for-each
+		(lambda (ATOM)
+			(if (not (cog-ctv? (cog-tv ATOM)))
+				(cog-set-tv! ATOM (stv 1 0))))
+		(cog-get-atoms 'Atom #t))
+)
