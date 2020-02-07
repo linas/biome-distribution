@@ -111,7 +111,11 @@
 			(string-append (cog-name (gadr expr)) "-x-"
 				(cog-name (gddr expr)))
 		(cog-count expr)))
-		(filter (lambda (expr) (< 0 (cog-count expr)))
+		(filter (lambda (expr)
+				(and (< 0 (cog-count expr))
+					; Avoid inclusion of 'AnyNode
+					(eq? (cog-type (gadr expr)) 'GeneNode)
+					(eq? (cog-type (gddr expr)) 'MoleculeNode)))
 			(cog-incoming-by-type (Predicate "expresses") 'EvaluationLink))))
 
 (dump-to-csv path-exprs "path-exprs-sym.csv")
