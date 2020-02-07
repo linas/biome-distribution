@@ -1757,3 +1757,25 @@ gahhh
             (throw 'no-transpose-data 'mtm-mi
                "No transpose data available for this dataset! Did you forget to (batch-transpose)? ")))
 
+
+=============================================================================
+(define gea (make-expression-pair-api))
+(define ges (add-pair-stars gea))
+(ges 'help)
+(ges 'left-type) ; GeneNode
+(ges 'right-type) ; MoleculeNode
+(ges 'left-basis-size) ; 27117
+(ges 'right-basis-size) ; 147848
+(define ap (ges 'get-all-elts))
+ (length ap)  ; 148734
+
+(define fp (filter (lambda (ev) (cog-ctv? (cog-tv ev))) ap))
+(length fp) ; 6794
+
+Arghhh  (delete-simple-tv)
+
+(define gez (add-zero-filter ges "zero"))
+(gez 'left-basis-size) ; 6694
+(gez 'right-basis-size) ; 6735
+
+

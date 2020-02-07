@@ -761,6 +761,7 @@ graphs/pentagon-paths
 \end_layout
 
 \begin_layout Standard
+\align center
 \begin_inset Graphics
 	filename /home/linas/src/novamente/mozi/graphs/pentagon-paths/path-genes-sym.png
 	width 70text%
@@ -780,20 +781,62 @@ The normalization is with respect to the total number of pentagons that
 \end_layout
 
 \begin_layout Standard
-There were 38843 distinct edges connecting pathways to proteins.
- There were 148040 distinct gene-protein expression edges.
+There were 38843(???) distinct edges connecting pathways to proteins.
+ There were 6794 distinct gene-protein expression edges.
  There were 77304 gene-gene interaction edges...
 \end_layout
 
-\begin_layout Subsubsection*
-Mutual Info
+\begin_layout Standard
+Here's the distribution of gene-expression edges, viz, the number of pentagons
+ a given gene-expression edge participated in.
 \end_layout
 
 \begin_layout Standard
-Lets look at gene-protein expression in the above.
- The matrix reports 27117 genes and 147848 proteins.
- The matrix appears to have 148734 non-zero matrix entries (!) ...
- not a surprise, because each protein is expresed by ...?
+\align center
+\begin_inset Graphics
+	filename /home/linas/src/novamente/mozi/graphs/pentagon-paths/path-exprs-sym.png
+	width 70col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Gene-protein expression
+\end_layout
+
+\begin_layout Standard
+Lets look at gene-protein expression pairs that appear in pentagons.
+ The matrix reports 6694 genes and 6735 proteins.
+ The matrix appears to have 6794 non-zero matrix entries.
+ On average, each gene-expression pair appeared in 144.7 pentagons.
+ For those gene-expression pairs that appear in pentagons, each gene expresses
+ on average two proteins (more precisely, 2.06).
+\end_layout
+
+\begin_layout Standard
+Now, gene-protein expression is well-understood, and so there should be
+ zero surprises in this data.
+ It seems almost pointless to look at this network graph.
+ So, then, the question is actually 
+\begin_inset Quotes eld
+\end_inset
+
+what does normal look like?
+\begin_inset Quotes erd
+\end_inset
+
+ This can serve as a calibration point for other phenomena.
+ So lets go through it....
+\end_layout
+
+\begin_layout Standard
+For every gene in appearing in a pentagon pathway, how many proteins does
+ it express, that also appear in pentagons? The answer to this question
+ surely depends on the size of the dataset, as larger datases will have
+ more pentagons.
+ But lets take a look, anyway.
 \end_layout
 
 \end_body
