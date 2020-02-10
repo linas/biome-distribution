@@ -1774,8 +1774,13 @@ gahhh
 
 Arghhh  (delete-simple-tv)
 
-(define gez (add-zero-filter ges "zero"))
+(define gez (add-zero-filter ges #f))
 (gez 'left-basis-size) ; 6694
 (gez 'right-basis-size) ; 6735
 
 
+	(lambda (gene)
+		(fold (lambda (PR cnt)
+			(if (< 0 (cog-count PR)) (+ 1 cnt) cnt)) 0
+			(gez 'right-stars gene)))
+	(gez 'left-basis)
