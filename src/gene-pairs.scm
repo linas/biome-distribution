@@ -143,6 +143,50 @@
 )
 
 ; ---------------------------------------------------------------------
+
+(define-public (make-pathway-pair-api)
+"
+  make-pathway-pair-api -- Pathway-protein pair access methods.
+
+  This implements a matrix object, connecting pathways and proteins.
+  The rows of the matrix are pathways, the columns are proteins.
+  These are represented as:
+
+    MemberLink
+       MoleculeNode \"Uniprot:E9PC49\"
+       ConceptNode \"SMP0027226\"
+
+  This Atom (the MemberLink) be used to record counts, frequencies,
+  entropies, etc pertaining to this particular pair, simply by placing
+  them, as values, on the MemberLink.
+
+  The 'get-pair method returns the above MemberLink, if it exists.
+  The 'make-pair method will create it, if it does not exist.
+
+  Left-side counts, frequencies, etc. such as N(*,y), P(*,y) or
+  log_2 P(*,y) will be placed on the following, which is returned
+  by the 'left-wildcard method:
+
+    MemberLink
+       AnyNode \"left-protein\"
+       ConceptNode \"SMP0027226\"
+
+  The corresponding N(x,*) P(x,*) etc are hung on the atom returned
+  by the 'right-wildcard method:
+
+    MemberLink
+      MoleculeNode \"Uniprot:E9PC49\"
+      AnyNode \"right-pathway\"
+"
+	(make-evaluation-pair-api
+		(PredicateNode "expresses")
+		'GeneNode 'MoleculeNode
+		(AnyNode "left-gene") (AnyNode "right-protein")
+		"Gene-expression"
+		"Gene-Protein pairs, predicate `expresses`")
+)
+
+; ---------------------------------------------------------------------
 ; Handy-dandy main entry points. These compute mutual information.
 ;
 ; XXX FIXME - these will fail if an SQL database is not open.
