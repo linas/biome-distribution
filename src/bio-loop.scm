@@ -287,6 +287,7 @@
 				; Perform the search
 				(define path-set (cog-execute! query))
 				(define pathways (cog-outgoing-set path-set))
+				(cog-delete query)
 				(cog-delete path-set)
 				pathways
 			)
