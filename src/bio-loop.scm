@@ -309,5 +309,6 @@
 ;
 ; Same as above, but this time with all pathways, not just some of them.
 ; (define pathways (pathways-of-mols (cog-get-atoms 'MoleculeNode)))
+; (length pathways)  ; 50566  so .. hardly any different ...
 
 ; ------------------------------------------------------------------
