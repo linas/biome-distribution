@@ -86,7 +86,7 @@
 "
 	(make-evaluation-pair-api
 		(PredicateNode "interacts_with")
-		'GeneNode 'MoleculeNode
+		'GeneNode 'GeneNode
 		(AnyNode "left-gene") (AnyNode "right-gene")
 		"Gene-pairs"
 		"Gene pairs, predicate `interacts_with`")
