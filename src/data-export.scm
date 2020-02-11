@@ -131,6 +131,10 @@
 
 (dump-to-csv path-intrs "path-intrs-sym.csv")
 
+; How many pathways? Lets count. I get 2129.
+(fold (lambda (path cnt) (+ cnt (if (< 0 (cog-count path)) 1 0))) 0
+	(cog-get-atoms 'ConceptNode))
+
 ; How many pentagons? Lets count paths. I get 491558.0
 (fold (lambda (path cnt) (+ cnt (cog-count path))) 0
 	(cog-get-atoms 'ConceptNode))
