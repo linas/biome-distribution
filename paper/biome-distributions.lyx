@@ -844,6 +844,11 @@ Lets look at gene-protein expression pairs that appear in pentagons.
  of all pentagons.
 \end_layout
 
+\begin_layout Standard
+There is no point in computing MI for gene-protein interactions.
+ The one-to-one relation makes this pointless.
+\end_layout
+
 \begin_layout Subsubsection*
 Pathways
 \end_layout
@@ -857,16 +862,34 @@ There were 50501 pathways, and 1082860 pathway-protein pairs.
 \end_layout
 
 \begin_layout Standard
-x
-\end_layout
-
-\begin_layout Subsubsection*
-Mutual Information
+Here's the pathway-protein MI graph.
+ Its fit with two Gaussians, for the same reasons as before.
+ Note that the parameters are very similar.
 \end_layout
 
 \begin_layout Standard
-There is no point in computing MI for gene-protein interactions.
- The one-to-one relation makes this pointless.
+\align center
+\begin_inset Graphics
+	filename /home/linas/src/novamente/mozi/graphs/mutual-info/pent-path-weighted.eps
+	width 70text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Presumably it's noiser because the proteome/reactome dataset is not as well-deve
+loped as the genome dataset.
+\end_layout
+
+\begin_layout Subsubsection*
+The End
+\end_layout
+
+\begin_layout Standard
+That's all.
+ 
 \end_layout
 
 \end_body

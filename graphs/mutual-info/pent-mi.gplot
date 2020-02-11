@@ -1,0 +1,30 @@
+#! /usr/bin/env gnuplot
+#
+# Create a graph of pentagon pathway-protein pairs.
+#
+# set term png
+# set out 'pent-path-weighted.png'
+
+set term eps color
+set out 'pent-path-weighted.eps'
+
+set title "Probability of a pathway-protein pair having given MI"
+set xlabel "Mutual Information"
+set ylabel "Probability of pairing"
+set xrange [-2:20]
+set yrange [4e-5:1]
+set logscale y
+set format y "10^{%L}"
+
+# There were 38843 pathway-protein pairs with a non-zero observation count
+# in the dataset.  The total counts are 983116.0
+# These were binned into 300 bins.  The range was
+# from MI=-5 to +25, so that the bin-width is (30/300). The
+# normalization is thus the total-count divided by bin width, so
+# that the integral under the curve is 1.0
+norm = 300/(30 * 983116.0)
+C = 1 / sqrt(2 * 3.1415926)
+plot "pent-path-weighted-mi.csv" using 2:($3*norm) with lines title "data", \
+     "pent-path-weighted-mi.csv" using 2:(0.1 * C * exp(-0.5*($2-2.5)**2)) with lines title "C/10 exp(-(MI-2.5)^2/2)", \
+     "pent-path-weighted-mi.csv" using 2:(0.25 *C* exp(-(($2-4.5)**2)/22)) with lines title "C/4 exp(-(MI-4.5)^2/22)",\
+     "pent-path-weighted-mi.csv" using 2:(1000) title "C = 1/√ 2 π"
