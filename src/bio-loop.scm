@@ -303,6 +303,7 @@
 
 ; Run the pentqagon counting code.
 ; (define pathways (pathways-of-genes (cog-get-atoms 'GeneNode)))
-; (count-pentagons pathways)
+; (length pathways)  ; 50501
+; (count-pentagons pathways)  ; Takes about 16 hours...
 
 ; ------------------------------------------------------------------
