@@ -103,10 +103,10 @@ Linas Vepstas
 
 \begin_layout Abstract
 An exploration of the statistical distribution of interactions between genes,
- proteins and pathways, extracted from public genome, proteome and rectome
- datasets.
+ proteins and pathways, extracted from public genome, proteome and reactome
+ data-sets.
  This is an exploratory diary that attempts to understand the large-scale
- statistical properties of the network structure of biomolecular interactions.
+ statistical properties of the network structure of bio-molecular interactions.
 \end_layout
 
 \begin_layout Abstract
@@ -130,7 +130,7 @@ Introduction
 \begin_layout Standard
 Publicly available genomics and proteomics databases describe a large number
  of interactions between genes and pathways.
- Taken together, these datasets describe a large graph, and the one may
+ Taken together, these data-sets describe a large graph, and the one may
  reasonably wonder about the properties and general structure of that graph.
  For example, one might ask if the graph is scale-free, or if it has a hub-and-s
 poke structure, or make other graph-theoretic inquiries into it.
@@ -198,8 +198,8 @@ Datasets
 \end_layout
 
 \begin_layout Standard
-The graph networks explored here were constructed from public datasets from
- MCBI, ChEBI, PubMed, UniProt, SMPDB, Entrez and BioGrid.
+The graph networks explored here were constructed from public data-sets
+ from MCBI, ChEBI, PubMed, UniProt, SMPDB, Entrez and BioGrid.
  Two variant networks were constructed and explored.
  The two differ in how gene interactions were treated.
  In the first, genes that regulate one-another were treated as directed
@@ -212,7 +212,7 @@ The graph networks explored here were constructed from public datasets from
 
 \begin_layout Standard
 Both graphs contain a total of 49050 genes.
- There are 540778 gene interactions in the first dataset, which are represented
+ There are 540778 gene interactions in the first data-set, which are represented
  as directed edges.
  Of these, 347127 are symmetric (
 \emph on
@@ -228,7 +228,7 @@ i.e.
 \end_layout
 
 \begin_layout Standard
-For the second dataset, the self-interacting genes are removed, and matching
+For the second data-set, the self-interacting genes are removed, and matching
  symmetrized edges are created, for a total of 731490 directed edges, or
  half of that, 365745, when the relation is taken as symmetric.
 \begin_inset Foot
@@ -261,7 +261,7 @@ A triangle is defined as a three-way interaction, of gene A regulating gene
  B, gene B regulating gene C and C regulating A.
  Such triangles are one of the most basic components of the topological
  structure of regulatory networks.
- It is worth understanding thier structure.
+ It is worth understanding their structure.
 \end_layout
 
 \begin_layout Standard
@@ -293,13 +293,13 @@ By counting the number of times an edge participates in some triangle, one
 
 .
  Given the counts of such pairs, this opens the door to a stable of standard
- statistical questions: what are the marginal disributions, the entropies,
+ statistical questions: what are the marginal distributions, the entropies,
  and the mutual information of such pairs? This is explored in a subsequent
  section.
 \end_layout
 
 \begin_layout Standard
-Because these explorations are perfomed on curated datasets carried out
+Because these explorations are perfomed on curated data-sets carried out
  by research labs, one has an open question of whether one is measuring
  
 \begin_inset Quotes eld
@@ -310,7 +310,7 @@ true biology
 \end_inset
 
 , or whether one is measuring the social network of the scientists, and
- thier intellectual interests.
+ their intellectual interests.
  There does not appear to be any obvious way of answering this question.
 \end_layout
 
@@ -319,12 +319,12 @@ Characterization
 \end_layout
 
 \begin_layout Standard
-The two datasets provide sometimes-similar and sometimes-different results.
+The two data-sets provide sometimes-similar and sometimes-different results.
  The differences are noted as appropriate.
 \end_layout
 
 \begin_layout Standard
-In the first dataset, there are 3452807 pointed triangles.
+In the first data-set, there are 3452807 pointed triangles.
  By definition, a 
 \begin_inset Quotes eld
 \end_inset
@@ -389,7 +389,7 @@ Counted with
 
 \end_inset
 
- This differs from the number of genes in the dataset, as not all genes
+ This differs from the number of genes in the data-set, as not all genes
  participate in triangles.
  There are 455572 distinct edges that appear in triangles.
  These edges appear a grand-total of 5050388 times in different triangles;
@@ -409,11 +409,11 @@ average
 
 \begin_layout Standard
 The presence of such degenerate triangles, and the non-reciprocal gene-gene
- interactions leads to contemplating the second dataset.
- In this dataset, all self-interacting genes are removed, and all gene interacti
-ons are symmetrized, so that for every edge AB there is also an edge BA:
- the concept of regulation is replaced by interaction.
- The second dataset has 10783686 pointed triangles; by symmetry, only 1/6
+ interactions leads to contemplating the second data-set.
+ In this data-set, all self-interacting genes are removed, and all gene
+ interactions are symmetrized, so that for every edge AB there is also an
+ edge BA: the concept of regulation is replaced by interaction.
+ The second data-set has 10783686 pointed triangles; by symmetry, only 1/6
  of these are distinct, leaving 1797281 distinct triangles.
  These triangles have a total of 731490 distinct edges.
  There is a total of 20123 genes participating in these triangles.
@@ -427,7 +427,7 @@ Zipf graphs
 The following figure shows the number of triangles in which a gene participates
  in.
  This figure if for the symmetrized network; the corresponding figure for
- the unsymmetrized network is very similiar.
+ the unsymmetrized network is very similar.
 \end_layout
 
 \begin_layout Standard
@@ -496,7 +496,7 @@ s in.
 \end_inset
 
  appears to offer a better fit.
- This figure is for the unsymmetrized dataset.
+ This figure is for the unsymmetrized data-set.
 \end_layout
 
 \begin_layout Standard
@@ -597,7 +597,7 @@ MI(x,y)=\log_{2}\frac{N(x,y)N(*,*)}{N(x,*)N(*,y)}
 
 \end_inset
 
-The total MI for a dataset is defined as
+The total MI for a data-set is defined as
 \begin_inset Formula 
 \[
 MI=\sum_{x,y}p(x,y)MI(x,y)
@@ -614,8 +614,8 @@ where
 \end_inset
 
 .
- For the symmetric dataset, it is 3.49.
- The total entropy for the dataset is 18.21.
+ For the symmetric data-set, it is 3.49.
+ The total entropy for the data-set is 18.21.
  The sparsity is 9.36, where the sparsity is defined as 
 \begin_inset Formula $\log_{2}$
 \end_inset
@@ -634,12 +634,12 @@ The distribution of the MI as a function of pair frequency is an interesting
  distribution to explore.
  There are two variants of this distribution that one can examine.
  One may consider only unique gene-pairs, or one may consider pairs weighted
- by thier counts.
+ by their counts.
  So, in the first case, if two gene-pairs were found to have the same MI,
  then they are treated as equiprobable; when binned into a histogram, they
  are placed in the same bin with equal weighting.
- In the second case, thier contribution to a bin is relative to the number
- of times each wwas observed.
+ In the second case, their contribution to a bin is relative to the number
+ of times each was observed.
  Equivalently, one may also say that one is counting 
 \begin_inset Quotes eld
 \end_inset
@@ -678,9 +678,9 @@ The figure below shows the first case: the distribution of MI, counted without
 \begin_layout Standard
 The normalization is such that the area under the data curve will integrate
  to 1.0.
- The data is fit with two gaussain distributions.
+ The data is fit with two gaussian distributions.
  Recall that gaussians appear to be parabolas on a semi-log plot.
- The paramters of each fit are as marked in the legend.
+ The parameters of each fit are as marked in the legend.
  The fits are hand-built, or 
 \begin_inset Quotes eld
 \end_inset
@@ -725,7 +725,7 @@ The second case, where the bin-counts are weighted by frequency, results
 \end_layout
 
 \begin_layout Standard
-As before, the fit is eyeballed, with a preferrence of finding numerological
+As before, the fit is eyeballed, with a preference of finding numerological
  simple-fraction fits, so as to expose simple laws, if these exist.
 \end_layout
 
@@ -735,7 +735,7 @@ Pentagons
 
 \begin_layout Standard
 The pentagon has five vertexes: a pathway (as a single, named vertex), two
- proteins on that pathway, two genes, each of which express the coresponding
+ proteins on that pathway, two genes, each of which express the corresponding
  protein, and finally, the two genes interacting with each other.
  Here, there are five edges, and three edge types: (protein in pathway),
  (gene expresses protein) and (gene-pair interaction).
@@ -748,24 +748,24 @@ The pentagon has five vertexes: a pathway (as a single, named vertex), two
 \end_layout
 
 \begin_layout Standard
-There are 50566 pathways in which some protein in the dataset is a member
+There are 50566 pathways in which some protein in the data-set is a member
  of.
  These are both SMP and R-HSA-tagged pathways (from the smpdb.ca and reactome.org,
  respectively).
  Each of these is observed in at least one pentagon.
- There is a total of 1082860 pathway-protein pairs in the dataset, but only
- 38843 appear in a pentagon.
+ There is a total of 1082860 pathway-protein pairs in the data-set, but
+ only 38843 appear in a pentagon.
  There are a total of 148734 gene-protein expression pairs, of which only
  a paltry 6794 appear in a pentagonal relationship.
  As before, there is a total of 365745 pairs of interacting genes; of these
  only 77304 appear in pentagons.
- Thus, the dataset, although quite large, appears to be quite disconnected:
+ Thus, the data-set, although quite large, appears to be quite disconnected:
  there are many interactions that have been mapped out, but these remain
  sparse enough that there are relatively few of these pentagonal interactions.
  This is presumably an artifact of the scientific exploration done to date,
  rather than an innate feature of actual biology.
  That is, there are presumably far more interactions, but these remain unknown
- and uncharted in the dataset.
+ and uncharted in the data-set.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -811,7 +811,7 @@ graphs/pentagon-paths
 The normalization is with respect to the total number of pentagons that
  a given vertex appears in.
  Thus, for example, the highest-ranked gene, and the highest-ranked pathway
- appears in approximately 1 out of 50 pentagons; the highest-ranked protien
+ appears in approximately 1 out of 50 pentagons; the highest-ranked protein
  appears in approximately 1 out of 100, which can be read directly off the
  y-intercept in the above graph.
 \end_layout
@@ -819,8 +819,8 @@ The normalization is with respect to the total number of pentagons that
 \begin_layout Standard
 I cannot come up with any plausible hypothesis for the plateaus, nor for
  the tails.
- These may be dataset artifacts: interactions that have been studied sufficientl
-y to have been captured in the dataset.
+ These may be data-set artifacts: interactions that have been studied sufficient
+ly to have been captured in the data-set.
  That is, a sociological artifact, rather than a statement about biology.
 \end_layout
 
@@ -853,7 +853,7 @@ viz.
 
 \begin_layout Standard
 The overall lumpiness of these graphs provides no particular insight.
- It seems plausible that the lumpiness is an artifact of the dataset, rather
+ It seems plausible that the lumpiness is an artifact of the data-set, rather
  than any indication that nature is structured in this way.
 \end_layout
 
@@ -885,7 +885,7 @@ Pathways
 \end_layout
 
 \begin_layout Standard
-There are a large number of pathway-protein pairs available in the dataset,
+There are a large number of pathway-protein pairs available in the data-set,
  of which only a small fraction, 38843 pairs, appeared in pentagons.
  As proteins can appear in multiple pathways, it is meaningful to explore
  correlations and affinities between these.
@@ -909,9 +909,9 @@ Below is the pathway-protein MI graph.
 \end_layout
 
 \begin_layout Standard
-It's clearly much noiser, as the set of edges is much smaller.
- The proteome/reactome dataset although large, seems not as well-developed
- as the genome dataset.
+It's clearly much noisier, as the set of edges is much smaller.
+ The proteome/reactome data-set although large, seems not as well-developed
+ as the genome data-set.
 \end_layout
 
 \begin_layout Subsubsection*
