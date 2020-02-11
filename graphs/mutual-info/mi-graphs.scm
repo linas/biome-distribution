@@ -1,7 +1,7 @@
 
 ;
 ; Notebook of cut-n-paste scripts used to generate
-; the graph(s)
+; the assorted mutual-information graphs.
 ;
 ; ------------------------------------------------------------
 ; Gene interactions
@@ -35,42 +35,54 @@
 (load "gene-pairs.scm")
 (define gea (make-expression-pair-api))
 (define ges (add-pair-stars gea))
+(batch-all-pair-mi ges #f)
 
-; Ick hack
-(use-modules (opencog persist) (opencog persist-sql))
-(sql-create "postgres:///gene_expr")
-(sql-open "postgres:///gene_expr")
-(batch-all-pair-mi ges)
-
-; ---------------------------------------
-; Create a "with-degeneracy" bin-count graph.
-(define bins
-	(bin-count good-pairs 300
-		(lambda (gpr)
-			(define fmi (gpf 'pair-fmi gpr))
-			(if (inf? fmi) -100 fmi))
-		(lambda (gpr) 1)
-		-5 25))
-
-(define fh (open-file "tri-mi.csv" "w"))
-(print-bincounts-tsv bins fh)
-(close fh)
+; ------------------------------------------------------------
+; Pathway-protein pairs
+(load "gene-pairs.scm")
+(define ppa (make-pathway-pair-api))
+(length (ppa 'all-pairs)) ; 1082860 after deleting bad chebi
+(define pps (add-pair-stars ppa))
+(pps 'left-basis-size) ; 14053
+(pps 'right-basis-size) ; 50566
+(define ppf (add-pair-freq-api pps #:nothrow #t))
 
 ; ---------------------------------------
-; Create a "without-degeneracy" bin-count graph.
-(define wbins
-	(bin-count good-pairs 300
-		(lambda (gpr) (gpf 'pair-fmi gpr))
-		(lambda (gpr) (cog-count gpr))
-		-5 25))
+; Create an MI bin-count graph.
 
-(define fh (open-file "tri-weighted-mi.csv" "w"))
-(print-bincounts-tsv wbins fh)
-(close fh)
+(define (mi-bin-graph LLOBJ FILENAME WEIGHT-FUN)
+"
+  Create an MI bin-count graph for LLOBJ.
+  The WEIGHT-FUN is used to assign a weight/count to each pair.
+"
+	(define good-pairs
+		(filter (lambda (gpr)
+			(and (< 0 (cog-count gpr)) (not (inf? (LLOBJ 'pair-fmi gpr)))))
+			(LLOBJ 'get-all-elts)))
+
+	(define bins
+		(bin-count good-pairs 300
+			(lambda (gpr)
+				(define fmi (LLOBJ 'pair-fmi gpr))
+				(if (inf? fmi) -100 fmi))
+			WEIGHT-FUN
+			-5 25))
+
+	(define fh (open-file FILENAME "w"))
+	(print-bincounts-tsv bins fh)
+	(close fh)
+	*unspecified*
+)
+
+; Weighted and unweighted gene-pair graphs from the triangle.
+(mi-bin-graph gpf "tri-mi.csv" (lambda (pr) 1))
+(mi-bin-graph gpf "tri-weighted-mi.csv" cog-count)
+
+(mi-bin-graph ppf "pent-path-weighted-mi.csv" cog-count)
 
 ; ---------------------------------------
 ; Make a sorted list of pairs, look at those with some minimal
-; observation count, and prnt out the head of the list.
+; observation count, and print out the head of the list.
 
 (define mi-sorted-pairs
 	(sort all-gene-pairs
