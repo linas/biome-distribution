@@ -1784,3 +1784,71 @@ Arghhh  (delete-simple-tv)
 			(if (< 0 (cog-count PR)) (+ 1 cnt) cnt)) 0
 			(gez 'right-stars gene)))
 	(gez 'left-basis)
+
+make-evaluation-pair-api in eval-pairs.scm wtf oh dead code.
+
+ (Member (MoleculeNode "protein") (Concept "SMP0027226"))
+
+(define counted-paths
+	(filter (lambda (path) (cog-ctv? (cog-tv path))) pathways))
+
+(define am (cog-get-atoms 'MemberLink))
+(length am) ;1517668
+
+(define (do-get-all-pairs)
+         (filter!
+            (lambda (pair)
+               (and
+                  (equal? 'MoleculeNode (cog-type (gar pair)))
+                  (equal? 'ConceptNode (cog-type (gdr pair)))))
+            (cog-get-atoms 'MemberLink)))
+
+(define ap (do-get-all-pairs))
+(length ap) ;1127455
+
+(define np
+         (filter!
+            (lambda (pair)
+               (and
+                  (equal? 'MoleculeNode (cog-type (gar pair)))
+                  (equal? 'ConceptNode (cog-type (gdr pair)))
+						(or
+							(string-prefix? "SMP" (cog-name (gdr pair)))
+							(string-prefix? "R-HSA-" (cog-name (gdr pair)))
+						)
+					))
+            (cog-get-atoms 'MemberLink)))
+
+
+(define smp
+(filter
+	(lambda (path)
+		(define na (cog-name path))
+		(and (string-prefix? "NR_" na)
+			(string-skip (substring na 3) char-set:digit))
+	)
+	(cog-get-atoms 'MoleculeNode)))
+
+(define prot
+(filter
+	(lambda (path)
+		(define na (cog-name path))
+		(and
+			(not (string-prefix? "ChEBI:" na))
+			(not (string-prefix? "ENST" na))
+			(not (string-prefix? "NM_" na))
+			(not (string-prefix? "NP_" na))
+			(not (string-prefix? "NR_" na))
+			(not (string-prefix? "YP_" na))
+			(not (string-prefix? "Uniprot" na))
+		)
+	)
+	(cog-get-atoms 'MoleculeNode)))
+
+
+(define ppa (make-pathway-pair-api))
+(length (ppa 'all-pairs)) ; 1127455
+
+python-minimal cython libpython2.7 
+
+expresses 148736

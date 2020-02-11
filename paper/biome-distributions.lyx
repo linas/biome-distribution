@@ -727,14 +727,21 @@ The pentagon has five vertexes: a pathway (as a single, named vertex), two
  perhaps, we've over-generalized and lost too many important details...)
 \end_layout
 
-\begin_layout Subsubsection*
-Zipf
+\begin_layout Standard
+There are 50501 pathways in which some protein in the dataset is a member
+ of.
+ These are both SMP and R-HSA-tagged pathways (from the smpdb.ca and reactome.org,
+ respectively).
 \end_layout
 
 \begin_layout Standard
-There are 50501 pathways in which some gene in the dataset is a member of.
- These are both SMP and R-HSA-tagged pathways (from the smpdb.ca and reactome.org,
- respectively).
+There is a total of 1127455 pathway-protein pairs.
+ There are a total of 148734 gene-protein expression pairs.
+ As before, there is a total of 365745 pairs of interacting genes.
+\end_layout
+
+\begin_layout Subsubsection*
+Zipf
 \end_layout
 
 \begin_layout Standard
@@ -835,6 +842,14 @@ Lets look at gene-protein expression pairs that appear in pentagons.
  All remaining genes express just one protein.
  However, these same genes also participate in a (comparatively) huge fraction
  of all pentagons.
+\end_layout
+
+\begin_layout Subsubsection*
+Pathways
+\end_layout
+
+\begin_layout Standard
+There were 50501 pathways.
 \end_layout
 
 \begin_layout Subsubsection*
