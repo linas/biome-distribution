@@ -296,7 +296,7 @@
 
 (define-public (batch-pairs LLOBJ)
 	(cog-report-counts)
-	(batch-all-pair-mi LLOBJ)
+	(batch-all-pair-mi LLOBJ #f)
 	(print-matrix-summary-report LLOBJ)
 )
 

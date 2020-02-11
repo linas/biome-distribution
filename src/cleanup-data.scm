@@ -17,6 +17,7 @@
 				(cog-delete-recursive cpt)))
 		(cog-get-atoms 'ConceptNode)))
 
+; --------------------
 (define (delete-self-interaction)
 "
   Many genes are marked as interacting with themselves.
@@ -32,6 +33,7 @@
 		(lambda (gene) (cog-delete-recursive (List gene gene)))
 		selfies))
 
+; --------------------
 (define (delete-bad-chebi)
 "
   Delete (MoleculeNode \"ChEBI:nan\") and all links that contain it.
@@ -42,8 +44,11 @@
 	(cog-delete-recursive (ConceptNode "SMPD2 "))
 	(cog-delete-recursive (ConceptNode "SMPD3 "))
 	(cog-delete-recursive (ConceptNode "SMPD4 "))
+
+	*unspecified*
 )
 
+; --------------------
 (define (count-gene-interactions)
 "
   Count the number of symmetric and non-symmetric gene-pair interactions
@@ -105,6 +110,7 @@
 	(format #t "Conclude: there are ~A symmetrized interactions\n" n-edge)
 )
 
+; --------------------
 (define (symmetrize-gene-interactions)
 "
   The gene interactions use the asymmetric ListLink to denote
@@ -130,6 +136,7 @@
 	(cog-delete sym-set)
 )
 
+; --------------------
 (define (delete-simple-tv)
 "
   Delete the SimpleTruthValues on all atoms in the atomspace.
@@ -147,3 +154,5 @@
 				(cog-set-tv! ATOM (stv 1 0))))
 		(cog-get-atoms 'Atom #t))
 )
+
+; --------------------

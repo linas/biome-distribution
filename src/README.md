@@ -9,6 +9,11 @@ Some of the primary files:
 * `data-export.scm` - Export selected stats to CSV files for graphing.
 * `gene-pairs.scm` - Provide a sparse-matrix API for data analysis.
 
+The primary data-processing pipeline is to start up a guile shell,
+and then load each of the above files in turn.  Review thier contents,
+and perform the "obvious" operations that each of them suggest.
+See also the `graphs` directory for assorted data-graphing scripts.
+
 Some of the secondary files:
 * `performance-instrumentation.scm` - measure performance stats.
 * `debug-wrapper.scm` - Used for debugging the MOZI code-base.
