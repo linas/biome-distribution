@@ -849,7 +849,15 @@ Pathways
 \end_layout
 
 \begin_layout Standard
-There were 50501 pathways.
+There were 50501 pathways, and 1082860 pathway-protein pairs.
+ Of these, there are 14053 proteins and 50566 pathways that appeared in
+ a pentagon.
+ Of the pathway-protein pairs available in the dataset, only 38843 appeared
+ in pentagons.
+\end_layout
+
+\begin_layout Standard
+x
 \end_layout
 
 \begin_layout Subsubsection*

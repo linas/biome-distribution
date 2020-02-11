@@ -1848,6 +1848,12 @@ make-evaluation-pair-api in eval-pairs.scm wtf oh dead code.
 
 (define ppa (make-pathway-pair-api))
 (length (ppa 'all-pairs)) ; 1127455
+; 1082860 after deleting bad chebi
+(define pps (add-pair-stars ppa))
+(pps 'left-basis-size) ; 14053
+(pps 'right-basis-size) ; 50566
+
+(batch-all-pair-mi pps #f)
 
 python-minimal cython libpython2.7 
 

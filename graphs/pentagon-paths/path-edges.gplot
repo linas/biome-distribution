@@ -33,6 +33,7 @@ plot "path-edges-sym.csv" using 1:($3 / npentagons) with lines title "Path-Prote
 #      "path-exprs-sym.csv" using 1:(8e-3 / ($1)**0.5) with lines title "1/√rank"
 
 set out 'path-intrs-sym.png'
+set title "Number of pentagons a gene-pair participates in"
 plot "path-intrs-sym.csv" using 1:($3 / npentagons) with lines title "Gene-Gene", \
     "path-intrs-sym.csv" using 1:(1e-3 / ($1)**0.5) with lines title "1/√rank"
 
