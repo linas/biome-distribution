@@ -23,20 +23,31 @@ ngenes = 6694
 nproteins = 6735
 npathways = 2129
 # Eyeballed fit to the data.
-set out 'path-edges-sym.png'
-set yrange [3e-6:1.1e-3]
-set title "Number of pentagons a pathway-protein pair participates in"
-plot "path-edges-sym.csv" using 1:($3 / npentagons) with lines title "Path-Protein", \
-    "path-edges-sym.csv" using 1:(1e-3 / ($1)**0.5) with lines title "1/√rank"
-
+# set out 'path-edges-sym.png'
+# set yrange [3e-6:1.1e-3]
+# set title "Number of pentagons a pathway-protein pair participates in"
+# plot "path-edges-sym.csv" using 1:($3 / npentagons) with lines title "Path-Protein", \
+#     "path-edges-sym.csv" using 1:(1e-3 / ($1)**0.5) with lines title "1/√rank"
+# 
 # set out 'path-exprs-sym.png'
 # set title "Number of pentagons a given gene-protein edge is in"
 # plot "path-exprs-sym.csv" using 1:($3 / npentagons) with lines title "Gene-Protein", \
 #      "path-exprs-sym.csv" using 1:(8e-3 / ($1)**0.5) with lines title "1/√rank"
-
+# 
 # set out 'path-intrs-sym.png'
 # set title "Number of pentagons a gene-pair participates in"
 # plot "path-intrs-sym.csv" using 1:($3 / npentagons) with lines title "Gene-Gene", \
 #     "path-intrs-sym.csv" using 1:(1e-3 / ($1)**0.5) with lines title "1/√rank"
 
 # -----------------------------------------------------
+# set out 'penta-edges-sym.png'
+
+set term eps color
+set out 'penta-edges-sym.eps'
+
+set yrange [1e-6:0.01]
+set title "Number of pentagons an edge participates in"
+plot "path-edges-sym.csv" using 1:($3 / npentagons) with lines title "Path-Protein", \
+     "path-exprs-sym.csv" using 1:($3 / npentagons) with lines title "Gene-Protein", \
+     "path-intrs-sym.csv" using 1:($3 / npentagons) with lines title "Gene-Gene", \
+     "path-intrs-sym.csv" using 1:(1e-3 / ($1)**0.5) with lines title "1/√rank"

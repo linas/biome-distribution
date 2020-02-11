@@ -832,19 +832,18 @@ Distribution of Edges
 There were 38843 distinct edges connecting pathways to proteins.
  There were 6794 distinct gene-protein expression edges.
  There were 77304 gene-gene interaction edges.
- The distribution of gene-expression edges, 
+ The distribution of these edges, 
 \emph on
 viz.
 
 \emph default
- the number of pentagons a given gene-expression edge participates in, is
- shown below.
+ the number of pentagons a given edge participates in, is shown below.
 \end_layout
 
 \begin_layout Standard
 \align center
 \begin_inset Graphics
-	filename /home/linas/src/novamente/mozi/graphs/pentagon-paths/path-exprs-sym.png
+	filename /home/linas/src/novamente/mozi/graphs/pentagon-paths/penta-edges-sym.eps
 	width 70col%
 
 \end_inset
@@ -853,39 +852,9 @@ viz.
 \end_layout
 
 \begin_layout Standard
-The distribution of gene-gene interaction edges in pentagons is much much
- lumpier, as shown below.
- No idea why.
-\end_layout
-
-\begin_layout Standard
-\align center
-\begin_inset Graphics
-	filename /home/linas/src/novamente/mozi/graphs/pentagon-paths/path-intrs-sym.png
-	width 70text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The distribution of pathway-protein edges is also uninsightful:
-\end_layout
-
-\begin_layout Standard
-\align center
-\begin_inset Graphics
-	filename /home/linas/src/novamente/mozi/graphs/pentagon-paths/path-edges-sym.png
-	width 70text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-so
+The overall lumpiness of these graphs provides no particular insight.
+ It seems plausible that the lumpiness is an artifact of the dataset, rather
+ than any indication that nature is structured in this way.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -907,8 +876,8 @@ Lets look at gene-protein expression pairs that appear in pentagons.
 \end_layout
 
 \begin_layout Standard
-There is no point in computing MI for gene-protein interactions.
- The one-to-one relation makes this pointless.
+There is no point in computing MI for gene-protein interactions; they occur
+ in tightly-bound and exclusive pairs; there is no free association.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -916,16 +885,15 @@ Pathways
 \end_layout
 
 \begin_layout Standard
-There were 50501 pathways, and 1082860 pathway-protein pairs.
- Of these, there are 14053 proteins and 50566 xxx NOOO pathways that appeared
- in a pentagon.
- Of the pathway-protein pairs available in the dataset, only 38843 appeared
- in pentagons.
+There are a large number of pathway-protein pairs available in the dataset,
+ of which only a small fraction, 38843 pairs, appeared in pentagons.
+ As proteins can appear in multiple pathways, it is meaningful to explore
+ correlations and affinities between these.
 \end_layout
 
 \begin_layout Standard
-Here's the pathway-protein MI graph.
- Its fit with two Gaussians, for the same reasons as before.
+Below is the pathway-protein MI graph.
+ It is fit with two Gaussians, as suggested by the previous observations.
  Note that the parameters are very similar.
 \end_layout
 
@@ -941,8 +909,17 @@ Here's the pathway-protein MI graph.
 \end_layout
 
 \begin_layout Standard
-Presumably it's noiser because the proteome/reactome dataset is not as well-deve
-loped as the genome dataset.
+It's clearly much noiser, as the set of edges is much smaller.
+ The proteome/reactome dataset although large, seems not as well-developed
+ as the genome dataset.
+\end_layout
+
+\begin_layout Subsubsection*
+TODO
+\end_layout
+
+\begin_layout Standard
+weighted in-degree of vertexes?
 \end_layout
 
 \begin_layout Subsubsection*
