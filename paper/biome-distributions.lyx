@@ -105,8 +105,8 @@ Linas Vepstas
 An exploration of the statistical distribution of interactions between genes,
  proteins and pathways, extracted from public genome, proteome and rectome
  datasets.
- This is a work-in-progress.
- It is incomplete.
+ This is an exploratory diary that attempts to understand the large-scale
+ statistical properties of the network structure of biomolecular interactions.
 \end_layout
 
 \begin_layout Abstract
@@ -123,16 +123,6 @@ An exploration of the mutual information of interaction pathways is also
  It appears that these are easily fit with a bimodal Gaussian distribution.
 \end_layout
 
-\begin_layout Abstract
-This is for human genome, reactome data.
- I don't doubt that the results are generic in biology.
-\end_layout
-
-\begin_layout Abstract
-The results here are preliminary; there are issues with ...
- my understanding of the pathway annotation may be flawed ...
-\end_layout
-
 \begin_layout Section*
 Introduction
 \end_layout
@@ -142,8 +132,8 @@ Publicly available genomics and proteomics databases describe a large number
  of interactions between genes and pathways.
  Taken together, these datasets describe a large graph, and the one may
  reasonably wonder about the properties and general structure of that graph.
- For example, one might as if the graph is scale-free, or if it has a hub-and-sp
-oke structure, or make other graph-theoretic inquiries into it.
+ For example, one might ask if the graph is scale-free, or if it has a hub-and-s
+poke structure, or make other graph-theoretic inquiries into it.
 \end_layout
 
 \begin_layout Standard
@@ -197,7 +187,7 @@ lexical attraction
 \begin_inset Quotes erd
 \end_inset
 
-) of pairs.
+) of interacting pairs.
  It appears to be easy to describe this as a pair of Gaussians.
  A theoretical grounding for these results is unknown to the author.
  Clarifications are solicited.
@@ -267,8 +257,8 @@ Triangles
 \end_layout
 
 \begin_layout Standard
-A triangle is defined as a three-way interaction, of gene A regulates gene
- B, gene B regulates gene C and C regulates A.
+A triangle is defined as a three-way interaction, of gene A regulating gene
+ B, gene B regulating gene C and C regulating A.
  Such triangles are one of the most basic components of the topological
  structure of regulatory networks.
  It is worth understanding thier structure.
@@ -321,7 +311,7 @@ true biology
 
 , or whether one is measuring the social network of the scientists, and
  thier intellectual interests.
- There does not appear to be any obvious way of answering this question.;
+ There does not appear to be any obvious way of answering this question.
 \end_layout
 
 \begin_layout Subsection*
@@ -335,8 +325,24 @@ The two datasets provide sometimes-similar and sometimes-different results.
 
 \begin_layout Standard
 In the first dataset, there are 3452807 pointed triangles.
- These are triangles with a distinguished point.
- By symmetry, ne would expect this number to be divisible by 3; it is not
+ By definition, a 
+\begin_inset Quotes eld
+\end_inset
+
+pointed triangle
+\begin_inset Quotes erd
+\end_inset
+
+ is one with a 
+\begin_inset Quotes eld
+\end_inset
+
+distinguished point
+\begin_inset Quotes erd
+\end_inset
+
+; this helps with the tracking of rotational symmetry.
+ By symmetry, one would expect this number to be divisible by 3; it is not
  because many of the triangles are degenerate: There are 145571 degenerate
  triangles having the only two distinct vertexes, and 2939 
 \begin_inset Quotes eld
@@ -347,6 +353,24 @@ bouquets
 \end_inset
 
  - that is, triangles where all three corners are the same vertex.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Given a triangular relationship of the form 
+\begin_inset Quotes eld
+\end_inset
+
+gene A regulates gene B, B regulates C and C regulates A,
+\begin_inset Quotes erd
+\end_inset
+
+ a degenerate triangle is obtained when B and C are the same gene.
+ A bouquet is obtained when A, B and C are the same gene.
+\end_layout
+
+\end_inset
+
  This leaves behind 1102412 distinct triangles having three distinct corners.
 \end_layout
 
@@ -384,31 +408,12 @@ average
 \end_layout
 
 \begin_layout Standard
-Because the first dataset contains self-interacting genes, not all triangles
- are 
-\begin_inset Quotes eld
-\end_inset
-
-true
-\begin_inset Quotes erd
-\end_inset
-
- triangles; come may be degenerate.
- That is, one may have triangular relationships of the form 
-\begin_inset Quotes eld
-\end_inset
-
-gene A regulates gene B, B regulates C and C regulates A,
-\begin_inset Quotes erd
-\end_inset
-
- where B and C are the same gene.
- The desire to eliminate such degenerate triangles leads to contemplating
- the second dataset.
-\end_layout
-
-\begin_layout Standard
-The second dataset has 10783686 pointed triangles; by symmetry, only 1/6
+The presence of such degenerate triangles, and the non-reciprocal gene-gene
+ interactions leads to contemplating the second dataset.
+ In this dataset, all self-interacting genes are removed, and all gene interacti
+ons are symmetrized, so that for every edge AB there is also an edge BA:
+ the concept of regulation is replaced by interaction.
+ The second dataset has 10783686 pointed triangles; by symmetry, only 1/6
  of these are distinct, leaving 1797281 distinct triangles.
  These triangles have a total of 731490 distinct edges.
  There is a total of 20123 genes participating in these triangles.
@@ -531,33 +536,56 @@ That such a technical change would have a rather profound effect on the
  structure of the graph is surprising.
 \end_layout
 
-\begin_layout Subsubsection*
-MI graphs
+\begin_layout Subsection*
+Mutual Information
 \end_layout
 
 \begin_layout Standard
-How does one compute MI, again?
+Mutual information (MI) is an entropic concept that characterizes the degree
+ to which a pair of objects associate with one-another.
+ For any given pair, one may examine how often the members of that pair
+ occur together, versus how often each member associates with other, third
+ parties.
+ It's 
+\begin_inset Quotes eld
+\end_inset
+
+entropic
+\begin_inset Quotes erd
+\end_inset
+
+, in the sense that specific sum and difference of marginal entropies, and
+ thus fits naturally into theoretical frameworks founded on entropic concepts.
 \end_layout
 
 \begin_layout Standard
-The starting point is interaction triangles, again.
+The raw genome databases do not provide any particular gene-pairing information,
+ beyond a yes/no assertion that a pair has been observed to interact in
+ some laboratory setting.
+ By pattern-mining triangles, one gets far more detailed interaction information.
  So, again, each triangle has three corners, the genes, and three edges,
  the gene pairs.
  By counting all possible triangles, one obtains a count of how often each
  edge is seen -- that is, how often an edge appears in some triangle.
- That is, one has a count N(ga, gb) which is the number of triangles that
- the pair (ga,gb) participated in.
+ That is, one has a count 
+\begin_inset Formula $N(g_{a},g_{b})$
+\end_inset
+
+ of the number of triangles that the pair 
+\begin_inset Formula $(g_{a},g_{b})$
+\end_inset
+
+ participated in.
  The rest is downhill.
- MI is as usual, Yuret's lexical attraction.
- etc.
+ MI is defined as usual as Yuret's lexical attraction.
 \end_layout
 
 \begin_layout Standard
-When one has counts 
+Given counts 
 \begin_inset Formula $N(x,y)$
 \end_inset
 
- one can readily compute the lexical attraction between the elements 
+, one can readily compute the lexical attraction between the elements 
 \begin_inset Formula $(x,y)$
 \end_inset
 
@@ -599,51 +627,41 @@ where
 \end_inset
 
  of this ratio provides the sparsity).
- Other statistics are possible: any given gene-pair participates in 400
- triangles, on average; however, the concept of averages is rather flawed,
- when one has such Zipfian distributions.
 \end_layout
 
 \begin_layout Standard
-So because the concept of average is flawed, we use MI instead...
- Hmm.
- what about the other stats (support, count, length!? I'm confused...
- OK: deconfuser: the matrix summary report shows *weighted* banach-space
- norms, so not raw, but weighted by frequency of row/column...)
-\end_layout
-
-\begin_layout Standard
-How is the MI distributed as a function of pair frequency? There are two
- such distributions that one can graph.
- Both distributions are probabilities of gene-pairs, as a function of MI.
- The first considers only unique gene-pairs, the second are weighted gene-pairs.
- That is, in the first, if two gene-pairs were found to have the same MI,
- then they are equiprobable.
- In the second, if two gene-pairs were found to have the same MI, then the
- relative probabilities of each is the same as the number of times they
- were observed.
- (Equivalently, one may also say that these are 
+The distribution of the MI as a function of pair frequency is an interesting
+ distribution to explore.
+ There are two variants of this distribution that one can examine.
+ One may consider only unique gene-pairs, or one may consider pairs weighted
+ by thier counts.
+ So, in the first case, if two gene-pairs were found to have the same MI,
+ then they are treated as equiprobable; when binned into a histogram, they
+ are placed in the same bin with equal weighting.
+ In the second case, thier contribution to a bin is relative to the number
+ of times each wwas observed.
+ Equivalently, one may also say that one is counting 
 \begin_inset Quotes eld
 \end_inset
 
-graphs without and with degeneracy
+without and with degeneracy
 \begin_inset Quotes erd
 \end_inset
 
-, or 
+, or is examining 
 \begin_inset Quotes eld
 \end_inset
 
-unweighted and weighted graphs
+unweighted and weighted distributions
 \begin_inset Quotes erd
 \end_inset
 
-).
+.
 \end_layout
 
 \begin_layout Standard
-So, first a graph without degeneracy (all gene pairs are treated as equi-probabl
-e)
+The figure below shows the first case: the distribution of MI, counted without
+ degeneracy (all gene pairs are treated as equi-probable).
 \end_layout
 
 \begin_layout Standard
@@ -660,10 +678,9 @@ e)
 \begin_layout Standard
 The normalization is such that the area under the data curve will integrate
  to 1.0.
- The data is fitted to two gaussain distributions.
+ The data is fit with two gaussain distributions.
  Recall that gaussians appear to be parabolas on a semi-log plot.
- The aparamters of the fit are as shown.
- They appear to be very nice integers, but this may be just a coincidence.
+ The paramters of each fit are as marked in the legend.
  The fits are hand-built, or 
 \begin_inset Quotes eld
 \end_inset
@@ -672,15 +689,26 @@ eyeballed
 \begin_inset Quotes erd
 \end_inset
 
-, and 
+, chosen to look good, and are 
 \emph on
 not
 \emph default
- the result of some numerical least-squares curve-fit.
+ the result of some automated curve-fit.
+ The fit parameters are 
+\begin_inset Quotes eld
+\end_inset
+
+numerology
+\begin_inset Quotes erd
+\end_inset
+
+: rounded to integers that look pleasing.
+ Whether or not the integers are meaningful or are incidental is unclear.
 \end_layout
 
 \begin_layout Standard
-The second graph is very similar, but this time shows the weighted distribution.
+The second case, where the bin-counts are weighted by frequency, results
+ in a graph that is similar.
  Again, it is easily fit with two gaussians, but this time, the centers
  of the gaussians are quite different, as are the widths.
 \end_layout
@@ -697,11 +725,11 @@ The second graph is very similar, but this time shows the weighted distribution.
 \end_layout
 
 \begin_layout Standard
-Again, the fit is eyeballed, with a preferrence of finding numerological
+As before, the fit is eyeballed, with a preferrence of finding numerological
  simple-fraction fits, so as to expose simple laws, if these exist.
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Section*
 Pentagons
 \end_layout
 
@@ -716,27 +744,19 @@ The pentagon has five vertexes: a pathway (as a single, named vertex), two
  Each edge type will also have an MI distribution, and so six MI graphs:
  one for each type, weighted and unweighted.
  So, twelve graphs in total.
+ Not all prove to be that interesting.
 \end_layout
 
 \begin_layout Standard
-(Based on earlier work, I beleive that that they will all look very similar
- to one-another...
- and explanation for that similarity is unknown to me ...
- the similarity is both reassuring and un-nerving: reassuring, in that there
- is a certain regularity to the giant mess of biology; un-nerving in that,
- perhaps, we've over-generalized and lost too many important details...)
-\end_layout
-
-\begin_layout Standard
-There are 50501 pathways in which some protein in the dataset is a member
+There are 50566 pathways in which some protein in the dataset is a member
  of.
  These are both SMP and R-HSA-tagged pathways (from the smpdb.ca and reactome.org,
  respectively).
-\end_layout
-
-\begin_layout Standard
-There is a total of 1127455 pathway-protein pairs.
- There are a total of 148734 gene-protein expression pairs.
+ Each of these is observed in at least one pentagon.
+ There is a total of 1082860 pathway-protein pairs in the dataset, but only
+ 38843 appear in a pentagon.
+ There are a total of 148734 gene-protein expression pairs, of which X appear
+ in a pentagonal relationship.
  As before, there is a total of 365745 pairs of interacting genes.
 \end_layout
 
@@ -788,7 +808,7 @@ The normalization is with respect to the total number of pentagons that
 \end_layout
 
 \begin_layout Standard
-There were 38843(?) distinct edges connecting pathways to proteins.
+There were 38843 distinct edges connecting pathways to proteins.
  There were 6794 distinct gene-protein expression edges.
  There were 77304 gene-gene interaction edges...
 \end_layout
@@ -889,7 +909,6 @@ The End
 
 \begin_layout Standard
 That's all.
- 
 \end_layout
 
 \end_body
