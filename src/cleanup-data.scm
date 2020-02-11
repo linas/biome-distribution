@@ -32,6 +32,18 @@
 		(lambda (gene) (cog-delete-recursive (List gene gene)))
 		selfies))
 
+(define (delete-bad-chebi)
+"
+  Delete (MoleculeNode \"ChEBI:nan\") and all links that contain it.
+  This is not a valid protein. Also delete some other junk.
+"
+	(cog-delete-recursive (MoleculeNode "ChEBI:nan"))
+	(cog-delete-recursive (ConceptNode "SMPD1 "))
+	(cog-delete-recursive (ConceptNode "SMPD2 "))
+	(cog-delete-recursive (ConceptNode "SMPD3 "))
+	(cog-delete-recursive (ConceptNode "SMPD4 "))
+)
+
 (define (count-gene-interactions)
 "
   Count the number of symmetric and non-symmetric gene-pair interactions
