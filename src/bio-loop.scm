@@ -287,6 +287,7 @@
 				; Perform the search
 				(define path-set (cog-execute! query))
 				(define pathways (cog-outgoing-set path-set))
+				(cog-delete query)
 				(cog-delete path-set)
 				pathways
 			)
@@ -303,6 +304,7 @@
 
 ; Run the pentqagon counting code.
 ; (define pathways (pathways-of-genes (cog-get-atoms 'GeneNode)))
-; (count-pentagons pathways)
+; (length pathways)  ; 50501
+; (count-pentagons pathways)  ; Takes about 16 hours...
 
 ; ------------------------------------------------------------------

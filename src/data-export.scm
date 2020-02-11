@@ -111,7 +111,11 @@
 			(string-append (cog-name (gadr expr)) "-x-"
 				(cog-name (gddr expr)))
 		(cog-count expr)))
-		(filter (lambda (expr) (< 0 (cog-count expr)))
+		(filter (lambda (expr)
+				(and (< 0 (cog-count expr))
+					; Avoid inclusion of 'AnyNode
+					(eq? (cog-type (gadr expr)) 'GeneNode)
+					(eq? (cog-type (gddr expr)) 'MoleculeNode)))
 			(cog-incoming-by-type (Predicate "expresses") 'EvaluationLink))))
 
 (dump-to-csv path-exprs "path-exprs-sym.csv")
@@ -143,9 +147,39 @@
 (fold (lambda (memb cnt) (+ cnt (cog-count memb))) 0
 	(cog-get-atoms 'MemberLink))
 
-; The other three? whoops, bug.
+; The other three? 2457790.0 = 2 * 983116.0 + 491558.0  OK
 (fold (lambda (eval cnt) (+ cnt (cog-count eval))) 0
 	(cog-get-atoms 'EvaluationLink))
+
+; ------------------------------------------------------------------
+; Gene-expression distribution.
+
+(define gea (make-expression-pair-api))
+(define ges (add-pair-stars gea))
+(define gez (add-zero-filter ges #f))
+(gez 'left-basis-size) ; 6694
+(gez 'right-basis-size) ; 6735
+(batch-all-pair-mi gez)
+(print-matrix-summary-report gez)
+
+; Distribution of support -- how many proteins each gene expresses
+(define expr-supp
+	(map (lambda (gene) (cons (cog-name gene)
+		(fold (lambda (PR cnt)
+			(if (< 0 (cog-count PR)) (+ 1 cnt) cnt)) 0
+			(gez 'right-stars gene))))
+		(gez 'left-basis)))
+
+(dump-to-csv expr-supp "expr-supp.csv")
+
+; Should be identical to path-genes, up above.
+(define expr-cnt
+	(map (lambda (gene) (cons (cog-name gene)
+		(fold (lambda (PR cnt) (+ cnt (cog-count PR))) 0
+			(gez 'right-stars gene))))
+		(gez 'left-basis)))
+
+(dump-to-csv expr-cnt "expr-cnt.csv")
 
 !# ; ---------------------------------------------------------------
 
