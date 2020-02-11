@@ -193,11 +193,11 @@
 
 ;; -----------
 ;; This defines a single edge search; one endpoint is the given
-;; gene, the other is a pathway.
-(define (find-pathways gene)
+;; item, the other is a pathway.
+(define (find-pathways item)
 	(Get
 		(TypedVariable (Variable "$p") (Type 'ConceptNode))
-		(Member gene (Variable "$p"))
+		(Member item (Variable "$p"))
 	))
 
 ;; -----------
@@ -276,14 +276,14 @@
 )
 
 ;; -----------
-(define (pathways-of-genes gene-list)
+(define (pathways-of-mols mol-list)
 "
-	Create a list of the pathways that the genes are in.
+	Create a list of the pathways that the genes/proteins are in.
 "
 	(delete-dup-atoms
 		(append-map
-			(lambda (gene)
-				(define query (find-pathways gene))
+			(lambda (mol)
+				(define query (find-pathways mol))
 				; Perform the search
 				(define path-set (cog-execute! query))
 				(define pathways (cog-outgoing-set path-set))
@@ -291,7 +291,7 @@
 				(cog-delete path-set)
 				pathways
 			)
-			gene-list))
+			mol-list))
 )
 
 ; =================================================================
@@ -303,8 +303,11 @@
 ; (count-triangles (cog-get-atoms 'GeneNode))
 
 ; Run the pentqagon counting code.
-; (define pathways (pathways-of-genes (cog-get-atoms 'GeneNode)))
+; (define pathways (pathways-of-mols (cog-get-atoms 'GeneNode)))
 ; (length pathways)  ; 50501
 ; (count-pentagons pathways)  ; Takes about 16 hours...
+;
+; Same as above, but this time with all pathways, not just some of them.
+; (define pathways (pathways-of-mols (cog-get-atoms 'MoleculeNode)))
 
 ; ------------------------------------------------------------------
