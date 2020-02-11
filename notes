@@ -1855,6 +1855,10 @@ make-evaluation-pair-api in eval-pairs.scm wtf oh dead code.
 
 (batch-all-pair-mi pps #f)
 
+(fold (lambda (path cnt) (+ cnt (if (< 0 (cog-count path)) 1 0))) 0
+   (pps 'left-basis))
+
+
 python-minimal cython libpython2.7 
 
 expresses 148736

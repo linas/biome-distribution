@@ -739,7 +739,7 @@ The pentagon has five vertexes: a pathway (as a single, named vertex), two
  protein, and finally, the two genes interacting with each other.
  Here, there are five edges, and three edge types: (protein in pathway),
  (gene expresses protein) and (gene-pair interaction).
- Thus, characterizing this statisitically requires six Zipfian graphs: three
+ Thus, characterizing this statistically requires six Zipfian graphs: three
  for the different vertex types, and three for the different edge types.
  Each edge type will also have an MI distribution, and so six MI graphs:
  one for each type, weighted and unweighted.
@@ -755,22 +755,31 @@ There are 50566 pathways in which some protein in the dataset is a member
  Each of these is observed in at least one pentagon.
  There is a total of 1082860 pathway-protein pairs in the dataset, but only
  38843 appear in a pentagon.
- There are a total of 148734 gene-protein expression pairs, of which X appear
- in a pentagonal relationship.
- As before, there is a total of 365745 pairs of interacting genes.
+ There are a total of 148734 gene-protein expression pairs, of which only
+ a paltry 6794 appear in a pentagonal relationship.
+ As before, there is a total of 365745 pairs of interacting genes; of these
+ only 77304 appear in pentagons.
+ Thus, the dataset, although quite large, appears to be quite disconnected:
+ there are many interactions that have been mapped out, but these remain
+ sparse enough that there are relatively few of these pentagonal interactions.
+ This is presumably an artifact of the scientific exploration done to date,
+ rather than an innate feature of actual biology.
+ That is, there are presumably far more interactions, but these remain unknown
+ and uncharted in the dataset.
 \end_layout
 
 \begin_layout Subsubsection*
-Zipf
+Distributions of Vertexes
 \end_layout
 
 \begin_layout Standard
-There were 491558 distinct pentagons (or twice that many, if you count mirror
- symmetry.) There are 6694 unique genes that appeared in pentagonal relationships.
- There were 6735 proteins that appeared in pentagonal relations.
- There were 2129 distinct pathways that appeared in pentagonal relations.
- All have an unexpected distribution.
- All are graphed below, on the same graph.
+Pattern mining the above-described pentagon resulted in the observation
+ of 491558 distinct pentagons (taking into account mirror symmetry: there
+ are twice as many, if the mirror image is counted separately.) There are
+ 6694 unique genes, 6735 unique proteins and 2129 distinct pathways that
+ appeared in pentagonal relationships.
+ All have an unexpected distribution; they are graphed below, on the same
+ graph.
 \begin_inset Foot
 status collapsed
 
@@ -804,18 +813,32 @@ The normalization is with respect to the total number of pentagons that
  Thus, for example, the highest-ranked gene, and the highest-ranked pathway
  appears in approximately 1 out of 50 pentagons; the highest-ranked protien
  appears in approximately 1 out of 100, which can be read directly off the
- above graph.
+ y-intercept in the above graph.
+\end_layout
+
+\begin_layout Standard
+I cannot come up with any plausible hypothesis for the plateaus, nor for
+ the tails.
+ These may be dataset artifacts: interactions that have been studied sufficientl
+y to have been captured in the dataset.
+ That is, a sociological artifact, rather than a statement about biology.
+\end_layout
+
+\begin_layout Subsubsection*
+Distribution of Edges
 \end_layout
 
 \begin_layout Standard
 There were 38843 distinct edges connecting pathways to proteins.
  There were 6794 distinct gene-protein expression edges.
- There were 77304 gene-gene interaction edges...
-\end_layout
+ There were 77304 gene-gene interaction edges.
+ The distribution of gene-expression edges, 
+\emph on
+viz.
 
-\begin_layout Standard
-Here's the distribution of gene-expression edges, viz, the number of pentagons
- a given gene-expression edge participated in.
+\emph default
+ the number of pentagons a given gene-expression edge participates in, is
+ shown below.
 \end_layout
 
 \begin_layout Standard
@@ -844,6 +867,25 @@ The distribution of gene-gene interaction edges in pentagons is much much
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+The distribution of pathway-protein edges is also uninsightful:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename /home/linas/src/novamente/mozi/graphs/pentagon-paths/path-edges-sym.png
+	width 70text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+so
 \end_layout
 
 \begin_layout Subsubsection*
@@ -875,8 +917,8 @@ Pathways
 
 \begin_layout Standard
 There were 50501 pathways, and 1082860 pathway-protein pairs.
- Of these, there are 14053 proteins and 50566 pathways that appeared in
- a pentagon.
+ Of these, there are 14053 proteins and 50566 xxx NOOO pathways that appeared
+ in a pentagon.
  Of the pathway-protein pairs available in the dataset, only 38843 appeared
  in pentagons.
 \end_layout
