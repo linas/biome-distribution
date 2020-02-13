@@ -536,6 +536,19 @@ That such a technical change would have a rather profound effect on the
  structure of the graph is surprising.
 \end_layout
 
+\begin_layout Subsubsection*
+Prior Results
+\end_layout
+
+\begin_layout Standard
+Hmm.
+ Apparently, I've seen square-root Zipfian distributions before, in language
+ data.
+ I'd forgotten about that.
+ See page 43 of this PDF: https://github.com/opencog/learn/raw/072f0a46d143d94fc2
+7cb5a04dd867b88c7142d0/learn-lang-diary/connector-sets-revised.pdf
+\end_layout
+
 \begin_layout Subsection*
 Mutual Information
 \end_layout
