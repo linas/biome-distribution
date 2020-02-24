@@ -1,7 +1,10 @@
-# Wikipedia
+#
+# Popular Wikipedia English-langauge Math pages.
+# Data extracted from
 # https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Mathematics/Popular_pages
-# second column is avg daily page views.
-# as of 9 Feb 2020
+#
+# First column is rank, second column is avg daily page views.
+# Data as of 9 Feb 2020 version of above page.
 #
 1	16611
 2	14903
