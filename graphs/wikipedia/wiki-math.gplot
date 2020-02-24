@@ -1,0 +1,23 @@
+#! /usr/bin/env gnuplot
+#
+# Create charts showing the distribution of the edges in pentagon-shaped
+# interaction loops.
+#
+set term png
+
+set yrange [:3e4]
+set logscale x
+set logscale y
+set format y "10^{%L}"
+
+set out 'wiki-math.png'
+
+set title "1000 Most popular English math pages, January 2020"
+set xlabel "View Rank"
+set ylabel "Average daily views"
+
+# set term eps color
+# set out 'penta-edges-sym.eps'
+
+plot "wiki-math.csv" using 1:2 with linespoints title "average daily views", \
+     "wiki-math.csv" using 1:(2e4 / ($1)**0.5) with lines lw 2 title "2×10^{4}/√rank"
