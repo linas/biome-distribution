@@ -549,6 +549,47 @@ Hmm.
 7cb5a04dd867b88c7142d0/learn-lang-diary/connector-sets-revised.pdf
 \end_layout
 
+\begin_layout Subsubsection*
+Related Results
+\end_layout
+
+\begin_layout Standard
+Page views of the most popular pages on Wikipedia show the same square-root
+ scaling.
+ See https://en.wikipedia.org/wiki/Wikipedia:Does_Wikipedia_traffic_obey_Zipf%27s_
+law%3F for a demonstration.
+ Here's a graph from this:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename /home/linas/src/novamente/mozi/graphs/wikipedia/wiki-math.png
+	lyxscale 50
+	width 70col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This shows the distribution of the 1000 most commonly viewed English-language
+ Wikipedia Mathematics articles, as of Janurary 2020.
+ A square-root distribution appears to hold up to at least a rank of 200
+ or 300; after that, the behavior is unclear.
+\end_layout
+
+\begin_layout Subsubsection*
+TODO
+\end_layout
+
+\begin_layout Standard
+What is the degree distribution? Viz, for scale-free networks, one usually
+ examines the degree distribution, and not the triangle distribution.
+ What about deg(u).deg(v) for edges connecting u,v?
+\end_layout
+
 \begin_layout Subsection*
 Mutual Information
 \end_layout
