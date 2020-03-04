@@ -113,10 +113,21 @@
 ; (define add-go-info-ctr (accum-time "add-go-info"))
 ; (define find-parent-ctr (accum-time "find-parent"))
 
-(define (report)
-;pathway stuff
-(smpdb-ctr #:report? #t)
-(reactome-ctr #:report? #t)
+; (load "report.scm")
+(define (old-report)
+
+   ; top-level stuff
+   (biogrid-ctr #:report? #t)
+   (biowrite-ctr #:report? #t)
+   (gene-go-anno-ctr #:report? #t)
+   (gene-go-write-ctr #:report? #t)
+   (gene-path-anno-ctr #:report? #t)
+   (gene-path-write-ctr #:report? #t)
+
+   (smpdb-ctr #:report? #t)
+   (reactome-ctr #:report? #t)
+
+; pathway stuff
 (find-pathway-genes-ctr #:report? #t)
 (add-pathway-genes-ctr #:report? #t)
 (find-pathway-member-ctr #:report? #t)
