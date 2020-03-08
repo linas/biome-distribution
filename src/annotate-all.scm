@@ -1,8 +1,12 @@
 
 (load "load-files.scm")
-(start-cogserver "debug.conf")
+; (start-cogserver "grid.conf")
+; (start-cogserver "debug.conf")
 (load "setup.scm")
+(load "stats.scm")
+(report-avg-gc-cpu-time)
 (load-all)
+(report-avg-gc-cpu-time)
 
 (define gene-list (list
 "TSPAN6"
@@ -691,12 +695,15 @@
    (define start (current-time))
 
 	(format #t "Start annotation of ~A genes\n" (length gene-list))
+	(report-avg-gc-cpu-time)
 	(annotate-genes gene-list "agingSymbols"
 	"[{\"function_name\": \"gene-pathway-annotation\", \"filters\": [{\"filter\": \"pathway\", \"value\": \"smpdb reactome\"},{\"filter\": \"include_prot\", \"value\": \"True\"}, {\"filter\": \"include_sm\", \"value\": \"False\"},{\"filter\": \"coding\", \"value\": \"True\"},{\"filter\": \"noncoding\", \"value\": \"True\"}, {\"filter\": \"biogrid\", \"value\": \"0\"}]}, {\"function_name\": \"gene-go-annotation\", \"filters\": [{\"filter\": \"namespace\", \"value\": \"biological_process cellular_component molecular_function\"}, {\"filter\": \"parents\", \"value\": \"0\"}, {\"filter\": \"protein\", \"value\": \"True\"}]}, {\"function_name\": \"include-rna\", \"filters\": [{\"filter\": \"coding\", \"value\": \"True\"},{\"filter\": \"noncoding\", \"value\": \"True\"},{\"filter\": \"protein\", \"value\": \"1\"}]},{\"function_name\": \"biogrid-interaction-annotation\", \"filters\": [{\"filter\": \"interaction\", \"value\": \"Proteins\"}]}]")
 
+	(gc)
+	(report-avg-gc-cpu-time)
    (format #t "\nRan annotation in ~A seconds\n" (- (current-time) start))
    *unspecified*
 )
 
 (run-all)
-(report)
+; (report)
