@@ -10,6 +10,7 @@
 ; guile> (load-all)
 ;
 (use-modules (opencog))
+(use-modules (opencog persist-file))
 (use-modules (opencog bioscience))
 (use-modules (opencog cogserver))
 
@@ -17,7 +18,9 @@
 	(define start (current-time))
 	(define ssz (count-all))
 	(define path (string-append "/home/ubuntu/datasets/" fn))
-	(define jnk (primitive-load path))
+	; (define jnk (primitive-load path))
+	; load-file is from (opencog persist-file)
+	(define jnk (load-file path))
 	(define delapse (- (current-time) start))
 	(define elapse (if (eq? delapse 0) 1 delapse))
 	(define delta (- (count-all) ssz))
@@ -25,6 +28,7 @@
 	(format #t "Took ~A secs to load ~A\n" elapse fn)
 	(format #t "Loaded ~A atoms (~A per sec) total atoms=~A\n"
 		delta rate (count-all))
+	; (format #t "Atomspace = ~A\n" (cog-report-counts))
 	*unspecified*
 )
 

@@ -1862,3 +1862,393 @@ make-evaluation-pair-api in eval-pairs.scm wtf oh dead code.
 python-minimal cython libpython2.7 
 
 expresses 148736
+
+gene-pathway-annotation aka gene-path-anno <- parser entry point
+  -- reactome
+     -- find-pathway-member small
+     -- find-pathway-genes big
+        -- patterns
+        -- add-pathway-genes majority of cpu <=== trouble area.
+     -- find-mol small-ish
+
+
+biogrid-interaction-annotation
+  -- find-output-interactors
+     -- big pattern small
+     -- generate-result big
+        -- find-go-term small
+        -- find-protein-form big -- but its a pattern
+
+
+find-protein-form use Get not Bind
+
+cache -- find-output-interactors  no not worth it
+
+why is find-pathway-member called 2x ?? doesn't matter its fast
+
+add-pathway-genes
+  -- locate-node fast
+  -- node-info is memoized...
+
+add-pathway-genes is now 5.5x faster and gene-path-anno is 2.5x faster
+
+while doing the 313'th gene
+
+crashes in the same place
+
+
+
+gene-path-anno is in 
+Time: 64.725457 secs. calls: 414 avg: 156341.7 usec/call for smpdb
+Time: 253.15135 secs. calls: 414 avg: 611476.7 usec/call for reactome
+
+Time: 244.60606 secs. calls: 2442 avg: 100166.3 usec/call for find-pathway-genes
+Time: 142.88328 secs. calls: 127562 avg:   1120.1 usec/call for add-pathway-genes
+Time: 2.4922931 secs. calls: 829 avg:   3006.4 usec/call for find-pathway-m
+
+Time: 0.2853182 secs. calls: 1472 avg:    193.8 usec/call for pathway-hierarchy
+Time: 3.8986631 secs. calls: 828 avg:   4708.5 usec/call for find-protein
+Time: 113.08048 secs. calls: 2442 avg:  46306.5 usec/call for find-mol
+Time: 0.4114375 secs. calls: 1504 avg:    273.6 usec/call for find-name
+Time: 6.1269069 secs. calls: 7746 avg:    791.0 usec/call for find-parent
+Time: 17.858872 secs. calls: 9054 avg:   1972.5 usec/call for locate-node
+Time: 39.305706 secs. calls: 104241 avg:    377.1 usec/call for add-loc
+
+
+gene-go is
+NOT find-pathway-genes
+NOT add-pathway-genes
+find-pathway-member
+pathway-hierarchy
+find-protein
+
+find-mol is dual role
+
+Pathway functions
+Time: 543.19234 secs. calls: 1 avg: 543192336.0 usec/call for gene-path-anno
+Zero calls to gene-path-write
+Time: 176.94091 secs. calls: 681 avg: 259825.1 usec/call for smpdb
+Time: 358.87071 secs. calls: 681 avg: 526976.1 usec/call for reactome
+Time: 355.52200 secs. calls: 3769 avg:  94327.9 usec/call for find-pathway-genes
+Time: 185.38953 secs. calls: 183670 avg:   1009.4 usec/call for add-pathway-genes
+Time: 4.8529986 secs. calls: 1362 avg:   3563.1 usec/call for find-pathway-member
+Zero calls to pathway-gene-interactors
+Zero calls to generate-interactors
+Time: 0.6302879 secs. calls: 2197 avg:    286.9 usec/call for pathway-hierarchy
+Time: 5.6913277 secs. calls: 1362 avg:   4178.7 usec/call for find-protein
+
+GO functions
+Time: 114.41950 secs. calls: 1 avg: 114419502.5 usec/call for gene-go-anno
+Time: 0.6046124 secs. calls: 1 avg: 604612.4 usec/call for gene-go-write
+Time: 68.771602 secs. calls: 1471 avg:  46751.6 usec/call for find-go-term
+Time: 27.870665 secs. calls: 11047 avg:   2522.9 usec/call for add-go-info
+
+
+Common functions
+Time: 174.59736 secs. calls: 3769 avg:  46324.6 usec/call for find-mol
+Time: 0.3685744 secs. calls: 1541 avg:    239.2 usec/call for find-name
+Time: 18.281771 secs. calls: 9914 avg:   1844.0 usec/call for locate-node
+Time: 59.014367 secs. calls: 153412 avg:    384.7 usec/call for add-loc
+Time: 5.9703277 secs. calls: 8586 avg:    695.4 usec/call for find-parent
+
+
+Not GO
+find-mol find-name locate-node add-loc find-parent
+
+Not biogrid find-mol add-loc
+
+biogrid-rare: find-name find-parent
+
+Time: 22.129893 secs. calls: 691 avg:  32025.9 usec/call for find-memberln
+Time: 0.4389117 secs. calls: 324 avg:   1354.7 usec/call for find-protein-form
+
+
+Pathway functions
+Time: 521.29256 secs. calls: 1 avg: 521292555.8 usec/call for gene-path-anno
+Time: 115.86134 secs. calls: 1 avg: 115861342.7 usec/call for gene-path-write
+Time: 172.32179 secs. calls: 681 avg: 253042.3 usec/call for smpdb
+Time: 342.50595 secs. calls: 681 avg: 502945.6 usec/call for reactome
+Time: 345.16271 secs. calls: 3769 avg:  91579.4 usec/call for find-pathway-genes
+Time: 181.36376 secs. calls: 183670 avg:    987.4 usec/call for add-pathway-genes
+Time: 164.07672 secs. calls: 3769 avg:  43533.2 usec/call for find-mol
+Time: 4.8064842 secs. calls: 1362 avg:   3529.0 usec/call for find-pathway-member
+Time: 0.6353414 secs. calls: 2197 avg:    289.2 usec/call for pathway-hierarchy
+Time: 5.6786770 secs. calls: 1362 avg:   4169.4 usec/call for find-protein
+Time: 54.434262 secs. calls: 153412 avg:    354.8 usec/call for add-loc
+Zero calls to pathway-gene-interactors
+Zero calls to generate-interactors
+
+Common biogrid/pathway functions
+Time: 2.0903343 secs. calls: 1549 avg:   1349.5 usec/call for find-name
+Time: 23.860827 secs. calls: 18187 avg:   1312.0 usec/call for locate-node
+Time: 6.2035060 secs. calls: 8853 avg:    700.7 usec/call for find-parent
+
+Biogrid functions
+Time: 544.60710 secs. calls: 1 avg: 544607103.2 usec/call for biogrid-anno
+Time: 16.548887 secs. calls: 1 avg: 16548887.1 usec/call for biogrid-write
+Time: 55.154352 secs. calls: 681 avg:  80990.2 usec/call for match-gene-interactors
+Time: 488.67459 secs. calls: 681 avg: 717583.8 usec/call for find-output-interactors
+Time: 282.23120 secs. calls: 540000 avg:    522.7 usec/call for generate-result
+Time: 52.450733 secs. calls: 1080000 avg:     48.6 usec/call for build-interaction
+Time: 171.74925 secs. calls: 145877 avg:   1177.4 usec/call for find-pubmed-id
+Zero calls to find-rna
+
+Common biogrid/GO functions
+Time: 105.45336 secs. calls: 10899 avg:   9675.5 usec/call for find-memberln
+Time: 9.5412558 secs. calls: 9464 avg:   1008.2 usec/call for find-protein-form
+
+GO functions
+Time: 105.78463 secs. calls: 1 avg: 105784630.0 usec/call for gene-go-anno
+Time: 0.6229931 secs. calls: 1 avg: 622993.1 usec/call for gene-go-write
+Time: 65.820128 secs. calls: 10218 avg:   6441.6 usec/call for find-go-term
+Time: 22.861835 secs. calls: 11047 avg:   2069.5 usec/call for add-go-info
+#t
+debug> 
+
+
+ice-9/boot-9.scm:1655:16: In procedure raise-exception:
+In procedure cog-handle: Wrong type argument in position 1 (expecting opencog atom): #<Invalid handle>
+
+
+wtf cog-atom? did not catch it!!
+
+
+old find-mol:
+Pathway functions
+Time: 605.30362 secs. calls: 1 avg: 605303617.1 usec/call for gene-path-anno
+Time: 119.20130 secs. calls: 1 avg: 119201303.5 usec/call for gene-path-write
+Time: 197.02142 secs. calls: 681 avg: 289311.9 usec/call for smpdb
+Time: 400.38248 secs. calls: 681 avg: 587933.2 usec/call for reactome
+Time: 404.90735 secs. calls: 3769 avg: 107431.0 usec/call for find-pathway-genes
+Time: 218.49366 secs. calls: 183670 avg:   1189.6 usec/call for add-pathway-genes
+Time: 185.57233 secs. calls: 3769 avg:  49236.5 usec/call for find-mol
+Time: 5.9458170 secs. calls: 1362 avg:   4365.5 usec/call for find-pathway-member
+Time: 0.5951698 secs. calls: 2197 avg:    270.9 usec/call for pathway-hierarchy
+Time: 6.7300200 secs. calls: 1362 avg:   4941.3 usec/call for find-protein
+Time: 63.506159 secs. calls: 153412 avg:    414.0 usec/call for add-loc
+Zero calls to pathway-gene-interactors
+Zero calls to generate-interactors
+
+Common biogrid/pathway functions
+Time: 2.3070624 secs. calls: 1549 avg:   1489.4 usec/call for find-name
+Time: 27.333982 secs. calls: 18187 avg:   1502.9 usec/call for locate-node
+Zero calls to find-parent
+
+Biogrid functions
+Time: 597.79982 secs. calls: 1 avg: 597799822.2 usec/call for biogrid-anno
+Time: 15.980891 secs. calls: 1 avg: 15980891.4 usec/call for biogrid-write
+Time: 55.152007 secs. calls: 681 avg:  80986.8 usec/call for match-gene-interactors
+Time: 541.87850 secs. calls: 681 avg: 795710.0 usec/call for find-output-interactors
+Time: 309.95492 secs. calls: 540000 avg:    574.0 usec/call for generate-result
+Time: 52.539998 secs. calls: 1080000 avg:     48.6 usec/call for build-interaction
+Time: 179.82050 secs. calls: 145877 avg:   1232.7 usec/call for find-pubmed-id
+Time: 7.6253914 secs. calls: 8853 avg:    861.3 usec/call for find-rna
+
+Common biogrid/GO functions
+Time: 113.07912 secs. calls: 10899 avg:  10375.2 usec/call for find-memberln
+Time: 10.764068 secs. calls: 9464 avg:   1137.4 usec/call for find-protein-form
+
+GO functions
+Time: 113.69616 secs. calls: 1 avg: 113696159.8 usec/call for gene-go-anno
+Time: 0.5844158 secs. calls: 1 avg: 584415.8 usec/call for gene-go-write
+Time: 70.341993 secs. calls: 10218 avg:   6884.1 usec/call for find-go-term
+Time: 24.755066 secs. calls: 11047 avg:   2240.9 usec/call for add-go-info
+scheme@(guile-user)> 
+
+orig find-mol:
+Time: 167.04053 secs. calls: 3769 avg:  44319.6 usec/call for find-mol
+Time: 164.07672 secs. calls: 3769 avg:  43533.2 usec/call for find-mol
+Time: 185.57233 secs. calls: 3769 avg:  49236.5 usec/call for find-mol
+
+srfi-1 find-mol:
+Time: 111.73313 secs. calls: 3769 avg:  29645.3 usec/call for find-mol
+
+de-predicate find-mol:
+Time: 109.04895 secs. calls: 3769 avg:  28933.1 usec/call for find-mol
+Time: 115.21986 secs. calls: 3769 avg:  30570.4 usec/call for find-mol
+
+cached:
+Time: 97.165338 secs. calls: 3769 avg:  25780.1 usec/call for find-mol
+Time: 101.62701 secs. calls: 3769 avg:  26963.9 usec/call for find-mol
+Time: 100.25473 secs. calls: 3769 avg:  26599.8 usec/call for find-mol
+
+Time: 1.6998823 secs. calls: 1992 avg:    853.4 usec/call for get-mol
+Time: 1.4956957 secs. calls: 1992 avg:    750.9 usec/call for get-mol
+
+
+
+node-info
+find-coding-gene
+
+
+non-cached find-coding-gene:
+Time: 42.131111 secs. calls: 177359 avg:    237.5 usec/call for find-coding-gene
+Time: 41.810285 secs. calls: 177359 avg:    235.7 usec/call for find-coding-gene
+
+cached version:
+Time: 3.9859701 secs. calls: 177359 avg:     22.5 usec/call for find-coding-gene
+Time: 1.8742897 secs. calls: 8517 avg:    220.1 usec/call for do-find-coding-gene
+
+
+find-GO-ns is cacheable its in 
+find-go-name is cacheable its in  go-info
+
+go-info is cacheacble, its in add-go-info 
+
+report find-rna cache ratio into #151
+Time: 176.14719 secs. calls: 184351 avg:    955.5 usec/call for find-rna
+Time: 7.1127286 secs. calls: 8853 avg:    803.4 usec/call for do-get-rna
+done
+
+
+pre-go-info-caching:
+Time: 79.225793 secs. calls: 10218 avg:   7753.6 usec/call for find-go-term
+Time: 77.238001 secs. calls: 10218 avg:   7559.0 usec/call for find-go-term
+
+Time: 29.799717 secs. calls: 11047 avg:   2697.5 usec/call for add-go-info
+Time: 28.259893 secs. calls: 11047 avg:   2558.2 usec/call for add-go-info
+
+Time: 50.957783 secs. calls: 10218 avg:   4987.1 usec/call for find-go-term
+Time: 2.4260579 secs. calls: 11047 avg:    219.6 usec/call for add-go-info
+Time: 1.9518182 secs. calls: 11047 avg:    176.7 usec/call for go-info
+Time: 1.8019651 secs. calls: 3449 avg:    522.5 usec/call for do-go-info
+
+report go-info cache ratio  DONE. #155
+
+
+Time: 238.57450 secs. calls: 3769 avg:  63299.2 usec/call for find-pathway-genes
+Time: 174.34150 secs. calls: 182039 avg:    957.7 usec/call for add-pathway-genes
+Time: 64.140769 secs. calls: 3769 avg:  17018.0 usec/call for get-pathway-genes
+Time: 63.417654 secs. calls: 1992 avg:  31836.2 usec/call for do-get-pathway-genes
+
+
+Well, that sucks ...
+
+large master: 819
+
+
+As of:
+Mar 6 2020 9ca662eaa831cbbe5db035ccba8548acc1e5bec4 (cache-find-rna)
+#151   annotation takes 1718 seconds (busy, small)
+
+Mar 6 2020 680293ff90078a82331fa4b427c502076725deed (cache-protein-form)
+#147 total time: 2255 (busy, small)
+
+Mar 5 2020 fe74c17af7c1eb922011be12ed84b214373bb774 (defilter)
+#146 4466 seconds (idle, small)
+
+Mar 5 2020 3f2fd54ecc25e7881c61cea26c50ab12a4f13246 (get-not-bind)
+#145 
+
+Mar 2 2020 518e0fb586006cc3456059a8cb5647e2d0377e3d (unlist-node)
+#137 
+
+29 Feb 2020 0f02e658bc80416bd713e2f1cd0c4d213ac05d66 (pubmed-cache)
+#136 
+
+28 Feb 2020 50da5d9d2dae90e40a6040ffa0f6610340047648 (interactors)
+#132 4502 (idle, small)
+
+28 Feb 2020 39f4edd0e55ec5dec5eec24b700721f7610a83de (generate)
+#133
+
+25 Feb 2020 438f6218be2383b5e61e626dd5db145a2da0c87e (memoize-node-info)
+#129
+
+25 Feb 2020 f5db6fecd8bf79d6f7280be0a16488012847f436 (check-path2)
+#127 lower win
+
+25 Feb 2020 8f6eff0508cdf1ba15d309b18c69e8415c32d7dc (memoize-find-name)
+#130
+
+25 Feb 2020 453f48c3e01505420a050e4738419a9d2900da28 (memoize-locate-node)
+#131
+
+20 Feb 2020 f2127ae53fc680f3ae9054f85ecd662030a4b249 (mutation-be-gone)
+#122  ram blowup
+
+do-get-mol-ctr
+do-go-info-ctr
+go-info-ctr
+
+
+811  833   842 816
+
+810 831
+781
+
+330% CPU time approx. to 200%
+541 
+560 -- !!1502 secs in GC!!
+524
+530 -- 
+Elapsed: 530.59 secs. Rate: 27.82 gc/min %cpu-GC: 106.4%  %cpu-use: 264.0%
+Elapsed: 539.27 secs. Rate: 28.48 gc/min %cpu-GC: 113.5%  %cpu-use: 269.6%
+Elapsed: 530.66 secs. Rate: 26.46 gc/min %cpu-GC: 101.6%  %cpu-use: 260.1%
+Elapsed: 534.02 secs. Rate: 29.44 gc/min %cpu-GC: 114.6%  %cpu-use: 269.2%
+
+
+Elapsed: 839.95 secs. Rate: 18.36 gc/min %cpu-GC: 49.94%  %cpu-use: 137.1%
+Elapsed: 803.77 secs. Rate: 20.68 gc/min %cpu-GC: 53.45%  %cpu-use: 139.4%
+Elapsed: 799.76 secs. Rate: 20.71 gc/min %cpu-GC: 52.68%  %cpu-use: 139.3%
+Elapsed: 813.68 secs. Rate: 20.35 gc/min %cpu-GC: 52.35%  %cpu-use: 139.1%
+```
+
+Elapsed: 1385.2 secs. Rate: 12.56 gc/min %cpu-GC: 13.86%  %cpu-use: 108.1%
+Elapsed: 1484.0 secs. Rate: 12.25 gc/min %cpu-GC: 17.48%  %cpu-use: 107.2%
+Elapsed: 1461.2 secs. Rate: 11.87 gc/min %cpu-GC: 20.61%  %cpu-use: 109.9%
+
+Elapsed: 1486.8 secs. Rate: 11.42 gc/min %cpu-GC: 16.69%  %cpu-use: 106.8%
+
+
+total: 1.39 * 800 = 1112.0
+(* 1.39 800 0.53) = 589.36
+
+(find-protein (GeneNode gene) 1)
+
+find-prot
+filter-pathway
+
+
+(define (xadd-pathway-genes pathway gene namespace-list num-parents
+                coding-rna non-coding-rna do-protein)
+
+   (define no-rna (or (null? coding-rna) (null? non-coding-rna)))
+   (define no-ns (and (null? namespace-list) (= 0 num-parents)))
+
+
+
+CLTC  TMCO1 CAND1
+
+   (define mtx (make-mutex))
+
+   (lambda (ITEM)
+      (lock-mutex mtx)
+      (let* ((val (hashx-ref atom-hash atom-assoc cache ITEM))
+            (rv (if val val
+                  (let ((fv (AFUNC ITEM)))
+                     (hashx-set! atom-hash atom-assoc cache ITEM fv)
+                     fv))))
+         (unlock-mutex mtx)
+         rv))
+
+above is not exception-safe...
+
+In procedure cog-new-link: Wrong type argument in position 2 (expecting opencog atom): #<procedure do-memoize ()>
+
+
+with-mutex
+
+In annotation/util.scm:
+    175:8  2 (do-find-pathway-name _)
+In unknown file:
+           1 (cog-outgoing-set #<Invalid handle>)
+In ice-9/boot-9.scm:
+
+as it cog-exectue! returned null handle...
+
+
+
+
+TODO: 
+optimize find-memberln
