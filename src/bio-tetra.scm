@@ -41,7 +41,7 @@
 		)))
 
 ;; -----------
-;; Count triangles.
+;; Count tetrahedra.
 (define (count-tetrahedra gene-list)
 	(define bench-secs (make-timer))
 	(define batch-secs (make-timer))
@@ -165,7 +165,7 @@
 
 (define (make-pointed-tetrahedra)
 	(define elapsed-secs (make-timer))
-	(define pset (cog-execute! pointed-triangle-query))
+	(define pset (cog-execute! pointed-tetrahedron-query))
 	(define points (cog-outgoing-set pset))
 	(define npoints (length points))
 	(cog-delete pset)
@@ -175,7 +175,7 @@
 
 (define (make-tetrahedra)
 	(define elapsed-secs (make-timer))
-	(define tset (cog-execute! triangle-query))
+	(define tset (cog-execute! tetrahedron-query))
 	(define tetrahedra (cog-outgoing-set tset))
 	(define ntet (length tetrahedra))
 	(cog-delete tset)
