@@ -2248,7 +2248,151 @@ In ice-9/boot-9.scm:
 as it cog-exectue! returned null handle...
 
 
-
-
 TODO: 
 optimize find-memberln
+
+
+(load-file Syntax error at line 237375 Bad expr:  "H"
+Function args:
+(/home/ubuntu/datasets/current/biogrid_gene_gene_3.5.177.scm))
+uncaught throw to C++-EXCEPTION: (load-file Syntax error at line 685118 Bad expr:  "S"
+Function args:
+(/home/ubuntu/datasets/current/entrez_to_protein.scm))
+
+
+Took 1 secs to load current/ChEBI2Reactome_PE_Pathway.txt.scm
+Loaded 87980 atoms (87980.0 per sec) total atoms=88146
+Took 14 secs to load current/noncodingRNA.scm
+
+Loaded 1298181 atoms (92727.21428571429 per sec) total atoms=1386575
+Took 23 secs to load current/smpdb_protein.scm
+Loaded 1476378 atoms (64190.34782608696 per sec) total atoms=2863405
+Took 38 secs to load current/biogrid_gene_gene_3.5.177.scm
+Loaded 2929684 atoms (77096.94736842105 per sec) total atoms=2930012
+Took 3 secs to load current/NCBI2Reactome_PE_Pathway.txt.scm
+Loaded 277580 atoms (92526.66666666667 per sec) total atoms=3141166
+Took 2 secs to load current/uniprot2GO.scm
+Loaded 239194 atoms (119597.0 per sec) total atoms=3169353
+Took 1 secs to load current/reactome.scm
+Loaded 15563 atoms (15563.0 per sec) total atoms=3185066
+Took 3 secs to load current/UniProt2Reactome_PE_Pathway.txt.scm
+Loaded 282281 atoms (94093.66666666667 per sec) total atoms=3423581
+Took 7 secs to load current/entrez_to_protein.scm
+Loaded 576528 atoms (82361.14285714286 per sec) total atoms=4000667
+Took 1 secs to load current/current_symbols.scm
+Loaded 40485 atoms (40485.0 per sec) total atoms=4041437
+Took 16 secs to load current/GO_annotation.scm
+Loaded 981103 atoms (61318.9375 per sec) total atoms=4166277
+Took 1 secs to load current/biogridgene2uniprot.scm
+Loaded 87400 atoms (87400.0 per sec) total atoms=4253691
+Took 10 secs to load current/codingRNA.scm
+Loaded 627744 atoms (62774.4 per sec) total atoms=4881441
+Took 4 secs to load current/GO.scm
+Loaded 381803 atoms (95450.75 per sec) total atoms=5263252
+Took 25 secs to load current/smpdb_chebi_wname.scm
+Loaded 1236952 atoms (49478.08 per sec) total atoms=5278473
+
+Loaded all the files in 75 seconds
+$1 = #f
+
+fast loader:
+Took 1 secs to load current/ChEBI2Reactome_PE_Pathway.txt.scm
+Loaded 39768 atoms (39768.0 per sec) total atoms=39768
+
+slow-loader:
+
+(cog-report-counts)
+
+
+scheme@(guile-user)> (serial-load-all)
+Took 3 secs to load current/ChEBI2Reactome_PE_Pathway.txt.scm
+Loaded 39768 atoms (13256.0 per sec) total atoms=39768
+Atomspace = ((ConceptNode . 3667) (PredicateNode . 2) (ListLink . 5782) (MemberLink . 10188) (AndLink . 12260) (EvaluationLink . 5782) (MoleculeNode . 2087))
+OK
+
+Took 171 secs to load current/biogrid_gene_gene_3.5.177.scm
+Loaded 1967867 atoms (11507.994152046784 per sec) total atoms=2007635
+Atomspace = ((ConceptNode . 54186) (PredicateNode . 5) (ListLink . 973402) (MemberLink . 10188) (AndLink . 12260) (EvaluationLink . 935370) (GeneNode . 20137) (MoleculeNode . 2087))
+OK
+
+Took 46 secs to load current/noncodingRNA.scm
+Loaded 747216 atoms (16243.826086956522 per sec) total atoms=2754851
+Atomspace = ((ConceptNode . 166947) (PredicateNode . 6) (ListLink . 1222500) (MemberLink . 10188) (AndLink . 12260) (EvaluationLink . 1184468) (GeneNode . 31846) (MoleculeNode . 126636))
+OK
+
+Took 141 secs to load current/smpdb_protein.scm
+Loaded 807659 atoms (5728.078014184397 per sec) total atoms=3562510
+Atomspace = ((ConceptNode . 265619) (PredicateNode . 6) (ListLink . 1272656) (MemberLink . 617356) (AndLink . 12260) (EvaluationLink . 1234624) (GeneNode . 31863) (MoleculeNode . 128126))
+very short read
+
+duuude done at line=5470687 exp=1823562
+
+loaded 151957 atoms for fast load
+Atomspace = ((ConceptNode . 98795) (PredicateNode . 1) (ListLink . 50156) (MemberLink . 1) (EvaluationLink . 1514) (MoleculeNode . 1490))
+
+vs. slow only:
+Loaded 809190 atoms (5906.496350364963 per sec) total atoms=809190
+Atomspace = ((ConceptNode . 98795) (PredicateNode . 1) (ListLink . 50156) (MemberLink . 607168) (EvaluationLink . 50156) (GeneNode . 1424) (MoleculeNode . 1490))
+
+
+
+Took 15 secs to load current/NCBI2Reactome_PE_Pathway.txt.scm
+Loaded 110007 atoms (7333.8 per sec) total atoms=3672517
+Atomspace = ((ConceptNode . 266002) (PredicateNode . 6) (ListLink . 1287467) (MemberLink . 655241) (AndLink . 54042) (EvaluationLink . 1249435) (GeneNode . 32198) (MoleculeNode . 128126))
+
+Took 9 secs to load current/uniprot2GO.scm
+Loaded 137023 atoms (15224.777777777777 per sec) total atoms=3809540
+Atomspace = ((ConceptNode . 271446) (PredicateNode . 6) (ListLink . 1287467) (MemberLink . 752670) (AndLink . 54042) (EvaluationLink . 1249435) (GeneNode . 32198) (MoleculeNode . 162276))
+
+Took 17 secs to load current/UniProt2Reactome_PE_Pathway.txt.scm
+Loaded 158124 atoms (9301.411764705883 per sec) total atoms=3967664
+Atomspace = ((ConceptNode . 282409) (PredicateNode . 6) (ListLink . 1314314) (MemberLink . 792856) (AndLink . 98788) (EvaluationLink . 1276282) (GeneNode . 32198) (MoleculeNode . 170811))
+
+Took 1 secs to load current/reactome.scm
+Loaded 9564 atoms (9564.0 per sec) total atoms=3977228
+Atomspace = ((ConceptNode . 285090) (PredicateNode . 6) (ListLink . 1316601) (MemberLink . 792856) (AndLink . 98788) (EvaluationLink . 1278569) (InheritanceLink . 2309) (GeneNode . 32198) (MoleculeNode . 170811))
+`
+Took 85 secs to load current/GO_annotation.scm
+Loaded 354080 atoms (4165.64705882353 per sec) total atoms=4331308
+Atomspace = ((ConceptNode . 314692) (PredicateNode . 6) (ListLink . 1336210) (MemberLink . 1077337) (AndLink . 98788) (EvaluationLink . 1298178) (InheritanceLink . 2309) (GeneNode . 32977) (MoleculeNode . 170811))
+n
+Took 30 secs to load current/entrez_to_protein.scm
+Loaded 419423 atoms (13980.766666666666 per sec) total atoms=4750731
+Atomspace = ((ConceptNode . 317602) (PredicateNode . 7) (ListLink . 1489210) (MemberLink . 1077337) (AndLink . 98788) (EvaluationLink . 1451178) (InheritanceLink . 2309) (GeneNode . 38861) (MoleculeNode . 275439))
+
+Took 2 secs to load current/current_symbols.scm
+Loaded 31782 atoms (15891.0 per sec) total atoms=4782513
+Atomspace = ((ConceptNode . 317602) (PredicateNode . 8) (ListLink . 1500017) (MemberLink . 1077337) (AndLink . 98788) (EvaluationLink . 1461990) (InheritanceLink . 2309) (GeneNode . 49023) (MoleculeNode . 275439))
+
+Took 186 secs to load current/smpdb_chebi_wname.scm
+Loaded 923462 atoms (4964.8494623655915 per sec) total atoms=5705975
+Atomspace = ((ConceptNode . 367360) (PredicateNode . 8) (ListLink . 1549825) (MemberLink . 1850528) (AndLink . 98788) (EvaluationLink . 1511798) (InheritanceLink . 2309) (GeneNode . 49023) (MoleculeNode . 276336))
+`n
+
+Took 7 secs to load current/biogridgene2uniprot.scm
+Loaded 83949 atoms (11992.714285714286 per sec) total atoms=5789924
+Atomspace = ((ConceptNode . 383794) (PredicateNode . 9) (ListLink . 1583581) (MemberLink . 1850528) (AndLink . 98788) (EvaluationLink . 1545554) (InheritanceLink . 2309) (GeneNode . 49023) (MoleculeNode . 276338))
+
+Took 47 secs to load current/codingRNA.scm
+Loaded 597595 atoms (12714.787234042553 per sec) total atoms=6387519
+Atomspace = ((ConceptNode . 383794) (PredicateNode . 10) (ListLink . 1836079) (MemberLink . 1850528) (AndLink . 98788) (EvaluationLink . 1798052) (InheritanceLink . 2309) (GeneNode . 49050) (MoleculeNode . 368909))
+
+Took 24 secs to load current/GO.scm
+Loaded 369815 atoms (15408.958333333334 per sec) total atoms=6757334
+Atomspace = ((ConceptNode . 454779) (PredicateNode . 12) (ListLink . 1925554) (MemberLink . 1850528) (AndLink . 98788) (EvaluationLink . 1887530) (InheritanceLink . 122184) (GeneNode . 49050) (MoleculeNode . 368909))
+
+
+Loaded all the files in 783 seconds
+$1 = #f
+scheme@(guile-user)> (* 16 60)
+$2 = 960
+scheme@(guile-user)> (gc-stats)
+$3 = ((gc-time-taken . 352806224189) (heap-size . 9469952) (heap-free-size . 356352) (heap-total-allocated . 50755714736) (heap-allocated-since-gc . 3896160) (protected-objects . 1) (gc-times . 12501))
+scheme@(guile-user)> 
+
+load-file" "Syntax error at line 15 Expecting an Atom\nFunction args:\n(/home/ubuntu/datasets/current/GO_annotation.scm)")'.
+
+ `("load-file" "Syntax error at line 1292 Unknown Atom type: stv\nFunction args:\n(/home/ubuntu/datasets/current/GO_annotation.scm)")'.
+
+Loaded all the files in 100 seconds
+
