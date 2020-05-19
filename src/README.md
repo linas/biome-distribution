@@ -21,3 +21,24 @@ Some of the secondary files:
 * `lmpd-genes.scm` - a list of 1482 genes.
 * `mem-use.sh` - log RAM usage statistics.
 * `grid.conf` and `path.conf` - handy-dandy cogserver configs
+
+Typical run
+-----------
+A tetrahedron run:
+
+```
+HUGETLB_MORECORE=yes LD_PRELOAD=/usr/lib/libhugetlbfs.so.0 guile
+scheme@(guile-user)> (load "load-files.scm")
+(start-cogserver)
+(load-all)
+(load "cleanup-data.scm")
+(delete-go-nodes)
+(delete-self-interaction)
+(delete-bad-chebi)
+(count-gene-interactions)
+(symmetrize-gene-interactions)
+(count-gene-interactions)
+(delete-simple-tv)
+(load "bio-loop.scm")
+(load "bio-tetra.scm")
+```
