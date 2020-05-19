@@ -18,8 +18,10 @@
 	(define start (current-time))
 	(define ssz (count-all))
 	(define path (string-append "/home/ubuntu/datasets/" fn))
-	; (define jnk (primitive-load path))
+	;
 	; load-file is from (opencog persist-file)
+	; and it is about 8x faster than `primitive-load`
+	; (define jnk (primitive-load path))
 	(define jnk (load-file path))
 	(define delapse (- (current-time) start))
 	(define elapse (if (eq? delapse 0) 1 delapse))
@@ -31,8 +33,6 @@
 	; (format #t "Atomspace = ~A\n" (cog-report-counts))
 	*unspecified*
 )
-
-(use-modules (ice-9 threads))
 
 (define file-list (list
  "biogridgene2uniprot.scm"
@@ -81,20 +81,9 @@
 	"current/GO.scm"
 ))
 
-(define (serial-load-all)
-	(define start (current-time))
-	; Using more than 2 threads results in net de-acceleration!
-	; (n-par-for-each 2 loaf file-list)
-	(for-each loaf current-list)
-	(format #t "\nLoaded all the files in ~A seconds\n" (- (current-time) start))
-	#f
-)
-
 (define (load-all)
 	(define start (current-time))
-	; Using more than 2 threads results in net de-acceleration!
-	; (n-par-for-each 2 loaf file-list)
-	(n-par-for-each 2 loaf current-list)
+	(for-each loaf current-list)
 	(format #t "\nLoaded all the files in ~A seconds\n" (- (current-time) start))
 	#f
 )
