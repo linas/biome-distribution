@@ -2396,3 +2396,97 @@ load-file" "Syntax error at line 15 Expecting an Atom\nFunction args:\n(/home/ub
 
 Loaded all the files in 100 seconds
 
+
+start 11PM
+libhugetlbfs: WARNING: New heap segment map at 0x56416f200000 failed: Cannot allocate memory
+Tetra done 500/49050 in 17337.856600675 secs rate=0.03 gene/sec elapsed=17338.
+
+start 12 PM
+Tetra done 500/49050 in 20950.681026636 secs rate=0.02 gene/sec elapsed=20951.
+Tetra done 1000/49050 in 24486.234528364 secs rate=0.02 gene/sec elapsed=45437.
+Tetra done 1500/49050 in 16955.569550114 secs rate=0.02 gene/sec elapsed=62392.
+
+so six hours a pop. Yuck.
+
+
+Do it again, w/ multi-term direct lookup.
+start noon
+(count-tetrahedra (cog-get-atoms 'GeneNode))
+Tetra done 500/49050 in 19338.284680108 secs rate=0.03 gene/sec elapsed=19338.
+
+That's still very losing.
+Do it again with single-term nack.
+Tetra done 50/49050 in 357. secs rate=0.14 gene/sec elapsed=356.52
+Tetra done 100/49050 in 1039.608528079 secs rate=0.07 gene/sec elapsed=1396.1
+Tetra done 150/49050 in 461. secs rate=0.08 gene/sec elapsed=1857.2
+Tetra done 200/49050 in 3275.171936237 secs rate=0.04 gene/sec elapsed=5132.3
+Tetra done 250/49050 in 1788.034691459 secs rate=0.04 gene/sec elapsed=6920.4
+Tetra done 300/49050 in 5327.730933101 secs rate=0.02 gene/sec elapsed=12248.
+Tetra done 350/49050 in 1070.717004326 secs rate=0.03 gene/sec elapsed=13319.
+Tetra done 400/49050 in 2380.923876091 secs rate=0.03 gene/sec elapsed=15700.
+Tetra done 450/49050 in 1136.927697364 secs rate=0.03 gene/sec elapsed=16837.
+Tetra done 500/49050 in 1649.0929973 secs rate=0.03 gene/sec elapsed=18486.
+---
+
+nack, again, top window. grid - 17003  pid 25173
+Tetra done 50/49050 in 316. secs rate=0.16 gene/sec elapsed=316.43
+Tetra done 100/49050 in 1035.593670248 secs rate=0.07 gene/sec elapsed=1352.0
+Tetra done 150/49050 in 440. secs rate=0.08 gene/sec elapsed=1791.8
+Tetra done 200/49050 in 3187.839275803 secs rate=0.04 gene/sec elapsed=4979.6
+Tetra done 250/49050 in 1778.740378956 secs rate=0.04 gene/sec elapsed=6758.4
+Tetra done 300/49050 in 5392.000219301 secs rate=0.02 gene/sec elapsed=12150.
+Tetra done 350/49050 in 1013.945399951 secs rate=0.03 gene/sec elapsed=13164.
+Tetra done 400/49050 in 2233.991115707 secs rate=0.03 gene/sec elapsed=15398.
+Tetra done 450/49050 in 1052.103571174 secs rate=0.03 gene/sec elapsed=16450.
+Tetra done 500/49050 in 1659.771027799 secs rate=0.03 gene/sec elapsed=18110.
+Tetra done 750/49050 in 2128.220208645 secs rate=0.03 gene/sec elapsed=29242.
+Tetra done 1000/49050 in 5811.322509432 secs rate=0.02 gene/sec elapsed=41368.
+Tetra done 1250/49050 in 1091.630218217 secs rate=0.03 gene/sec elapsed=49078.
+Tetra done 1500/49050 in 1360.187493002 secs rate=0.03 gene/sec elapsed=57795.
+Tetra done 1750/49050 in 1968.218188658 secs rate=0.03 gene/sec elapsed=69280.
+Tetra done 2000/49050 in 1794.409534285 secs rate=0.03 gene/sec elapsed=76248.
+
+
+
+
+full-on caching: (middle window) 17001  pid 21984
+Tetra done 50/49050 in 346. secs rate=0.14 gene/sec elapsed=346.49
+Tetra done 100/49050 in 1074.988594294 secs rate=0.07 gene/sec elapsed=1421.5
+Tetra done 150/49050 in 478. secs rate=0.08 gene/sec elapsed=1899.7
+Tetra done 200/49050 in 3377.544715255 secs rate=0.04 gene/sec elapsed=5277.3
+Tetra done 250/49050 in 1948.473661945 secs rate=0.03 gene/sec elapsed=7225.7
+Tetra done 300/49050 in 5827.518502177 secs rate=0.02 gene/sec elapsed=13053.
+Tetra done 350/49050 in 1183.467971937 secs rate=0.02 gene/sec elapsed=14237.
+Tetra done 400/49050 in 2488.720730604 secs rate=0.02 gene/sec elapsed=16725.
+Tetra done 450/49050 in 1216.253035126 secs rate=0.03 gene/sec elapsed=17942.
+Tetra done 500/49050 in 1710.973150912 secs rate=0.03 gene/sec elapsed=19653.
+Tetra done 750/49050 in 2178.701768439 secs rate=0.02 gene/sec elapsed=30770.
+Tetra done 1000/49050 in 5775.104894568 secs rate=0.02 gene/sec elapsed=43048.
+Tetra done 1250/49050 in 1109.929086878 secs rate=0.02 gene/sec elapsed=50797.
+Tetra done 1500/49050 in 1389.160560156 secs rate=0.03 gene/sec elapsed=59690.
+Tetra done 1750/49050 in 1993.288869844 secs rate=0.02 gene/sec elapsed=71182.
+Tetra done 2000/49050 in 1851.521040398 secs rate=0.03 gene/sec elapsed=78254.
+
+
+
+
+
+
+Master: only the old positive single-term cache.
+bottom window path.conf 17002  pid 23621
+Tetra done 50/49050 in 392. secs rate=0.13 gene/sec elapsed=391.98
+Tetra done 100/49050 in 1249.435502896 secs rate=0.06 gene/sec elapsed=1641.4
+Tetra done 150/49050 in 491. secs rate=0.07 gene/sec elapsed=2132.6
+Tetra done 200/49050 in 3479.214295589 secs rate=0.04 gene/sec elapsed=5611.9
+Tetra done 250/49050 in 2015.037010913 secs rate=0.03 gene/sec elapsed=7626.9
+Tetra done 300/49050 in 5693.471465538 secs rate=0.02 gene/sec elapsed=13320.
+Tetra done 350/49050 in 1111.049545066 secs rate=0.02 gene/sec elapsed=14431.
+Tetra done 400/49050 in 2328.927740838 secs rate=0.02 gene/sec elapsed=16760.
+Tetra done 450/49050 in 1224.662314804 secs rate=0.03 gene/sec elapsed=17985.
+Tetra done 500/49050 in 1935.730680506 secs rate=0.03 gene/sec elapsed=19921.
+Tetra done 750/49050 in 2393.589804218 secs rate=0.02 gene/sec elapsed=32555.
+Tetra done 1000/49050 in 6551.784415314 secs rate=0.02 gene/sec elapsed=46234.
+Tetra done 1250/49050 in 1219.161454083 secs rate=0.02 gene/sec elapsed=54747.
+Tetra done 1500/49050 in 1475.835604819 secs rate=0.02 gene/sec elapsed=64318.
+
+

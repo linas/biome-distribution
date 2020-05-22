@@ -28,7 +28,7 @@ A tetrahedron run:
 
 ```
 HUGETLB_MORECORE=yes LD_PRELOAD=/usr/lib/libhugetlbfs.so.0 guile
-scheme@(guile-user)> (load "load-files.scm")
+scheme@(guile-user)> (load "load-files.scm") ; about 100 seconds
 (start-cogserver)
 (load-all)
 (load "cleanup-data.scm")
@@ -38,7 +38,9 @@ scheme@(guile-user)> (load "load-files.scm")
 (count-gene-interactions)
 (symmetrize-gene-interactions)
 (count-gene-interactions)
-(delete-simple-tv)
+(delete-simple-tv)     ; two or four minutes?
 (load "bio-loop.scm")
+(make-triangles)
 (load "bio-tetra.scm")
+(count-tetrahedra (cog-get-atoms 'GeneNode))
 ```

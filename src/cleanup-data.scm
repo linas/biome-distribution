@@ -108,6 +108,7 @@
 
 	(define n-edge (/ (- (+ n-acts n-asym) n-self) 2))
 	(format #t "Conclude: there are ~A symmetrized interactions\n" n-edge)
+	*unspecified*
 )
 
 ; --------------------
@@ -145,7 +146,7 @@
   this cannot be fixed, because the PLN book documents the garbage;
   its part of the spec. Whoops.
 "
-
+	(define elapsed-secs (make-timer))
 	; Setting to (stv 1 0) sets it to DEFAULT_TV, which frees
 	; the RAM in the AtomSpace.
 	(for-each
@@ -153,6 +154,8 @@
 			(if (not (cog-ctv? (cog-tv ATOM)))
 				(cog-set-tv! ATOM (stv 1 0))))
 		(cog-get-atoms 'Atom #t))
+	(format #t "Removed SimpleTV in ~6f seconds\n" (elapsed-secs))
+	*unspecified*
 )
 
 ; --------------------

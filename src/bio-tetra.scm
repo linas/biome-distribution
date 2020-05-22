@@ -17,8 +17,10 @@
 
 ;; This defines a tetrahedron-shaped search; one endpoint is fixed,
 ;; and we are looking for three other genes that interact with the
-;; endpoint and form a tetrahedrone.
-(define (find-gene-tetrahedron gene)
+;; endpoint and form a tetrahedron.  XXX This search is not practical;
+;; with the current pattern engine, this will take approx 25 cpu-days.
+;; See below for an alternative.
+(define (naive-find-gene-tetrahedron gene)
 	(Get
 		(VariableList
 			(TypedVariable (Variable "$a") (Type 'GeneNode))
@@ -38,6 +40,29 @@
 				(List (Variable "$b") (Variable "$c")))
 			(Evaluation (Predicate "interacts_with")
 				(List (Variable "$c") (Variable "$a")))
+		)))
+
+;; -----------
+;; This defines a tetrahedron-shaped search; one endpoint is fixed,
+;; and we are looking for three other genes that interact with the
+;; endpoint and form a tetrahedron.  Unlike the bove search, this
+;; assumes that triangles have been pre-computed.
+(define (find-gene-tetrahedron gene)
+	(Get
+		(VariableList
+			(TypedVariable (Variable "$a") (Type 'GeneNode))
+			(TypedVariable (Variable "$b") (Type 'GeneNode))
+			(TypedVariable (Variable "$c") (Type 'GeneNode))
+		)
+		(And
+			(Evaluation (Predicate "interacts_with")
+				(List gene (Variable "$a")))
+			(Evaluation (Predicate "interacts_with")
+				(List gene (Variable "$b")))
+			(Evaluation (Predicate "interacts_with")
+				(List gene (Variable "$c")))
+			(Evaluation (Predicate "triangle")
+				(Set (Variable "$a") (Variable "$b") (Variable "$c")))
 		)))
 
 ;; -----------
@@ -61,12 +86,13 @@
 			(define rlen (cog-arity result))
 
 			; Collect up some stats
-			(cog-inc-count! gene rlen)
+			; (cog-inc-count! gene rlen)
 			(for-each
 				(lambda (gene-triple)
 					(define gene-a (cog-outgoing-atom gene-triple 0))
 					(define gene-b (cog-outgoing-atom gene-triple 1))
 					(define gene-c (cog-outgoing-atom gene-triple 2))
+					(define gene-d gene)
 					(define pab (Evaluation (Predicate "interacts_with")
 						(List  gene-a gene-b)))
 					(define pbc (Evaluation (Predicate "interacts_with")
@@ -74,12 +100,25 @@
 					(define pca (Evaluation (Predicate "interacts_with")
 						(List  gene-c gene-a)))
 
+					(define pad (Evaluation (Predicate "interacts_with")
+						(List  gene-a gene-d)))
+					(define pbd (Evaluation (Predicate "interacts_with")
+						(List  gene-b gene-d)))
+					(define pcd (Evaluation (Predicate "interacts_with")
+						(List  gene-c gene-d)))
+
 					(cog-inc-count! gene-a 1)
 					(cog-inc-count! gene-b 1)
 					(cog-inc-count! gene-c 1)
+					(cog-inc-count! gene-d 1)
+
 					(cog-inc-count! pab 1)
 					(cog-inc-count! pbc 1)
-					(cog-inc-count! pca 1))
+					(cog-inc-count! pca 1)
+
+					(cog-inc-count! pad 1)
+					(cog-inc-count! pbd 1)
+					(cog-inc-count! pcd 1))
 				(cog-outgoing-set result))
 
 			; delete the SetLink
@@ -92,12 +131,13 @@
 			; (display ".")
 			(set! ndone (+ ndone 1))
 			(if (eq? 0 (modulo ndone 500))
-				(let* ((elapsed
+				(let* ((elapsed-secs
 							(/ (- (get-internal-real-time) start-time)
 								internal-time-units-per-second))
-						(rate (/ ndone elapsed)))
+						(elapsed-mins (/ elapsed-secs 60))
+						(rate (/ ndone elapsed-mins)))
 					(format #t
-						"Tetra done ~A/~A in ~4f secs rate=~4f gene/sec elapsed=~6f\n"
+						"Tetra done ~A/~A in ~6f secs rate=~4f gene/min elapsed=~8f\n"
 						ndone ngen (batch-secs) rate elapsed)))
 		)
 		gene-list)
