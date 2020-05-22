@@ -130,7 +130,7 @@
 			;; 	gene-name (gene-secs) rlen)
 			; (display ".")
 			(set! ndone (+ ndone 1))
-			(if (eq? 0 (modulo ndone 500))
+			(if (eq? 0 (modulo ndone 50))
 				(let* ((elapsed-secs
 							(/ (- (get-internal-real-time) start-time)
 								internal-time-units-per-second))
