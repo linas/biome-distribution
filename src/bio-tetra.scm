@@ -21,7 +21,7 @@
 ;; with the current pattern engine, this will take approx 25 cpu-days.
 ;; See below for an alternative.
 (define (naive-find-gene-tetrahedron gene)
-	(Get
+	(Meet
 		(VariableList
 			(TypedVariable (Variable "$a") (Type 'GeneNode))
 			(TypedVariable (Variable "$b") (Type 'GeneNode))
@@ -48,7 +48,7 @@
 ;; endpoint and form a tetrahedron.  Unlike the bove search, this
 ;; assumes that triangles have been pre-computed.
 (define (find-gene-tetrahedron gene)
-	(Get
+	(Meet
 		(VariableList
 			(TypedVariable (Variable "$a") (Type 'GeneNode))
 			(TypedVariable (Variable "$b") (Type 'GeneNode))
@@ -83,7 +83,8 @@
 			; Perform the search
 			; (define gene-secs (make-timer))
 			(define result (cog-execute! query))
-			(define rlen (cog-arity result))
+			(define rlist (cog-value->list result))
+			(define rlen (length rlist))
 
 			; Collect up some stats
 			; (cog-inc-count! gene rlen)
@@ -119,11 +120,9 @@
 					(cog-inc-count! pad 1)
 					(cog-inc-count! pbd 1)
 					(cog-inc-count! pcd 1))
-				(cog-outgoing-set result))
+				(rlist))
 
-			; delete the SetLink
-			(cog-delete result)
-			; delete the GetLink, too.
+			; delete the GetLink.
 			(cog-delete query)
 
 			;; (format #t "Ran tetrahedra ~A in ~6f seconds; got ~A results\n"
@@ -138,7 +137,7 @@
 						(rate (/ ndone elapsed-mins)))
 					(format #t
 						"Tetra done ~A/~A in ~6f secs rate=~4f gene/min elapsed=~8f\n"
-						ndone ngen (batch-secs) rate elapsed)))
+						ndone ngen (batch-secs) rate elapsed-secs)))
 		)
 		gene-list)
 	(format #t "\n")

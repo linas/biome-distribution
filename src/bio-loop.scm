@@ -114,7 +114,7 @@
 ;; -----------
 ; Explicitly create and count triangles.
 (define pointed-triangle-query
-	(Bind
+	(Query
 		(VariableList
 			(TypedVariable (Variable "$a") (Type 'GeneNode))
 			(TypedVariable (Variable "$b") (Type 'GeneNode))
@@ -134,7 +134,7 @@
 
 ; Same as above, but not pointed; uses a set.
 (define triangle-query
-	(Bind
+	(Query
 		(VariableList
 			(TypedVariable (Variable "$a") (Type 'GeneNode))
 			(TypedVariable (Variable "$b") (Type 'GeneNode))
@@ -155,9 +155,8 @@
 (define (make-pointed-triangles)
 	(define elapsed-secs (make-timer))
 	(define pset (cog-execute! pointed-triangle-query))
-	(define points (cog-outgoing-set pset))
+	(define points (cog-value->list pset))
 	(define npoints (length points))
-	(cog-delete pset)
 	(format #t "Obtained ~A pointed triangles in ~6f seconds\n"
 		npoints (elapsed-secs))
 )
@@ -165,9 +164,8 @@
 (define (make-triangles)
 	(define elapsed-secs (make-timer))
 	(define tset (cog-execute! triangle-query))
-	(define triangles (cog-outgoing-set tset))
+	(define triangles (cog-value->list tset))
 	(define ntris (length triangles))
-	(cog-delete tset)
 	(format #t "Obtained ~A triangles in ~6f seconds\n" ntris (elapsed-secs))
 )
 
@@ -301,7 +299,9 @@
 ;
 ; Run the triangle counting code.
 ; (count-triangles (cog-get-atoms 'GeneNode))
-
+;
+; (cog-incoming-size (Predicate "triangle"))
+;
 ; Run the pentqagon counting code.
 ; (define pathways (pathways-of-mols (cog-get-atoms 'GeneNode)))
 ; (length pathways)  ; 50501

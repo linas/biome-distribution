@@ -41,6 +41,7 @@ scheme@(guile-user)> (load "load-files.scm") ; about 100 seconds
 (delete-simple-tv)     ; two or four minutes?
 (load "bio-loop.scm")
 (make-triangles)
+; Above should create 1797281 (1.8M) triangles
 (load "bio-tetra.scm")
 (count-tetrahedra (cog-get-atoms 'GeneNode))
 ```
