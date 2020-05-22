@@ -21,15 +21,6 @@
 ; Needeed for definition of GeneNode and MoleculeNode
 (use-modules (opencog bioscience))
 
-; Performance stats timer
-(define (make-timer)
-	(let ((start-time (get-internal-real-time)))
-		(lambda ()
-			(define now (get-internal-real-time))
-			(define diff (/ (- now start-time) internal-time-units-per-second))
-			(set! start-time now)
-			diff)))
-
 ; ------------------------------------------------------------------
 ; The triangle routines.
 

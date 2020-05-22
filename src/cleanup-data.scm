@@ -6,6 +6,17 @@
 ;
 (use-modules (opencog exec))
 
+; --------------------
+; Performance stats timer
+(define (make-timer)
+	(let ((start-time (get-internal-real-time)))
+		(lambda ()
+			(define now (get-internal-real-time))
+			(define diff (/ (- now start-time) internal-time-units-per-second))
+			(set! start-time now)
+			diff)))
+
+; --------------------
 (define (delete-go-nodes)
 "
   Delete the GO (GeneOnotology) nodes, as they are not pathways.

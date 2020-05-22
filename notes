@@ -2445,6 +2445,7 @@ Tetra done 1250/49050 in 1091.630218217 secs rate=0.03 gene/sec elapsed=49078.
 Tetra done 1500/49050 in 1360.187493002 secs rate=0.03 gene/sec elapsed=57795.
 Tetra done 1750/49050 in 1968.218188658 secs rate=0.03 gene/sec elapsed=69280.
 Tetra done 2000/49050 in 1794.409534285 secs rate=0.03 gene/sec elapsed=76248.
+Tetra done 2500/49050 in 1830.48523792 secs rate=0.02 gene/sec elapsed=117488.873815013
 
 
 
@@ -2466,7 +2467,8 @@ Tetra done 1250/49050 in 1109.929086878 secs rate=0.02 gene/sec elapsed=50797.
 Tetra done 1500/49050 in 1389.160560156 secs rate=0.03 gene/sec elapsed=59690.
 Tetra done 1750/49050 in 1993.288869844 secs rate=0.02 gene/sec elapsed=71182.
 Tetra done 2000/49050 in 1851.521040398 secs rate=0.03 gene/sec elapsed=78254.
-
+Tetra done 2500/49050 in 1966.789259385 secs rate=0.02 gene/sec elapsed=119688.326560214
+Tetra done 2750/49050 in 5350.045062939 secs rate=0.02 gene/sec elapsed=137571.242393373
 
 
 
@@ -2488,6 +2490,9 @@ Tetra done 750/49050 in 2393.589804218 secs rate=0.02 gene/sec elapsed=32555.
 Tetra done 1000/49050 in 6551.784415314 secs rate=0.02 gene/sec elapsed=46234.
 Tetra done 1250/49050 in 1219.161454083 secs rate=0.02 gene/sec elapsed=54747.
 Tetra done 1500/49050 in 1475.835604819 secs rate=0.02 gene/sec elapsed=64318.
+Tetra done 2000/49050 in 1974.580412704 secs rate=0.02 gene/sec elapsed=84589.
+Tetra done 2500/49050 in 1944.352487444 secs rate=0.02 gene/sec elapsed=128645.84323927
+
 
 
 
