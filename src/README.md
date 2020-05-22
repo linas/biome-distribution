@@ -38,7 +38,7 @@ scheme@(guile-user)> (load "load-files.scm") ; about 100 seconds
 (count-gene-interactions)
 (symmetrize-gene-interactions)
 (count-gene-interactions)
-(delete-simple-tv)     ; two or four minutes?
+(delete-simple-tv)     ; about 160 seconds
 (load "bio-loop.scm")
 (make-triangles)
 ; Above should create 1797281 (1.8M) triangles

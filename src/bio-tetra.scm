@@ -120,7 +120,7 @@
 					(cog-inc-count! pad 1)
 					(cog-inc-count! pbd 1)
 					(cog-inc-count! pcd 1))
-				(rlist))
+				rlist)
 
 			; delete the GetLink.
 			(cog-delete query)
