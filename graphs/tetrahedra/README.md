@@ -32,9 +32,11 @@ cutting and pasting the code there.
 
 Current results:
 9989 genes participated in tetrahedra - `(length graph-participants)`
+487728 distinct edges in tetrahedra - `(length gene-pairs)`
+
 
 ### Files
 
-* `gene-tetra.gplot` -- Create Zipf-distribution graphs for tetrahedra.
+* `gene-tetra.gplot`  -- Create Zipf-distribution graphs for tetrahedra.
 * `tetra-edges.gplot` -- Create Zipf-distribution graphs for gene-pair
-                        edges in appearing tetrahedra.
+                         edges in appearing tetrahedra.

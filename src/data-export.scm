@@ -44,14 +44,16 @@
 		(filter (lambda (gene) (< 0 (cog-count gene)))
 			(cog-get-atoms 'GeneNode))))
 
-; Trinalge counts go into "gene-loops.csv"
+; Triangle counts go into "gene-loops.csv", tetrahedra into "gene-tetra.csv"
 (dump-to-csv graph-participants "gene-loops.csv")
+(dump-to-csv graph-participants "gene-tetra.csv")
 
-; Gene pairs that appeared as edges in a triangular loop
+; Gene pairs that appeared as edges in a graph (triangle, tetrahedron
+; or other graph).
 ; Some of these pairs have AnyNodes from the matrix code,
 ; so filter those out... 
 ; Some pairs have zero-count. These are interacting genes in 
-; the dataset, but simply do not form a triangle.
+; the dataset, but are not graph participants.
 (define gene-pairs
 	(filter (lambda (evlnk)
 			(and (< 0 (cog-count evlnk))
@@ -67,7 +69,9 @@
 		(cog-count evelnk)))
 		gene-pairs))
 
+; Use "tri-edges.csv" for triangles, "tetra-edges.csv" for tetrahedra.
 (dump-to-csv gene-pair-cnts "tri-edges.csv")
+(dump-to-csv gene-pair-cnts "tetra-edges.csv")
 
 ; ------------------------------------------------------------
 ; Examination of the pentagons.
