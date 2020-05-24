@@ -8,6 +8,7 @@
 ;
 (use-modules (srfi srfi-1))
 (use-modules (opencog) (opencog exec))
+; (use-modules (ice-9 threads))
 
 ; Needeed for definition of GeneNode and MoleculeNode
 (use-modules (opencog bioscience))
@@ -28,18 +29,18 @@
 			(TypedVariable (Variable "$c") (Type 'GeneNode))
 		)
 		(And
-			(Evaluation (Predicate "interacts_with")
-				(List gene (Variable "$a")))
-			(Evaluation (Predicate "interacts_with")
-				(List gene (Variable "$b")))
-			(Evaluation (Predicate "interacts_with")
-				(List gene (Variable "$c")))
-			(Evaluation (Predicate "interacts_with")
-				(List (Variable "$a") (Variable "$b")))
-			(Evaluation (Predicate "interacts_with")
-				(List (Variable "$b") (Variable "$c")))
-			(Evaluation (Predicate "interacts_with")
-				(List (Variable "$c") (Variable "$a")))
+			(Evaluation (Predicate "gene-pair")
+				(Set gene (Variable "$a")))
+			(Evaluation (Predicate "gene-pair")
+				(Set gene (Variable "$b")))
+			(Evaluation (Predicate "gene-pair")
+				(Set gene (Variable "$c")))
+			(Evaluation (Predicate "gene-pair")
+				(Set (Variable "$a") (Variable "$b")))
+			(Evaluation (Predicate "gene-pair")
+				(Set (Variable "$b") (Variable "$c")))
+			(Evaluation (Predicate "gene-pair")
+				(Set (Variable "$c") (Variable "$a")))
 		)))
 
 ;; -----------
@@ -48,22 +49,26 @@
 ;; endpoint and form a tetrahedron.  Unlike the bove search, this
 ;; assumes that triangles have been pre-computed.
 (define (find-gene-tetrahedron gene)
-	(Meet
+	(Query
 		(VariableList
 			(TypedVariable (Variable "$a") (Type 'GeneNode))
 			(TypedVariable (Variable "$b") (Type 'GeneNode))
 			(TypedVariable (Variable "$c") (Type 'GeneNode))
 		)
 		(And
-			(Evaluation (Predicate "interacts_with")
-				(List gene (Variable "$a")))
-			(Evaluation (Predicate "interacts_with")
-				(List gene (Variable "$b")))
-			(Evaluation (Predicate "interacts_with")
-				(List gene (Variable "$c")))
-			(Evaluation (Predicate "triangle")
+			(Evaluation (Predicate "gene-pair")
+				(Set gene (Variable "$a")))
+			(Evaluation (Predicate "gene-pair")
+				(Set gene (Variable "$b")))
+			(Evaluation (Predicate "gene-pair")
+				(Set gene (Variable "$c")))
+			(Evaluation (Predicate "gene-triangle")
 				(Set (Variable "$a") (Variable "$b") (Variable "$c")))
-		)))
+		)
+		(Evaluation (Predicate "tetrahedron")
+			(Set (Variable "$a") (Variable "$b") (Variable "$c") (Variable "$d")))
+		))
+))
 
 ;; -----------
 ;; Count tetrahedra.
@@ -73,7 +78,7 @@
 	(define start-time (get-internal-real-time))
 	(define ndone 0)
 	(define ngen (length gene-list))
-	(for-each
+	(for-each ;; or try par-for-each
 		(lambda (gene)
 			; Create a search pattern for each gene in the gene list.
 			; (define gene (Gene gene-name))
@@ -94,18 +99,18 @@
 					(define gene-b (cog-outgoing-atom gene-triple 1))
 					(define gene-c (cog-outgoing-atom gene-triple 2))
 					(define gene-d gene)
-					(define pab (Evaluation (Predicate "interacts_with")
+					(define pab (Evaluation (Predicate "gene-pair")
 						(List  gene-a gene-b)))
-					(define pbc (Evaluation (Predicate "interacts_with")
+					(define pbc (Evaluation (Predicate "gene-pair")
 						(List  gene-b gene-c)))
-					(define pca (Evaluation (Predicate "interacts_with")
+					(define pca (Evaluation (Predicate "gene-pair")
 						(List  gene-c gene-a)))
 
-					(define pad (Evaluation (Predicate "interacts_with")
+					(define pad (Evaluation (Predicate "gene-pair")
 						(List  gene-a gene-d)))
-					(define pbd (Evaluation (Predicate "interacts_with")
+					(define pbd (Evaluation (Predicate "gene-pair")
 						(List  gene-b gene-d)))
-					(define pcd (Evaluation (Predicate "interacts_with")
+					(define pcd (Evaluation (Predicate "gene-pair")
 						(List  gene-c gene-d)))
 
 					(cog-inc-count! gene-a 1)
@@ -148,32 +153,6 @@
 )
 
 ;; -----------
-; Explicitly create and count tetrahedra.
-(define pointed-tetrahedron-query
-	(Bind
-		(VariableList
-			(TypedVariable (Variable "$a") (Type 'GeneNode))
-			(TypedVariable (Variable "$b") (Type 'GeneNode))
-			(TypedVariable (Variable "$c") (Type 'GeneNode))
-			(TypedVariable (Variable "$d") (Type 'GeneNode))
-		)
-		(And
-			(Evaluation (Predicate "interacts_with")
-				(List (Variable "$a") (Variable "$b")))
-			(Evaluation (Predicate "interacts_with")
-				(List (Variable "$b") (Variable "$c")))
-			(Evaluation (Predicate "interacts_with")
-				(List (Variable "$c") (Variable "$a")))
-			(Evaluation (Predicate "interacts_with")
-				(List (Variable "$a") (Variable "$d")))
-			(Evaluation (Predicate "interacts_with")
-				(List (Variable "$b") (Variable "$d")))
-			(Evaluation (Predicate "interacts_with")
-				(List (Variable "$c") (Variable "$d")))
-		)
-		(Evaluation (Predicate "pointed_tetrahedron")
-			(List (Variable "$a") (Variable "$b") (Variable "$c") (Variable "$d")))
-		))
 
 ; Same as above, but not pointed; uses a set.
 (define tetrahedron-query
@@ -185,17 +164,17 @@
 			(TypedVariable (Variable "$d") (Type 'GeneNode))
 		)
 		(And
-			(Evaluation (Predicate "interacts_with")
+			(Evaluation (Predicate "gene-pair")
 				(List (Variable "$a") (Variable "$b")))
-			(Evaluation (Predicate "interacts_with")
+			(Evaluation (Predicate "gene-pair")
 				(List (Variable "$b") (Variable "$c")))
-			(Evaluation (Predicate "interacts_with")
+			(Evaluation (Predicate "gene-pair")
 				(List (Variable "$c") (Variable "$a")))
-			(Evaluation (Predicate "interacts_with")
+			(Evaluation (Predicate "gene-pair")
 				(List (Variable "$a") (Variable "$d")))
-			(Evaluation (Predicate "interacts_with")
+			(Evaluation (Predicate "gene-pair")
 				(List (Variable "$b") (Variable "$d")))
-			(Evaluation (Predicate "interacts_with")
+			(Evaluation (Predicate "gene-pair")
 				(List (Variable "$c") (Variable "$d")))
 		)
 		(Evaluation (Predicate "tetrahedron")

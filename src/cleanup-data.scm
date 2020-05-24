@@ -132,7 +132,7 @@
   case, the interactions should be symmetrized. That's what this does.
 "
 	(define interact-q
-		(Bind
+		(Query
 			(VariableList
 				(TypedVariable (Variable "g1") (Type 'GeneNode))
 				(TypedVariable (Variable "g2") (Type 'GeneNode)))
@@ -144,8 +144,37 @@
 
 	(define sym-set (cog-execute! interact-q))
 	(format #t "Found ~A gene interactions\n"
-		(length (cog-outgoing-set sym-set)))
-	(cog-delete sym-set)
+		(length (cog-value->list sym-set)))
+	(cog-delete interact-q)
+	*unspecified*
+)
+
+; --------------------
+(define (make-gene-pairs)
+"
+  The gene interactions use the asymmetric ListLink to denote
+  gene pairs. But gene interactions are (meant to be) symmetric, so
+  they should have used the SetLink. We make this now.
+
+  See also: make-triangles, make-tetrahedra
+"
+	(define make-sym-pairs
+		(Query
+			(VariableList
+				(TypedVariable (Variable "g1") (Type 'GeneNode))
+				(TypedVariable (Variable "g2") (Type 'GeneNode)))
+			(Present
+				(Evaluation (Predicate "interacts_with")
+					(List (Variable "g1") (Variable "g2"))))
+			(Evaluation (Predicate "gene-pair")
+				(Set (Variable "g1") (Variable "g2")))))
+
+	(define elapsed-secs (make-timer))
+	(define sym-set (cog-execute! make-sym-pairs))
+	(format #t "Created ~A symmetric gene-pairs in ~6f seconds\n"
+		(length (cog-value->list sym-set)) (elapsed-secs))
+	(cog-delete make-sym-pairs)
+	*unspecified*
 )
 
 ; --------------------

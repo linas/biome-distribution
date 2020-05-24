@@ -10,11 +10,24 @@ of interactions.
 ### HOWTO:
 
 ```
-(load "load-files.scm")
+HUGETLB_MORECORE=yes LD_PRELOAD=/usr/lib/libhugetlbfs.so.0 guile
+scheme@(guile-user)> (load "load-files.scm")
 (start-cogserver)
-(load-all)
+(load-all)             ; about 100 seconds
+(load "cleanup-data.scm")
+(delete-go-nodes)
+(delete-self-interaction)
+(delete-bad-chebi)
+(count-gene-interactions)
+(make-gene-pairs)
+(cog-delete-recursive (Predicate "interacts_with"))
+(delete-simple-tv)     ; about 160 seconds
 (load "bio-loop.scm")
+(count-gene-triangles)   ; about 2800 seconds
+; Above should create 1797281 (1.8M) triangles
 ```
+
+
 Then see bottom of that file...
 ```
 (count-triangles (cog-get-atoms 'GeneNode))

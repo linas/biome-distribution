@@ -17,11 +17,11 @@ scheme@(guile-user)> (load "load-files.scm")
 (delete-self-interaction)
 (delete-bad-chebi)
 (count-gene-interactions)
-(symmetrize-gene-interactions)
-(count-gene-interactions)
+(make-gene-pairs)
+(cog-delete-recursive (Predicate "interacts_with"))
 (delete-simple-tv)     ; about 160 seconds
 (load "bio-loop.scm")
-(make-triangles)       ; about 2800 seconds
+(make-gene-triangles)       ; about 2800 seconds
 ; Above should create 1797281 (1.8M) triangles
 (load "bio-tetra.scm")
 (count-tetrahedra (cog-get-atoms 'GeneNode))

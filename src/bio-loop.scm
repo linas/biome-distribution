@@ -28,9 +28,10 @@
 ;; and we are looking for two other genes that interact with the
 ;; endpoint and form a triangle.  This is called
 ;; "find-output-interactors" in the MOZI code-base, and we keep
-;; that name here.
+;; that name here. XXX Caution: This uses the non-symmetrized
+;; edges from the original dataset. Caveat emptor!
 (define (find-output-interactors gene)
-	(Get
+	(Meet
 		(VariableList
 			(TypedVariable (Variable "$a") (Type 'GeneNode))
 			(TypedVariable (Variable "$b") (Type 'GeneNode))
@@ -44,9 +45,32 @@
 				(List gene (Variable "$b")))
 		)))
 
+; Same as above, but using the explicitly symmetrized edges.
+; It also explicitly creates the triangles as it counts.
+; This helps avoid accidental double-counting and other
+; hard-to-understand bugs. e.g. where the order of the distal
+; gene pair is swapped.
+(define (find-gene-triangle gene)
+	(Query
+		(VariableList
+			(TypedVariable (Variable "$a") (Type 'GeneNode))
+			(TypedVariable (Variable "$b") (Type 'GeneNode))
+		)
+		(And
+			(Present (Evaluation (Predicate "gene-pair")
+				(Set gene (Variable "$a"))))
+			(Present (Evaluation (Predicate "gene-pair")
+				(Set (Variable "$a") (Variable "$b"))))
+			(Present (Evaluation (Predicate "gene-pair")
+				(Set (Variable "$b") gene)))
+		)
+		(Evaluation (Predicate "gene-triangle")
+			(Set gene (Variable "$a") (Variable "$b")))
+		))
+
 ;; -----------
-;; Count triangles.
-(define (count-triangles gene-list)
+;; Count triangles. This also creates them.
+(define (count-gene-triangles gene-list)
 	(define bench-secs (make-timer))
 	(define batch-secs (make-timer))
 	(define start-time (get-internal-real-time))
@@ -57,28 +81,42 @@
 			; Create a search pattern for each gene in the gene list.
 			; (define gene (Gene gene-name))
 			; (define gene-name (cog-name gene))
-			(define query (find-output-interactors gene))
+			; (define query (find-output-interactors gene))
+			(define query (find-gene-triagles gene))
 
 			; Perform the search
 			; (define gene-secs (make-timer))
 			(define result (cog-execute! query))
-			(define rlen (cog-arity result))
+			(define rlist (cog-value->list result))
+			(define rlen (cog-arity rlist))
 
-			; Collect up some stats
-			(cog-inc-count! gene rlen)
+			(define (mkpr a b)
+				(Evaluation (Predicate "gene-pair") (Set a b)))
+
+			; Collect up some stats. Note that this ends up
+			; triple-counting everything. All counts should be
+			; multiples of three!
 			(for-each
-				(lambda (gene-pair)
-					(define gene-a (cog-outgoing-atom gene-pair 0))
-					(define gene-b (cog-outgoing-atom gene-pair 1))
-					(define act-pair (Evaluation (Predicate "interacts_with") gene-pair))
+				(lambda (triangle)
+					(define gene-set (gdr triangle))
+					(define gene-a (cog-outgoing-atom gene-set 0))
+					(define gene-b (cog-outgoing-atom gene-set 1))
+					(define gene-c (cog-outgoing-atom gene-set 2))
+					(define eab (mkpr gene-a gene-b))
+					(define ebc (mkpr gene-b gene-c))
+					(define eca (mkpr gene-c gene-a))
 					(cog-inc-count! gene-a 1)
 					(cog-inc-count! gene-b 1)
-					(cog-inc-count! act-pair 1))
-				(cog-outgoing-set result))
+					(cog-inc-count! gene-c 1)
+					(cog-inc-count! eab 1))
+					(cog-inc-count! ebc 1))
+					(cog-inc-count! eca 1))
 
-			; delete the SetLink
-			(cog-delete result)
-			; delete the GetLink, too.
+					; Each triangle should be seen exactly 3 times.
+					(cog-inc-count! triangle 1))
+				rlist)
+
+			; delete the QueryLink, too.
 			(cog-delete query)
 
 			;; (format #t "Ran triangle ~A in ~6f seconds; got ~A results\n"
@@ -103,7 +141,9 @@
 )
 
 ;; -----------
-; Explicitly create and count triangles.
+;; Explicitly create and count triangles.
+;; XXX Caution: This uses the non-symmetrized edges from the original
+;; dataset. Caveat emptor!
 (define pointed-triangle-query
 	(Query
 		(VariableList
@@ -123,26 +163,6 @@
 			(List (Variable "$a") (Variable "$b") (Variable "$c")))
 		))
 
-; Same as above, but not pointed; uses a set.
-(define triangle-query
-	(Query
-		(VariableList
-			(TypedVariable (Variable "$a") (Type 'GeneNode))
-			(TypedVariable (Variable "$b") (Type 'GeneNode))
-			(TypedVariable (Variable "$c") (Type 'GeneNode))
-		)
-		(And
-			(Evaluation (Predicate "interacts_with")
-				(List (Variable "$a") (Variable "$b")))
-			(Evaluation (Predicate "interacts_with")
-				(List (Variable "$b") (Variable "$c")))
-			(Evaluation (Predicate "interacts_with")
-				(List (Variable "$c") (Variable "$a")))
-		)
-		(Evaluation (Predicate "triangle")
-			(Set (Variable "$a") (Variable "$b") (Variable "$c")))
-		))
-
 (define (make-pointed-triangles)
 	(define elapsed-secs (make-timer))
 	(define pset (cog-execute! pointed-triangle-query))
@@ -152,14 +172,35 @@
 		npoints (elapsed-secs))
 )
 
-(define (make-triangles)
+; Same as above, but not pointed; uses a set.
+(define gene-triangle-query
+	(Query
+		(VariableList
+			(TypedVariable (Variable "$a") (Type 'GeneNode))
+			(TypedVariable (Variable "$b") (Type 'GeneNode))
+			(TypedVariable (Variable "$c") (Type 'GeneNode))
+		)
+		(And
+			(Present (Evaluation (Predicate "gene-pair")
+				(Set (Variable "$a") (Variable "$b"))))
+			(Present (Evaluation (Predicate "gene-pair")
+				(Set (Variable "$b") (Variable "$c"))))
+			(Present (Evaluation (Predicate "gene-pair")
+				(Set (Variable "$c") (Variable "$a"))))
+		)
+		(Evaluation (Predicate "gene-triangle")
+			(Set (Variable "$a") (Variable "$b") (Variable "$c")))
+		))
+
+(define (make-gene-triangles)
 	(define elapsed-secs (make-timer))
-	(define tset (cog-execute! triangle-query))
+	(define tset (cog-execute! gene-triangle-query))
 	(define triangles (cog-value->list tset))
 	(define ntris (length triangles))
 	(format #t "Obtained ~A triangles in ~6f seconds\n" ntris (elapsed-secs))
 )
 
+; =================================================================
 ;; -----------
 ;; This defines a pentagon-shaped search; one endpoint, a reaction
 ;; pathway, is fixed, and we are looking for two proteins that
