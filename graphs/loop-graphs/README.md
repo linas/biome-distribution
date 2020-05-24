@@ -23,7 +23,8 @@ Then see bottom of that file...
 (count-pentagons pathways)
 ```
 
-To make the csv's, cut and paste the code at the bottom of that file.
+To make the csv's, do a `(load "gene-pairs.scm")` and then go to
+`data-export.scm` and start cutting and pasting the code there.
 
 ### Files
 

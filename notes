@@ -2429,6 +2429,7 @@ Tetra done 500/49050 in 1649.0929973 secs rate=0.03 gene/sec elapsed=18486.
 ---
 
 nack, again, top window. grid - 17003  pid 25173
+XXX except this is measuring bad code!
 Tetra done 50/49050 in 316. secs rate=0.16 gene/sec elapsed=316.43
 Tetra done 100/49050 in 1035.593670248 secs rate=0.07 gene/sec elapsed=1352.0
 Tetra done 150/49050 in 440. secs rate=0.08 gene/sec elapsed=1791.8
@@ -2446,8 +2447,27 @@ Tetra done 1500/49050 in 1360.187493002 secs rate=0.03 gene/sec elapsed=57795.
 Tetra done 1750/49050 in 1968.218188658 secs rate=0.03 gene/sec elapsed=69280.
 Tetra done 2000/49050 in 1794.409534285 secs rate=0.03 gene/sec elapsed=76248.
 Tetra done 2500/49050 in 1830.48523792 secs rate=0.02 gene/sec elapsed=117488.873815013
+Tetra done 3000/49050 in 1488.750315754 secs rate=0.02 gene/sec elapsed=146458.990425445
 
 
+---
+final version, nack only pid 32394: (the earlier test was borked)
+(bottom window)
+Tetra done 50/49050 in 380.41 secs rate=7.89 gene/min elapsed=380.4110
+Tetra done 100/49050 in 1075.2 secs rate=4.12 gene/min elapsed=1455.569
+Tetra done 150/49050 in 430.57 secs rate=4.77 gene/min elapsed=1886.143
+Tetra done 200/49050 in 3541.7 secs rate=2.21 gene/min elapsed=5427.859
+Tetra done 250/49050 in 2004.8 secs rate=2.02 gene/min elapsed=7432.677
+Tetra done 300/49050 in 6042.7 secs rate=1.34 gene/min elapsed=13475.34
+Tetra done 350/49050 in 1215.4 secs rate=1.43 gene/min elapsed=14690.75
+Tetra done 400/49050 in 2605.0 secs rate=1.39 gene/min elapsed=17295.77
+Tetra done 450/49050 in 1241.1 secs rate=1.46 gene/min elapsed=18536.91
+Tetra done 500/49050 in 1878.1 secs rate=1.47 gene/min elapsed=20415.01
+
+
+
+So, comparing above to below, the full-caching code is 3.4% to 3.8% faster
+than the single-var-cache plus nack -- so not much better, but better.
 
 
 full-on caching: (middle window) 17001  pid 21984
@@ -2469,9 +2489,18 @@ Tetra done 1750/49050 in 1993.288869844 secs rate=0.02 gene/sec elapsed=71182.
 Tetra done 2000/49050 in 1851.521040398 secs rate=0.03 gene/sec elapsed=78254.
 Tetra done 2500/49050 in 1966.789259385 secs rate=0.02 gene/sec elapsed=119688.326560214
 Tetra done 2750/49050 in 5350.045062939 secs rate=0.02 gene/sec elapsed=137571.242393373
+Tetra done 3000/49050 in 1543.388932242 secs rate=0.02 gene/sec elapsed=149533.404567869
 
+full-on, double-check, final code: top window, pid 1176
+Tetra done 50/49050 in 343.92 secs rate=8.72 gene/min elapsed=343.9167
+Tetra done 100/49050 in 1062.4 secs rate=4.27 gene/min elapsed=1406.309
+Tetra done 150/49050 in 469.56 secs rate=4.80 gene/min elapsed=1875.867
+Tetra done 200/49050 in 3467.0 secs rate=2.25 gene/min elapsed=5342.833
+Tetra done 250/49050 in 1992.4 secs rate=2.04 gene/min elapsed=7335.196
+Tetra done 300/49050 in 5895.5 secs rate=1.36 gene/min elapsed=13230.70
+Tetra done 350/49050 in 1256.0 secs rate=1.45 gene/min elapsed=14486.73
 
-
+Hmm slightly slower, but the system is heavily loaded so ....
 
 
 Master: only the old positive single-term cache.
@@ -2495,6 +2524,150 @@ Tetra done 2500/49050 in 1944.352487444 secs rate=0.02 gene/sec elapsed=128645.8
 
 
 
-
+(broken?) nack-only caching, with triangles. pid 28358 botton left
 Oh no - Obtained 1797281 triangles in 3046.1 seconds
+
+Tetra done 50/49050 in 97.155 secs rate=30.9 gene/min elapsed=97.15500
+Tetra done 100/49050 in 348.43 secs rate=13.5 gene/min elapsed=445.5884
+Tetra done 150/49050 in 153.67 secs rate=15.0 gene/min elapsed=599.2541
+Tetra done 200/49050 in 887.26 secs rate=8.07 gene/min elapsed=1486.512
+Tetra done 250/49050 in 431.16 secs rate=7.82 gene/min elapsed=1917.668
+Tetra done 300/49050 in 793.88 secs rate=6.64 gene/min elapsed=2711.550
+Tetra done 350/49050 in 233.18 secs rate=7.13 gene/min elapsed=2944.729
+Tetra done 400/49050 in 265.60 secs rate=7.48 gene/min elapsed=3210.330
+Tetra done 450/49050 in 180.27 secs rate=7.96 gene/min elapsed=3390.596
+Tetra done 500/49050 in 176.51 secs rate=8.41 gene/min elapsed=3567.104
+
+above is with broken nack code.
+
+full-on-caching with pre-comp trinagles  - final version.
+middle window -- pid 1226
+Obtained 1797281 triangles in 2804.8 seconds
+Tetra done 50/49050 in 117.74 secs rate=25.5 gene/min elapsed=117.7405
+Tetra done 100/49050 in 418.93 secs rate=11.2 gene/min elapsed=536.6692
+Tetra done 150/49050 in 184.82 secs rate=12.5 gene/min elapsed=721.4917
+Tetra done 200/49050 in 956.71 secs rate=7.15 gene/min elapsed=1678.200
+Tetra done 250/49050 in 492.32 secs rate=6.91 gene/min elapsed=2170.524
+Tetra done 300/49050 in 829.49 secs rate=6.00 gene/min elapsed=3000.011
+Tetra done 350/49050 in 246.42 secs rate=6.47 gene/min elapsed=3246.430
+Tetra done 400/49050 in 282.59 secs rate=6.80 gene/min elapsed=3529.024
+Tetra done 450/49050 in 207.40 secs rate=7.23 gene/min elapsed=3736.420
+Tetra done 500/49050 in 193.75 secs rate=7.63 gene/min elapsed=3930.174
+Tetra done 1000/49050 in 571.46 secs rate=8.64 gene/min elapsed=6942.998
+Tetra done 1500/49050 in 131.63 secs rate=9.83 gene/min elapsed=9155.248
+Tetra done 2000/49050 in 235.49 secs rate=10.6 gene/min elapsed=11363.95
+Tetra done 5000/49050 in 733.53 secs rate=10.1 gene/min elapsed=29765.90
+Tetra done 7500/49050 in 202.30 secs rate=10.8 gene/min elapsed=41762.71
+Tetra done 10000/49050 in 335.04 secs rate=11.0 gene/min elapsed=54584.39
+Tetra done 12500/49050 in 880.64 secs rate=10.9 gene/min elapsed=68543.66
+Tetra done 15000/49050 in 165.16 secs rate=10.6 gene/min elapsed=84962.37
+Tetra done 17500/49050 in 74.128 secs rate=10.7 gene/min elapsed=97934.22
+Tetra done 20000/49050 in 233.69 secs rate=10.9 gene/min elapsed=109716.4
+Tetra done 25000/49050 in 256.59 secs rate=11.3 gene/min elapsed=133241.2
+
+
+
+
+
+threaded pattern matcher, rand at about 3x at first, slowing to 1x.
+scheme@(guile-user)> (delete-simple-tv) 
+Removed SimpleTV in 223.55 seconds
+so that is actually slower....
+
+(make-triangles)
+runs at 8x approx...  dropping to 2x at 1797281 
+Obtained 1797281 triangles in 1127.7 seconds
+
+So that is 1128/2800 = 0.40  the time of 2.5x faster
+took 160:43 cpu-mins or 9600 secs or  3.4x more cpu than expected.
+
+meh.  this was for a single query, with 49050 entires in the starting
+list... .. disappointing... where's teh extra CPU from ???
+(gc-stats) says 466 seconds in GC .. wow .. whatever for?
+
+runs at 1x-2x CPU top windowm pid 5437
+scheme@(guile-user)> (count-tetrahedra (cog-get-atoms 'GeneNode))
+Tetra done 50/49050 in 58.119 secs rate=51.6 gene/min elapsed=58.11900
+Tetra done 100/49050 in 187.29 secs rate=24.4 gene/min elapsed=245.4128
+Tetra done 150/49050 in 91.459 secs rate=26.7 gene/min elapsed=336.8720
+Tetra done 200/49050 in 585.09 secs rate=13.0 gene/min elapsed=921.9658
+Tetra done 250/49050 in 225.40 secs rate=13.1 gene/min elapsed=1147.370
+Tetra done 300/49050 in 528.36 secs rate=10.7 gene/min elapsed=1675.725
+Tetra done 350/49050 in 128.06 secs rate=11.6 gene/min elapsed=1803.780
+Tetra done 400/49050 in 183.31 secs rate=12.1 gene/min elapsed=1987.094
+Tetra done 450/49050 in 122.36 secs rate=12.8 gene/min elapsed=2109.450
+Tetra done 500/49050 in 121.49 secs rate=13.4 gene/min elapsed=2230.944
+Tetra done 1000/49050 in 446.63 secs rate=14.3 gene/min elapsed=4190.982
+Tetra done 1500/49050 in 84.013 secs rate=15.9 gene/min elapsed=5673.485
+Tetra done 2000/49050 in 136.22 secs rate=16.9 gene/min elapsed=7093.894
+Tetra done 3000/49050 in 83.842 secs rate=14.9 gene/min elapsed=12109.96
+Tetra done 4000/49050 in 89.311 secs rate=15.1 gene/min elapsed=15942.46
+Tetra done 5000/49050 in 655.07 secs rate=14.5 gene/min elapsed=20693.97
+Tetra done 7500/49050 in 143.61 secs rate=14.7 gene/min elapsed=30532.23
+Tetra done 10000/49050 in 255.12 secs rate=14.4 gene/min elapsed=41538.62
+Tetra done 12500/49050 in 787.13 secs rate=14.1 gene/min elapsed=53143.76
+Tetra done 15000/49050 in 110.34 secs rate=13.4 gene/min elapsed=67335.58
+Tetra done 17500/49050 in 57.646 secs rate=13.4 gene/min elapsed=78639.23
+
+
+
+
+
+
+and again, regular pattern engine with par-for-each.
+bottom window pid 6475
+Obtained 1797281 triangles in 2593.4 seconds
+gc-time-taken . 409
+cpu-time: 53:46 == 3226 seconds so why the diff ? Hmm.
+Initially running at 6x  cpu cores
+Tetra done 50/49050 in 3.2349 secs rate=927. gene/min elapsed=3.234727
+Tetra done 100/49050 in 46.828 secs rate=120. gene/min elapsed=50.06256
+Tetra done 150/49050 in 62.008 secs rate=80.3 gene/min elapsed=112.0707
+Tetra done 200/49050 in 80.479 secs rate=62.3 gene/min elapsed=192.5499
+Tetra done 250/49050 in 112.31 secs rate=49.2 gene/min elapsed=304.8608
+Tetra done 300/49050 in 133.40 secs rate=41.1 gene/min elapsed=438.2565
+Tetra done 350/49050 in 47.799 secs rate=43.2 gene/min elapsed=486.0553
+Tetra done 400/49050 in 83.142 secs rate=42.2 gene/min elapsed=569.1977
+Tetra done 450/49050 in 50.898 secs rate=43.5 gene/min elapsed=620.0960
+Tetra done 500/49050 in 48.941 secs rate=44.8 gene/min elapsed=669.0370
+Tetra done 1000/49050 in 68.783 secs rate=42.9 gene/min elapsed=1397.331
+Tetra done 1500/49050 in 18.988 secs rate=45.9 gene/min elapsed=1959.723
+Tetra done 2000/49050 in 47.952 secs rate=49.2 gene/min elapsed=2438.940
+Tetra done 3000/49050 in 41.911 secs rate=45.7 gene/min elapsed=3938.553
+Tetra done 4000/49050 in 44.861 secs rate=47.0 gene/min elapsed=5110.271
+Tetra done 5000/49050 in 132.49 secs rate=47.3 gene/min elapsed=6345.136
+Tetra done 7500/49050 in 52.777 secs rate=49.0 gene/min elapsed=9179.640
+Tetra done 10000/49050 in 73.587 secs rate=50.2 gene/min elapsed=11961.31
+Tetra done 12500/49050 in 197.14 secs rate=49.8 gene/min elapsed=15068.06
+Tetra done 15000/49050 in 41.714 secs rate=47.8 gene/min elapsed=18832.44
+Tetra done 17500/49050 in 40.590 secs rate=47.9 gene/min elapsed=21915.46
+Tetra done 20000/49050 in 84.768 secs rate=47.9 gene/min elapsed=25076.49
+Tetra done 25000/49050 in 94.590 secs rate=47.4 gene/min elapsed=31629.61
+Tetra done 30000/49050 in 47.859 secs rate=46.0 gene/min elapsed=39108.06
+Tetra done 35000/49050 in 107.37 secs rate=45.3 gene/min elapsed=46323.14
+Tetra done 40000/49050 in 52.340 secs rate=45.5 gene/min elapsed=52718.60
+Tetra done 45000/49050 in 111.27 secs rate=45.1 gene/min elapsed=59925.79
+Tetra done 49050/49050 in 476.66 secs rate=44.8 gene/min elapsed=65704.94
+
+Finished tetrahedron relations for 49050 genes in 65771.26 seconds
+so 18 hours wall-clock.
+
+Ends with 27GB rss
+gc-stats  19070 seconds in GC
+584 MB heap
+2342 gc-times
+total of 8480:15 minutes = 508815 seconds = 141 cpu-hours
+
+so avg burn = 7.7x CPU = 508815 / 65771.26
+
+avg speedup at half-way point
+Tetra done 25000/49050 in 256.59 secs rate=11.3 gene/min elapsed=133241.2
+
+is 133241.2 / 31629.61 = 4.2x
+so only 4x faster for nearly 8x more cpu ... bummer...
+
+
+Next:
+
+
 

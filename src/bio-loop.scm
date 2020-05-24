@@ -293,7 +293,7 @@
 ;
 ; (cog-incoming-size (Predicate "triangle"))
 ;
-; Run the pentqagon counting code.
+; Run the pentagon counting code.
 ; (define pathways (pathways-of-mols (cog-get-atoms 'GeneNode)))
 ; (length pathways)  ; 50501
 ; (count-pentagons pathways)  ; Takes about 16 hours...

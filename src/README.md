@@ -24,24 +24,8 @@ Some of the secondary files:
 
 Typical run
 -----------
-A tetrahedron run:
+For info on typical data runs, see the files:
 
-```
-HUGETLB_MORECORE=yes LD_PRELOAD=/usr/lib/libhugetlbfs.so.0 guile
-scheme@(guile-user)> (load "load-files.scm") ; about 100 seconds
-(start-cogserver)
-(load-all)
-(load "cleanup-data.scm")
-(delete-go-nodes)
-(delete-self-interaction)
-(delete-bad-chebi)
-(count-gene-interactions)
-(symmetrize-gene-interactions)
-(count-gene-interactions)
-(delete-simple-tv)     ; about 160 seconds
-(load "bio-loop.scm")
-(make-triangles)
-; Above should create 1797281 (1.8M) triangles
-(load "bio-tetra.scm")
-(count-tetrahedra (cog-get-atoms 'GeneNode))
-```
+* graphs/loop-graphs/README.md
+* graphs/pentagon-paths/README.md
+* graphs/tetrahedra/README.md

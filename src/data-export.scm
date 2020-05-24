@@ -15,7 +15,7 @@
 "
    Write the pair-list to the filename.
    pair-list is a list of (string . count) pairs.
-   It is sorted, first.
+   Before writing, it will be sorted, first.
 "
 	; Sort according to descending rank.
 	(define sorted-counts (sort pair-list
@@ -37,13 +37,15 @@
 ; This first section is for the triangles; for the pentagons, see
 ; further down.
 
-; Genes that appeared in a triangular loop.
-(define loop-participants
+; Genes that had postive counts.
+; That is, they were counted as participating in a graph.
+(define graph-participants
 	(map (lambda (gene) (cons (cog-name gene) (cog-count gene)))
 		(filter (lambda (gene) (< 0 (cog-count gene)))
 			(cog-get-atoms 'GeneNode))))
 
-(dump-to-csv loop-participants "gene-loops.csv")
+; Trinalge counts go into "gene-loops.csv"
+(dump-to-csv graph-participants "gene-loops.csv")
 
 ; Gene pairs that appeared as edges in a triangular loop
 ; Some of these pairs have AnyNodes from the matrix code,
