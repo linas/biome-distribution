@@ -45,6 +45,7 @@
 			(cog-get-atoms 'GeneNode))))
 
 ; Triangle counts go into "gene-loops.csv", tetrahedra into "gene-tetra.csv"
+(dump-to-csv graph-participants "gene-pairs.csv")
 (dump-to-csv graph-participants "gene-loops.csv")
 (dump-to-csv graph-participants "gene-tetra.csv")
 
@@ -59,7 +60,7 @@
 			(and (< 0 (cog-count evlnk))
 				(equal? 'GeneNode (cog-type (gadr evlnk)))
 				(equal? 'GeneNode (cog-type (gddr evlnk)))))
-		(cog-incoming-set (Predicate "interacts_with"))))
+		(cog-incoming-set (Predicate "gene-pair"))))
 
 ; Count-pairs for the gene-pairs
 (define gene-pair-cnts

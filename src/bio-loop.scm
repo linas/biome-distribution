@@ -76,6 +76,7 @@
 	(define start-time (get-internal-real-time))
 	(define ndone 0)
 	(define ngen (length gene-list))
+	(format #t "Begin looping over ~A genes\n" ngen)
 	(for-each
 		(lambda (gene)
 			; Create a search pattern for each gene in the gene list.
@@ -92,8 +93,6 @@
 
 			(define (mkpr a b)
 				(Evaluation (Predicate "gene-pair") (Set a b)))
-
-			(format #t "Begin looping over %A genes\n" rlen)
 
 			; Collect up some stats. Note that this ends up
 			; triple-counting everything. All counts should be
@@ -120,6 +119,7 @@
 
 			; delete the QueryLink, too.
 			(cog-delete query)
+			(cog-delete-recursive (Variable "$a"))
 
 			;; (format #t "Ran triangle ~A in ~6f seconds; got ~A results\n"
 			;; 	gene-name (gene-secs) rlen)

@@ -39,6 +39,7 @@
 	(define start-time (get-internal-real-time))
 	(define ndone 0)
 	(define ngen (length gene-list))
+	(format #t "Begin looping over ~A genes\n" ngen)
 	(for-each
 		(lambda (gene)
 			; Create a search pattern for each gene in the gene list.
@@ -49,8 +50,6 @@
 			(define result (cog-execute! query))
 			(define rlist (cog-value->list result))
 			(define rlen (length rlist))
-
-			(format #t "Begin looping over %A genes\n" rlen)
 
 			; Collect up some stats. Note that this ends up
 			; double-counting everything. All counts should be
@@ -69,15 +68,16 @@
 
 			; delete the QueryLink, too.
 			(cog-delete query)
+			(cog-delete-recursive (Variable "$a"))
 
 			(set! ndone (+ ndone 1))
-			(if (eq? 0 (modulo ndone 500))
+			(if (eq? 0 (modulo ndone 5000))
 				(let* ((elapsed
 							(/ (- (get-internal-real-time) start-time)
 								internal-time-units-per-second))
 						(rate (/ ndone elapsed)))
 					(format #t
-						"Edges done ~A/~A in ~4f secs rate=~4f gene/sec elapsed=~6f\n"
+						"Edges done ~A/~A in ~4f secs rate=~5f gene/sec elapsed=~5f\n"
 						ndone ngen (batch-secs) rate elapsed)))
 		)
 		gene-list)

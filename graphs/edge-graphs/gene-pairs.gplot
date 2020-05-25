@@ -2,7 +2,7 @@
 #
 # Create a graph of the number of edges found.
 #
-set term png
+set term png size 1024,768
 set out 'gene-pairs.png'
 # set term eps color
 # set out 'gene-pairs.eps'
@@ -16,8 +16,10 @@ set ylabel "Number of interactions"
 
 set yrange [1:]
 
+nedges = 365745
+
 # Eyeballed fit to the data.
 plot "gene-pairs.csv" using 1:3 title "data", \
-     "gene-pairs.csv" using 1:(200000 / ($1)**0.5) with lines title "2e5/√rank", \
-     "gene-pairs.csv" using 1:((200000 / ($1)**0.5) * exp(-($1) / 2500)) with lines title "2e5 *exp(-rank/2500)/√rank", \
-     "gene-pairs.csv" using 1:((200000 / ($1)**0.5) * exp(-($1) / 1500)) with lines title "2e5 *exp(-rank/1500)/√rank"
+     "gene-pairs.csv" using 1:(9600 / ($1)**0.5) with lines title "9600/√rank", \
+     "gene-pairs.csv" using 1:((9600 / ($1)**0.5) * exp(-($1) / 9500)) with lines title "9600 exp(-rank/9500)/√rank", \
+     "gene-pairs.csv" using 1:((9600 / ($1)**0.5) * exp(-($1)**1.5 / (2*nedges))) with lines title "9600 *exp(-rank^{3/2}/1500)/√rank"

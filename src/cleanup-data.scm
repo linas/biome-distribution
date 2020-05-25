@@ -114,6 +114,9 @@
 	(cog-delete self-set)
 	(format #t "Found ~A self-interacting  genes\n" n-self)
 
+	(cog-delete-recursive (Variable "g1"))
+	(cog-delete-recursive (Variable "g2"))
+
 	(define n-asym (- n-acts n-sym))
 	(format #t "Conclude: there are ~A asymmetric interctions\n" n-asym)
 
