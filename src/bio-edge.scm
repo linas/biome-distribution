@@ -29,7 +29,7 @@
 			(Set gene (Variable "$a"))))
 		(Evaluation (Predicate "gene-pair")
 			(Set gene (Variable "$a")))
-		))
+	))
 
 ;; -----------
 ;; Count the edges.
@@ -64,7 +64,7 @@
 					(cog-inc-count! gene-b 1)
 
 					; Each edge should be seen exactly twice.
-					(cog-inc-count! edge 1)
+					(cog-inc-count! edge 1))
 				rlist)
 
 			; delete the QueryLink, too.
