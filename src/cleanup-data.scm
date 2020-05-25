@@ -5,6 +5,7 @@
 ; assorted issues.
 ;
 (use-modules (opencog exec))
+(use-modules (srfi srfi-1))
 
 ; --------------------
 ; Performance stats timer
@@ -178,6 +179,48 @@
 		(length (cog-value->list sym-set)) (elapsed-secs))
 	(cog-delete make-sym-pairs)
 	*unspecified*
+)
+
+; --------------------
+(define (delete-all-but-interactions)
+"
+  Remove pretty much everything that is not a gene or a protein
+  interacting with one-another.
+  The goal is to reduce the atomspace to something manageable and more
+  responsive during gene graph searches.
+"
+	; What about the first two?
+	(cog-delete-recursive (PredicateNode "transcribed_to"))
+	(cog-delete-recursive (PredicateNode "translated_to"))
+	(cog-delete-recursive (PredicateNode "has_location"))
+	(cog-delete-recursive (PredicateNode "has_name"))
+	(cog-delete-recursive (PredicateNode "has_pubmedID"))
+	(cog-delete-recursive (PredicateNode "GO_name"))
+	(cog-delete-recursive (PredicateNode "has_biogridID"))
+	(cog-delete-recursive (PredicateNode "GO_namespace"))
+	(cog-delete-recursive (PredicateNode "has_entrez_id"))
+
+	; The above will orphan many ListLinks. Delete them.
+	(for-each cog-delete
+		(filter
+			(lambda (lst) (= 0 (cog-incoming-size lst)))
+			(cog-get-atoms 'List)))
+
+	; Once the ListLinks are gone, then orphan nodes show up.
+	(for-each
+		(lambda (misc)
+			(if (= 0 (cog-incoming-size misc)) (cog-delete misc)))
+		(cog-get-atoms 'Concept))
+
+	(for-each
+		(lambda (misc)
+			(if (= 0 (cog-incoming-size misc)) (cog-delete misc)))
+		(cog-get-atoms 'Molecule))
+
+	(for-each
+		(lambda (gene)
+			(if (= 0 (cog-incoming-size gene)) (cog-delete gene)))
+		(cog-get-atoms 'Gene))
 )
 
 ; --------------------

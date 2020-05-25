@@ -2866,7 +2866,6 @@ MoleculeNode
  (PredicateNode "has_pubmedID")
  (PredicateNode "GO_name")
  (PredicateNode "has_biogridID")
- (PredicateNode "expresses")
  (PredicateNode "GO_namespace")
  (PredicateNode "has_entrez_id")
 
@@ -2879,3 +2878,34 @@ MoleculeNode
 28927
 
 But 49050 - 20123 = 28927 yay!
+
+ (And
+         (Member (Variable "$p1") pathway)
+         (Member (Variable "$p2") pathway)
+         (Evaluation (Predicate "expresses") (List (Variable "$g1") (Variable "$p1")))
+         (Evaluation (Predicate "expresses") (List (Variable "$g2") (Variable "$p2")))
+         (Evaluation (Predicate "interacts_with") (List (Variable "$g1") (Variable "$g2")))
+
+(use-modules (srfi srfi-1))
+(define all-lsts
+	(append-map
+		(lambda (gene) (cog-incoming-by-type gene 'List))
+		(cog-get-atoms 'Gene)))
+
+(define empties
+	(filter
+		(lambda (lst) (= 0 (cog-incoming-size lst)))
+		all-lsts))
+
+(for-each cog-delete empties)
+
+   (for-each
+      (lambda (misc)
+         (if (= 0 (cog-incoming-size misc)) (cog-delete misc)))
+      (cog-get-atoms 'Concept))
+
+   (for-each
+      (lambda (misc)
+         (if (= 0 (cog-incoming-size misc)) (cog-delete misc)))
+      (cog-get-atoms 'Molecule))
+
