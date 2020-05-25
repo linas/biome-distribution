@@ -323,10 +323,11 @@ eyeballed
 \end_inset
 
 , in that they look visually reasonable during plotting.
- The eyeballed fit has a surprisingly simple expression:
+ The best eyeballed fitt is surprisingly good, and has a fairly simple expressio
+n:
 \begin_inset Formula 
 \[
-p\left(k\right)=\frac{4\exp\left(-k^{3/2}/2N\right)}{\sqrt{kN}}
+p\left(k\right)=A\frac{\exp\left(-k^{3/2}/2N\right)}{\sqrt{k}}
 \]
 
 \end_inset
@@ -335,8 +336,42 @@ p\left(k\right)=\frac{4\exp\left(-k^{3/2}/2N\right)}{\sqrt{kN}}
 \end_layout
 
 \begin_layout Standard
-but this is sheer-luck numerology...
- large N limit can;'t work like this.
+The normalization 
+\begin_inset Formula $A$
+\end_inset
+
+ can be solved for exactly in the limit of large 
+\begin_inset Formula $N$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\int_{0}^{\infty}\frac{\exp-\beta x^{-3/2}}{\sqrt{x}}dx=\frac{2}{\beta^{1/3}}\int_{0}^{\infty}e^{-u^{3}}du=\frac{2}{3\beta^{1/3}}\int_{0}^{\infty}y^{-2/3}e^{-y}dy
+\]
+
+\end_inset
+
+The last integral is the gamma function 
+\begin_inset Formula $\Gamma\left(1/3\right)\approx2.6789\cdots$
+\end_inset
+
+ and so, bassed on the eyeballed fit, one has 
+\begin_inset Formula 
+\[
+A=\frac{3}{2\Gamma\left(\frac{1}{3}\right)\left(2N\right)^{1/3}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The author does not know of any reason why the initial fall-off should follow
+ a square-root slope, or why there should be a simple exponential correction:
+ that is, the theoretical underpinnings and implications for this form is
+ unknown.
 \end_layout
 
 \begin_layout Section*

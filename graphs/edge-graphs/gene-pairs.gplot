@@ -22,12 +22,12 @@ nedges = 365745.0
 # Due to double-counting, each vertex got quadruple-counted, so
 norm = 1 / (4 * nedges)
 
-# Leading term is sqrt of the number of edges.
-lead = 1 / sqrt(nedges)
+# Leading term 
+lead = 1 / 160.914
 
 # Eyeballed fit to the data.
 plot "gene-pairs.csv" using 1:(norm * $3) with lines lw 3 title "data", \
-     "gene-pairs.csv" using 1:(4*lead / ($1)**0.5) with lines lw 3 title "4 (N rank)^{-1/2}", \
-     "gene-pairs.csv" using 1:((4*lead / ($1)**0.5) * exp(-($1)**1.5 / (2*nedges))) with lines lw 3 title "4 exp(-rank^{3/2}/ 2N) (N rank)^{-1/2}"
+     "gene-pairs.csv" using 1:(lead / ($1)**0.5) with lines lw 3 title "A rank^{-1/2}", \
+     "gene-pairs.csv" using 1:((lead / ($1)**0.5) * exp(-($1)**1.5 / (2*nedges))) with lines lw 3 title "A exp(-rank^{3/2}/ 2N) rank^{-1/2}"
 
 #     "gene-pairs.csv" using 1:((4*lead / ($1)**0.5) * exp(-($1) / 9500)) with lines title "9600 exp(-rank/9500)/√rank", \
