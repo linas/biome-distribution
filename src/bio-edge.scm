@@ -57,7 +57,7 @@
 			; multiples of two!
 			(for-each
 				(lambda (edge)
-					(define gene-set (gdr triangle))
+					(define gene-set (gdr edge))
 					(define gene-a (cog-outgoing-atom gene-set 0))
 					(define gene-b (cog-outgoing-atom gene-set 1))
 					(cog-inc-count! gene-a 1)
