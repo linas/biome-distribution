@@ -22,7 +22,7 @@ nedges = 365745.0
 # Due to double-counting, each vertex got quadruple-counted, so
 norm = 1 / (4 * nedges)
 
-# Leading term 
+# Leading term - this is 2 gamma(1/3) (2N)^{1/3} for N=nedges
 lead = 1 / 160.914
 
 # Eyeballed fit to the data.

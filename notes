@@ -2924,7 +2924,26 @@ Finished triangle relations for 49050 genes in 15897.29 seconds
 
 Tri done 20000/20123 in 436. secs rate=1.22 gene/sec elapsed=16381.
 Finished triangle relations for 20123 genes in 16530.42 seconds
+That's 280 minutes - 4 hours 40
 
 so no help.
 
+All simple edges counted twice:
+(filter (lambda (evlnk) (not (= 2 (cog-count evlnk))))
+	(cog-incoming-set (Predicate "gene-pair")))
+
+older results said:
+A total of 18766 genes participate in these interactions
+ but now there are only 13846 out of 20123 ... what  happened?
+I think we were double-counting some directions...
+
+Older results with non-symmetric edges on the nnon-symetrtried dataset:
+(very confusing)
+There are 455572 distinct edges that appear in triangles. These edges appear a grand-total of 5050388 times in different triangles
+
+This leaves behind 1102412 distinct triangles having three distinct corners.
+wtf...
+
+(filter (lambda (evlnk) (not (= 3 (cog-count evlnk))))
+	(cog-incoming-set (Predicate "gene-triangle")))
 

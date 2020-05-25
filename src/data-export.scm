@@ -37,17 +37,28 @@
 ; This first section is for the triangles; for the pentagons, see
 ; further down.
 
-; Grand total number of participating genes. This should be 20123.
+; Grand total number of participating genes.
+; For stand-alone edges, this should be 20123.
+; For triangles, this is 13846.
+; For tetrahedra, this is 9989.
 (define total-genes
 	(fold (lambda (gene cnt) (if (< 0 (cog-count gene)) (+ cnt 1) cnt)) 0 
 		(cog-get-atoms 'GeneNode)))
 
-; Grand total count on all genes.
+; Grand total observation count on all genes. i.e. how many times that
+; gene was counted as participating in some graph.
+;
 ; When counting edges, this should be 4x the number of edges,
-; or 4x 365745 so 1462980
-; When counting triangles ...
-; When counting tetrahedra...
-(define total-count
+; or 4x 365745 so 1462980. Why 4x? There is 2x because each endpoint is
+; explored, and another 2x because UnorderedLink permutes.
+;
+; When counting triangles, this is 1462980 which is a 12x over-count:
+; 3x because once per corner, 2x because distal edge is swapped, and
+; another 2x because UnorderedLink explores both permutations. So the
+; actual count is 1462980 / 12 = 121915
+;
+; When counting tetrahedra, this is 884761344
+(define total-gene-observation-count
 	(fold (lambda (gene cnt) (+ cnt (cog-count gene))) 0 
 		(cog-get-atoms 'GeneNode)))
 
@@ -63,17 +74,30 @@
 (dump-to-csv graph-participants "gene-loops.csv")
 (dump-to-csv graph-participants "gene-tetra.csv")
 
+; ------------------------------------------------------------
+; Above was for single vertexes. Below is for edges.
+;
 ; Gene pairs that appeared as edges in a graph (triangle, tetrahedron
 ; or other graph).
 ; Some of these pairs have AnyNodes from the matrix code,
 ; so filter those out... 
 ; Some pairs have zero-count. These are interacting genes in 
 ; the dataset, but are not graph participants.
-(define gene-pairs
+;
+; For triangles, the length of this is 308765 (out of a total of 365745
+; gene-pairs in the dataset).
+;
+(define participating-gene-pairs
 	(filter (lambda (evlnk)
 			(and (< 0 (cog-count evlnk))
 				(equal? 'GeneNode (cog-type (gadr evlnk)))
 				(equal? 'GeneNode (cog-type (gddr evlnk)))))
+		(cog-incoming-set (Predicate "gene-pair"))))
+
+; Total count on all of the edges participating in a graph.
+; For triangles, this was 16175529
+(define total-edge-observation-count
+	(fold (lambda (pare cnt) (+ cnt (cog-count pare))) 0 
 		(cog-incoming-set (Predicate "gene-pair"))))
 
 ; Count-pairs for the gene-pairs
@@ -82,11 +106,27 @@
 		(string-concatenate
 			(list (cog-name (gadr evelnk)) "-" (cog-name (gddr evelnk))))
 		(cog-count evelnk)))
-		gene-pairs))
+		participating-gene-pairs))
 
 ; Use "tri-edges.csv" for triangles, "tetra-edges.csv" for tetrahedra.
 (dump-to-csv gene-pair-cnts "tri-edges.csv")
 (dump-to-csv gene-pair-cnts "tetra-edges.csv")
+
+; ------------------------------------------------------------
+; Above was for edges.  This is for triangles.
+; Avoid errors:
+(for-each cog-delete-recursive (cog-get-atoms 'Variable))
+(cog-report-counts)
+
+; How many triangles?
+(define total-triangles
+	(cog-incoming-size (Predicate "gene-triangle")))
+
+; How many triangles were NOT observed exactly 3 times?
+; Should be zero for plain triangles.
+; but something else for tetrahedra.
+(length (filter (lambda (evlnk) (not (= 3 (cog-count evlnk))))
+	(cog-incoming-set (Predicate "gene-triangle"))))
 
 ; ------------------------------------------------------------
 ; Examination of the pentagons.

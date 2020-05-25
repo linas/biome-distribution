@@ -327,7 +327,7 @@ eyeballed
 n:
 \begin_inset Formula 
 \[
-p\left(k\right)=A\frac{\exp\left(-k^{3/2}/2N\right)}{\sqrt{k}}
+p\left(k\right)=A\frac{\exp\left(-k^{3/2}/2N308765\right)}{\sqrt{k}}
 \]
 
 \end_inset
@@ -441,104 +441,24 @@ Characterization
 \end_layout
 
 \begin_layout Standard
-The two data-sets provide sometimes-similar and sometimes-different results.
- The differences are noted as appropriate.
-\end_layout
-
-\begin_layout Standard
-In the first data-set, there are 3452807 pointed triangles.
- By definition, a 
-\begin_inset Quotes eld
-\end_inset
-
-pointed triangle
-\begin_inset Quotes erd
-\end_inset
-
- is one with a 
-\begin_inset Quotes eld
-\end_inset
-
-distinguished point
-\begin_inset Quotes erd
-\end_inset
-
-; this helps with the tracking of rotational symmetry.
- By symmetry, one would expect this number to be divisible by 3; it is not
- because many of the triangles are degenerate: There are 145571 degenerate
- triangles having the only two distinct vertexes, and 2939 
-\begin_inset Quotes eld
-\end_inset
-
-bouquets
-\begin_inset Quotes erd
-\end_inset
-
- - that is, triangles where all three corners are the same vertex.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-Given a triangular relationship of the form 
-\begin_inset Quotes eld
-\end_inset
-
-gene A regulates gene B, B regulates C and C regulates A,
-\begin_inset Quotes erd
-\end_inset
-
- a degenerate triangle is obtained when B and C are the same gene.
- A bouquet is obtained when A, B and C are the same gene.
-\end_layout
-
-\end_inset
-
- This leaves behind 1102412 distinct triangles having three distinct corners.
-\end_layout
-
-\begin_layout Standard
-A total of 18766 genes participate in these interactions.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-Counted with 
-\family typewriter
-(length loop-participants)
-\family default
-.
-\end_layout
-
-\end_inset
-
- This differs from the number of genes in the data-set, as not all genes
- participate in triangles.
- There are 455572 distinct edges that appear in triangles.
- These edges appear a grand-total of 5050388 times in different triangles;
- thus, on average, any given gene interaction might appear in 11 different
- triangles.
- However, the concept of 
-\begin_inset Quotes eld
-\end_inset
-
-average
-\begin_inset Quotes erd
-\end_inset
-
- is troublesome in Zipfian distributions; this and other marginals are expanded
- on in a subsequent section.
-\end_layout
-
-\begin_layout Standard
-The presence of such degenerate triangles, and the non-reciprocal gene-gene
- interactions leads to contemplating the second data-set.
- In this data-set, all self-interacting genes are removed, and all gene
- interactions are symmetrized, so that for every edge AB there is also an
- edge BA: the concept of regulation is replaced by interaction.
- The second data-set has 10783686 pointed triangles; by symmetry, only 1/6
- of these are distinct, leaving 1797281 distinct triangles.
- These triangles have a total of 731490 distinct edges.
- There is a total of 20123 genes participating in these triangles.
+Not all of the interacting genes participate in triangular relations; only
+ 13846 of the initial 20123 appear in such relations.
+ In total, there were 308765 distinct pairs participating in triangles (out
+ of 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+365745 pair-wise interactions in the dataset).
+ A total of 1797281 triangles were observed.
 \end_layout
 
 \begin_layout Subsection*
@@ -548,8 +468,7 @@ Zipf graphs
 \begin_layout Standard
 The following figure shows the number of triangles in which a gene participates
  in.
- This figure if for the symmetrized network; the corresponding figure for
- the unsymmetrized network is very similar.
+ 
 \end_layout
 
 \begin_layout Standard
