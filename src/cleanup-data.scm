@@ -188,6 +188,7 @@
   interacting with one-another.
   The goal is to reduce the atomspace to something manageable and more
   responsive during gene graph searches.
+  This assumes that `(make-gene-pairs)` has alreay run.
 "
 	; What about the first two?
 	(cog-delete-recursive (PredicateNode "transcribed_to"))
@@ -200,11 +201,31 @@
 	(cog-delete-recursive (PredicateNode "GO_namespace"))
 	(cog-delete-recursive (PredicateNode "has_entrez_id"))
 
+	; The symmetrized gene-pair has rendered this useless.
+	(cog-delete-recursive (PredicateNode "interacts_with"))
+
+	; The pentagons depend on interacting genes, so kill all genes
+	; that aren't in some gene-pair.
+	(define all-genes (cog-get-atoms 'GeneNode))
+	(define interacting-genes
+		(filter
+			(lambda (gene) (< 0 (cog-incoming-size-by-type gene 'Set)))
+			all-genes))
+
+	(for-each cog-delete-recursive
+		(atoms-subtract all-genes interacting-genes))
+
 	; The above will orphan many ListLinks. Delete them.
 	(for-each cog-delete
 		(filter
 			(lambda (lst) (= 0 (cog-incoming-size lst)))
 			(cog-get-atoms 'List)))
+
+	; We are not looking at InheritanceLinks for anything
+	(for-each
+		(lambda (misc)
+			(if (= 0 (cog-incoming-size misc)) (cog-delete misc)))
+		(cog-get-atoms 'Inheritance))
 
 	; Once the ListLinks are gone, then orphan nodes show up.
 	(for-each

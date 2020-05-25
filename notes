@@ -2909,3 +2909,12 @@ But 49050 - 20123 = 28927 yay!
          (if (= 0 (cog-incoming-size misc)) (cog-delete misc)))
       (cog-get-atoms 'Molecule))
 
+(define all-genes (cog-get-atoms 'GeneNode))
+(define interacting 
+	(filter
+		(lambda (gene) (< 0 (cog-incoming-size-by-type gene 'Set)))
+		all-genes))
+
+(for-each cog-delete-recursive
+	(atoms-subtract all-genes interacting))
+
