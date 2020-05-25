@@ -2918,3 +2918,7 @@ But 49050 - 20123 = 28927 yay!
 (for-each cog-delete-recursive
 	(atoms-subtract all-genes interacting))
 
+Old code did triangles in 
+Tri done 49000/49050 in 196. secs rate=3.09 gene/sec elapsed=15881.
+Finished triangle relations for 49050 genes in 15897.29 seconds
+

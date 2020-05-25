@@ -20,10 +20,10 @@ scheme@(guile-user)> (load "load-files.scm")
 (delete-bad-chebi)
 (count-gene-interactions)
 (make-gene-pairs)      ; 20 seconds
-(cog-delete-recursive (Predicate "interacts_with"))
-(delete-simple-tv)     ; about 140 seconds
+(delete-all-but-gene-interactions)  ; 60 seconds
+(delete-simple-tv)     ; about 15 seconds
 (load "bio-loop.scm")
-(count-gene-triangles (cog-get-atoms 'GeneNode))   ; about 2800 seconds
+(count-gene-triangles (cog-get-atoms 'GeneNode))   ; about XXX
 ; Above should create 1797281 (1.8M) triangles
 ```
 
@@ -35,7 +35,7 @@ Conclude: there are 193651 asymmetric interctions
 Conclude: there are 365745 symmetrized interactions
 ```
 
-For the pentagons,
+For the pentagons, ... alteres sequence ... 
 ```
 (define pathways (pathways-of-genes (cog-get-atoms 'GeneNode)))
 (count-pentagons pathways)

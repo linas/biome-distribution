@@ -256,6 +256,10 @@ Use the
 Pathways are from https://reactome.org and from http://smpdb.ca/
 \end_layout
 
+\begin_layout Standard
+There are only 20123 genes that interact with one-another...
+\end_layout
+
 \begin_layout Section*
 Pair-wise interactions
 \end_layout
@@ -280,7 +284,59 @@ At the most basic level, one can ask about the distribution of gene interactions
 \end_layout
 
 \begin_layout Standard
-and so,,,
+There are 20123 interacting genes participiating in a total of 
+\begin_inset Formula $N_{tot}=365745$
+\end_inset
+
+ interactions.
+ The vertical axis shows the fraction of all interactions that a given gene
+ participates in.
+ That is, if the 
+\begin_inset Formula $k$
+\end_inset
+
+'th gene in the ranking participates in 
+\begin_inset Formula $N(k)$
+\end_inset
+
+ interactions, then the fraction of interactions is given by 
+\begin_inset Formula 
+\[
+p\left(k\right)=\frac{N\left(k\right)}{N_{tot}}
+\]
+
+\end_inset
+
+so that the integral under the curve is 
+\begin_inset Formula $N=N_{tot}$
+\end_inset
+
+.
+ The distribution appears to be Zipfian in nature, but with an unexpected
+ exponent of 1/2.
+ The overlayed fitting curves are 
+\begin_inset Quotes eld
+\end_inset
+
+eyeballed
+\begin_inset Quotes erd
+\end_inset
+
+, in that they look visually reasonable during plotting.
+ The eyeballed fit has a surprisingly simple expression:
+\begin_inset Formula 
+\[
+p\left(k\right)=\frac{4\exp\left(-k^{3/2}/2N\right)}{\sqrt{kN}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+but this is sheer-luck numerology...
+ large N limit can;'t work like this.
 \end_layout
 
 \begin_layout Section*

@@ -37,12 +37,16 @@
 ; This first section is for the triangles; for the pentagons, see
 ; further down.
 
-; Grand total number of participating genes.
+; Grand total number of participating genes. This should be 20123.
 (define total-genes
 	(fold (lambda (gene cnt) (if (< 0 (cog-count gene)) (+ cnt 1) cnt)) 0 
 		(cog-get-atoms 'GeneNode)))
 
 ; Grand total count on all genes.
+; When counting edges, this should be 4x the number of edges,
+; or 4x 365745 so 1462980
+; When counting triangles ...
+; When counting tetrahedra...
 (define total-count
 	(fold (lambda (gene cnt) (+ cnt (cog-count gene))) 0 
 		(cog-get-atoms 'GeneNode)))
