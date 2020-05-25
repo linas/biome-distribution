@@ -50,7 +50,7 @@
 ; This helps avoid accidental double-counting and other
 ; hard-to-understand bugs. e.g. where the order of the distal
 ; gene pair is swapped.
-(define (find-gene-triangle gene)
+(define (find-gene-triangles gene)
 	(Query
 		(VariableList
 			(TypedVariable (Variable "$a") (Type 'GeneNode))
@@ -82,7 +82,7 @@
 			; (define gene (Gene gene-name))
 			; (define gene-name (cog-name gene))
 			; (define query (find-output-interactors gene))
-			(define query (find-gene-triagles gene))
+			(define query (find-gene-triangles gene))
 
 			; Perform the search
 			; (define gene-secs (make-timer))
