@@ -23,27 +23,26 @@ scheme@(guile-user)> (load "load-files.scm")
 (cog-delete-recursive (Predicate "interacts_with"))
 (delete-simple-tv)     ; about 160 seconds
 (load "bio-loop.scm")
-(count-gene-triangles)   ; about 2800 seconds
+(count-gene-triangles (cog-get-atoms 'GeneNode))   ; about 2800 seconds
 ; Above should create 1797281 (1.8M) triangles
 ```
 
 At this time, after deletetion of self-interactors, have
+```
 Found 537839 gene interactions
 Found 344188 symmetric (paired) gene interactions
 Conclude: there are 193651 asymmetric interctions
 Conclude: there are 365745 symmetrized interactions
-
-
-Then see bottom of that file...
 ```
-(count-triangles (cog-get-atoms 'GeneNode))
-; or
+
+For the pentagons,
+```
 (define pathways (pathways-of-genes (cog-get-atoms 'GeneNode)))
 (count-pentagons pathways)
 ```
 
-To make the csv's, do a `(load "gene-pairs.scm")` and then go to
-`data-export.scm` and start cutting and pasting the code there.
+To make the csv's, do a `(load "data-export.scm")` and then start
+cutting and pasting the code there.
 
 ### Files
 

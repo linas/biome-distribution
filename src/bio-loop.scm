@@ -93,6 +93,8 @@
 			(define (mkpr a b)
 				(Evaluation (Predicate "gene-pair") (Set a b)))
 
+			(format #t "Begin looping over %A genes\n" rlen)
+
 			; Collect up some stats. Note that this ends up
 			; triple-counting everything. All counts should be
 			; multiples of three!
