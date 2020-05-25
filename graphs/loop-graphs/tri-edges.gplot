@@ -1,0 +1,30 @@
+#! /usr/bin/env gnuplot
+#
+# Create a graph of the distribution of triangle edges.
+#
+# ##########################################################################
+#
+# set term png size 1024,768
+# set out 'tri-edges.png'
+set term eps color
+set out 'tri-edges.eps'
+
+set logscale x
+set logscale y
+set format y "10^{%L}"
+set title "Participation of gene-pairs in triangles"
+set xlabel "Gene-pair rank (ranked by count of triangles)"
+set ylabel "Fraction of all triangles"
+
+set yrange [1e-7:2e-4]
+
+ntris = 1797281.0
+overcnt = 9
+obeta = 2 * sqrt(2 * ntris)
+
+norm = 3 / (4 * obeta)
+
+# Eyeballed fit to the data.
+plot "tri-edges.csv" using 1:($3 / (overcnt*ntris)) with lines lw 1 title "data", \
+     "tri-edges.csv" using 1:(norm / ($1)**0.25) with lines lw 1 title "A / rank^{1/4}", \
+     "tri-edges.csv" using 1:((norm / ($1)**0.25) * exp(-($1)**0.75 / obeta)) with lines lw 1 title "A exp(-rank^{3/4}/ 2√(2N)) / rank^{1/4}"

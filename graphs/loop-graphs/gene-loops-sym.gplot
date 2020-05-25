@@ -1,7 +1,8 @@
 #! /usr/bin/env gnuplot
 #
 # Create a graph of the number of triangles found.
-# This is for the earlier messed-up datasets.
+# This is for the earlier (25 January 2020) messed-up datasets.
+# I'm confused about what is going on, lets ignore these.
 #
 set term png
 set out 'gene-loops-asym.png'

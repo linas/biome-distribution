@@ -350,10 +350,6 @@ p\left(k\right)=A\frac{\exp\left(-k^{3/2}/2N\right)}{\sqrt{k}}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 The normalization 
 \begin_inset Formula $A$
 \end_inset
@@ -530,18 +526,11 @@ Similarly, one may ask how many triangles a given edge (a given gene-pair)
 \end_layout
 
 \begin_layout Standard
-The exponent now appears to be 
-\begin_inset Formula $\alpha\approx0.25$
-\end_inset
-
-, as shown in the figure below.
-\end_layout
-
-\begin_layout Standard
 \align center
 \begin_inset Graphics
-	filename /home/linas/src/novamente/mozi/graphs/loop-graphs/tri-edges-sym.eps
-	width 70col%
+	filename /home/linas/src/novamente/mozi/graphs/loop-graphs/tri-edges.eps
+	lyxscale 200
+	width 90col%
 
 \end_inset
 
@@ -549,8 +538,39 @@ The exponent now appears to be
 \end_layout
 
 \begin_layout Standard
-That such a technical change would have a rather profound effect on the
- structure of the graph is surprising.
+The rank exponent is now 1/4, instead of 1/2.
+ The eyeballed fit is given by 
+\begin_inset Formula 
+\[
+p\left(k\right)=Ak^{-1/4}\exp\left(-k^{3/4}/2\sqrt{2N}\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $N=1797281$
+\end_inset
+
+ is the total number of triangles.
+ The integral is again in the form of a gamma, but much simpler:
+\begin_inset Formula 
+\[
+\int_{0}^{\infty}\frac{\exp-\beta x^{-3/4}}{x^{1/4}}dx=\frac{4}{3\beta}\int_{0}^{\infty}e^{-u}du=\frac{4}{3\beta}
+\]
+
+\end_inset
+
+Thus, the normalization is
+\begin_inset Formula 
+\[
+A=\frac{3}{8\sqrt{2N}}
+\]
+
+\end_inset
+
+The preciseness of the numerology is remarkable, but the underlying theory
+ is unknown.
+ 
 \end_layout
 
 \begin_layout Subsubsection*
