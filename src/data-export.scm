@@ -95,7 +95,11 @@
 		(cog-incoming-set (Predicate "gene-pair"))))
 
 ; Total count on all of the edges participating in a graph.
-; For triangles, this was 16175529
+; For triangles, this was 16175529, which is 9x the number of unique
+; triangles. Why 9x? A factor of 3x because each vertex is visted.
+; That is, each triangle is counted 3 times. A second factor of 3x
+; because each edge is counted once. (!) We didn't really need to count
+; each edge, by symmetry they would have shown up, eventually.
 (define total-edge-observation-count
 	(fold (lambda (pare cnt) (+ cnt (cog-count pare))) 0 
 		(cog-incoming-set (Predicate "gene-pair"))))

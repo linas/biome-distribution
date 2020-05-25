@@ -96,7 +96,12 @@
 
 			; Collect up some stats. Note that this ends up
 			; triple-counting everything. All counts should be
-			; multiples of three!
+			; multiples of three! .. except for edges, which will
+			; be a multiple of 9, because (3x) triple-count of triangles
+			; and another (3x) cause we count every edge. So really,
+			; it would have been enough to count one vertex once, and
+			; one edge once. (Presuming UnorderedLink doesn't confuse
+			; a single-edge counting strategy. So the below is safer.)
 			(for-each
 				(lambda (triangle)
 					(define gene-set (gdr triangle))

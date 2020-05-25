@@ -23,7 +23,7 @@ scheme@(guile-user)> (load "load-files.scm")
 (delete-all-but-gene-interactions)  ; 60 seconds
 (delete-simple-tv)     ; about 15 seconds
 (load "bio-loop.scm")
-(count-gene-triangles (cog-get-atoms 'GeneNode))   ; about XXX
+(count-gene-triangles (cog-get-atoms 'GeneNode)) ; about 4:40 hh:mm
 ; Above should create 1797281 (1.8M) triangles
 ```
 
