@@ -312,8 +312,26 @@ so that the integral under the curve is
 \end_inset
 
 .
- The distribution appears to be Zipfian in nature, but with an unexpected
- exponent of 1/2.
+\end_layout
+
+\begin_layout Standard
+The first unexpected surprise is that this graph is not Zipfian.
+ That is, the distribution is not of the form 
+\begin_inset Formula $k^{-\alpha}$
+\end_inset
+
+ with exponent 
+\begin_inset Formula $\alpha\approx1$
+\end_inset
+
+.
+ The leading slope is instead given by 
+\begin_inset Formula $\alpha=0.5$
+\end_inset
+
+.
+ There is also a pronouned tail that seems too large to ignore or ascribe
+ to statistical rounding.
  The overlayed fitting curves are 
 \begin_inset Quotes eld
 \end_inset
@@ -327,7 +345,7 @@ eyeballed
 n:
 \begin_inset Formula 
 \[
-p\left(k\right)=A\frac{\exp\left(-k^{3/2}/2N308765\right)}{\sqrt{k}}
+p\left(k\right)=A\frac{\exp\left(-k^{3/2}/2N\right)}{\sqrt{k}}
 \]
 
 \end_inset
@@ -466,15 +484,15 @@ Zipf graphs
 \end_layout
 
 \begin_layout Standard
-The following figure shows the number of triangles in which a gene participates
- in.
- 
+The following figure shows the fraction of triangles in which a gene participate
+s in.
 \end_layout
 
 \begin_layout Standard
 \align center
 \begin_inset Graphics
-	filename /home/linas/src/novamente/mozi/graphs/loop-graphs/gene-loops-sym.eps
+	filename /home/linas/src/novamente/mozi/graphs/loop-graphs/gene-loops.eps
+	lyxscale 200
 	width 90col%
 
 \end_inset
@@ -483,78 +501,36 @@ The following figure shows the number of triangles in which a gene participates
 \end_layout
 
 \begin_layout Standard
-The first unexpected surprise is that this graph is not Zipfian.
- That is, the distribution is not of the form 
-\begin_inset Formula $1/(rank)^{\alpha}$
+The general slope, of a square-root-of-rank, is as before.
+ Two eyeballed fits are provided: one for 
+\begin_inset Formula $p(n)\approx A\exp(-\beta n^{3/4})/\sqrt{n}$
 \end_inset
 
- with 
-\begin_inset Formula $\alpha\approx1$
+ and one for 
+\begin_inset Formula $p(n)\approx A\exp(-\beta n^{2/3})/\sqrt{n}$
 \end_inset
 
 .
- Just eyeballing the general shape, as done above, one promptly arrives
- that 
-\begin_inset Formula $\alpha=0.5$
-\end_inset
-
- for the leading part of the figure.
- The tail is certainly not Zipfian, either; it falls of sharply.
- A first guess, no better than voodoo numerology, suggests that the 
-\begin_inset Formula $n$
-\end_inset
-
--th ranked gene appears in 
-\begin_inset Formula $p(n)=0.25e^{-\beta n}/\sqrt{n}$
-\end_inset
-
- of all triangles, for some constant 
+ It is not clear which provides a better fit of the data.
+ Unlike before, there is no obvious numerological relation to justify the
+ value of 
 \begin_inset Formula $\beta$
 \end_inset
 
-.
- Closer examination suggests 
-\begin_inset Formula $p(n)=0.25\exp(-\beta n^{3/4})/\sqrt{n}$
-\end_inset
-
- provides a better fit.
- These forms are chosen to simply look appealing to the eye, rather than
- by minimizing some least-squares curve-fit.
- These seem like reasonable hypothesis, given the above graph.
- However, the situation gets a bit confused, when one looks at edges.
+: it does not seem to be any simple algebraic combination of the number
+ of triangles, edges and vertexes.
+ (The square of the number of vertexes, divided by the number of triangles
+ comes close, but not close enough.)
 \end_layout
 
 \begin_layout Standard
-One may also ask how many triangles a given edge (a given gene-pair) participate
-s in.
- A similar distribution results, although the suggestive 
-\begin_inset Formula $\sqrt{n}$
-\end_inset
-
- hypothesis does not seem to hold cleanly.
- As shown in the figure below, the exponent 
-\begin_inset Formula $\alpha\approx0.43$
-\end_inset
-
- appears to offer a better fit.
- This figure is for the unsymmetrized data-set.
+Similarly, one may ask how many triangles a given edge (a given gene-pair)
+ participates in.
+ This is shown below.
 \end_layout
 
 \begin_layout Standard
-\align center
-\begin_inset Graphics
-	filename /home/linas/src/novamente/mozi/graphs/loop-graphs/tri-edges.eps
-	width 70col%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The symmetrization of the edges makes a dramatic change to the distribution
- exponent.
- The exponent now appears to be 
+The exponent now appears to be 
 \begin_inset Formula $\alpha\approx0.25$
 \end_inset
 
