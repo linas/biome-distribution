@@ -22,9 +22,7 @@
 ; but it will do.
 (define (find-gene-edges gene)
 	(Query
-		(VariableList
-			(TypedVariable (Variable "$a") (Type 'GeneNode))
-		)
+		(TypedVariable (Variable "$a") (Type 'GeneNode))
 		(Present (Evaluation (Predicate "gene-pair")
 			(Set gene (Variable "$a"))))
 		(Evaluation (Predicate "gene-pair")

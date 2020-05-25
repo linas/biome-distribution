@@ -26,43 +26,28 @@
 
 ;; This defines a triangle-shaped search; one endpoint is fixed,
 ;; and we are looking for two other genes that interact with the
-;; endpoint and form a triangle.  This is called
-;; "find-output-interactors" in the MOZI code-base, and we keep
-;; that name here. XXX Caution: This uses the non-symmetrized
-;; edges from the original dataset. Caveat emptor!
-(define (find-output-interactors gene)
-	(Meet
-		(VariableList
-			(TypedVariable (Variable "$a") (Type 'GeneNode))
-			(TypedVariable (Variable "$b") (Type 'GeneNode))
-		)
-		(And
-			(Evaluation (Predicate "interacts_with")
-				(List gene (Variable "$a")))
-			(Evaluation (Predicate "interacts_with")
-				(List (Variable "$a") (Variable "$b")))
-			(Evaluation (Predicate "interacts_with")
-				(List gene (Variable "$b")))
-		)))
-
-; Same as above, but using the explicitly symmetrized edges.
-; It also explicitly creates the triangles as it counts.
-; This helps avoid accidental double-counting and other
-; hard-to-understand bugs. e.g. where the order of the distal
-; gene pair is swapped.
+;; endpoint and form a triangle.
+;;
+;; The resulting triangles are explicitly created.
+;; (This helps avoid accidental double-counting and other
+;; hard-to-understand bugs. e.g. where the order of the distal
+;; gene pair is swapped.)
+;;
+;; The original MOZI code called this `find-output-interactors`,
+;; this is a fixed-up variant therof.
 (define (find-gene-triangles gene)
 	(Query
 		(VariableList
 			(TypedVariable (Variable "$a") (Type 'GeneNode))
 			(TypedVariable (Variable "$b") (Type 'GeneNode))
 		)
-		(And
-			(Present (Evaluation (Predicate "gene-pair")
-				(Set gene (Variable "$a"))))
-			(Present (Evaluation (Predicate "gene-pair")
-				(Set (Variable "$a") (Variable "$b"))))
-			(Present (Evaluation (Predicate "gene-pair")
-				(Set (Variable "$b") gene)))
+		(Present
+			(Evaluation (Predicate "gene-pair")
+				(Set gene (Variable "$a")))
+			(Evaluation (Predicate "gene-pair")
+				(Set (Variable "$a") (Variable "$b")))
+			(Evaluation (Predicate "gene-pair")
+				(Set (Variable "$b") gene))
 		)
 		(Evaluation (Predicate "gene-triangle")
 			(Set gene (Variable "$a") (Variable "$b")))
@@ -158,7 +143,7 @@
 			(TypedVariable (Variable "$b") (Type 'GeneNode))
 			(TypedVariable (Variable "$c") (Type 'GeneNode))
 		)
-		(And
+		(Present
 			(Evaluation (Predicate "interacts_with")
 				(List (Variable "$a") (Variable "$b")))
 			(Evaluation (Predicate "interacts_with")
@@ -187,13 +172,13 @@
 			(TypedVariable (Variable "$b") (Type 'GeneNode))
 			(TypedVariable (Variable "$c") (Type 'GeneNode))
 		)
-		(And
-			(Present (Evaluation (Predicate "gene-pair")
-				(Set (Variable "$a") (Variable "$b"))))
-			(Present (Evaluation (Predicate "gene-pair")
-				(Set (Variable "$b") (Variable "$c"))))
-			(Present (Evaluation (Predicate "gene-pair")
-				(Set (Variable "$c") (Variable "$a"))))
+		(Present
+			(Evaluation (Predicate "gene-pair")
+				(Set (Variable "$a") (Variable "$b")))
+			(Evaluation (Predicate "gene-pair")
+				(Set (Variable "$b") (Variable "$c")))
+			(Evaluation (Predicate "gene-pair")
+				(Set (Variable "$c") (Variable "$a")))
 		)
 		(Evaluation (Predicate "gene-triangle")
 			(Set (Variable "$a") (Variable "$b") (Variable "$c")))

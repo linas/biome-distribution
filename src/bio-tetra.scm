@@ -55,7 +55,7 @@
 			(TypedVariable (Variable "$b") (Type 'GeneNode))
 			(TypedVariable (Variable "$c") (Type 'GeneNode))
 		)
-		(And
+		(Present
 			(Evaluation (Predicate "gene-pair")
 				(Set gene (Variable "$a")))
 			(Evaluation (Predicate "gene-pair")
@@ -65,7 +65,7 @@
 			(Evaluation (Predicate "gene-triangle")
 				(Set (Variable "$a") (Variable "$b") (Variable "$c")))
 		)
-		(Evaluation (Predicate "tetrahedron")
+		(Evaluation (Predicate "gene-tetrahedron")
 			(Set (Variable "$a") (Variable "$b") (Variable "$c") (Variable "$d")))
 		))
 ))
@@ -91,27 +91,33 @@
 			(define rlist (cog-value->list result))
 			(define rlen (length rlist))
 
-			; Collect up some stats
-			; (cog-inc-count! gene rlen)
-			(for-each
-				(lambda (gene-triple)
-					(define gene-a (cog-outgoing-atom gene-triple 0))
-					(define gene-b (cog-outgoing-atom gene-triple 1))
-					(define gene-c (cog-outgoing-atom gene-triple 2))
-					(define gene-d gene)
-					(define pab (Evaluation (Predicate "gene-pair")
-						(List  gene-a gene-b)))
-					(define pbc (Evaluation (Predicate "gene-pair")
-						(List  gene-b gene-c)))
-					(define pca (Evaluation (Predicate "gene-pair")
-						(List  gene-c gene-a)))
+			(define (mkpr a b)
+				(Evaluation (Predicate "gene-pair") (Set a b)))
+			(define (mktri a b c)
+				(Evaluation (Predicate "gene-triangle") (Set a b c)))
 
-					(define pad (Evaluation (Predicate "gene-pair")
-						(List  gene-a gene-d)))
-					(define pbd (Evaluation (Predicate "gene-pair")
-						(List  gene-b gene-d)))
-					(define pcd (Evaluation (Predicate "gene-pair")
-						(List  gene-c gene-d)))
+			; Collect up some stats. This over-counts due to
+			; degeneracy, and thus wastes some CPU time. Allow
+			; this as it helps provide double-checks for counting.
+			(for-each
+				(lambda (gene-tetra)
+					(define gene-set (gdr gene-tetra))
+
+					(define gene-a (cog-outgoing-atom gene-set 0))
+					(define gene-b (cog-outgoing-atom gene-set 1))
+					(define gene-c (cog-outgoing-atom gene-set 2))
+					(define gene-d (cog-outgoing-atom gene-set 3))
+					(define pab (mkpr gene-a gene-b))
+					(define pbc (mkpr gene-b gene-c))
+					(define pca (mkpr gene-c gene-a))
+					(define pad (mkpr gene-a gene-d))
+					(define pbd (mkpr gene-b gene-d))
+					(define pcd (mkpr gene-c gene-d))
+
+					(define tabc (mktri gene-a gene-b gene-c))
+					(define tabd (mktri gene-a gene-b gene-d))
+					(define tacd (mktri gene-a gene-c gene-d))
+					(define tbcd (mktri gene-b gene-c gene-d))
 
 					(cog-inc-count! gene-a 1)
 					(cog-inc-count! gene-b 1)
@@ -124,15 +130,20 @@
 
 					(cog-inc-count! pad 1)
 					(cog-inc-count! pbd 1)
-					(cog-inc-count! pcd 1))
+					(cog-inc-count! pcd 1)
+
+					(cog-inc-count! tabc 1)
+					(cog-inc-count! tabd 1)
+					(cog-inc-count! tacd 1)
+					(cog-inc-count! tbcd 1)
+
+					(cog-inc-count! gene-tetra 1))
 				rlist)
 
 			; delete the GetLink.
 			(cog-delete query)
+			(cog-delete-recursive (Variable "$a"))
 
-			;; (format #t "Ran tetrahedra ~A in ~6f seconds; got ~A results\n"
-			;; 	gene-name (gene-secs) rlen)
-			; (display ".")
 			(set! ndone (+ ndone 1))
 			(if (eq? 0 (modulo ndone 50))
 				(let* ((elapsed-secs
@@ -154,50 +165,45 @@
 
 ;; -----------
 
-; Same as above, but not pointed; uses a set.
-(define tetrahedron-query
-	(Bind
-		(VariableList
-			(TypedVariable (Variable "$a") (Type 'GeneNode))
-			(TypedVariable (Variable "$b") (Type 'GeneNode))
-			(TypedVariable (Variable "$c") (Type 'GeneNode))
-			(TypedVariable (Variable "$d") (Type 'GeneNode))
-		)
-		(And
-			(Evaluation (Predicate "gene-pair")
-				(List (Variable "$a") (Variable "$b")))
-			(Evaluation (Predicate "gene-pair")
-				(List (Variable "$b") (Variable "$c")))
-			(Evaluation (Predicate "gene-pair")
-				(List (Variable "$c") (Variable "$a")))
-			(Evaluation (Predicate "gene-pair")
-				(List (Variable "$a") (Variable "$d")))
-			(Evaluation (Predicate "gene-pair")
-				(List (Variable "$b") (Variable "$d")))
-			(Evaluation (Predicate "gene-pair")
-				(List (Variable "$c") (Variable "$d")))
-		)
-		(Evaluation (Predicate "tetrahedron")
-			(Set (Variable "$a") (Variable "$b") (Variable "$c") (Variable "$d")))
-		))
-
-(define (make-pointed-tetrahedra)
-	(define elapsed-secs (make-timer))
-	(define pset (cog-execute! pointed-tetrahedron-query))
-	(define points (cog-outgoing-set pset))
-	(define npoints (length points))
-	(cog-delete pset)
-	(format #t "Obtained ~A pointed tetrahedra in ~6f seconds\n"
-		npoints (elapsed-secs))
-)
-
+;; Same as above, but without the counting.
 (define (make-tetrahedra)
-	(define elapsed-secs (make-timer))
-	(define tset (cog-execute! tetrahedron-query))
-	(define tetrahedra (cog-outgoing-set tset))
-	(define ntet (length tetrahedra))
-	(cog-delete tset)
-	(format #t "Obtained ~A tetrahedra in ~6f seconds\n" ntet (elapsed-secs))
+	(define bench-secs (make-timer))
+	(define batch-secs (make-timer))
+	(define start-time (get-internal-real-time))
+	(define ndone 0)
+	(define ngen (length gene-list))
+	(for-each ;; or try par-for-each
+		(lambda (gene)
+			; Create a search pattern for each gene in the gene list.
+			(define query (find-gene-tetrahedron gene))
+
+			; Perform the search
+			; (define gene-secs (make-timer))
+			(define result (cog-execute! query))
+			(define rlist (cog-value->list result))
+			(define rlen (length rlist))
+
+			; delete the GetLink.
+			(cog-delete query)
+			(cog-delete-recursive (Variable "$a"))
+
+			(set! ndone (+ ndone 1))
+			(if (eq? 0 (modulo ndone 50))
+				(let* ((elapsed-secs
+							(/ (- (get-internal-real-time) start-time)
+								internal-time-units-per-second))
+						(elapsed-mins (/ elapsed-secs 60))
+						(rate (/ ndone elapsed-mins)))
+					(format #t
+						"Created Tetra ~A/~A in ~6f secs rate=~4f gene/min elapsed=~8f\n"
+						ndone ngen (batch-secs) rate elapsed-secs)))
+		)
+		(cog-get-atoms 'Gene))
+	(format #t "\n")
+	(format #t "Finished creating tetrahedra for ~A genes in ~8f seconds\n"
+			ngen (bench-secs))
+
+	*unspecified*
 )
 
 ; =================================================================

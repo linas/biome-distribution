@@ -204,60 +204,75 @@ Datasets
 \begin_layout Standard
 The graph networks explored here were constructed from public data-sets
  from MCBI, ChEBI, PubMed, UniProt, SMPDB, Entrez and BioGrid.
- Two variant networks were constructed and explored.
- The two differ in how gene interactions were treated.
- In the first, genes that regulate one-another were treated as directed
- edges, in that gene A may regulate gene B, but not the other way around.
- This includes genes that may self-regulate.
- The second network was obtained from the first by symmetrizing all gene
- interactions (if A interacts with B, then B interacts with A) and removing
- all self-interacting genes.
+ These datasets include information about genes that regulate one-another,
+ genes that express proteins, and proteins that appear on a common reaction
+ pathway.
 \end_layout
 
 \begin_layout Standard
-XXX Both graphs contain a total of 49050 genes.
- There are 540778 gene interactions in the first data-set, which are represented
- as directed edges.
- Of these, 347127 are symmetric (
-\emph on
-i.e.
-
-\emph default
- have a partner indicating the opposite direction).
- There were 2939 self-interacting genes.
- From this, we deduce a total of (347127 - 2939) / 2 = 172094 symmetric
- interactions, and 540778 - 347127 = 193651 non-symmetric interactions.
- The number of edges that have non-zero counts (i.e.
- appeared at least once in a triangle) is 455572.
-\end_layout
-
-\begin_layout Standard
-For the second data-set, the self-interacting genes are removed, and matching
- symmetrized edges are created, for a total of 731490 directed edges, or
- half of that, 365745, when the relation is taken as symmetric.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-Use the 
-\family typewriter
-(count-gene-interactions)
+All gene-gene interactions were taken as symmetric, so that if one gene
+ up- or down-regulates another, the interaction was represented by a symmetric
+ (undirected) edge: namely, that two genes interact, without any specific
+ direction information noted.
+ The datasets contained a total of 20123 genes participating in 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+365745+
 \family default
- tool.
-\end_layout
-
-\end_inset
-
- The number of edges with non-zero counts (i.e.
- the number of edges that appear in at least one triangle) is 617530.
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+2939
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ pair-wise interactions.
+ Of these, there were
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 2939 self-interacting genes; these self-interactions were removed, so as
+ to avoid confusion during counting.
 \end_layout
 
 \begin_layout Standard
 Pathways are from https://reactome.org and from http://smpdb.ca/
-\end_layout
-
-\begin_layout Standard
-There are only 20123 genes that interact with one-another...
 \end_layout
 
 \begin_layout Section*
@@ -593,7 +608,18 @@ The preciseness of the numerology is remarkable, but the underlying theory
  is unknown.
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Section*
+Tetrahedra
+\end_layout
+
+\begin_layout Standard
+One may search for graph cliques of higher order than 3: a clique of 4 is
+ a tetrahedron, a clique of order 5 is a 5-simplex, and so on.
+ Data mining tetrahedra is considerably more CPU-intensive.
+ The results are presented below.
+\end_layout
+
+\begin_layout Section*
 Prior Results
 \end_layout
 
