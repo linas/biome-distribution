@@ -88,7 +88,7 @@
 			; (define gene-secs (make-timer))
 			(define result (cog-execute! query))
 			(define rlist (cog-value->list result))
-			(define rlen (cog-arity rlist))
+			(define rlen (length rlist))
 
 			(define (mkpr a b)
 				(Evaluation (Predicate "gene-pair") (Set a b)))
