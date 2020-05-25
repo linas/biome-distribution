@@ -15,13 +15,21 @@ set xlabel "Gene Rank (ranked by count of triangles)"
 set ylabel "Fraction of all triangles"
 # set key left bottom
 
-set yrange [1e-6:1]
+set yrange [1e-7:2e-2]
 
 # Total number of unique triangles observed
 ntris = 1797281
 
+# over-count factor
+overcnt = 9
+
+# See paper
+norm = 0.015992741
+
+# cube root of 3x number of genes
+obeta = 203.8087
+
 # Eyeballed fit to the data.
-plot "gene-loops.csv" using 1:($3 / ntris) with lines lw 3 title "data", \
-     "gene-loops.csv" using 1:(0.15 / ($1)**0.5) with lines lw 3 title "A/√rank", \
-     "gene-loops.csv" using 1:((0.15 / ($1)**0.5) * exp(-($1)**0.75 / 200)) with lines lw 3 title "A exp(-rank^{3/4}/200)/√rank", \
-     "gene-loops.csv" using 1:((0.15 / ($1)**0.5) * exp(-($1)**(2.0/3) / 100)) with lines lw 3 title "A exp(-rank^{2/3}/100)/√rank"
+plot "gene-loops.csv" using 1:($3 / (overcnt * ntris)) with lines lw 3 title "data", \
+     "gene-loops.csv" using 1:(norm / ($1)**0.5) with lines lw 3 title "A / √rank", \
+     "gene-loops.csv" using 1:((norm / ($1)**0.5) * exp(-($1)**0.75 / obeta)) with lines lw 3 title "A exp(-rank^{3/4}/ √(3V)) / √rank"

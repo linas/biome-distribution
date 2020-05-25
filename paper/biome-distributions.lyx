@@ -215,7 +215,7 @@ The graph networks explored here were constructed from public data-sets
 \end_layout
 
 \begin_layout Standard
-Both graphs contain a total of 49050 genes.
+XXX Both graphs contain a total of 49050 genes.
  There are 540778 gene interactions in the first data-set, which are represented
  as directed edges.
  Of these, 347127 are symmetric (
@@ -367,7 +367,7 @@ The normalization
 \end_inset
 
 The last integral is the gamma function 
-\begin_inset Formula $\Gamma\left(1/3\right)\approx2.6789\cdots$
+\begin_inset Formula $\Gamma\left(1/3\right)\approx2.67893853\cdots$
 \end_inset
 
  and so, bassed on the eyeballed fit, one has 
@@ -498,25 +498,46 @@ s in.
 
 \begin_layout Standard
 The general slope, of a square-root-of-rank, is as before.
- Two eyeballed fits are provided: one for 
-\begin_inset Formula $p(n)\approx A\exp(-\beta n^{3/4})/\sqrt{n}$
+ The eyeballed fit is given by 
+\begin_inset Formula 
+\[
+p\left(k\right)=Ak^{-1/2}\exp\left(-k^{3/4}/\sqrt{3V}\right)
+\]
+
 \end_inset
 
- and one for 
-\begin_inset Formula $p(n)\approx A\exp(-\beta n^{2/3})/\sqrt{n}$
+where 
+\begin_inset Formula $V=13846$
+\end_inset
+
+ is the number of vertexes (number of genes participating in triangles).
+ Notice that the leading slope is one-half, as before, but the exponential
+ fall-off is not as sharp.
+ It still appears to have a very simple numerological value that is easily
+ guessed.
+ As before, the integral is again in the form of a gamma:
+\begin_inset Formula 
+\[
+\int_{0}^{\infty}\frac{\exp-\beta x^{-3/4}}{x^{1/2}}dx=\frac{2}{\beta^{2/3}}\int_{0}^{\infty}\exp\left(-u^{3/2}\right)du=\frac{4}{3\beta^{2/3}}\Gamma\left(\frac{2}{3}\right)
+\]
+
+\end_inset
+
+so that the normalization is 
+\begin_inset Formula 
+\[
+A=\frac{3}{4\left(3V\right)^{1/3}\Gamma\left(2/3\right)}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $\Gamma\left(2/3\right)\approx1.354117939\cdots$
 \end_inset
 
 .
- It is not clear which provides a better fit of the data.
- Unlike before, there is no obvious numerological relation to justify the
- value of 
-\begin_inset Formula $\beta$
-\end_inset
-
-: it does not seem to be any simple algebraic combination of the number
- of triangles, edges and vertexes.
- (The square of the number of vertexes, divided by the number of triangles
- comes close, but not close enough.)
+ As before, the fit seems very good, despite effectively being numerological
+ guess-work.
 \end_layout
 
 \begin_layout Standard
@@ -570,7 +591,6 @@ A=\frac{3}{8\sqrt{2N}}
 
 The preciseness of the numerology is remarkable, but the underlying theory
  is unknown.
- 
 \end_layout
 
 \begin_layout Subsubsection*

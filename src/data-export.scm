@@ -45,17 +45,19 @@
 	(fold (lambda (gene cnt) (if (< 0 (cog-count gene)) (+ cnt 1) cnt)) 0 
 		(cog-get-atoms 'GeneNode)))
 
+; -------
 ; Grand total observation count on all genes. i.e. how many times that
 ; gene was counted as participating in some graph.
 ;
 ; When counting edges, this should be 4x the number of edges,
 ; or 4x 365745 so 1462980. Why 4x? There is 2x because each endpoint is
 ; explored, and another 2x because UnorderedLink permutes.
+; 
+; The total number of edges can be double-checked.
+(cog-incoming-size (Predicate "gene-pair"))
 ;
-; When counting triangles, this is 1462980 which is a 12x over-count:
-; 3x because once per corner, 2x because distal edge is swapped, and
-; another 2x because UnorderedLink explores both permutations. So the
-; actual count is 1462980 / 12 = 121915
+; When counting triangles, this is 16175529 which is a 9x over-count.
+; 3x because once per corner, and 3x because each corner is counted.
 ;
 ; When counting tetrahedra, this is 884761344
 (define total-gene-observation-count
