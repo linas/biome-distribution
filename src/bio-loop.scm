@@ -108,9 +108,9 @@
 					(cog-inc-count! gene-a 1)
 					(cog-inc-count! gene-b 1)
 					(cog-inc-count! gene-c 1)
-					(cog-inc-count! eab 1))
-					(cog-inc-count! ebc 1))
-					(cog-inc-count! eca 1))
+					(cog-inc-count! eab 1)
+					(cog-inc-count! ebc 1)
+					(cog-inc-count! eca 1)
 
 					; Each triangle should be seen exactly 3 times.
 					(cog-inc-count! triangle 1))
