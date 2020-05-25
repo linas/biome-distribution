@@ -1,6 +1,10 @@
 #
 # gene-loops.csv
 # This is the new, symmetrized, data-scrubed version for the triangles.
+# Circa 25 January 2020. Except that it differs from the
+# latest-go-around; I think things were being mis-counted below;
+# we should have always worked with the fully symmetrixed edges.
+# So the data below is junk and kept for historical comparison.
 #
 # Rank-ordered counts
 #
