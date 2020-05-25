@@ -181,6 +181,35 @@
 )
 
 ; --------------------
+(define (delete-all-but-gene-interactions)
+"
+  Remove pretty much everything that is not a gene that belongs to
+  a gene-pair.  The goal is to reduce the atomspace to something
+  manageable and more responsive during gene graph searches.
+  This assumes that `(make-gene-pairs)` has alreay run.
+"
+	(define elapsed-secs (make-timer))
+	(for-each cog-delete-recursive (cog-get-atoms 'Molecule))
+	(for-each cog-delete-recursive (cog-get-atoms 'Concept))
+	(for-each cog-delete-recursive (cog-get-atoms 'List))
+
+	(for-each
+		(lambda (pred)
+			(if (not (equal? pred (Predicate "gene-pair")))
+				(cog-delete-recursive pred)))
+		(cog-get-atoms 'Predicate))
+
+	(for-each
+		(lambda (gene)
+			(if (= 0 (cog-incoming-size gene)) (cog-delete gene)))
+		(cog-get-atoms 'Gene))
+
+	(format #t "Cleaned out non-genomic data ~6f seconds\n" (elapsed-secs))
+	(format #t "What's left: ~A\n" (cog-report-counts))
+	*unspecified*
+)
+
+; --------------------
 (define (delete-simple-tv)
 "
   Delete the SimpleTruthValues on all atoms in the atomspace.

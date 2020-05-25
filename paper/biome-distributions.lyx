@@ -101,6 +101,10 @@ Linas Vepstas
 23 January 2020
 \end_layout
 
+\begin_layout Date
+revised 24 May 2020
+\end_layout
+
 \begin_layout Abstract
 An exploration of the statistical distribution of interactions between genes,
  proteins and pathways, extracted from public genome, proteome and reactome
@@ -250,6 +254,33 @@ Use the
 
 \begin_layout Standard
 Pathways are from https://reactome.org and from http://smpdb.ca/
+\end_layout
+
+\begin_layout Section*
+Pair-wise interactions
+\end_layout
+
+\begin_layout Standard
+At the most basic level, one can ask about the distribution of gene interactions.
+ This is straight-forward: one simply crawls over the dataset, and simply
+ counts how many interactions a gene particiates in.
+ Ranking the genes by count produces the distribution shown below.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename /home/linas/src/novamente/mozi/graphs/edge-graphs/gene-pairs.eps
+	lyxscale 200
+	width 90col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and so,,,
 \end_layout
 
 \begin_layout Section*
@@ -434,7 +465,7 @@ The following figure shows the number of triangles in which a gene participates
 \align center
 \begin_inset Graphics
 	filename /home/linas/src/novamente/mozi/graphs/loop-graphs/gene-loops-sym.eps
-	width 70col%
+	width 90col%
 
 \end_inset
 

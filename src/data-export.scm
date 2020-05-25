@@ -37,6 +37,16 @@
 ; This first section is for the triangles; for the pentagons, see
 ; further down.
 
+; Grand total number of participating genes.
+(define total-genes
+	(fold (lambda (gene cnt) (if (< 0 (cog-count gene)) (+ cnt 1) cnt)) 0 
+		(cog-get-atoms 'GeneNode)))
+
+; Grand total count on all genes.
+(define total-count
+	(fold (lambda (gene cnt) (+ cnt (cog-count gene))) 0 
+		(cog-get-atoms 'GeneNode)))
+
 ; Genes that had postive counts.
 ; That is, they were counted as participating in a graph.
 (define graph-participants

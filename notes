@@ -2669,5 +2669,213 @@ so only 4x faster for nearly 8x more cpu ... bummer...
 
 Next:
 
+wtfland
+
+(define participating
+	(filter
+		(lambda (gene) (< 0 (cog-incoming-size-by-type gene 'Set)))
+		(cog-get-atoms 'GeneNode)))
+
+(length participating 20123) how can that be ???
+
+(load "load-files.scm")
+(load-all)
+(load "cleanup-data.scm")
+(delete-go-nodes)
+
+(define gns
+	(filter
+		(lambda (gene) (< 0 (cog-incoming-size-by-type gene 'List)))
+		(cog-get-atoms 'Gene)))
+
+(length gns) ; 49040
+
+(filter (lambda (gene) (= 0 (cog-incoming-size-by-type gene 'List)))
+   (cog-get-atoms 'Gene)))
+
+indeed.... there are ten junkers .. even before deleting go nodes.
+
+(define fms
+	(cog-execute!
+		(Query
+			(And
+				(TypedVariable (Variable "fm") (Type 'Gene))
+				(TypedVariable (Variable "to") (Type 'Gene))
+				(Evaluation (Predicate "interacts_with")
+					(List (Variable "fm") (Variable "to"))))
+			(Variable "fm"))))
+
+(length (cog-value->list fms)) ; 19648
+; after deleting self-interactors, drops to 19621
+
+(define tos
+	(cog-execute!
+		(Query
+			(And
+				(TypedVariable (Variable "fm") (Type 'Gene))
+				(TypedVariable (Variable "to") (Type 'Gene))
+				(Evaluation (Predicate "interacts_with")
+					(List (Variable "fm") (Variable "to"))))
+			(Variable "to"))))
+
+(length (cog-value->list tos)) ; 18074
+; after deleting self-interactors, drops to 18046
+
+(define boths
+	(cog-execute!
+		(Query
+			(And
+				(TypedVariable (Variable "fm") (Type 'Gene))
+				(TypedVariable (Variable "to") (Type 'Gene))
+				(Choice
+					(Evaluation (Predicate "interacts_with")
+						(List (Variable "fm") (Variable "to")))
+					(Evaluation (Predicate "interacts_with")
+						(List (Variable "to") (Variable "fm")))))
+			(Variable "to"))))
+
+(length (cog-value->list boths)) ; 20137
+(delete-self-interaction)
+; after deleting self-interactors, drops to 20123
+
+How did I not notice that before .. ? What are those other gens in?
+
+(define gns
+	(filter
+		(lambda (gene) (< 0 (cog-incoming-size-by-type gene 'List)))
+		(cog-get-atoms 'Gene)))
+
+(use-modules (srfi srfi-1))
+(define lsts
+	(append-map
+		(lambda (gene) (cog-incoming-by-type gene 'List))
+		(cog-get-atoms 'Gene)))
+
+with duplicates: (length lsts) 1529659
+
+(define not-int
+	(filter (lambda (lst) (null?
+		(cog-link 'Evaluation (Predicate "interacts_with") lst)))
+		lsts))
+
+(length not-int)
+453981
+
+(cog-incoming-set (car not-int))
+$15 = ((EvaluationLink
+   (PredicateNode "has_current_symbol")
+   (ListLink
+      (GeneNode "H3F3BP2")
+      (GeneNode "H3P41")
+   ))
+yikes!!
+
+(define not-sym
+	(filter (lambda (lst) (null?
+		(cog-link 'Evaluation (Predicate "has_current_symbol") lst)))
+		not-int))
+
+(length not-sym)
+432371
+
+(cog-incoming-set (car not-sym))
+
+$17 = ((EvaluationLink
+   (PredicateNode "transcribed_to")
+   (ListLink
+      (GeneNode "CD2AP")
+      (MoleculeNode "ENST00000359314")
+   )
+)
+)
+OK... that's more intersting.
 
 
+(define neither
+	(cog-execute!
+		(Query
+			(And
+				(TypedVariable (Variable "fm") (Type 'Gene))
+				(TypedVariable (Variable "to") (Type 'Gene))
+				(Present (List (Variable "fm") (Variable "to")))
+				(Absent
+					(Evaluation (Predicate "interacts_with")
+						(List (Variable "fm") (Variable "to"))))
+				(Absent
+					(Evaluation (Predicate "interacts_with")
+						(List (Variable "to") (Variable "fm")))))
+			(Variable "to"))))
+
+(length (cog-value->list neither))
+
+(define neither
+	(cog-execute!
+		(Query
+			(And
+				(TypedVariable (Variable "fm") (Type 'Gene))
+				(TypedVariable (Variable "to") (Type 'Gene))
+				(Present (List (Variable "fm") (Variable "to")))
+				(Absent
+					(Evaluation (Predicate "gene-pair")
+						(Set (Variable "fm") (Variable "to")))))
+			(Variable "to"))))
+
+(length (cog-value->list neither)) ; 8679
+
+But 49040 - 20123 = 29K
+So there are genes not in in lists
+
+(define all-em
+	(append-map
+		(lambda (gene) (cog-incoming-set gene))
+		(cog-get-atoms 'Gene)))
+
+(length all-em)
+2602312
+
+(define not-list
+	(filter
+		(lambda (inc) (and
+			(not (equal? (cog-type inc) 'ListLink))
+			(not (equal? (cog-type inc) 'SetLink))))
+		all-em))
+
+(length not-list) ; 341163
+(MemberLink
+   (GeneNode "CD2AP")
+   (ConceptNode "R-HSA-373753")
+)
+
+oh, duh.
+
+(define not-mem
+	(filter
+		(lambda (inc) (and
+			(not (equal? (cog-type inc) 'MemberLink))))
+		not-list))
+
+MoleculeNode
+(for-each cog-delete-recursive (cog-get-atoms 'Molecule))
+(for-each cog-delete-recursive (cog-get-atoms 'Concept))
+(for-each cog-delete-recursive (cog-get-atoms 'List))
+
+ (PredicateNode "has_location")
+ (PredicateNode "transcribed_to")
+ (PredicateNode "translated_to")
+ (PredicateNode "has_name")
+ (PredicateNode "has_pubmedID")
+ (PredicateNode "GO_name")
+ (PredicateNode "has_biogridID")
+ (PredicateNode "expresses")
+ (PredicateNode "GO_namespace")
+ (PredicateNode "has_entrez_id")
+
+
+(define stale
+	(filter
+		(lambda (gene) (= 0 (cog-incoming-size gene)))
+		(cog-get-atoms 'Gene)))
+(length stale)
+28927
+
+But 49050 - 20123 = 28927 yay!
