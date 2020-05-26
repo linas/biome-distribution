@@ -2,7 +2,7 @@
 #
 # Create a graph of the distribution of tetrahedron edges.
 #
-set term png
+set term png size 1024,768
 set out 'tetra-edges.png'
 # set term eps color
 # set out 'tetra-edges.eps'
@@ -10,7 +10,7 @@ set out 'tetra-edges.png'
 set logscale x
 set logscale y
 set format y "10^{%L}"
-set title "Gene-pair participation in tetrahedra (non-symmetrized)"
+set title "Gene-pair participation in tetrahedra"
 set xlabel "Gene-pair rank (ranked by count of tetrahedra)"
 set ylabel "Fraction of all tetrahedra"
 set key left bottom
@@ -22,32 +22,11 @@ ntetra = 9989
 # Eyeballed fit to the data.
 plot "tetra-edges.csv" using 1:($3 / ntetra) with lines lw 1 title "data", \
      "tetra-edges.csv" using 1:(35 / ($1)**0.25) with lines lw 1 title "35/rank^{1/4}", \
-     "tetra-edges.csv" using 1:((35 / ($1)**0.25) * exp(-($1)**0.75 / 2500)) with lines lw 1 title "35 exp(-rank^{1/4}/2500)/rank^{1/4}"
+     "tetra-edges.csv" using 1:((35 / ($1)**0.25) * exp(-($1)**0.75 / 2500)) with lines lw 1 title "35 exp(-rank^{3/4}/2500)/rank^{1/4}"
 
-#     "tetra-edges.csv" using 1:((35 / ($1)**0.25) * exp(-($1)**0.6666 /
-#     1000)) with lines lw 1 title "35 exp(-rank^{xxx}/5)/rank^{1/4}"
-#
-# ##########################################################################
-##
-## set term png
-## set out 'tetra-edges-sym.png'
-#set term eps color
-#set out 'tetra-edges-sym.eps'
-#
-#set logscale x
-#set logscale y
-#set format y "10^{%L}"
-#set title "Participation of gene-pairs in triangles (symmetrized dataset)"
-#set xlabel "Gene-pair rank (ranked by count of triangles)"
-#set ylabel "Fraction of all triangles"
-#
-#set yrange [1e-6:1e-3]
-#
-#ntris = 1797281
-#
-## Eyeballed fit to the data.
-#plot "tetra-edges-sym.csv" using 1:($3 / ntris) with lines lw 1 title "data", \
-#     "tetra-edges-sym.csv" using 1:(7e-4 / ($1)**0.25) with lines lw 1 title "7e-4/rank^{1/4}", \
-#     "tetra-edges-sym.csv" using 1:((7e-4 / ($1)**0.25) * exp(-($1)**0.75 / 6.5e3)) with lines lw 1 title "7e-4 exp(-rank^{3/4}/6e3)/rank^{1/4}"
-#
-##     "tetra-edges-sym.csv" using 1:((7e-4 / ($1)**0.25) * exp(-($1) / 1.5e5)) with lines lw 1 title "7e-4 exp(-rank/2e5)/√rank", \
+
+# Some interesting near misses for quality control.
+#     "tetra-edges.csv" using 1:(18 / ($1)**0.125) with lines lw 1 title "18/rank^{1/8}", \
+#     "tetra-edges.csv" using 1:((35 / ($1)**0.25) * exp(-($1)**0.5 / 150)) with lines lw 1 title "35 exp(-rank^{1/2}/150)/rank^{1/4}", \
+#     "tetra-edges.csv" using 1:((35 / ($1)**0.25) * exp(-($1) / 40000)) with lines lw 1 title "35 exp(-rank/40000)/rank^{1/4}"
+

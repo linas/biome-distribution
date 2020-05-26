@@ -10,9 +10,9 @@ set out 'gene-tetra.png'
 set logscale x
 set logscale y
 set format y "10^{%L}"
-set title "Tetrahedra per gene (non-symmetrized)"
+set title "Tetrahedra per gene"
 set xlabel "Gene Rank (ranked by count of tetrahedra)"
-set ylabel "Number of tetrahedra"
+set ylabel "Fraction of all tetrahedra"
 set key left bottom
 
 set yrange [1e-8:2e-2]

@@ -91,6 +91,8 @@
 ; For triangles, the length of this is 308765 (out of a total of 365745
 ; gene-pairs in the dataset).
 ;
+; For tetrahedrons, this is 243864 (out of 365745)
+;
 (define participating-gene-pairs
 	(filter (lambda (evlnk)
 			(and (< 0 (cog-count evlnk))
@@ -104,6 +106,9 @@
 ; That is, each triangle is counted 3 times. A second factor of 3x
 ; because each edge is counted once. (!) We didn't really need to count
 ; each edge, by symmetry they would have shown up, eventually.
+;
+; For tetrahedra, this is 1327142016 which is a 16x overcount (?)
+; and should be 82946376
 (define total-edge-observation-count
 	(fold (lambda (pare cnt) (+ cnt (cog-count pare))) 0 
 		(cog-incoming-set (Predicate "gene-pair"))))
