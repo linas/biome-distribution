@@ -15,13 +15,13 @@ set xlabel "Gene Rank (ranked by count of tetrahedra)"
 set ylabel "Fraction of all tetrahedra"
 set key left bottom
 
-set yrange [1e-8:2e-2]
+set yrange [1e-9:1e-3]
 
-ntetra = 55297584
+ntetra = 110595168
 overcnt = 16
 
-sa = 1.3e-2
-sb = 3
+sa = 8e-4
+sb = 0.2
 
 obeta = 2e5
 

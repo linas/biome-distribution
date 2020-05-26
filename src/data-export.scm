@@ -42,7 +42,7 @@
 ; For triangles, this is 13846.
 ; For tetrahedra, this is 9989.
 (define total-genes
-	(fold (lambda (gene cnt) (if (< 0 (cog-count gene)) (+ cnt 1) cnt)) 0 
+	(fold (lambda (gene cnt) (if (< 0 (cog-count gene)) (+ cnt 1) cnt)) 0
 		(cog-get-atoms 'GeneNode)))
 
 ; -------
@@ -52,18 +52,19 @@
 ; When counting edges, this should be 4x the number of edges,
 ; or 4x 365745 so 1462980. Why 4x? There is 2x because each endpoint is
 ; explored, and another 2x because UnorderedLink permutes.
-; 
+;
 ; The total number of edges can be double-checked.
 (cog-incoming-size (Predicate "gene-pair"))
 ;
 ; When counting triangles, this is 16175529 which is a 9x over-count.
 ; 3x because once per corner, and 3x because each corner is counted.
 ;
-; When counting tetrahedra, this is 884761344 which is a 16x over-count
+; When counting tetrahedra, this is 110595168 which is a 16x over-count
 ; 4x because looked at each corner, and 4x because all four corners were
-; counted. So 884761344 / 16 = 55297584
+; counted. So 110595168 / 16 = 6912198 (XXX or is it a 32x overcount?)
+; or is it a 32x 9x overcount?
 (define total-gene-observation-count
-	(fold (lambda (gene cnt) (+ cnt (cog-count gene))) 0 
+	(fold (lambda (gene cnt) (+ cnt (cog-count gene))) 0
 		(cog-get-atoms 'GeneNode)))
 
 ; Genes that had positive counts.
@@ -84,8 +85,8 @@
 ; Gene pairs that appeared as edges in a graph (triangle, tetrahedron
 ; or other graph).
 ; Some of these pairs have AnyNodes from the matrix code,
-; so filter those out... 
-; Some pairs have zero-count. These are interacting genes in 
+; so filter those out...
+; Some pairs have zero-count. These are interacting genes in
 ; the dataset, but are not graph participants.
 ;
 ; For triangles, the length of this is 308765 (out of a total of 365745
@@ -107,10 +108,10 @@
 ; because each edge is counted once. (!) We didn't really need to count
 ; each edge, by symmetry they would have shown up, eventually.
 ;
-; For tetrahedra, this is 1327142016 which is a 16x overcount (?)
-; and should be 82946376
+; For tetrahedra, this is 221190336.0 which is a 16x overcount (?)
+; and should be 13824396 or is this a 64x 9x overcount ???
 (define total-edge-observation-count
-	(fold (lambda (pare cnt) (+ cnt (cog-count pare))) 0 
+	(fold (lambda (pare cnt) (+ cnt (cog-count pare))) 0
 		(cog-incoming-set (Predicate "gene-pair"))))
 
 ; Count-pairs for the gene-pairs
@@ -131,15 +132,27 @@
 (for-each cog-delete-recursive (cog-get-atoms 'Variable))
 (cog-report-counts)
 
-; How many triangles?
+; How many triangles? We expect 1797281 of them.
 (define total-triangles
 	(cog-incoming-size (Predicate "gene-triangle")))
 
+; When performing tirangle counting, we expect each triangle to
+; be counted exactly three times, due to how the query was written.
+; So .. sanity check... is this the case?
+;
 ; How many triangles were NOT observed exactly 3 times?
 ; Should be zero for plain triangles.
 ; but something else for tetrahedra.
 (length (filter (lambda (evlnk) (not (= 3 (cog-count evlnk))))
 	(cog-incoming-set (Predicate "gene-triangle"))))
+
+; ------------------------------------------------------------
+; Above was for triangles. This is for tetrahedra.
+
+; How many tetrahedra? Expect
+(define total-tetrahedra
+	(cog-incoming-size (Predicate "gene-tetrahedron")))
+
 
 ; ------------------------------------------------------------
 ; Examination of the pentagons.
