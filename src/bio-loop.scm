@@ -133,38 +133,7 @@
 )
 
 ;; -----------
-;; Explicitly create and count triangles.
-;; XXX Caution: This uses the non-symmetrized edges from the original
-;; dataset. Caveat emptor!
-(define pointed-triangle-query
-	(Query
-		(VariableList
-			(TypedVariable (Variable "$a") (Type 'GeneNode))
-			(TypedVariable (Variable "$b") (Type 'GeneNode))
-			(TypedVariable (Variable "$c") (Type 'GeneNode))
-		)
-		(Present
-			(Evaluation (Predicate "interacts_with")
-				(List (Variable "$a") (Variable "$b")))
-			(Evaluation (Predicate "interacts_with")
-				(List (Variable "$b") (Variable "$c")))
-			(Evaluation (Predicate "interacts_with")
-				(List (Variable "$c") (Variable "$a")))
-		)
-		(Evaluation (Predicate "pointed_triangle")
-			(List (Variable "$a") (Variable "$b") (Variable "$c")))
-		))
-
-(define (make-pointed-triangles)
-	(define elapsed-secs (make-timer))
-	(define pset (cog-execute! pointed-triangle-query))
-	(define points (cog-value->list pset))
-	(define npoints (length points))
-	(format #t "Obtained ~A pointed triangles in ~6f seconds\n"
-		npoints (elapsed-secs))
-)
-
-; Same as above, but not pointed; uses a set.
+;; Create triangles only, do not do any counting.
 (define gene-triangle-query
 	(Query
 		(VariableList

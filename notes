@@ -2564,6 +2564,12 @@ Tetra done 15000/49050 in 165.16 secs rate=10.6 gene/min elapsed=84962.37
 Tetra done 17500/49050 in 74.128 secs rate=10.7 gene/min elapsed=97934.22
 Tetra done 20000/49050 in 233.69 secs rate=10.9 gene/min elapsed=109716.4
 Tetra done 25000/49050 in 256.59 secs rate=11.3 gene/min elapsed=133241.2
+...
+Tetra done 49050/49050 in 214.41 secs rate=11.5 gene/min elapsed=256467.7
+Finished tetrahedron relations for 49050 genes in 256467.7 seconds
+gc-stats: 5585 seconds in gc !! heap=1.25GB
+4411:59  cpu-mins = 73.5 cpu-hours. = 264720.0 secs so 8253 extra cpu..?
+
 
 
 
@@ -2947,3 +2953,14 @@ wtf...
 (filter (lambda (evlnk) (not (= 3 (cog-count evlnk))))
 	(cog-incoming-set (Predicate "gene-triangle")))
 
+
+Obtained 1797281 triangles in 4970.6 seconds
+(cog-report-counts)                                      
+$10 = ((PredicateNode . 2) (SetLink . 2163026) (EvaluationLink . 2163026) (TypeNode . 1) (GeneNode . 20123))
+
+So 1797281 + 365745 = 2163026 bingo. OK
+
+Aieee!!
+
+Hang on, were the triangles all with distinct vertexes???
+noooo ooh noooo

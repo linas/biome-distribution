@@ -59,12 +59,14 @@
 ; When counting triangles, this is 16175529 which is a 9x over-count.
 ; 3x because once per corner, and 3x because each corner is counted.
 ;
-; When counting tetrahedra, this is 884761344
+; When counting tetrahedra, this is 884761344 which is a 16x over-count
+; 4x because looked at each corner, and 4x because all four corners were
+; counted.
 (define total-gene-observation-count
 	(fold (lambda (gene cnt) (+ cnt (cog-count gene))) 0 
 		(cog-get-atoms 'GeneNode)))
 
-; Genes that had postive counts.
+; Genes that had positive counts.
 ; That is, they were counted as participating in a graph.
 (define graph-participants
 	(map (lambda (gene) (cons (cog-name gene) (cog-count gene)))

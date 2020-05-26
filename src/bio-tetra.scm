@@ -67,8 +67,7 @@
 		)
 		(Evaluation (Predicate "gene-tetrahedron")
 			(Set (Variable "$a") (Variable "$b") (Variable "$c") (Variable "$d")))
-		))
-))
+	))
 
 ;; -----------
 ;; Count tetrahedra.
@@ -78,6 +77,7 @@
 	(define start-time (get-internal-real-time))
 	(define ndone 0)
 	(define ngen (length gene-list))
+	(format #t "Begin looping over ~A genes\n" ngen)
 	(for-each ;; or try par-for-each
 		(lambda (gene)
 			; Create a search pattern for each gene in the gene list.
@@ -171,7 +171,9 @@
 	(define batch-secs (make-timer))
 	(define start-time (get-internal-real-time))
 	(define ndone 0)
+	(define gene-list (cog-get-atoms 'Gene))
 	(define ngen (length gene-list))
+	(format #t "Begin looping over ~A genes\n" ngen)
 	(for-each ;; or try par-for-each
 		(lambda (gene)
 			; Create a search pattern for each gene in the gene list.
@@ -198,7 +200,7 @@
 						"Created Tetra ~A/~A in ~6f secs rate=~4f gene/min elapsed=~8f\n"
 						ndone ngen (batch-secs) rate elapsed-secs)))
 		)
-		(cog-get-atoms 'Gene))
+		gene-list)
 	(format #t "\n")
 	(format #t "Finished creating tetrahedra for ~A genes in ~8f seconds\n"
 			ngen (bench-secs))

@@ -200,6 +200,7 @@
 	(cog-delete-recursive (PredicateNode "has_biogridID"))
 	(cog-delete-recursive (PredicateNode "GO_namespace"))
 	(cog-delete-recursive (PredicateNode "has_entrez_id"))
+	(cog-delete-recursive (PredicateNode "has_current_symbol"))
 
 	; The symmetrized gene-pair has rendered this useless.
 	(cog-delete-recursive (PredicateNode "interacts_with"))
@@ -256,6 +257,7 @@
 	(for-each cog-delete-recursive (cog-get-atoms 'Molecule))
 	(for-each cog-delete-recursive (cog-get-atoms 'Concept))
 	(for-each cog-delete-recursive (cog-get-atoms 'List))
+	(for-each cog-delete-recursive (cog-get-atoms 'Variable))
 
 	(for-each
 		(lambda (pred)
