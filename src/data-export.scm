@@ -61,7 +61,7 @@
 ;
 ; When counting tetrahedra, this is 884761344 which is a 16x over-count
 ; 4x because looked at each corner, and 4x because all four corners were
-; counted.
+; counted. So 884761344 / 16 = 55297584
 (define total-gene-observation-count
 	(fold (lambda (gene cnt) (+ cnt (cog-count gene))) 0 
 		(cog-get-atoms 'GeneNode)))

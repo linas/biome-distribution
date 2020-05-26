@@ -2963,4 +2963,20 @@ So 1797281 + 365745 = 2163026 bingo. OK
 Aieee!!
 
 Hang on, were the triangles all with distinct vertexes???
-noooo ooh noooo
+Yes, they are, cause the self-iteractors were removed.
+Likewase all tetrahedra are OK, too. we can double-check:
+
+(define corrupt
+	(Query
+		(VariableList
+			(TypedVariable (Variable "$a") (Type 'Gene))
+			(TypedVariable (Variable "$b") (Type 'Gene)))
+		(Present
+      	(Evaluation (Predicate "triangle")
+         	(Set (Variable "$a") (Variable "$a") (Variable "$b"))))
+      (Evaluation (Predicate "triangle")
+        	(Set (Variable "$a") (Variable "$a") (Variable "$b")))
+	))
+
+zero.
+
