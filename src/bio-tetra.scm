@@ -66,7 +66,7 @@
 				(Set (Variable "$a") (Variable "$b") (Variable "$c")))
 		)
 		(Evaluation (Predicate "gene-tetrahedron")
-			(Set (Variable "$a") (Variable "$b") (Variable "$c") (Variable "$d")))
+			(Set (Variable "$a") (Variable "$b") (Variable "$c") gene))
 	))
 
 ;; -----------
