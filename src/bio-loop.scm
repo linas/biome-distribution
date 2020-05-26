@@ -132,6 +132,7 @@
 	*unspecified*
 )
 
+; =================================================================
 ;; -----------
 ;; Create triangles only, do not do any counting.
 (define gene-triangle-query
