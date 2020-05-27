@@ -26,23 +26,33 @@ scheme@(guile-user)> (load "load-files.scm")
 ; Above should create 1797281 (1.8M) triangles
 (load "bio-tetra.scm")
 (count-tetrahedra (cog-get-atoms 'GeneNode))
+(load "data-export.scm")
+(print-loop-report)
 ```
 
-To make the csv's, do a `(load "data-export.scm)` and then start
-cutting and pasting the code there.
+To make the csv's, cut and paste from "data-export.scm".
 
 Current results:
 9989 genes participated in tetrahedra - `(length graph-participants)`
-Theese were counted 884761344 but this is a 16x over-count, so actually
-just 55297584 counts = 55M wow.
+These were counted 147460224 times but this is a 4x over-count,
+so actually 36865056 corner observations. 
+Each tetra has 4 corners so 36865056 / 9216264 = 4 yay!
 
-487728 distinct directed edges in tetrahedra - `(length gene-pairs)`
-       (edges with non-zero counts) 
-243864 symmetric edges in tetrahedra (half of above)
-1797281 triangles, as always, but .. we didn't count triangles. :-(
+Total of 243864 symmetric edges participated in tetrahedra 
+(out of 365745 edges total in the dataset.)
+These were observed 221190336 times but this is a 4x overcount ...
+4x because each tetrahedron was observed 4x
+So total of 55297584 edge observations.
+Each tetra has 6 edges so 55297584 / 9216264 = 6 yayy!
 
-1327142016.0 total observations of edges
+Participating triangles are 1701579 out of 1797281 triangles total
+Observed 147460224 times, a 4x over-count.
+4x because each tetrahedron was observed 4x
+So a total of 36865056 triangle observations.
+Each tetra has 4 tris so 36865056 / 9216264 = 4 yay!
 
+Total of 9216264 tetrahedra, observed 36865056 times or a 4x over-count.
+which makes sense: each was counted once, per corner.
 
 ### Files
 

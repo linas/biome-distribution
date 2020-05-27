@@ -21,6 +21,9 @@ set yrange [1e-7:2e-2]
 ntris = 1797281
 
 # over-count factor
+# 3x because each triangle was counted 3 times.
+# 3x because each triangle has three verrtexes, and we counted
+# each vertex 1x instead of 0.333x (probability has to sum to one.)
 overcnt = 9
 
 # See paper

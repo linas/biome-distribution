@@ -25,6 +25,8 @@ scheme@(guile-user)> (load "load-files.scm")
 (load "bio-loop.scm")
 (count-gene-triangles (cog-get-atoms 'GeneNode)) ; about 4:40 hh:mm
 ; Above should create 1797281 (1.8M) triangles
+(load "data-export.scm")
+(print-loop-report
 ```
 
 At this time, after deletetion of self-interactors, have
@@ -34,8 +36,23 @@ Found 344188 symmetric (paired) gene interactions
 Conclude: there are 193651 asymmetric interctions
 Conclude: there are 365745 symmetrized interactions
 ```
+Yuck. Above is confusing.  New style:
 
-For the pentagons, ... alteres sequence ... 
+13846 genes out of 20123 participate in traingles.
+5391843 triangles counted but this is a 3x over-count,
+  since each was observed once per corner. So
+1797281 triangles total.
+
+Genes were counted 16175529 times, this is a 3x over-count
+so 5391843 gene counts. Which is 3x number of triangles, yay!
+
+Ditto edges, yay!
+
+There were 308765 participating edges out of 365745
+
+
+======= see elsewhere for pentas...
+For the pentagons, ... altered sequence ... 
 ```
 (define pathways (pathways-of-genes (cog-get-atoms 'GeneNode)))
 (count-pentagons pathways)

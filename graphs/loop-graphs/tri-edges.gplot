@@ -19,6 +19,11 @@ set ylabel "Fraction of all triangles"
 set yrange [1e-7:2e-4]
 
 ntris = 1797281.0
+#
+# overcount is 9x for same reasons as before:
+# a factor of 3x because each triangle was observed 3x times
+# a factor of 3x because we want each edge to count for 1/3 not 1.
+# so that probablity normalizes to 1.0 not 3.0
 overcnt = 9
 obeta = 2 * sqrt(2 * ntris)
 

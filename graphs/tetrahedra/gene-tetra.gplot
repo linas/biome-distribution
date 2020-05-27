@@ -15,15 +15,21 @@ set xlabel "Gene Rank (ranked by count of tetrahedra)"
 set ylabel "Fraction of all tetrahedra"
 set key left bottom
 
-set yrange [1e-9:1e-3]
+set yrange [2e-8:2e-2]
 
-ntetra = 110595168
+ntetra = 9216264
 overcnt = 16
+# The overcount is as before:
+# A factor of 4x because each tetra was observed 4 times
+# A factor of 4x because each tetra has 4 corners and we want
+# to count each corner with a weight of 1/4 to normalize probability.
 
-sa = 8e-4
-sb = 0.2
+sa = 1.3e-2
+sb = 3
 
 obeta = 2e5
+obeta = 214547.5  # sqrt (nedge * ntetra /2)
+obeta = 202277.3  # 2 sqrt (nedge * ntetra) / 3
 
 # Eyeballed fit to the data.
 plot "gene-tetra.csv" using 1:($3 / (ntetra * overcnt)) with lines title "data", \

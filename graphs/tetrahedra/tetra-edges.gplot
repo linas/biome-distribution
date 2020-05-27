@@ -15,18 +15,27 @@ set xlabel "Gene-pair rank (ranked by count of tetrahedra)"
 set ylabel "Fraction of all tetrahedra"
 set key left bottom
 
-set yrange [1e-3:30]
+set yrange [1e-8:5e-3]
 
-ntetra = 9989
+ntetra = 9216264
+overcnt = 24
+# overcount logic as before:
+# factor of 4x because each tetra observed 4x
+# factor of 6x because each tetra has 6 edges, count for 1/6 weight.
+
+A = 4.5e-4
+
+obeta = 1500
+obeta = 1517.915 # sqrt(ntetra) / 2
 
 # Eyeballed fit to the data.
-plot "tetra-edges.csv" using 1:($3 / ntetra) with lines lw 1 title "data", \
-     "tetra-edges.csv" using 1:(35 / ($1)**0.25) with lines lw 1 title "35/rank^{1/4}", \
-     "tetra-edges.csv" using 1:((35 / ($1)**0.25) * exp(-($1)**0.75 / 2500)) with lines lw 1 title "35 exp(-rank^{3/4}/2500)/rank^{1/4}"
+plot "tetra-edges.csv" using 1:($3 / (overcnt *ntetra)) with lines lw 1 title "data", \
+     "tetra-edges.csv" using 1:(A / ($1)**0.25) with lines lw 1 title "A/rank^{1/4}", \
+     "tetra-edges.csv" using 1:((A / ($1)**0.25) * exp(-($1)**0.75 / obeta)) with lines lw 1 title "A exp(-rank^{3/4}/√4N)/rank^{1/4}"
 
 
 # Some interesting near misses for quality control.
 #     "tetra-edges.csv" using 1:(18 / ($1)**0.125) with lines lw 1 title "18/rank^{1/8}", \
-#     "tetra-edges.csv" using 1:((35 / ($1)**0.25) * exp(-($1)**0.5 / 150)) with lines lw 1 title "35 exp(-rank^{1/2}/150)/rank^{1/4}", \
-#     "tetra-edges.csv" using 1:((35 / ($1)**0.25) * exp(-($1) / 40000)) with lines lw 1 title "35 exp(-rank/40000)/rank^{1/4}"
+#     "tetra-edges.csv" using 1:((A / ($1)**0.25) * exp(-($1)**0.5 / 150)) with lines lw 1 title "35 exp(-rank^{1/2}/150)/rank^{1/4}", \
+#     "tetra-edges.csv" using 1:((A / ($1)**0.25) * exp(-($1) / 40000)) with lines lw 1 title "35 exp(-rank/40000)/rank^{1/4}"
 

@@ -51,8 +51,13 @@
 
 	; ------------------------------------------------
 	; The total number of edges
-	(format #t "The total number of gene-pairs is ~A\n"
+	(define total-edges
 		(cog-incoming-size (Predicate "gene-pair")))
+	(define total-participating-edges
+		(fold (lambda (pare cnt) (if (< 0 (cog-count pare)) (+ cnt 1) cnt)) 0
+			(cog-incoming-set (Predicate "gene-pair"))))
+	(format #t "Num participating gene-pairs ~A (out of ~A)\n"
+		total-participating-edges total-edges)
 
 	; Total count on all of the edges participating in a graph.
 	; For triangles, this was 16175529, which is 9x the number of unique
@@ -75,8 +80,13 @@
 	(define total-triangles
 		(cog-incoming-size (Predicate "gene-triangle")))
 
-	(format #t "The total number of triangles is ~A\n"
-		total-triangles)
+	; But only 1701579 participate in tetrahedra
+	(define total-participating-triangles
+		(fold (lambda (tri cnt) (if (< 0 (cog-count tri)) (+ cnt 1) cnt)) 0
+			(cog-incoming-set (Predicate "gene-triangle"))))
+
+	(format #t "Num participating triangles ~A (out of ~A)\n"
+		total-participating-triangles total-triangles)
 
 	(define total-triangle-observation-count
 		(fold (lambda (tri cnt) (+ cnt (cog-count tri))) 0
@@ -89,6 +99,8 @@
 	; How many tetrahedra? Expect
 	(define total-tetrahedra
 		(cog-incoming-size (Predicate "gene-tetrahedron")))
+	(format #t "Ther were ~A gene tetrahedra\n"
+		total-tetrahedra)
 
 	(define total-tetrahedra-observation-count
 		(fold (lambda (pare cnt) (+ cnt (cog-count pare))) 0
