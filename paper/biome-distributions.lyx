@@ -1051,12 +1051,66 @@ It's clearly much noisier, as the set of edges is much smaller.
  as the genome data-set.
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsection*
 TODO
 \end_layout
 
 \begin_layout Standard
 weighted in-degree of vertexes?
+\end_layout
+
+\begin_layout Subsubsection*
+Better Algos:
+\end_layout
+
+\begin_layout Standard
+Explore more efficient algos:
+\end_layout
+
+\begin_layout Itemize
+A fast algorithm plus source code here: Sampo Niskanen and Patric R.J.
+ Östergård, 
+\begin_inset Quotes eld
+\end_inset
+
+CLIQUER USER’S GUIDE Version 1.0
+\begin_inset Quotes erd
+\end_inset
+
+ Helsinki University of Technology Communications Laboratory Technical Report
+ T48 Espoo 2003 https://users.aalto.fi/~pat/cliquer/
+\end_layout
+
+\begin_layout Itemize
+Description of above algorithm: P.
+ R.
+ J.
+ Östergård, 
+\begin_inset Quotes eld
+\end_inset
+
+A fast algorithm for the maximum clique problem
+\begin_inset Quotes erd
+\end_inset
+
+, Disrete Appl.
+ Math.
+ 120 (2002), 195–205.
+\end_layout
+
+\begin_layout Itemize
+Review of clique algos and related problems: I.
+ M.
+ Bomze, M.
+ Budinih, P.
+ M.
+ Pardalos, and M.
+ Pelillo, The maximum clique problem, in: D.-Z.
+ Du and P.
+ M.
+ Pardalos (Eds.), Handbook of Combinatorial Optimization, Supplement Volume
+ A, Kluwer, Dordreht, 1999, pp.
+ 174
 \end_layout
 
 \begin_layout Subsubsection*
