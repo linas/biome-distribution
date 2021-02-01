@@ -282,7 +282,7 @@ Pair-wise interactions
 \begin_layout Standard
 At the most basic level, one can ask about the distribution of gene interactions.
  This is straight-forward: one simply crawls over the dataset, and simply
- counts how many interactions a gene particiates in.
+ counts how many interactions a gene participates in.
  Ranking the genes by count produces the distribution shown below.
 \end_layout
 
@@ -299,7 +299,7 @@ At the most basic level, one can ask about the distribution of gene interactions
 \end_layout
 
 \begin_layout Standard
-There are 20123 interacting genes participiating in a total of 
+There are 20123 interacting genes participating in a total of 
 \begin_inset Formula $N_{tot}=365745$
 \end_inset
 
@@ -345,7 +345,7 @@ The first unexpected surprise is that this graph is not Zipfian.
 \end_inset
 
 .
- There is also a pronouned tail that seems too large to ignore or ascribe
+ There is also a pronounced tail that seems too large to ignore or ascribe
  to statistical rounding.
  The overlayed fitting curves are 
 \begin_inset Quotes eld
@@ -356,8 +356,8 @@ eyeballed
 \end_inset
 
 , in that they look visually reasonable during plotting.
- The best eyeballed fitt is surprisingly good, and has a fairly simple expressio
-n:
+ The best eyeballed fit is surprisingly good, and has a fairly simple expression
+:
 \begin_inset Formula 
 \[
 p\left(k\right)=A\frac{\exp\left(-k^{3/2}/2N\right)}{\sqrt{k}}
@@ -385,7 +385,7 @@ The last integral is the gamma function
 \begin_inset Formula $\Gamma\left(1/3\right)\approx2.67893853\cdots$
 \end_inset
 
- and so, bassed on the eyeballed fit, one has 
+ and so, based on the eyeballed fit, one has 
 \begin_inset Formula 
 \[
 A=\frac{3}{2\Gamma\left(\frac{1}{3}\right)\left(2N\right)^{1/3}}
@@ -419,7 +419,7 @@ A triangle is defined as a three-way interaction, of gene A regulating gene
 Any given gene may appear in multiple triangles; clearly, some genes might
  participate in many, and some in only a few.
  So, the first statistical question becomes: what is the distribution of
- these genes? This is answered via a Zipf-style graph: one makes a list
+ these genes? This is answered via a Zipf–style graph: one makes a list
  of all of genes, ranking them according to the number of triangles they
  participated in, and then graphing, on a log-log graph, the number of triangles
  vs.
@@ -450,7 +450,7 @@ By counting the number of times an edge participates in some triangle, one
 \end_layout
 
 \begin_layout Standard
-Because these explorations are perfomed on curated data-sets carried out
+Because these explorations are performed on curated data-sets carried out
  by research labs, one has an open question of whether one is measuring
  
 \begin_inset Quotes eld
@@ -658,7 +658,7 @@ law%3F for a demonstration.
 
 \begin_layout Standard
 This shows the distribution of the 1000 most commonly viewed English-language
- Wikipedia Mathematics articles, as of Janurary 2020.
+ Wikipedia Mathematics articles, as of January 2020.
  A square-root distribution appears to hold up to at least a rank of 200
  or 300; after that, the behavior is unclear.
 \end_layout
@@ -703,7 +703,7 @@ The raw genome databases do not provide any particular gene-pairing information,
  So, again, each triangle has three corners, the genes, and three edges,
  the gene pairs.
  By counting all possible triangles, one obtains a count of how often each
- edge is seen -- that is, how often an edge appears in some triangle.
+ edge is seen – that is, how often an edge appears in some triangle.
  That is, one has a count 
 \begin_inset Formula $N(g_{a},g_{b})$
 \end_inset
@@ -815,8 +815,8 @@ The figure below shows the first case: the distribution of MI, counted without
 \begin_layout Standard
 The normalization is such that the area under the data curve will integrate
  to 1.0.
- The data is fit with two gaussian distributions.
- Recall that gaussians appear to be parabolas on a semi-log plot.
+ The data is fit with two Gaussian distributions.
+ Recall that Gaussians appear to be parabolas on a semi-log plot.
  The parameters of each fit are as marked in the legend.
  The fits are hand-built, or 
 \begin_inset Quotes eld
@@ -846,8 +846,8 @@ numerology
 \begin_layout Standard
 The second case, where the bin-counts are weighted by frequency, results
  in a graph that is similar.
- Again, it is easily fit with two gaussians, but this time, the centers
- of the gaussians are quite different, as are the widths.
+ Again, it is easily fit with two Gaussians, but this time, the centers
+ of the Gaussians are quite different, as are the widths.
 \end_layout
 
 \begin_layout Standard
