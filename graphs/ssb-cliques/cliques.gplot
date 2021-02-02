@@ -1,6 +1,7 @@
 #!/usr/bin/gnuplot -p
 
-set term png size 1024,768
+# set term png size 1024,768
+set term png
 set out 'cliques.png'
 
 set logscale y
