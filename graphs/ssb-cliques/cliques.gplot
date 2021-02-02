@@ -1,13 +1,15 @@
 #!/usr/bin/gnuplot -p
 
-set term png small
+set term png
 set out 'cliques.png'
 
 set logscale y
 set logscale x
-set title "number of cliques"
+set format y "10^{%T}"
+
+set title "Number of Cliques"
 set xlabel "clique size"
 set ylabel "number of cliques"
-plot "cliques-by-size-west-2021-01-31.tsv" using 1:2 title ""
+plot "cliques-by-size-west-2021-01-31.tsv" using 1:2 with linespoints title ""
 
 # pause 100
