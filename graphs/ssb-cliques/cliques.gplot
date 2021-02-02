@@ -1,15 +1,21 @@
 #!/usr/bin/gnuplot -p
 
-set term png
+set term png size 1024,768
 set out 'cliques.png'
 
 set logscale y
 set logscale x
 set format y "10^{%T}"
+set key left
+set yrange [10:1e8]
 
 set title "Number of Cliques"
 set xlabel "clique size"
 set ylabel "number of cliques"
-plot "cliques-by-size-west-2021-01-31.tsv" using 1:2 with linespoints title ""
+plot "cliques-by-size-west-2021-01-31.tsv" using 1:2 with linespoints title "", \
+     2.0e7*exp(1 - 25*(log(x)-2.5)**2) title "parabola", \
+     2.0e7*exp(1 - 35*(abs(log(x)-2.45))**2.8) title "fit"
 
+#
+#     2.0e7*exp(1 - 25*(log(x)-2.5)**2) title "parabola", \
 # pause 100
