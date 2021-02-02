@@ -10,12 +10,17 @@ set key left
 set yrange [10:1e8]
 
 set title "Number of Cliques"
-set xlabel "clique size"
-set ylabel "number of cliques"
-plot "cliques-by-size-west-2021-01-31.tsv" using 1:2 with linespoints title "", \
-     9.0e3*exp(x) title "exp x", \
-     5.4e7*exp(-35 * (abs(log(x)-2.45))**2.8) title "exp[ -35 (log x-2.45)^{2.8}]"
+set xlabel "Clique Size"
+set ylabel "Number of Cliques"
+plot "cliques-by-size-west-2021-01-31.tsv" using 1:2 with linespoints lw 2 title "data", \
+     9.0e3*exp(x - 0.002*x*x*x) lw 2 title "exp[ x - x^3/500 ]", \
+     9.0e3*exp(x - 0.0033*(x-2.4)**3) lw 2 title "exp[ x - (x-2.4)^3 / 300 ]"
 
+# A two-part fit that works well.
+# plot "cliques-by-size-west-2021-01-31.tsv" using 1:2 with linespoints title "", \
+#     9.0e3*exp(x) title "exp x", \
+#     5.4e7*exp(-35 * (abs(log(x)-2.45))**2.8) title "exp[ -35 (log x-2.45)^{2.8}]"
 #
+# A crude parabola. Does not fit.
 #     2.0e7*exp(1 - 25*(log(x)-2.5)**2) title "parabola", \
 # pause 100
