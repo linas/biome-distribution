@@ -403,6 +403,19 @@ The author does not know of any reason why the initial fall-off should follow
  unknown.
 \end_layout
 
+\begin_layout Standard
+The distribution 
+\begin_inset Formula 
+\[
+y^{-2/3}e^{-y}dy
+\]
+
+\end_inset
+
+is the Poisson distribution.
+ Poisson distributions famously describe radio-active decay...
+\end_layout
+
 \begin_layout Section*
 Triangles
 \end_layout
