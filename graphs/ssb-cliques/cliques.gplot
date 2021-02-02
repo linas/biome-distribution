@@ -13,8 +13,8 @@ set title "Number of Cliques"
 set xlabel "clique size"
 set ylabel "number of cliques"
 plot "cliques-by-size-west-2021-01-31.tsv" using 1:2 with linespoints title "", \
-     2.0e7*exp(1 - 25*(log(x)-2.5)**2) title "parabola", \
-     2.0e7*exp(1 - 35*(abs(log(x)-2.45))**2.8) title "fit"
+     9.0e3*exp(x) title "exp x", \
+     5.4e7*exp(-35 * (abs(log(x)-2.45))**2.8) title "exp[ -35 (log x-2.45)^{2.8}]"
 
 #
 #     2.0e7*exp(1 - 25*(log(x)-2.5)**2) title "parabola", \
