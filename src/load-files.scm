@@ -10,6 +10,7 @@
 ; guile> (load-all)
 ;
 (use-modules (opencog))
+(use-modules (opencog persist))
 (use-modules (opencog persist-file))
 (use-modules (opencog bioscience))
 (use-modules (opencog cogserver))
