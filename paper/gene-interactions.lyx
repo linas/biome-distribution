@@ -91,6 +91,28 @@
 
 \begin_layout Title
 Square-root Zipfian Distributions in Gene Interactions
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Submitted on 30 Nov 2021 for publication in Fluctuations and Noise Letters
+ (FNL) 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://www.worldscientific.com/worldscinet/fnl
+\end_layout
+
+\end_inset
+
+ FNL-S-21-00145.pdf
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Author
@@ -911,6 +933,60 @@ The distribution of the interaction between genes in publicly-available
 No theoretical foundation is proposed, although the author imagines that,
  perhaps, the matrices describing pairwise interactions might be drawn from
  a Gaussian Unitary Ensemble (GUE) or a Gaussian Orthogonal ensemble (GOE).
+\end_layout
+
+\begin_layout Section*
+Thanks
+\end_layout
+
+\begin_layout Standard
+The work here was made possible in part by the OpenCog Foundation (
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://opencog.org/
+\end_layout
+
+\end_inset
+
+) via Ben Goertzel and by Hanson Robotics (
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://www.hansonrobotics.com/
+\end_layout
+
+\end_inset
+
+).
+ The genomics datasets were provided by MOZI.AI (
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://mozi.ai/
+\end_layout
+
+\end_inset
+
+) in collaboration with iCog Labs, Addis Ababa, Ethiopia (
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://www.linkedin.com/company/icog-labs
+\end_layout
+
+\end_inset
+
+).
+ 
 \end_layout
 
 \begin_layout Standard
