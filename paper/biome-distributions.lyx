@@ -275,6 +275,22 @@ All gene-gene interactions were taken as symmetric, so that if one gene
 Pathways are from https://reactome.org and from http://smpdb.ca/
 \end_layout
 
+\begin_layout Standard
+The source code used to obtain the results here is open source; it can be
+ found at 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://github.com/linas/biome-distribution
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Section*
 Pair-wise interactions
 \end_layout

@@ -230,6 +230,22 @@ All gene-gene interactions were taken as symmetric, so that if one gene
  to avoid confusion during counting.
 \end_layout
 
+\begin_layout Standard
+The source code used to obtain the results here is open source; it can be
+ found at 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://github.com/linas/biome-distribution
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Section*
 Pair-wise interactions
 \end_layout
