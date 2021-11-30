@@ -775,6 +775,14 @@ The raw genome databases do not provide any particular gene-pairing information,
  participated in.
  The rest is downhill.
  MI is defined as usual as Yuret's lexical attraction.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Yuret1998"
+literal "false"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1171,6 +1179,16 @@ Review of clique algos and related problems: I.
  Pardalos (Eds.), Handbook of Combinatorial Optimization, Supplement Volume
  A, Kluwer, Dordreht, 1999, pp.
  174
+\end_layout
+
+\begin_layout Subsubsection*
+Theoretical foundations
+\end_layout
+
+\begin_layout Standard
+Look more closely at Gaussian Unitary Ensembles.
+ Look also at https://en.wikipedia.org/wiki/Supersymmetric_theory_of_stochastic_dy
+namics
 \end_layout
 
 \begin_layout Subsubsection*

@@ -113,6 +113,7 @@ The distribution of interactions between genes, extracted from public genome
 l tail.
  The mutual information between gene pairs is found to have a bimodal Gaussian
  distribution.
+ This is an experimental result; no theoretical explanation is proposed.
 \end_layout
 
 \begin_layout Section*
@@ -627,39 +628,35 @@ The preciseness of the numerology is remarkable, but the underlying theory
 \end_layout
 
 \begin_layout Section*
-Tetrahedra
+Similar Results
 \end_layout
 
 \begin_layout Standard
-One may search for graph cliques of higher order than 3: a clique of 4 is
- a tetrahedron, a clique of order 5 is a 5-simplex, and so on.
- Data mining tetrahedra is considerably more CPU-intensive.
- The results are presented below.
-\end_layout
+Square-root Zipfian distributions are common.
+ Such a distribution has been observed in the grammatical network of natural
+ language data, that is, in the network of the English language, constructed
+ by counting nearby word-pairs in text corpora.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vepstas2017"
+literal "false"
 
-\begin_layout Section*
-Prior Results
-\end_layout
+\end_inset
 
-\begin_layout Standard
-Hmm.
- Apparently, I've seen square-root Zipfian distributions before, in language
- data.
- I'd forgotten about that.
- See page 43 of this PDF: https://github.com/opencog/learn/raw/072f0a46d143d94fc2
-7cb5a04dd867b88c7142d0/learn-lang-diary/connector-sets-revised.pdf
-\end_layout
-
-\begin_layout Subsubsection*
-Related Results
+ (See page 43)
 \end_layout
 
 \begin_layout Standard
 Page views of the most popular pages on Wikipedia show the same square-root
  scaling.
- See https://en.wikipedia.org/wiki/Wikipedia:Does_Wikipedia_traffic_obey_Zipf%27s_
-law%3F for a demonstration.
- Here's a graph from this:
+\begin_inset CommandInset citation
+LatexCommand cite
+key "WP-Zipf-traffic"
+literal "false"
+
+\end_inset
+
+ The result is reproduced below:
 \end_layout
 
 \begin_layout Standard
@@ -681,17 +678,7 @@ This shows the distribution of the 1000 most commonly viewed English-language
  or 300; after that, the behavior is unclear.
 \end_layout
 
-\begin_layout Subsubsection*
-TODO
-\end_layout
-
-\begin_layout Standard
-What is the degree distribution? Viz, for scale-free networks, one usually
- examines the degree distribution, and not the triangle distribution.
- What about deg(u).deg(v) for edges connecting u,v?
-\end_layout
-
-\begin_layout Subsection*
+\begin_layout Section*
 Mutual Information
 \end_layout
 
@@ -733,6 +720,14 @@ The raw genome databases do not provide any particular gene-pairing information,
  participated in.
  The rest is downhill.
  MI is defined as usual as Yuret's lexical attraction.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Yuret1998"
+literal "false"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -885,258 +880,21 @@ As before, the fit is eyeballed, with a preference of finding numerological
 \end_layout
 
 \begin_layout Section*
-Pentagons
+Conclusion
 \end_layout
 
 \begin_layout Standard
-The pentagon has five vertexes: a pathway (as a single, named vertex), two
- proteins on that pathway, two genes, each of which express the corresponding
- protein, and finally, the two genes interacting with each other.
- Here, there are five edges, and three edge types: (protein in pathway),
- (gene expresses protein) and (gene-pair interaction).
- Thus, characterizing this statistically requires six Zipfian graphs: three
- for the different vertex types, and three for the different edge types.
- Each edge type will also have an MI distribution, and so six MI graphs:
- one for each type, weighted and unweighted.
- So, twelve graphs in total.
- Not all prove to be that interesting.
+The distribution of the interaction between genes in publicly-available
+ genetics databases has been examined.
+ The distribution appeas to be a square-root Zipfian distribution.
+ The distribution of the mutual information between pairs of genes is described
+ by a bimodal Gaussian distribution.
 \end_layout
 
 \begin_layout Standard
-There are 50566 pathways in which some protein in the data-set is a member
- of.
- These are both SMP and R-HSA-tagged pathways (from the smpdb.ca and reactome.org,
- respectively).
- Each of these is observed in at least one pentagon.
- There is a total of 1082860 pathway-protein pairs in the data-set, but
- only 38843 appear in a pentagon.
- There are a total of 148734 gene-protein expression pairs, of which only
- a paltry 6794 appear in a pentagonal relationship.
- As before, there is a total of 365745 pairs of interacting genes; of these
- only 77304 appear in pentagons.
- Thus, the data-set, although quite large, appears to be quite disconnected:
- there are many interactions that have been mapped out, but these remain
- sparse enough that there are relatively few of these pentagonal interactions.
- This is presumably an artifact of the scientific exploration done to date,
- rather than an innate feature of actual biology.
- That is, there are presumably far more interactions, but these remain unknown
- and uncharted in the data-set.
-\end_layout
-
-\begin_layout Subsubsection*
-Distributions of Vertexes
-\end_layout
-
-\begin_layout Standard
-Pattern mining the above-described pentagon resulted in the observation
- of 491558 distinct pentagons (taking into account mirror symmetry: there
- are twice as many, if the mirror image is counted separately.) There are
- 6694 unique genes, 6735 unique proteins and 2129 distinct pathways that
- appeared in pentagonal relationships.
- All have an unexpected distribution; they are graphed below, on the same
- graph.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-Per contents of the 
-\family typewriter
-graphs/pentagon-paths
-\family default
- directory.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\align center
-\begin_inset Graphics
-	filename /home/linas/src/novamente/mozi/graphs/pentagon-paths/path-genes-sym.png
-	width 70text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The normalization is with respect to the total number of pentagons that
- a given vertex appears in.
- Thus, for example, the highest-ranked gene, and the highest-ranked pathway
- appears in approximately 1 out of 50 pentagons; the highest-ranked protein
- appears in approximately 1 out of 100, which can be read directly off the
- y-intercept in the above graph.
-\end_layout
-
-\begin_layout Standard
-I cannot come up with any plausible hypothesis for the plateaus, nor for
- the tails.
- These may be data-set artifacts: interactions that have been studied sufficient
-ly to have been captured in the data-set.
- That is, a sociological artifact, rather than a statement about biology.
-\end_layout
-
-\begin_layout Subsubsection*
-Distribution of Edges
-\end_layout
-
-\begin_layout Standard
-There were 38843 distinct edges connecting pathways to proteins.
- There were 6794 distinct gene-protein expression edges.
- There were 77304 gene-gene interaction edges.
- The distribution of these edges, 
-\emph on
-viz.
-
-\emph default
- the number of pentagons a given edge participates in, is shown below.
-\end_layout
-
-\begin_layout Standard
-\align center
-\begin_inset Graphics
-	filename /home/linas/src/novamente/mozi/graphs/pentagon-paths/penta-edges-sym.eps
-	width 70col%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The overall lumpiness of these graphs provides no particular insight.
- It seems plausible that the lumpiness is an artifact of the data-set, rather
- than any indication that nature is structured in this way.
-\end_layout
-
-\begin_layout Subsubsection*
-Gene-protein expression
-\end_layout
-
-\begin_layout Standard
-Lets look at gene-protein expression pairs that appear in pentagons.
- The matrix reports 6694 genes and 6735 proteins.
- The matrix appears to have 6794 non-zero matrix entries.
- On average, each gene-expression pair appeared in 144.7 pentagons.
- For those gene-expression pairs that appear in pentagons, very nearly all
- genes express just one protein, with only a few exceptions.
- Of the 6694 genes, there were 20 genes that expressed two proteins, and
- four that expressed more than two: HLA-B, HLA-A, HLA-C and HLA-DRB1.
- All remaining genes express just one protein.
- However, these same genes also participate in a (comparatively) huge fraction
- of all pentagons.
-\end_layout
-
-\begin_layout Standard
-There is no point in computing MI for gene-protein interactions; they occur
- in tightly-bound and exclusive pairs; there is no free association.
-\end_layout
-
-\begin_layout Subsubsection*
-Pathways
-\end_layout
-
-\begin_layout Standard
-There are a large number of pathway-protein pairs available in the data-set,
- of which only a small fraction, 38843 pairs, appeared in pentagons.
- As proteins can appear in multiple pathways, it is meaningful to explore
- correlations and affinities between these.
-\end_layout
-
-\begin_layout Standard
-Below is the pathway-protein MI graph.
- It is fit with two Gaussians, as suggested by the previous observations.
- Note that the parameters are very similar.
-\end_layout
-
-\begin_layout Standard
-\align center
-\begin_inset Graphics
-	filename /home/linas/src/novamente/mozi/graphs/mutual-info/pent-path-weighted.eps
-	width 70text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-It's clearly much noisier, as the set of edges is much smaller.
- The proteome/reactome data-set although large, seems not as well-developed
- as the genome data-set.
-\end_layout
-
-\begin_layout Subsection*
-TODO
-\end_layout
-
-\begin_layout Standard
-weighted in-degree of vertexes?
-\end_layout
-
-\begin_layout Subsubsection*
-Better Algos:
-\end_layout
-
-\begin_layout Standard
-Explore more efficient algos:
-\end_layout
-
-\begin_layout Itemize
-A fast algorithm plus source code here: Sampo Niskanen and Patric R.J.
- Östergård, 
-\begin_inset Quotes eld
-\end_inset
-
-CLIQUER USER’S GUIDE Version 1.0
-\begin_inset Quotes erd
-\end_inset
-
- Helsinki University of Technology Communications Laboratory Technical Report
- T48 Espoo 2003 https://users.aalto.fi/~pat/cliquer/
-\end_layout
-
-\begin_layout Itemize
-Description of above algorithm: P.
- R.
- J.
- Östergård, 
-\begin_inset Quotes eld
-\end_inset
-
-A fast algorithm for the maximum clique problem
-\begin_inset Quotes erd
-\end_inset
-
-, Disrete Appl.
- Math.
- 120 (2002), 195–205.
-\end_layout
-
-\begin_layout Itemize
-Review of clique algos and related problems: I.
- M.
- Bomze, M.
- Budinih, P.
- M.
- Pardalos, and M.
- Pelillo, The maximum clique problem, in: D.-Z.
- Du and P.
- M.
- Pardalos (Eds.), Handbook of Combinatorial Optimization, Supplement Volume
- A, Kluwer, Dordreht, 1999, pp.
- 174
-\end_layout
-
-\begin_layout Subsubsection*
-The End
-\end_layout
-
-\begin_layout Standard
-That's all.
+No theoretical foundation is propsed, although the author imagines that,
+ perhaps, the matrices describing pairwise interactions might be drawn from
+ a Gaussian Unitary Ensemble (GUE) or a Gaussian Orthogonal nsemble (GOE).
 \end_layout
 
 \begin_layout Standard
