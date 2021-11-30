@@ -347,7 +347,7 @@ The first unexpected surprise is that this graph is not Zipfian.
 .
  There is also a pronounced tail that seems too large to ignore or ascribe
  to statistical rounding.
- The overlayed fitting curves are 
+ The overlaid fitting curves are 
 \begin_inset Quotes eld
 \end_inset
 
@@ -413,12 +413,12 @@ y^{-2/3}e^{-y}dy
 \end_inset
 
 is reminiscent of a Poisson distribution, but with two key differences.
- First, for a conventional Poission distribution, the 
+ First, for a conventional Poisson distribution, the 
 \begin_inset Formula $y$
 \end_inset
 
  is fixed, and not variable: it is the parameter.
- Second, for a conventional Poission distribution, the exponent 
+ Second, for a conventional Poisson distribution, the exponent 
 \begin_inset Formula $-2/3$
 \end_inset
 
@@ -426,8 +426,8 @@ is reminiscent of a Poisson distribution, but with two key differences.
 \end_layout
 
 \begin_layout Standard
-Sums/integrals over Poission distributions have been proposed as models
- of 1/f noise as early as 1937.
+Sums/integrals over Poisson distributions have been proposed as models of
+ 1/f noise as early as 1937.
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Bernamont1937,Ward2007"
@@ -1161,7 +1161,7 @@ A fast algorithm for the maximum clique problem
 \begin_inset Quotes erd
 \end_inset
 
-, Disrete Appl.
+, Discrete Appl.
  Math.
  120 (2002), 195–205.
 \end_layout

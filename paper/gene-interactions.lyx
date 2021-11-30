@@ -302,7 +302,7 @@ The first unexpected surprise is that this graph is not Zipfian.
 .
  There is also a pronounced tail that seems too large to ignore or ascribe
  to statistical rounding.
- The overlayed fitting curves are 
+ The overlaid fitting curves are 
 \begin_inset Quotes eld
 \end_inset
 
@@ -372,12 +372,12 @@ y^{-2/3}e^{-y}dy
 \end_inset
 
 is reminiscent of a Poisson distribution, but with two key differences.
- First, for a conventional Poission distribution, the 
+ First, for a conventional Poisson distribution, the 
 \begin_inset Formula $y$
 \end_inset
 
  is fixed, and not variable: it is the parameter.
- Second, for a conventional Poission distribution, the exponent 
+ Second, for a conventional Poisson distribution, the exponent 
 \begin_inset Formula $-2/3$
 \end_inset
 
@@ -385,8 +385,8 @@ is reminiscent of a Poisson distribution, but with two key differences.
 \end_layout
 
 \begin_layout Standard
-Sums/integrals over Poission distributions have been proposed as models
- of 1/f noise as early as 1937.
+Sums/integrals over Poisson distributions have been proposed as models of
+ 1/f noise as early as 1937.
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Bernamont1937,Ward2007"
@@ -886,15 +886,15 @@ Conclusion
 \begin_layout Standard
 The distribution of the interaction between genes in publicly-available
  genetics databases has been examined.
- The distribution appeas to be a square-root Zipfian distribution.
+ The distribution appears to be a square-root Zipfian distribution.
  The distribution of the mutual information between pairs of genes is described
  by a bimodal Gaussian distribution.
 \end_layout
 
 \begin_layout Standard
-No theoretical foundation is propsed, although the author imagines that,
+No theoretical foundation is proposed, although the author imagines that,
  perhaps, the matrices describing pairwise interactions might be drawn from
- a Gaussian Unitary Ensemble (GUE) or a Gaussian Orthogonal nsemble (GOE).
+ a Gaussian Unitary Ensemble (GUE) or a Gaussian Orthogonal ensemble (GOE).
 \end_layout
 
 \begin_layout Standard
