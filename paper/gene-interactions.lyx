@@ -90,7 +90,7 @@
 \begin_body
 
 \begin_layout Title
-Biome Distributions
+Square-root Zipfian Distributions in Gene Interactions
 \end_layout
 
 \begin_layout Author
@@ -102,29 +102,17 @@ Linas Vepstas
 \begin_inset Newline newline
 \end_inset
 
-revised 24 May 2020
+revised 30 Nov 2021
 \end_layout
 
 \begin_layout Abstract
-An exploration of the statistical distribution of interactions between genes,
- proteins and pathways, extracted from public genome, proteome and reactome
- data-sets.
- This is an exploratory diary that attempts to understand the large-scale
- statistical properties of the network structure of bio-molecular interactions.
-\end_layout
-
-\begin_layout Abstract
-It was naively hypothesized that genome/proteome reaction pathways form
- a scale-free network, and thus would have a Zipfian distribution.
- Much to our surprise, this is not the case! It seems like *everything*
- follows a square-root Zipfian distribution! I do not know of any network
- theory or biology theory that would explain this, so it is a surprise.
-\end_layout
-
-\begin_layout Abstract
-An exploration of the mutual information of interaction pathways is also
- performed.
- It appears that these are easily fit with a bimodal Gaussian distribution.
+The distribution of interactions between genes, extracted from public genome
+ databases, is examined.
+ Interactions between pairs of genes, and triangles of three interacting
+ genes, is found to follow a square-root Zipfian distribution with an exponentia
+l tail.
+ The mutual information between gene pairs is found to have a bimodal Gaussian
+ distribution.
 \end_layout
 
 \begin_layout Section*
@@ -149,39 +137,9 @@ triangles
 \begin_inset Quotes erd
 \end_inset
 
-: three genes that mutually interact, and 
-\begin_inset Quotes eld
-\end_inset
-
-pentagons
-\begin_inset Quotes erd
-\end_inset
-
-: a pair of genes that express a pair of proteins that lie on a common pathway.
- If the genome (proteome, reactome) network were scale-free, then one might
- expect Zipfian distributions of triangles and pentagons.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-These questions originally arose during the characterization of a bioinformatics
- data-mining benchmark, found in 
-\family typewriter
-https://github.com/opencog/benchmark/query-loop
-\family default
-, and was elaborated in the 
-\begin_inset Quotes eld
-\end_inset
-
-Genome distribution!?
-\begin_inset Quotes erd
-\end_inset
-
- email discussion.
-\end_layout
-
-\end_inset
-
+: three genes that mutually interact.
+ If the genome network were scale-free, then one might expect Zipfian distributi
+ons of triangles and pentagons.
  This appears not to be the case.
  A further study is made of the mutual information (
 \begin_inset Quotes eld
@@ -269,10 +227,6 @@ All gene-gene interactions were taken as symmetric, so that if one gene
 \color inherit
  2939 self-interacting genes; these self-interactions were removed, so as
  to avoid confusion during counting.
-\end_layout
-
-\begin_layout Standard
-Pathways are from https://reactome.org and from http://smpdb.ca/
 \end_layout
 
 \begin_layout Section*
@@ -401,6 +355,10 @@ The author does not know of any reason why the initial fall-off should follow
  a square-root slope, or why there should be a simple exponential correction:
  that is, the theoretical underpinnings and implications for this form is
  unknown.
+\end_layout
+
+\begin_layout Subsection*
+Fractal shot noise
 \end_layout
 
 \begin_layout Standard
