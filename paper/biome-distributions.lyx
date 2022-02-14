@@ -412,73 +412,6 @@ A=\frac{3}{2\Gamma\left(\frac{1}{3}\right)\left(2N\right)^{1/3}}
 
 \end_layout
 
-\begin_layout Standard
-The author does not know of any reason why the initial fall-off should follow
- a square-root slope, or why there should be a simple exponential correction:
- that is, the theoretical underpinnings and implications for this form is
- unknown.
-\end_layout
-
-\begin_layout Standard
-The distribution 
-\begin_inset Formula 
-\[
-y^{-2/3}e^{-y}dy
-\]
-
-\end_inset
-
-is reminiscent of a Poisson distribution, but with two key differences.
- First, for a conventional Poisson distribution, the 
-\begin_inset Formula $y$
-\end_inset
-
- is fixed, and not variable: it is the parameter.
- Second, for a conventional Poisson distribution, the exponent 
-\begin_inset Formula $-2/3$
-\end_inset
-
- is a non-negative integer, and is the support of the distribution.
-\end_layout
-
-\begin_layout Standard
-Sums/integrals over Poisson distributions have been proposed as models of
- 1/f noise as early as 1937.
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Bernamont1937,Ward2007"
-literal "false"
-
-\end_inset
-
- The precise form of the noise depends on the distribution of the 
-\begin_inset Quotes eld
-\end_inset
-
-parameter
-\begin_inset Quotes erd
-\end_inset
-
- 
-\begin_inset Formula $y$
-\end_inset
-
-; conventional shot noise results from a uniform distribution.
- The distribution 
-\begin_inset Formula $y^{-2/3}$
-\end_inset
-
- seen here most closely resemble models of fractal shot noise.
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Lowen2005"
-literal "false"
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Section*
 Triangles
 \end_layout
@@ -696,6 +629,102 @@ One may search for graph cliques of higher order than 3: a clique of 4 is
 \end_layout
 
 \begin_layout Section*
+Why Square root?
+\end_layout
+
+\begin_layout Standard
+The author does not know of any reason why the initial fall-off should follow
+ a square-root slope, or why there should be a simple exponential correction:
+ that is, the theoretical underpinnings and implications for this form is
+ unknown.
+\end_layout
+
+\begin_layout Standard
+The distribution 
+\begin_inset Formula 
+\[
+y^{-2/3}e^{-y}dy
+\]
+
+\end_inset
+
+is reminiscent of a Poisson distribution, but with two key differences.
+ First, for a conventional Poisson distribution, the 
+\begin_inset Formula $y$
+\end_inset
+
+ is fixed, and not variable: it is the parameter.
+ Second, for a conventional Poisson distribution, the exponent 
+\begin_inset Formula $-2/3$
+\end_inset
+
+ is a non-negative integer, and is the support of the distribution.
+\end_layout
+
+\begin_layout Standard
+Sums/integrals over Poisson distributions have been proposed as models of
+ 1/f noise as early as 1937.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Bernamont1937,Ward2007"
+literal "false"
+
+\end_inset
+
+ The precise form of the noise depends on the distribution of the 
+\begin_inset Quotes eld
+\end_inset
+
+parameter
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $y$
+\end_inset
+
+; conventional shot noise results from a uniform distribution.
+ The distribution 
+\begin_inset Formula $y^{-2/3}$
+\end_inset
+
+ seen here most closely resemble models of fractal shot noise.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Lowen2005"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Preferential attachment models of networks
+\end_layout
+
+\begin_layout Standard
+Update: I've recently received an anonymous comment: 
+\emph on
+
+\begin_inset Quotes eld
+\end_inset
+
+For the distributions of frequencies this is equivalent to an exponent equal
+ to 3.
+ But this is an exponent-value which is well-known in preferential attachment
+ models of networks.
+ Moreover, the distribution of interactions is the same as the degree distributi
+on in networks
+\emph default
+.
+\begin_inset Quotes erd
+\end_inset
+
+ Perhaps this can solve the mystery.
+\end_layout
+
+\begin_layout Subsection*
 Prior Results
 \end_layout
 
@@ -749,7 +778,7 @@ What is the degree distribution? Viz, for scale-free networks, one usually
  What about deg(u).deg(v) for edges connecting u,v?
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Section*
 Mutual Information
 \end_layout
 
