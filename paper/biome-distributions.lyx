@@ -699,29 +699,89 @@ literal "false"
 
 \end_layout
 
+\begin_layout Standard
+The initial slope of the first ten items or so might be described by the
+ Yule–Simon distribution.
+ See https://en.wikipedia.org/wiki/Yule%E2%80%93Simon_distribution
+\end_layout
+
 \begin_layout Subsection*
 Preferential attachment models of networks
 \end_layout
 
 \begin_layout Standard
-Update: I've recently received an anonymous comment: 
-\emph on
+TODO: What is the degree distribution? That is, graph of frequency vs degree
+ of a node.
+ For scale-free networks, one usually examines the degree distribution,
+ and not the triangle distribution.
+ 
+\end_layout
 
-\begin_inset Quotes eld
+\begin_layout Standard
+For a scale-free network with preferential attachement, when graphing the
+ degree distribution, the exponent is 3.
+ Real-world networks have exponent 
+\begin_inset Formula $2<\gamma<3$
 \end_inset
 
-For the distributions of frequencies this is equivalent to an exponent equal
- to 3.
- But this is an exponent-value which is well-known in preferential attachment
- models of networks.
- Moreover, the distribution of interactions is the same as the degree distributi
-on in networks
-\emph default
 .
-\begin_inset Quotes erd
-\end_inset
+ Modified preferential attachement models can yeild other exponents.
+ 
+\end_layout
 
- Perhaps this can solve the mystery.
+\begin_layout Standard
+Refs: 
+\end_layout
+
+\begin_layout Itemize
+Albert-László Barabási and Réka Albert.
+ Emergence of scaling in random networks.
+ Science, 286(5439):509–512, 1999.
+\end_layout
+
+\begin_layout Itemize
+S.
+ N.
+ Dorogovtsev, J.
+ F.
+ F.
+ Mendes, and A.
+ N.
+ Samukhin.
+ Structure of growing networks with preferential linking.
+ Physical Review Letters, 85:4633–4636, 2000.
+\end_layout
+
+\begin_layout Itemize
+Mark Newman, Albert-László Barabási, and Duncan J Watts.
+ The structure and dynamics of networks.
+ Princeton University Press, 2006.
+\end_layout
+
+\begin_layout Itemize
+https://en.wikipedia.org/wiki/Preferential_attachment
+\end_layout
+
+\begin_layout Standard
+An anonymous commenter has implied that, in the preferential attachement
+ model, the slope of the equivalent Zipf distribution would be 1/2.
+ Is this true? Where is this demonstrated?
+\end_layout
+
+\begin_layout Subsubsection*
+TODO
+\end_layout
+
+\begin_layout Standard
+What is the degree distribution? That is, graph of frequency vs degree of
+ a node.
+ For scale-free networks, one usually examines the degree distribution,
+ and not the triangle distribution.
+ 
+\end_layout
+
+\begin_layout Standard
+What about the product deg(u).deg(v) for edges connecting u,v?
 \end_layout
 
 \begin_layout Subsection*
@@ -766,16 +826,6 @@ This shows the distribution of the 1000 most commonly viewed English-language
  Wikipedia Mathematics articles, as of January 2020.
  A square-root distribution appears to hold up to at least a rank of 200
  or 300; after that, the behavior is unclear.
-\end_layout
-
-\begin_layout Subsubsection*
-TODO
-\end_layout
-
-\begin_layout Standard
-What is the degree distribution? Viz, for scale-free networks, one usually
- examines the degree distribution, and not the triangle distribution.
- What about deg(u).deg(v) for edges connecting u,v?
 \end_layout
 
 \begin_layout Section*
